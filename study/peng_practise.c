@@ -189,22 +189,23 @@
 //	for()
 //	return 0;
 //}
-//#include<stdio.h>//计算1/1-1/2+1/3-1/4+1/5 …… + 1/99 - 1/100 的值，打印出结果
+//#include<stdio.h>//计算1/1-1/2+1/3-1/4+1/5 …… + 1/99 - 1/100 的值，打印出结果0.688172
 //int main()
 //{
-//	float a = 1.0;
-//	float b = 1.0;
-//	float c = 1.0;
-//	float d = 1.0;
-//	float i = 0.0;
-//	float j = 0.0;
-//	for (i = a / b; b <= 100; b += 2)
-//		i += i;
-//	for (i=j = c / d; d <= 100; d += 2)
-//		j += j;
-//	printf("%f", i - j);
+//	double a = 0;
+//	double b = 1.0;
+//	double c = 0;
+//	double d = 1.0;
+//	double i = 0.0;
+//	double j = 0.0;
+//	for (i = 1 / b; b <= 100; b += 2)
+//		a += i;
+//	for (i=j = 1 / d; d <= 100; d += 2)
+//		c += j;
+//	printf("%lf", i - j);
 //	return 0;
 //}
+
 //#include<stdio.h>//打印1000-2000年间的闰年
 //int main()
 //{
@@ -256,4 +257,19 @@
 //{
 //	printf("%c", '\130');
 //		return 0;
+//}
+//#include<stdio.h>//敲金字塔
+//int main()
+//{
+//	int a = 0;
+//	scanf("%d", &a);//金字塔的行数
+//	for (int i = 1; i <= a; i++)//设置每一行的循环
+//	{
+//		for (int j = 0; j <= a - i; j++)//先打空格，每行空格 = 金字塔行数 - 此刻行数
+//			printf(" ");
+//		for (int k = 1; k <= 2*i-1; k++)//打字符，每行字符 = 2 * 此刻行数 - 1
+//			printf("*");
+//		printf("\n");//每行打印完换行
+//	}
+//	return 0;
 //}
