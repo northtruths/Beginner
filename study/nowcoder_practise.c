@@ -80,8 +80,6 @@
 //    float a = 0;
 //    while(scanf("%f", &a) != EOF)
 //    printf("%.0f\n", a / 1);
-//   
-//
 //    return 0;
 //}
 //#include<stdio.h>
@@ -92,4 +90,29 @@
 //	scanf("%f", &a);
 //	printf("%d", b / 1);
 //	return 0;
+//}
+//#include<stdio.h>//BC11
+//int main()
+//{
+//    int a, b, c = 0;
+//    scanf("%d%d%d", &a, &b, &c);
+//    printf("score1=%d,score2=%d,score3=%d", a, b, c);
+//    return 0;
+//}
+//#include<stdio.h>//BC12
+//int main()
+//{
+//    int a = 0;
+//    float b, c, d = 0;
+//    scanf("%d;%f,%f,%f", &a, &b, &c, &d);
+//    printf("The each subject score of No. %d is %.2f, %.2f, %.2f", a, b, c, d);
+//    return 0;
+//}
+//#include<stdio.h>//BC13
+//int main()
+//{
+//    int a, b, c = 0;
+//    scanf("%4d %2d %2d", &a, &b, &c);
+//    printf("year=%04d\nmonth=%02d\ndate=%02d\n", a, b, c);
+//    return 0;
 //}
