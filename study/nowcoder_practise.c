@@ -116,3 +116,99 @@
 //    printf("year=%04d\nmonth=%02d\ndate=%02d\n", a, b, c);
 //    return 0;
 //}
+//#include<stdio.h>//BC14
+//int main()
+//{
+//    int a = 0;
+//    int b = 0;
+//    int c = 0;
+//    scanf("a=%d,b=%d", &a, &b);
+//    c = a;
+//    a = b;
+//    b = c;
+//    printf("a=%d,b=%d", a, b);
+//    return 0;
+//}
+//#include<stdio.h>//BC15运行时将换行键也输入并输出了
+//int main()
+//{
+//    char a = 0;
+//    while(scanf("%c", &a) !=EOF)
+//    printf("%c", a+=32);
+//    return 0;
+//
+//}
+//#include<stdio.h>//BC16
+//int main()
+//{
+//    printf("%15d", 0xABCDEF);
+//    return 0;
+//}
+//#include <stdio.h>//BC17;%o是小写，%X是大写
+//int main()
+//{
+//    int a = 1234;
+//    printf("%#o ", a);
+//    printf("%#X", a);
+//    return 0;
+//}
+//#include<stdio.h>//BC18
+//int main()
+//{
+//    char a = 0;
+//    int b = 0;
+//    float c = 0;
+//    scanf("%c\n%d\n%f\n", &a, &b, &c);
+//    printf("%c %d %.6f", a, b, c);
+//    return 0;
+//}
+//#include<stdio.h>//BC19
+//int main()
+//{
+//    int a, b, c = 0;
+//    scanf("%d %d %d", &a, &b, &c);
+//    printf("%d%8d%8d", a, b, c);
+//    return 0;
+//}
+//#include<stdio.h>//BC20
+//int main()
+//{
+//    int a, b = 0;
+//    while (scanf("%X %o", &a, &b) != EOF)
+//        printf("%d", a + b);
+//    return 0;
+//}
+//#include<stdio.h>//BC21
+//int main()
+//{
+//    int a, b = 0;
+//    scanf("%d%d", &a, &b);
+//    int sum = a + b;
+//    printf("%d", sum);
+//    return 0;
+//}
+//#include<stdio.h>//BC22
+//int main()
+//{
+//    int a, b = 0;
+//    scanf("%d%d", &a, &b);
+//    printf("%d", a / b);
+//    return 0;
+//}
+//#include <stdio.h>//BC23
+//int main()
+//{
+//    int a, b = 0;
+//    scanf("%d %d", &a, &b);
+//    printf("%d", a % b);
+//    return 0;
+//}
+//#include<stdio.h>//BC24
+//int main()
+//{
+//    float a = 0;
+//    scanf("%f", &a);
+//    int b = (int)a;
+//    printf("%d", b % 10);
+//    return 0;
+//}
