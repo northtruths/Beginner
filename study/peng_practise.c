@@ -273,3 +273,57 @@
 //	}
 //	return 0;
 //}
+//#include<stdio.h>
+//int main()
+//{
+//	goto tiaozhuan;
+//	for (int i = 1; i <= 2; i++)
+//		printf("%d", i);
+//tiaozhuan:
+//	printf("hehe");
+//
+//	return 0;
+//}
+//#include<stdio.h>//打印100-200的素数
+//#include<math.h>
+//int main()
+//{
+//	for (int i = 100; i <= 200; i++)
+//	{
+//		int flag = 1;//假设是素数
+//		//素数除以 2 到 它的前一位都有：不能整除
+//		for (int j = 2; j < sqrt(i) ; j++)
+//		{
+//			if (i % j == 0)
+//			{
+//				flag = 0;
+//				break;
+//			}
+//		}
+//		if (1 == flag)
+//			printf("%d ", i);
+//	}
+//
+//	return 0;
+//}
+//#include<stdio.h>//给定两个数，求这两个数的最大公约数
+//int main()
+//{
+//	int a, b,c = 0;
+//	while (scanf("%d%d", &a, &b) != EOF)
+//	{
+//		if (a > b)//求a、b谁大并赋给c
+//			c = a;
+//		else
+//			c = b;
+//		for (int i = c; i > 1; i--)//从a、b中较大的值一直减小直到能被两数同时整除即是最大公约数
+//		{
+//			if (a % i == 0 && b % i == 0)
+//			{
+//				printf("%d", i);
+//				break;
+//			}
+//		}
+//	}
+//		return 0;
+//}

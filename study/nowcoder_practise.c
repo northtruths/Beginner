@@ -212,3 +212,78 @@
 //    printf("%d", b % 10);
 //    return 0;
 //}
+//#include<stdio.h>//BC25
+//int main()
+//{
+//    int num = 0;
+//    scanf("%d", &num);
+//    int sum = num * 100;
+//    printf("%d", sum);
+//    return 0;
+//}
+//#include<stdio.h>//BC27
+//int main()
+//{
+//    int a = 0;
+//    scanf("%d", &a);
+//    printf("%d", a % 10);
+//    return 0;
+//}
+//#include<stdio.h>//BC28
+//int main()
+//{
+//    int a = 0;
+//    scanf("%d", &a);
+//    printf("%d", a / 10 % 10);
+//    return 0;
+//}
+//#include<stdio.h>//BC30
+//int main()
+//{
+//    int a, b = 0;
+//    scanf("%d%d", &a, &b);
+//    int c = a + b;
+//    while (c > 7)
+//        c -= 7;
+//    printf("%d", c);
+//    return 0;
+//}
+//#include<stdio.h>//BC30
+//int main()
+//{
+//    int seconds = 0;
+//    scanf("%d", &seconds);
+//    int a = seconds / 3600;
+//    int b = (seconds - a * 3600) / 60;
+//    int c = seconds % 3600 % 60;
+//    printf("%d %d %d", a, b, c);
+//    return 0;
+//}
+//#include<stdio.h>//BC31
+//int main()
+//{
+//    int n = 0;
+//    scanf("%d", &n);
+//    printf("%d", 1 << n);
+//    return 0;
+//}
+//#include<stdio.h>//BC32
+//int main()
+//{
+//    int age = 0;
+//    scanf("%d", &age);
+//    printf("%.0f", age * 3.156e7);
+//    return 0;
+//
+//}
+//#include<stdio.h>
+//int main()
+//{
+//    int a = 0;
+//    scanf("%d", &a);
+//    for (int i = 1; i <= a; i++ )
+//    {
+//        printf("1");
+//    }
+//    return 0;
+//}
