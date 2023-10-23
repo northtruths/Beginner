@@ -287,3 +287,58 @@
 //    }
 //    return 0;
 //}
+//#include<stdio.h>//BC34
+//#include<math.h>
+//int main()
+//{
+//    float a, b, c = 0;
+//    scanf("%f%f%f", &a, &b, &c);
+//    float p = (a + b + c) / 2.0;
+//    float circumference = a + b + c;
+//    float area = sqrt(p * (p - a) * (p - b) * (p - c));
+//    printf("circumference=%.2f area=%.2f", circumference, area);
+//    return 0;
+//}
+//#include<stdio.h>//BC35
+//int main()
+//{
+//    int n, h, m = 0;
+//    while (scanf("%d%d%d", &n, &h, &m) != EOF)
+//    {
+//        //m / h = ºÈÍêmilkµÄºÐÊý
+//        int s = n - m / h;
+//        if (m % h != 0)
+//            s--;
+//        printf("%d", s);
+//    }
+//
+//
+//    return 0;
+//}
+//#include<stdio.h>//BC36
+//int main()
+//{
+//    float f = 0;
+//    scanf("%f", &f);
+//    float c = 5.0 / 9 * (f - 32);
+//    printf("%.3f", c);
+//    return 0;
+//}
+//#include<stdio.h>//BC37
+//#include<math.h>
+//int main()
+//{
+//    float r = 0;
+//    scanf("%f", &r);
+//    printf("%f", 3.14 * pow(r, 2));
+//    return 0;
+//}
+//#include <stdio.h>//BC38
+//
+//int main()
+//{
+//    float r1, r2 = 0;
+//    scanf("%f%f", &r1, &r2);
+//    printf("%f", 1 / ((1 / r1) + (1 / r2)));
+//    return 0;
+//}

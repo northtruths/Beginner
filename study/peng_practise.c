@@ -284,6 +284,7 @@
 //
 //	return 0;
 //}
+
 //#include<stdio.h>//打印100-200的素数
 //#include<math.h>
 //int main()
@@ -306,6 +307,7 @@
 //
 //	return 0;
 //}
+
 //#include<stdio.h>//给定两个数，求这两个数的最大公约数
 //int main()
 //{
@@ -320,7 +322,7 @@
 //		{
 //			if (a % i == 0 && b % i == 0)
 //			{
-//				printf("%d", i);
+//				printf("%d\n", i);
 //				break;
 //			}
 //		}
