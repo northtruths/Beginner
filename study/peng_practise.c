@@ -329,3 +329,88 @@
 //	}
 //		return 0;
 //}
+
+//#include<stdio.h>
+//int main()
+//{
+//	int a = 0;
+//	scanf("%5d", &a);
+//	printf("%10d", a);
+//	return 0;
+//}
+//#include<string.h>
+//#include<stdio.h>
+//int main()
+//{
+//	char a = "a b c d e";
+//	printf("%d ", sizeof(a));
+//	return 0;
+//}
+//#include <stdio.h>
+//int main()
+//{
+//    char str[] = "hello bit";
+//    printf("%d %d\n", sizeof(str), strlen(str));
+//    return 0;
+//}
+
+//#include<stdio.h>//【一维数组】输入10个整数，求平均值
+//int main()
+//{
+//	int arr[10] = { 0 };
+//	int sum = 0;
+//	for (int i = 0; i < 10; i++)
+//	{
+//		scanf("%d", &arr[i]);
+//		sum += arr[i];
+//	}
+//	printf("%.1f", sum / 10.0);
+//	return 0;
+//}
+
+//#include<stdio.h>//打印 X 字型
+//int main()
+//{
+//    int a = 0;
+//    while (scanf("%d", &a) != EOF)
+//    {
+//        for (int i = 1; i <= a; i++)//第几行
+//        {
+//            for (int j = 1; j <= a; j++)//第几列
+//            {
+//                if (i == j || i == a + 1 - j)
+//                    printf("*");
+//                else
+//                    printf(" ");
+//
+//            }
+//            printf("\n");
+//        }
+//    }
+//    return 0;
+//}
+
+#include<stdio.h>//空心正方形图案
+int main()
+{
+    int n = 0;
+    while (scanf("%d", &n) != EOF)
+    {
+        for (int i = 0; i < n; i++)
+        {
+            for (int j = 0; j < n; j++)
+            {
+                if (i == 0 || i == n - 1)//第一排和最后一排
+                    for (int a = 0; a < n; a++)
+                        printf("*");
+                else if (j == 0 || j == n - 1)
+                    printf("*");
+                else
+                    printf(" ");
+            }
+            printf("\n");
+
+        }
+    }
+    return 0;
+}
