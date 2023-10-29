@@ -510,3 +510,19 @@
 //	}
 //
 //}
+
+#include<stdio.h>
+int main()
+{
+    int n, m = 0;
+    int arr1[n];
+    int arr2[m];
+    scanf("%d%d", &n, &m);
+    for (int i = 0; i < n; i++)
+        scanf()
+        return 0;
+}
+int max(int x, int y)
+{
+
+}
