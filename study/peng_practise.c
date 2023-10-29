@@ -390,27 +390,123 @@
 //    return 0;
 //}
 
-#include<stdio.h>//空心正方形图案
-int main()
-{
-    int n = 0;
-    while (scanf("%d", &n) != EOF)
-    {
-        for (int i = 0; i < n; i++)
-        {
-            for (int j = 0; j < n; j++)
-            {
-                if (i == 0 || i == n - 1)//第一排和最后一排
-                    for (int a = 0; a < n; a++)
-                        printf("*");
-                else if (j == 0 || j == n - 1)
-                    printf("*");
-                else
-                    printf(" ");
-            }
-            printf("\n");
+//#include<stdio.h>//空心正方形图案
+//int main()
+//{
+//    int n = 0;
+//    while (scanf("%d", &n) != EOF)
+//    {
+//        for (int i = 0; i < n; i++)
+//        {
+//            for (int j = 0; j < n; j++)
+//            {
+//                if (i == 0 || i == n - 1)//第一排和最后一排
+//                
+//                  
+//                        printf("*");
+//                   
+//                
+//                else if (j == 0 || j == n - 1)
+//                    printf("*");
+//                else
+//                    printf(" ");
+//                
+//            }
+//            printf("\n");
+//
+//        }
+//    }
+//    return 0;
+//}
 
-        }
-    }
-    return 0;
-}
+//#include<stdio.h>
+//int main()
+//{
+//	float a = 0;
+//	while (scanf("%f", &a) != EOF)
+//	{
+//		int b = (int)a + 0.5;
+//		printf("%d", b);
+//	}
+//	return 0;
+//}
+
+//#include<stdio.h>//矩阵转置
+//int main()
+//{
+//    int n = 0;
+//    int m = 0;
+//    int arr[10][10] = {0};
+//    scanf("%d%d", &n, &m);
+//    for (int i = 0; i < n; i++)
+//    {
+//        for (int j = 0; j < m; j++)
+//        {
+//            scanf("%d", &arr[i][j]);
+//        }
+//    }
+//    for (int i = 0; i < m; i++)
+//    {
+//        for (int j = 0; j < n; j++)
+//        {
+//            printf("%d ", arr[j][i]);
+//        }
+//        printf("\n");
+//    }
+//    return 0;
+//}
+
+//#include <stdio.h>
+//
+//int main()
+//{
+//    int n = 0;
+//    int m = 0;
+//    int arr[10][10] = { 0 };
+//    scanf("%d %d", &n, &m);
+//    int i = 0;
+//    int j = 0;
+//    for (i = 0; i < n; i++)
+//    {
+//        for (j = 0; j < m; j++)
+//        {
+//            scanf("%d", &arr[i][j]);
+//        }
+//    }
+//    for (i = 0; i < m; i++)
+//    {
+//        for (j = 0; j < n; j++)
+//        {
+//            printf("%d ", arr[j][i]);
+//        }
+//        printf("\n");
+//    }
+//
+//    return 0;
+//}
+
+//#include<stdio.h>
+//int main()
+//{
+//	int arr1[3] = { 1,2,3 };
+//	int arr2[3] = { 4,5,6 };
+//	int arr3[3] = { 0 };
+//	for (int i = 0; i < 3; i++)
+//		arr3[i] = arr1[i];
+//	for (int i = 0; i < 3; i++)
+//		arr1[i] = arr2[i];
+//	for (int i = 0; i < 3; i++)
+//		arr2[i] = arr3[i];
+//	printf("arr1 = ");
+//	for (int j = 0; j < 3; j++)
+//	{
+//		printf("%d ", arr1[j]);
+//	}
+//	printf("\n");
+//	printf("arr2 = ");
+//	for (int j = 0; j < 3; j++)
+//	{
+//		printf("%d ", arr2[j]);
+//	}
+//
+//}
