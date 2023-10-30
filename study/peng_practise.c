@@ -511,18 +511,66 @@
 //
 //}
 
-#include<stdio.h>
-int main()
-{
-    int n, m = 0;
-    int arr1[n];
-    int arr2[m];
-    scanf("%d%d", &n, &m);
-    for (int i = 0; i < n; i++)
-        scanf()
-        return 0;
-}
-int max(int x, int y)
-{
+//int printf_1();
+//#include<stdio.h>
+//int main()
+//{
+//	printf_1();
+//	int a = 10;
+//	return 0;
+//}
+//
+//int printf_1()
+//{
+//	int a = 20;
+//	printf("%d", a);
+//}
 
-}
+//#include<stdio.h>
+//int main()
+//{
+//	printf("hehe");
+//	return;
+//}
+
+//#include<stdio.h>//return 是否可以返回函数中定义的数组，不可以
+//int a()
+//{
+//	int arr[3] = { 1, 2, 3 };
+//	return arr;
+//}
+//int main()
+//{
+//	printf("%d", a);
+//	return 0;
+//}
+//
+
+//#include<stdio.h>
+//int initial(int arr[], int sz)
+//{
+//	int i = 0;
+//	for (int i = 0; i < sz; i++)
+//	{
+//		arr[i] = i;
+//		printf("%d ", arr[i]);
+//	}
+//	printf("\n");
+//	return 0;
+//}
+//
+//void reverse(int arr[],int sz)
+//{
+//	int j = 0;
+//	for (j = sz; j > 0; j--)
+//		printf("%d ", arr[j - 1]);
+//}
+//
+//int main()
+//{
+//	int arr[3] = { 1, 1, 1 };
+//	int sz = sizeof(arr) / sizeof(arr[0]);
+//	initial(arr, sz);
+//	reverse(arr, sz);
+//	return 0;
+//}
