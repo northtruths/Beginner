@@ -574,3 +574,12 @@
 //	reverse(arr, sz);
 //	return 0;
 //}
+
+//#include<stdio.h>
+//int main()
+//{
+//	char arr[3][3] = { 0 };
+//	arr[1][0] = '1';
+//	printf("%c", arr[1][0]);
+//	return 0;
+//}
