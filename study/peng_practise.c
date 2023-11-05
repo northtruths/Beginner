@@ -258,6 +258,7 @@
 //	printf("%c", '\130');
 //		return 0;
 //}
+
 //#include<stdio.h>//敲金字塔
 //int main()
 //{
@@ -273,6 +274,7 @@
 //	}
 //	return 0;
 //}
+
 //#include<stdio.h>
 //int main()
 //{
@@ -583,3 +585,80 @@
 //	printf("%c", arr[1][0]);
 //	return 0;
 //}
+
+//#include<stdio.h>//喝汽水，1瓶汽水1元，2个空瓶可以换一瓶汽水，给20元，可以喝多少汽水
+//int main()
+//{
+//	int m = 20;
+//	int i = 0;
+//	int count = 0;
+//	while (m)
+//	{
+//		m--;//汽水减一
+//		i++;//空瓶加一
+//		if (i == 2)//两瓶空瓶换一瓶汽水
+//		{
+//			m += 1;
+//			i -= 2;
+//		}
+//		count++;
+//	}
+//	printf("可以喝%d瓶汽水", count);
+//	return  0;
+//}
+
+//#include<stdio.h>//打印菱形
+//int main()
+//{
+//	int row = 0;
+//	scanf("%d", &row);//打印的行数
+//	int i, j = 0;
+//	int on = row / 2 + 1;//上行数
+//	int un = row / 2;//下行数
+//	for (i = 1; i <= on; i++)//打印上半部分
+//	{
+//		for (j = 1; j <= on - i; j++)//先打空格，个数为 总行数 - 现在行数
+//			printf(" ");
+//		for (j = 1; j <= i * 2 - 1; j++)//打字符，个数为 行数 * 2 - 1
+//			printf("*");
+//		printf("\n");
+//	}
+//	for (i = 1; i <= un; i++)//打印下半部分
+//	{
+//		for (j = 1; j <= i; j++)//打印空格，个数为 现行数 
+//			printf(" ");
+//		int a = un - 1;//第一行与最后一行的差，用来倒转行数，方便计算字符个数
+//		for(j = 1;j <= (i + (a - 2 * (i - 1))) * 2 - 1; j++)//打印字符，个数为 （现行数 +（a - 2 * (现行数 - 1)）） * 2 - 1
+//			printf("*");
+//		printf("\n");
+//	}
+//	return 0;
+//}
+
+#include<stdio.h>//求1 - 10000的水花仙数
+#include<math.h>
+int main()
+{
+	int f = 0;
+	for (f = 0; f <= 100; f++)
+	{
+		int a = f;
+		int b = f;
+		int sum = 0;
+		int count = 0;
+		while (a)//判断位数
+		{
+
+			a = a / 10;
+			count++;
+		}
+		while (b)
+		{
+			sum += pow(b % 10, count);
+			b / 10;
+		}
+		if (sum == f)
+			printf("%d ", f);
+	}
+	return 0;
+}
