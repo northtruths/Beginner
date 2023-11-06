@@ -635,30 +635,157 @@
 //	return 0;
 //}
 
-#include<stdio.h>//求1 - 10000的水花仙数
-#include<math.h>
-int main()
-{
-	int f = 0;
-	for (f = 0; f <= 100; f++)
-	{
-		int a = f;
-		int b = f;
-		int sum = 0;
-		int count = 0;
-		while (a)//判断位数
-		{
+//#include<stdio.h>//求1 - 10000的水花仙数
+//#include<math.h>
+//int main()
+//{
+//	int f = 0;
+//	for (f = 0; f <= 10000; f++)
+//	{
+//		int a = f;
+//		int b = f;
+//		int sum = 0;
+//		int count = 0;
+//		while (a)//判断位数
+//		{
+//
+//			a = a / 10;
+//			count++;
+//		}
+//		while (b)
+//		{
+//			sum += pow(b % 10, count);//个位的位数次方
+//			b = b / 10;
+//		}
+//		if (sum == f)
+//			printf("%d ", f);
+//	}
+//	return 0;
+//}
 
-			a = a / 10;
-			count++;
-		}
-		while (b)
-		{
-			sum += pow(b % 10, count);
-			b / 10;
-		}
-		if (sum == f)
-			printf("%d ", f);
-	}
-	return 0;
-}
+//#include<stdio.h>//求Sn=a+aa+aaa+aaaa+aaaaa的前5项之和，其中a是一个数字
+//#include<math.h>
+//int main()
+//{
+//	int num = 0;
+//	int sum = 0;
+//	int Sn = 0;
+//	scanf("%d", &num);
+//	for (int i = 0; i < 5; i++)
+//	{
+//		sum += num * pow(10,i);
+//		Sn += sum;
+//	}
+//	printf("%d", Sn);
+//	return 0;
+//}
+
+//#include<stdio.h>//计算斐波那契数
+//int Feibo(int num)
+//{
+//	if (1 == num || 2 == num)
+//		return 1;
+//	else
+//		return Feibo(num - 1) + Feibo(num - 2);
+//}
+//int main()
+//{
+//	int num = 0;
+//	while (scanf("%d", &num) != EOF)
+//	{
+//		int ret = Feibo(num);
+//		printf("%d\n", ret);
+//	}
+//	return 0;
+//}
+
+//#include<stdio.h>//用递归实现 n 的 k 次方
+//int Pow(int n, int k)
+//{
+//	int outcome = 0;
+//	if (1 == k)
+//		outcome = n;
+//	else
+//		outcome = Pow(n, k - 1) * n;
+//	return outcome;
+//}
+//int main()
+//{
+//	int n = 0;
+//	int k = 0;
+//	scanf("%d%d", &n, &k);
+//	int ret = Pow(n, k);
+//	printf("%d", ret);
+//	return 0;
+//}
+
+//#include<stdio.h>//写一个递归函数DigitSum(n)，输入一个非负整数，返回组成它的数字之和
+//int DigitSum(int m)
+//{
+//	int sum = 0;
+//	int n = 0;
+//	if (m != 0)
+//	{
+//		n = m % 10;
+//		sum += (n + DigitSum(m / 10));
+//	}
+//	return sum;
+//}
+//int main()
+//{
+//	int m = 0;
+//	scanf("%d", &m);
+//	int ret = DigitSum(m);
+//	printf("%d", ret);
+//	return 0;
+//}
+
+//#include<stdio.h>//递归求 n 的阶乘
+//factorial(int n)
+//{
+//	if (1 == n)
+//		return 1;
+//	else
+//		return n * factorial(n - 1);
+//}
+//int main()
+//{
+//	int n = 0;
+//	scanf("%d", &n);
+//	int ret = factorial(n);
+//	printf("%d", ret);
+//	return 0;
+//}
+
+//#include<stdio.h>//非递归求 n 的阶乘
+//int main()
+//{
+//	int n = 0;
+//	int fac = 1;
+//	scanf("%d", &n);
+//	for (int i = 1; i <= n; i++)
+//	{
+//		fac = fac * i;
+//	}
+//	printf("%d", fac);
+//	return 0;
+//}
+
+//#include<stdio.h>//用递归的方式打印一个数的每一位
+//void Print(int num)
+//{
+//	if (num != 0)
+//	{
+//		Print(num / 10);
+//		printf("%d\n", num % 10);
+//	}
+//	
+//}
+//int main()
+//{
+//	int num = 0;
+//	scanf("%d", &num);
+//	Print(num);
+//	return 0;
+//}
+
