@@ -343,3 +343,40 @@
 //    printf("%f", 1 / ((1 / r1) + (1 / r2)));
 //    return 0;
 //}
+
+//int NumberOf1(int n) {  //JZ15
+//    // write code here
+//    int res = 0;
+//    scanf("%d", &n);
+//    for (int i = 1; i <= 32; i++)
+//    {
+//        if (n == (n | 1))
+//            res++;
+//        n = n >> 1;
+//    }
+//    return res;
+//}
+
+//#include<stdio.h>//OR76
+//int main()
+//{
+//	int a = 0;
+//	int b = 0;
+//	int count = 0;
+//	scanf("%d%d", &a, &b);
+//	for (int i = 1; i <= 31; i++)
+//	{
+//		int n = 0;
+//		int m = 0;
+//		if (a == (a | 1))//判断最右边一位是否为 1 ，判断条件也可以用 ((a & 1) != 0)
+//			n = 1;//最右一位为 1 则赋值 1 ，默认为零（最右一位为 0 ）
+//		if (b == (b | 1))//同上判断
+//			m = 1;
+//		if (m != n)//判断两数最右位是否相等
+//			count++;
+//		a >>= 1;
+//		b >>= 1;
+//	}
+//	printf("%d", count);
+//	return 0;
+//}
