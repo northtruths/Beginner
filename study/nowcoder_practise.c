@@ -380,3 +380,60 @@
 //	printf("%d", count);
 //	return 0;
 //}
+
+//#include<stdio.h>//BC33
+//int main()
+//{
+//    float n = 0;
+//    scanf("%f", &n);
+//    float gar[(int)n];
+//    for (int j = 0; j < n; j++)
+//    {
+//        scanf("%f", &gar[j]);
+//    }
+//    float max = gar[0];
+//    float min = gar[0];
+//    float sum = 0;
+//    for (int i = 0; i < n; i++)
+//    {
+//
+//        if (max < gar[i])
+//            max = gar[i];
+//        if (min > gar[i])
+//            min = gar[i];
+//        sum += gar[i];
+//    }
+//    printf("%.2f %.2f %.2f", max, min, sum / n);
+//    return 0;
+//}
+
+//#include<stdio.h>//BC39
+//int main()
+//{
+//    float need = 10 * 1000;
+//    int h = 0;
+//    int r = 0;
+//    scanf("%d%d", &h, &r);
+//    float a_cup = 3.14 * h * r * r;
+//    int i = 1;
+//    while (1)
+//    {
+//        if (a_cup * i >= need)
+//            break;
+//        i++;
+//
+//    }
+//    printf("%d", i);
+//    return 0;
+//}
+
+//#include<stdio.h>//BC40
+//int main()
+//{
+//    int a = 0;
+//    int b = 0;
+//    scanf("%d%d", &a, &b);
+//    int dif = b - a;
+//    printf("%d", b + dif);
+//    return 0;
+//}
