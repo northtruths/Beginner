@@ -123,3 +123,78 @@
 //	printf("狼来了。。快跑啊！");
 //	return  0;
 //}
+
+//#include<stdio.h>
+//int main()
+//{
+//	for (int i = 1; i <= 20; i++)
+//	{
+//		printf("%d\n", i);
+//		if (i % 2 == 0 && i % 3 == 0)
+//			printf("叮叮当当\n");
+//		else if (i % 2 == 0)
+//			printf("叮叮\n");
+//		else if (i % 3 == 0)
+//			printf("当当\n");
+//	}
+//	return 0;
+//}
+
+//#include<stdio.h>
+//int main()
+//{
+//	for (int i = 1; i <= 100; i++)
+//	{
+//		if (i % 2 == 0)
+//			printf("%d\n", i);
+//	}
+//	return 0;
+//}
+
+//#include<stdio.h>
+//int main()
+//{
+//	int n = 0;
+//	int Copy = 0;
+//	scanf("%d", &n);
+//	for (int i = 1; i <= n; i++)
+//	{
+//		if (i % 3 == 2 && i % 7 == 1)
+//		{
+//			Copy = i;
+//			printf("%d\n", Copy);
+//		}
+//	}
+//	return 0;
+//}
+
+//#include<stdio.h>
+//int main()
+//{
+//	int n = 0;
+//	int j = 0;
+//	int o = 0;
+//	scanf("%d", &n);
+//	for (int i = 1; i <= n; i++)
+//	{
+//		if (i % 2 == 0)
+//			o += i;
+//		else
+//			j += i;
+//	}
+//	printf("奇数和为%d\n", j);
+//	printf("偶数和为%d", o);
+//	return 0;
+//}
+
+//#include<stdio.h>
+//int main()
+//{
+//	char a = 0;
+//	scanf("%c", &a);
+//	if ((int)a % 2 != 0)
+//		printf("YES\n");
+//	else
+//		printf("NO");
+//	return 0;
+//}
