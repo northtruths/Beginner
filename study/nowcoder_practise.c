@@ -437,3 +437,20 @@
 //    printf("%d", b + dif);
 //    return 0;
 //}
+
+//#include<stdio.h>//字符逆序（内容逆序未实现（实现可以在创建一个相同的str，与指针变量进行交换运算），只实现了逆序输出）
+//#include<string.h>
+//int main()
+//{
+//    char str[10000] = { 0 };
+//    gets(str);
+//    int len = strlen(str);
+//    char* p = &str[len - 1];
+//    for (int i = 0; i < len; i++)
+//    {
+//        printf("%c", *p);
+//        p--;
+//    }
+//
+//    return 0;
+//}

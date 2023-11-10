@@ -912,3 +912,82 @@
 //	printf("%d", ret);
 //	return 0;
 //}
+
+//#include<stdio.h>//字符逆序（内容逆序未实现（实现可以在创建一个相同的str，与指针变量进行交换运算），只实现了逆序输出）
+//#include<string.h>
+//int main()
+//{
+//    char str[10000] = { 0 };
+//    gets(str);
+//    int len = strlen(str);
+//    char* p = &str[len - 1];
+//    for (int i = 0; i < len; i++)
+//    {
+//        printf("%c", *p);
+//        p--;
+//    }
+//
+//    return 0;
+//}
+
+//#include<stdio.h>//字符串左旋
+//#include<string.h>
+//int main()
+//{
+//	char str[100] = { 0 };
+//	printf("输入要左旋的字符串：");
+//	gets(str);
+//	int len = strlen(str);
+//	str[len] = '0';
+//	char* p = str;
+//	printf("要左旋几次：");
+//	int n = 0;
+//	scanf("%d", &n);
+//	for (int i = 0; i < n; i++)
+//	{
+//		str[len] = * p;
+//		int k = 0;;
+//		while (k < len)
+//		{
+//			str[k] = str[k + 1];
+//			k++;
+//		}
+//	}
+//	for (int j = 0; j < len; j++)
+//	{
+//		printf("%c", str[j]);
+//	}
+//	return 0;
+//}
+
+//int my_strlen(char* str)//strlen实现
+//{
+//	char* p = str;
+//	int count = 0;
+//	while (*p)
+//	{
+//		p++;
+//		count += 1;
+//	}
+//	return count;
+//}
+//#include<stdio.h>
+//int main()
+//{
+//	char arr[100] = { 0 };
+//	gets(arr);
+//	int ret = my_strlen(arr);
+//	printf("%d", ret);
+//	return 0;
+//}
+
+//#include<stdio.h>//验证*p + 1 和*（p + 1）的区别
+//int main()
+//{
+//	int arr[5] = { 1, 2, 3, 4, 5 };
+//	int* p = arr;
+//	printf("%d\n", *(p + 3));
+//	printf("%d", *p + 3);
+//
+//	return 0;
+//}
