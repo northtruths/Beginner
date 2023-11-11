@@ -235,23 +235,27 @@
 //	return 0;
 //}
 
-//#include<stdio.h>//测试case后面能否使用&&、||
+//#include<stdio.h>//测试case后面能否使用&&、||,不能
 //int main()
 //{
 //	int a = 0;
 //	scanf("%d", &a);
 //	switch(a)
 //	{
-//	case 1 && 2:
-//		printf("1");
+//	case (1 || 2):
+//		printf("hehe");
 //		break;
-//	case 3 || 4:
-//		printf("2");
+//	case 4:
+//		printf("haha");
 //		break;
+//	default:
+//		printf("xixi");
+//
 //
 //	}
 //	return 0;
 //}
+
 //#include<stdio.h>
 //int main()
 //{
@@ -991,3 +995,59 @@
 //
 //	return 0;
 //}
+
+//#include<stdio.h>//数组在内存中储存的格式，从二进制的 右边往左 储存（先存小的）
+//int main()
+//{
+//	int arr[10] = { 1, 15, 16, 255, 256, 4095, 4096, 65535, 65536};
+//
+//	return 0;
+//}
+
+//#include<stdio.h>//strcmp比较的是第一个不同字符的ASCII码的大小
+//#include<string.h>
+//int main()
+//{
+//	char arr1[5] = {'a','b','A','B','B'};
+//	char arr2[5] = {'a','b','B','A','A'};
+//	if (strcmp(arr1, arr2) > 0)
+//		printf("arr1 > arr2");
+//	else if (strcmp(arr1, arr2) == 0)
+//		printf("arr1 = arr2");
+//	else
+//		printf("arr1 < arr2");
+//	return 0;
+//}
+
+//#include<stdio.h>//指针/地址加减整数的规律
+//int main()
+//{
+//	int a[5] = {1, 2, 3, 4, 5};
+//	int* p = &a + 1;
+//	int* p1 = p + 1;
+//	int* p2 = *p + 1;
+//	printf("%p\n", &a);
+//	printf("%p\n", p);
+//	//printf("%p\n", p2);
+//
+//	return 0;
+//}
+
+#include<stdio.h>
+int main()
+{
+	int a[5] = { 0 };
+	int sz = sizeof(a) / sizeof(a[0]);
+	int* p = a;
+	for (int i = 0; i < sz; i++)
+	{
+		scanf("%d", p + i);
+	}
+	for (int j = 0; j < sz; j++)
+	{
+		//printf("%d", *p + 1);
+		printf("%d", *(p + j));
+
+	}
+	return 0;
+}
