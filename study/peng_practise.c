@@ -1162,3 +1162,33 @@
 //	}
 //	return 0;
 //}
+
+//#include<stdio.h>//二分查找,二分查找升序数组里的一个数，找到返回下标，没找到返回 -1
+//int bin_search(int arr[], int left, int right, int key)
+//{
+//	while (arr[(right + left) / 2] != key && left < right)
+//	{
+//		if (arr[(right + left) / 2] > key)
+//			right = (right + left) / 2;
+//		if (arr[(right + left) / 2] < key)
+//			left = (right + left) / 2;
+//	}
+//	if (arr[(right + left) / 2] == key)
+//		return (right + left) / 2;
+//	else
+//		return -1;
+//}
+//
+//int main()
+//{
+//	int arr[10] = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
+//	int key = 0;
+//	printf("请输入你要查找的数：");
+//	scanf("%d", &key);
+//	int sz = sizeof(arr) / sizeof(arr[0]);
+//	int left = 0;
+//	int right = sz - 1;
+//		int ret = bin_search(arr, left, right, key);
+//		printf("%d", ret);
+//	return 0;
+//}
