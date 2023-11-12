@@ -1033,21 +1033,132 @@
 //	return 0;
 //}
 
-#include<stdio.h>
-int main()
-{
-	int a[5] = { 0 };
-	int sz = sizeof(a) / sizeof(a[0]);
-	int* p = a;
-	for (int i = 0; i < sz; i++)
-	{
-		scanf("%d", p + i);
-	}
-	for (int j = 0; j < sz; j++)
-	{
-		//printf("%d", *p + 1);
-		printf("%d", *(p + j));
+//#include<stdio.h>
+//int main()
+//{
+//	int a[5] = { 0 };
+//	int sz = sizeof(a) / sizeof(a[0]);
+//	int* p = a;
+//	for (int i = 0; i < sz; i++)
+//	{
+//		scanf("%d", p + i);
+//	}
+//	for (int j = 0; j < sz; j++)
+//	{
+//		//printf("%d", *p + 1);
+//		printf("%d", *(p + j));
+//
+//	}
+//	return 0;
 
-	}
-	return 0;
-}
+
+
+//#include<stdio.h>//交换
+//int a = 10;
+//int b = 20;
+//void exchange()
+//{
+//	a = 20;
+//	b = 10;
+//}
+//int main()
+//{
+//	printf("a = %d, b = %d\n", a, b);
+//	exchange();
+//	printf("a = %d, b = %d", a, b);
+//
+//	return 0;
+//}
+
+//#include<stdio.h>//用指针打印数组内容
+//int main()
+//{
+//	int arr[10] = { 0 };
+//	int* p = arr;
+//	int sz = sizeof(arr) / sizeof(arr[0]);
+//	for (int i = 0; i < sz; i++)
+//	{
+//		scanf("%d", (p + i));
+//	}
+//	for (int j = 0; j < sz; j++)
+//	{
+//		printf("%d ", *(p + j));
+//	}
+//	return 0;
+//}
+
+//#include<stdio.h>//冒泡排序
+//maopao(int arr[],int sz)
+//{
+//	int i = 0;
+//	int j = 0;
+//	int* p = arr;
+//	for (int i= 0; i < sz; i++)
+//	{
+//		for (j = 0; j < sz - 1 - i; j++)
+//		{
+//			if (*(p + j) > *(p + j + 1))
+//			{
+//				int z = *(p + j);
+//				*(p + j) = *(p + j + 1);
+//				*(p + j + 1) = z;
+//
+//			}
+//		}
+//	}
+//}
+//
+//int main()
+//{
+//	int arr[10] = { 0 };
+//	int sz = sizeof(arr) / sizeof(arr[0]);
+//	int* p = arr;
+//	for (int i = 0; i < sz; i++)
+//	{ 
+//		scanf("%d", (p + i));
+//	}
+//	maopao(arr,sz);
+//	for (int i = 0; i < sz; i++)
+//	{
+//		printf("%d ", * (p + i));
+//	}
+//	return 0;
+//}
+
+//#include<stdio.h>//调整奇数偶数顺序
+//
+//void Adjust(int arr[],int sz)
+//{
+//	int i = 0;
+//	int j = 0;
+//	int* p = arr;
+//	for (int i= 0; i < sz; i++)
+//	{
+//		for (j = 0; j < sz - 1 - i; j++)
+//		{
+//			if (*(p + j) % 2 == 0 && *(p + j + 1) % 2 != 0)
+//			{
+//				int z = *(p + j);
+//				*(p + j) = *(p + j + 1);
+//				*(p + j + 1) = z;
+//
+//			}
+//		}
+//	}
+//}
+//int main()
+//{
+//	int arr[10] = { 0 };
+//	int sz = sizeof(arr) / sizeof(arr[0]);
+//	int* p = arr;
+//	for (int i = 0; i < sz; i++)
+//	{
+//		scanf("%d", (p + i));
+//	}
+//	Adjust(arr,sz);
+//	for (int i = 0; i < sz; i++)
+//	{
+//		printf("%d ", * (p + i));
+//	}
+//	return 0;
+//}
