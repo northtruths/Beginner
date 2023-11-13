@@ -198,3 +198,98 @@
 //		printf("NO");
 //	return 0;
 //}
+
+//#include<stdio.h>//判断回文数
+//int main()
+//{
+//	int n = 0;
+//	scanf("%d", &n);
+//	int a = n;//定义一个和 n 相等的数 a
+//	int count = 0;
+//	while (a)//计算 n 的位数
+//	{
+//		a /= 10;
+//		count++;
+//	}
+//	int arr[count];//变长数组（vs不支持）
+//	a = n;
+//	for (int i = 0; i < count; i++)//将 n 的每位上的数字依次给数组 arr
+//	{
+//		arr[count - i - 1] = a % 10;
+//		a /= 10;
+//	}
+//	int count1 = 0;//用计数
+//	for (int j = 0; j < (count + 1) / 2; j++)//当 count1 等于循环次数说明 n 正序的数等于倒序的数 
+//	{
+//		if (arr[j] == arr[count - j - 1])
+//			count1++;
+//	}
+//	if (count1 == (count + 1) / 2)
+//		printf("%d 是回文数", n);
+//	return 0;
+//}
+
+//#include<stdio.h>
+//int main()
+//{
+//	float money = 0;
+//	printf("每个人捐多少？");
+//	scanf("%f", &money);
+//	int i = 1;
+//	while(i <= 1000)
+//	{
+//		if (i * money >= 100000)
+//		{
+//			i++;
+//			break;
+//		}
+//		i++;
+//	}
+//	printf("捐款人数为：%d", i - 1);
+//	return 0;
+//}
+
+//#include<stdio.h>//鸡兔同笼
+//int main()
+//{
+//	int tu = 0;
+//	int ji = 0;
+//	for(tu = 1; tu <= 35; tu++ )
+//		for (ji = 1; ji <= 35; ji++)
+//		{
+//			if (tu * 4 + ji * 2 == 94 && ji + tu == 35)
+//			{
+//				printf("鸡%d只，兔%d只", ji, tu);
+//				goto end;
+//			}
+//		}
+//end:
+//	return 0;
+//}
+
+//#include<stdio.h>
+//#include<math.h>
+//int main()
+//{
+//	int N = 0;
+//	int K = 0;
+//	int money = 0;
+//	int need = 0;
+//	scanf("%d%d", &N, &K);
+//	N = N * 10000;
+//	double L = K / 100.0;
+//	int i = 0;
+//	for (i = 1; i <= 20; i++)
+//	{
+//		money += N;
+//		need = 2000000 * pow(1 + L , i - 1);
+//		if (money >= need)
+//		{
+//			printf("%d", i);
+//			break;
+//		}
+//	}
+//	if (i == 21)
+//		printf("Impossible");
+//	return 0;
+//}

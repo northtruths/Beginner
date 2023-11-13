@@ -44,7 +44,7 @@
 //	return  0;
 //}
 
-//判断素数
+////判断素数
 //int is_prime()
 //{
 //	int a = 0;
@@ -54,13 +54,14 @@
 //	{
 //		if (a % i == 0)
 //		{
+//			printf("%d", a);
 //			printf("不是素数");
 //			break;
 //		}
 //		else
 //		{
-//			printf("是素数\n");
 //			printf("%d", a);
+//			printf("是素数\n");
 //			break;
 //		}
 //	}
