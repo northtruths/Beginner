@@ -454,3 +454,83 @@
 //
 //    return 0;
 //}
+
+//#include<stdio.h>//BC41
+//int main()
+//{
+//    int r = 0;
+//    scanf("%d", &r);
+//    double V = (4 / 3.0) * 3.14 * (r * r * r);
+//    printf("%.2lf", V);
+//    return 0;
+//}
+
+//#include<stdio.h>//BC42–°¿÷¿÷∂®ƒ÷÷”
+//int main()
+//{
+//    int h = 0;
+//    int m = 0;
+//    int k = 0;
+//    scanf("%d:%d %d", &h, &m, &k);
+//    while (k >= 60)
+//    {
+//        k -= 60;
+//        h++;
+//    }
+//    m += k;
+//    while (m >= 60)
+//    {
+//        m -= 60;
+//        h++;
+//    }
+//    while (h > 23)
+//    {
+//        h -= 24;
+//    }
+//    printf("%02d:%02d", h, m);
+//    return 0;
+//}
+
+//#include<stdio.h>//BC43–°¿÷¿÷≈≈µÁÃ›
+//int main()
+//{
+//    int n = 0;
+//    scanf("%d", &n);
+//    int t = n / 12;
+//    printf("%d", t * 4 + 2);
+//    return 0;
+//}
+
+#include<stdio.h>
+int main()
+{
+    int n = 0;
+    int m = 0;
+    scanf("%d%d", &n, &m);
+    long long int i = 0;
+    long long int j = 0;
+    if (n > m)
+    {
+        i = m;
+        j = n;
+    }
+    else
+    {
+        i = n;
+        j = m;
+    }
+    while (1)
+    {
+        if (n % i == 0 && m % i == 0)
+            break;
+        i--;
+    }
+    while (1)
+    {
+        if (j % n == 0 && j % m == 0)
+            break;
+        j++;
+    }
+    printf("%lld", i + j);
+    return 0;
+}
