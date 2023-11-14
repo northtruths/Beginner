@@ -501,36 +501,71 @@
 //    return 0;
 //}
 
-#include<stdio.h>
-int main()
-{
-    int n = 0;
-    int m = 0;
-    scanf("%d%d", &n, &m);
-    long long int i = 0;
-    long long int j = 0;
-    if (n > m)
-    {
-        i = m;
-        j = n;
-    }
-    else
-    {
-        i = n;
-        j = m;
-    }
-    while (1)
-    {
-        if (n % i == 0 && m % i == 0)
-            break;
-        i--;
-    }
-    while (1)
-    {
-        if (j % n == 0 && j % m == 0)
-            break;
-        j++;
-    }
-    printf("%lld", i + j);
-    return 0;
-}
+//#include<stdio.h>//BC44小乐乐与欧几里得
+//int main()
+//{
+//    long long int n = 0;
+//    long long int m = 0;
+//    scanf("%lld%lld", &n, &m);
+//    long long int i = 0;
+//    long long int j = 0;
+//    if (n > m)
+//        i = m;
+//    else
+//        i = n;
+//    while (1)
+//    {
+//        if (n % i == 0 && m % i == 0)
+//            break;
+//        i--;
+//    }
+//    j = m * n / i;//公式：最小公倍数=（n*m）/最大公约数
+//    printf("%lld", i + j);
+//    return 0;
+//}
+
+//#include<stdio.h>
+//#include<math.h>
+//int main()
+//{
+//    int n = 9;
+//    scanf("%d", &n);
+//    int count = 0;//判断位数
+//    int a = n;
+//    while (a)
+//    {
+//        a /= 10;
+//        count++;
+//    }
+//    int arr[count];
+//    int b = pow(10, count - 1);
+//    for (int i = 0; i < count; i++)//把 n 每位上的数字顺序放入数组
+//    {
+//        arr[i] = n / b % 10;
+//        b /= 10;
+//        if (b == 0)
+//            b = 1;
+//    }
+//    int flag = 0;//若数字的高位为偶数则不打印 0 ，直到出现奇数后的偶数才会打印 0 ，这里判断是否出现过奇数
+//    for (int j = 0; j < count; j++)
+//    {
+//        if (flag == 0)//若没出现过奇数，跳过本次循环
+//        {
+//            if (arr[j] % 2 == 0)
+//            {
+//                continue;
+//            }
+//
+//        }
+//        if (arr[j] % 2 == 0)
+//            printf("0");
+//        else
+//        {
+//            flag = 1;
+//            printf("1");
+//        }
+//    }
+//    if (flag == 0)//若一直没出现过奇数
+//        printf("0");
+//    return 0;
+//}

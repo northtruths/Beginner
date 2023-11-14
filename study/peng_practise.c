@@ -1192,3 +1192,12 @@
 //		printf("%d", ret);
 //	return 0;
 //}
+
+//#include<stdio.h>
+//int main()
+//{
+//	int arr[3][5] = { {1, 2}, {2, 3}, {3, 4} };
+//	arr[2][4] = ((3, 4), (4, 5));
+//	printf("%d ", arr[2][4]);
+//	return 0;
+//}
