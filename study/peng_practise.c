@@ -1201,3 +1201,39 @@
 //	printf("%d ", arr[2][4]);
 //	return 0;
 //}
+
+//#include<stdio.h>
+//int main()
+//{
+//	char arr[10] = { 0 };
+//	for (int i = 0; i < 10; i++)
+//	{
+//		scanf("%c", &arr[i]);
+//	}
+//	int count = 0;
+//	for (int i = 0; i < 10; i++)
+//	{
+//		if (arr[i] % 2 == 0)//字符 2 和 数字 2的效果是一样的，字符 2 有ASCII码，数字 2 没有
+//			count++;
+//		printf("%d ", count);
+//	}
+//	return 0;
+//}
+
+//#include<stdio.h>
+//#include<math.h>
+//int main()
+//{
+//	int i = -2;
+//	int j = pow(i, 2);
+//	printf("%d", j);
+//	return 0;
+//}
+
+#include<stdio.h>
+int main()
+{
+    unsigned int a = 1, b = 2;
+    printf("%d %d", a, b);
+    return 0;
+}

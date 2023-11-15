@@ -524,7 +524,7 @@
 //    return 0;
 //}
 
-//#include<stdio.h>
+//#include<stdio.h>//BC45小乐乐改数字,每位的数变成0或1
 //#include<math.h>
 //int main()
 //{
@@ -568,4 +568,41 @@
 //    if (flag == 0)//若一直没出现过奇数
 //        printf("0");
 //    return 0;
+//}
+
+//#include<stdio.h>//BC46KiKi算期末成绩
+//int main()
+//{
+//    int ex = 0;
+//    int class = 0;
+//    int midexam = 0;
+//    int endexam = 0;
+//    scanf("%d%d%d%d%d", &ex, &class, &midexam, &endexam);
+//    printf("%.1f", ex * 0.2 + class * 0.1 + midexam * 0.2 + endexam * 0.5);
+//    return 0;
+//}
+
+//#include<stdio.h>//BC47,这是一个非常简单的题目，意在考察你编程的基础能力。千万别想难了哦
+//int main()
+//{
+//    int a, b, c, d;
+//    scanf("%d%d%d%d", &a, &b, &c, &d);
+//    printf("%d", (a + b - c) * d);
+//    return 0;
+//}
+
+//#include<stdio.h>//BC48牛牛的线段
+//#include<math.h>
+//int main()
+//{
+//	int x1 = 0;
+//	int y1 = 0;
+//	int x2 = 0;
+//	int y2 = 0;
+//	scanf("%d%d", &x1, &y1);
+//	scanf("%*[^\n] %c");//清除缓存区
+//	scanf("%d%d", &x2, &y2);
+//	int i = pow(x1 - x2, 2);
+//	int j = pow(y1 - y2, 2);
+//	printf("%d", i + j);
 //}
