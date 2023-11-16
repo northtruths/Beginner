@@ -606,3 +606,12 @@
 //	int j = pow(y1 - y2, 2);
 //	printf("%d", i + j);
 //}
+
+//#include<stdio.h>//BC49
+//int main()
+//{
+//    unsigned int a = 0, b = 0;
+//    scanf("%u%u", &a, &b);
+//    printf("%u", (a + b) % 100);
+//    return 0;
+//}

@@ -1,4 +1,5 @@
 ﻿#define _CRT_SECURE_NO_WARNINGS
+
 //#include<stdio.h>
 //int main()
 //{int num1;int num2;
@@ -1230,10 +1231,125 @@
 //	return 0;
 //}
 
+//#include<stdio.h>
+//int main()
+//{
+//	int a = 10;
+//	int b = 10;
+//	if (a == b)
+//		printf("yes");
+//	else if (a == b)
+//		printf("no");
+//	return 0;
+//}
+
+//#include<stdio.h>
+//int main()
+//{
+//	int a = 'a';
+//	printf("%d", a);
+//	return 0;
+//}
+
+//#include<stdio.h>
+//#include<stdlib.h>
+//int main()
+//{
+//	int a = 10;
+//	printf("%p\n", &a);
+//	int* p1 = &a;
+//	free(p1);
+//	printf("%p\n", p1);
+//	printf("%d\n", *p1);
+//	return 0;
+//}
+
+//#include<stdio.h>//判断左右螺旋
+//#include<string.h>
+//int left_revolve(char str1[], char str2[], int len1, int n)//左旋
+//{
+//	int flag = 0;//判断是与否
+//	char copy[100] = { 0 };//需螺旋的数组的复制
+//	for (int i = 0; i < len1; i++)
+//		copy[i] = str1[i];
+//	for (int j = 0; j < n; j++)//螺旋次数
+//	{
+//		for (int k = 0; k < len1 - 1; k++)//用下一个元素覆盖上一个元素，并最后一个元素用原来的数组对应元素覆盖
+//		{
+//			copy[k] = copy[k + 1];
+//		}
+//		copy[len1 - 1] = str1[j];
+//		if (strcmp(str2, copy) == 0)
+//		{
+//			flag = 1;
+//			break;
+//		}
+//	}
+//	return flag;
+//}
+//
+//int right_revolve(char str1[], char str2[], int len1, int n)//右旋
+//{
+//	int flag = 0;
+//	char copy[100] = { 0 };
+//	for (int i = 0; i < len1; i++)
+//		copy[i] = str1[i];
+//	for (int j = 0; j < n; j++)
+//	{
+//		for (int k = len1 - 1; k > 0; k--)
+//		{
+//			copy[k] = copy[k - 1];
+//		}
+//		copy[0] = str1[len1 - 1];
+//		if (strcmp(str2, copy) == 0)
+//		{
+//			flag = 1;
+//			break;
+//		}
+//	}
+//	return flag;
+//}
+// 
+//void is_revolve(char str1[], char str2[], int len1, int len2, int n, char x)//判断两字符串是否为螺旋的关系
+//{
+//	int ret;
+//	if (x == 'l')
+//		ret = left_revolve(str1, str2, len1, n);
+//	else
+//		ret = right_revolve(str1, str2, len1, n);
+//	printf("%d", ret);
+//}
+//
+//int main()
+//{
+//	char str1[100] = { 0 };
+//	char str2[100] = { 0 };
+//	printf("请输入要比较的两串字符串（用空格隔开）：");
+//	scanf("%s %s", str1, str2);
+//	int len1 = strlen(str1);
+//	int len2 = strlen(str2);
+//	printf("请输入要螺旋的方向（l/r），及螺旋次数，用空格隔开：");
+//	char x = 0;
+//	int n = 0;
+//	scanf("%*[\n] %c %d", &x, &n);
+//	is_revolve(str1, str2, len1, len2, n, x);
+//	return 0;
+//}
+
 #include<stdio.h>
 int main()
 {
-    unsigned int a = 1, b = 2;
-    printf("%d %d", a, b);
-    return 0;
+	char A[3] = { "bcd" };
+	char B = 'c';
+	char C = 'd';
+	char D[3] = { "abc" };
+	if ((A[0] == B && B == C && A[0] == C) || (A[1] == B && B == C && A[1] == C) || (A[2] == B && B == C && A[2] == C))
+		printf("%c", B);
+	else if ((A[0] == B && B == D && A[0] == D) || (A[1] == B && B == D && A[1] == D) || (A[2] == B && B == D && A[2] == D))
+		printf("%c", B);
+	else if ((A[0] == D && D == C && A[0] == C) || (A[1] == D && D == C && A[1] == C) || (A[2] == D && D == C && A[2] == C))
+		printf("%c", C);
+	else if (D == B && B == C && D == C)
+		printf("%d", B);
+	return 0;
 }
