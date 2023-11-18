@@ -1336,20 +1336,48 @@
 //	return 0;
 //}
 
+//#include<stdio.h>
+//int main()
+//{
+//	char A[3] = { "bcd" };//（不是a）
+//	char B = 'c';
+//	char C = 'd';
+//	char D[3] = { "abc" };//（不是d）
+//	if ((A[0] == B && B == C && A[0] == C) || (A[1] == B && B == C && A[1] == C) || (A[2] == B && B == C && A[2] == C))
+//		printf("%c", B);
+//	else if ((A[0] == B && B != 'd' && A[0] != 'd') || (A[1] == B && B != 'd' && A[1] != 'd') || (A[2] == B && B != 'd' && A[2] != 'd'))
+//		printf("%c", B);
+//	else if ((A[0] != 'd' && 'd'!= C && A[0] == C) || (A[1] != 'd' && 'd' != C && A[1] == C) || (A[2] != 'd' && 'd' != C && A[2] == C))
+//		printf("%c", C);
+//	else if ('d' != B && B == C && 'd' != C)
+//		printf("%d", B);
+//	return 0;
+//}
+
 #include<stdio.h>
 int main()
 {
-	char A[3] = { "bcd" };
-	char B = 'c';
-	char C = 'd';
-	char D[3] = { "abc" };
-	if ((A[0] == B && B == C && A[0] == C) || (A[1] == B && B == C && A[1] == C) || (A[2] == B && B == C && A[2] == C))
-		printf("%c", B);
-	else if ((A[0] == B && B == D && A[0] == D) || (A[1] == B && B == D && A[1] == D) || (A[2] == B && B == D && A[2] == D))
-		printf("%c", B);
-	else if ((A[0] == D && D == C && A[0] == C) || (A[1] == D && D == C && A[1] == C) || (A[2] == D && D == C && A[2] == C))
-		printf("%c", C);
-	else if (D == B && B == C && D == C)
-		printf("%d", B);
+	int arr[100][100] = { 0 };
+	int n = 0;
+	printf("请输入要打印的行数：");
+	scanf("%d", &n);
+	for (int i = 0; i < n; i++)
+	{
+		for (int j = 0; j <= i; j++)
+		{
+			if (i == 0 || j == 0 || i == j)
+				arr[i][j] = 1;
+			else
+				arr[i][j] = arr[i - 1][j - 1] + arr[i - 1][j];
+		}
+	}
+	for (int i = 0; i < n; i++)
+	{
+		for (int j = 0; j <= i; j++)
+		{
+			printf("%d", arr[i][j]);
+		}
+		printf("\n");
+	}
 	return 0;
 }
