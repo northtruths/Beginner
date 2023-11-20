@@ -1354,30 +1354,183 @@
 //	return 0;
 //}
 
+//#include<stdio.h>
+//int main()
+//{
+//	int arr[100][100] = { 0 };
+//	int n = 0;
+//	printf("请输入要打印的行数：");
+//	scanf("%d", &n);
+//	for (int i = 0; i < n; i++)
+//	{
+//		for (int j = 0; j <= i; j++)
+//		{
+//			if (i == 0 || j == 0 || i == j)
+//				arr[i][j] = 1;
+//			else
+//				arr[i][j] = arr[i - 1][j - 1] + arr[i - 1][j];
+//		}
+//	}
+//	for (int i = 0; i < n; i++)
+//	{
+//		for (int j = 0; j <= i; j++)
+//		{
+//			printf("%d", arr[i][j]);
+//		}
+//		printf("\n");
+//	}
+//	return 0;
+//}
+
+//#include<stdio.h>//用转移表实现一个加减乘除的计算器
+//int add(int x, int y)
+//{
+//	return x + y;
+//}
+//
+//int sub(int x, int y)
+//{
+//	return x - y;
+//}
+//
+//int mul(int x, int y)
+//{
+//	return x * y;
+//}
+//
+//int div(int x, int y)
+//{
+//	return x / y;
+//}
+//void menu()
+//{
+//	printf("****************************\n");
+//	printf("******* 1.add    2.sub *****\n");
+//	printf("******* 3.mul    4.div *****\n");
+//	printf("******* 0.exit *************\n");
+//	printf("****************************\n");
+//
+//}
+//int main()
+//{
+//	int c = 0;
+//	int x = 0;
+//	int y = 0;
+//	int ret = 0;
+//	menu();
+//	int (*arr[5])(int x, int y) = { NULL,add, sub, mul, div };
+//	do
+//	{
+//		printf("请输入要进行的运算：");
+//		scanf("%d", &c);
+//		if (c != 0)
+//		{
+//			printf("请输入要计算的两个数：");
+//			scanf("%d%d", &x, &y);
+//			ret = (*(arr[c]))(x, y);
+//			printf("结果是：%d\n", ret);
+//		}
+//	} while (c != 0);
+//
+//	return 0;
+//}
+
+//#include<stdio.h>//qsort的练习使用，包含结构体的排序
+//#include<stdlib.h>
+//#include<string.h>
+//void int_compar(const void* x, const void* y)
+//{
+//	return *(int*)x - *(int*)y;
+//}
+//
+//void int_sort()
+//{
+//	int arr[10] = { 6, 7, 3, 4, 1, 2, 8, 9, 0, 5 };
+//	int sz = sizeof(arr) / sizeof(arr[0]);
+//	for (int i = 0; i < sz; i++)
+//	{
+//		printf("%d ", arr[i]);
+//	}
+//	printf("\n");
+//	qsort(arr, sz, sizeof(arr[0]), int_compar);
+//	for (int i = 0; i < sz; i++)
+//	{
+//		printf("%d ", arr[i]);
+//	}
+//}
+//
+//struct stu
+//{
+//	char name[10];
+//	int age;
+//};
+//
+//int struct_name_compar(const void* x, const void* y)
+//{
+//	return strcmp(((struct stu*)x)->name, ((struct stu*)y)->name);
+//}
+//
+//void struct_sort()
+//{
+//	struct stu arr[4] = { {"zhangsan",22}, {"lisi", 20}, {"wangwu", 23}, {"laoliu", 66} };
+//	int sz = sizeof(arr) / sizeof(arr[0]);
+//	qsort(arr, sz, sizeof(arr[0]), struct_name_compar);
+//}
+//int main()
+//{
+//	int_sort();
+//	struct_sort();
+//	return 0;
+//}
+
+//#include<stdio.h>
+//int main()
+//{
+//	int arr[100] = { 0 };
+//	int s = 0;
+//	for (int i = 0; i < 10; i++)
+//	{
+//		scanf("%d", &arr[i]);
+//	}
+//	for (int i = 0; i < 10; i++)
+//	{
+//		printf("%d", arr[i]);
+//
+//	}
+//	return 0;
+//}
+
 #include<stdio.h>
 int main()
 {
-	int arr[100][100] = { 0 };
 	int n = 0;
-	printf("请输入要打印的行数：");
 	scanf("%d", &n);
-	for (int i = 0; i < n; i++)
+	int num = 0;
+	int cn = n;
+	while (cn)//求数的位数
 	{
-		for (int j = 0; j <= i; j++)
-		{
-			if (i == 0 || j == 0 || i == j)
-				arr[i][j] = 1;
-			else
-				arr[i][j] = arr[i - 1][j - 1] + arr[i - 1][j];
-		}
+		cn /= 10;
+		num++;
 	}
-	for (int i = 0; i < n; i++)
+	int arr[100] = { 0 };
+	for (int i = 0; i < num; i++)//将数字的每位顺序放入数组
 	{
-		for (int j = 0; j <= i; j++)
+		arr[num - 1 - i] = n % 10;
+		n /= 10;
+	}
+	for (int j = 0; j < num; j++)
+	{
+		int flag = 0;//判断是否有相等的数，有1否0
+		for (int k = 0; k < num; k++)
 		{
-			printf("%d", arr[i][j]);
+			if (arr[j] == arr[k] && j != k)
+			{
+				flag = 1;
+				break;
+			}
 		}
-		printf("\n");
+		if (flag == 0)
+			printf("%d ", arr[j]);
 	}
 	return 0;
 }

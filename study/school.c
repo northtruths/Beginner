@@ -275,7 +275,7 @@
 //	int K = 0;
 //	int money = 0;
 //	int need = 0;
-//	scanf("%d%d", &N, &K);
+//	scanf("%d%d", &N, &K); 
 //	N = N * 10000;
 //	double L = K / 100.0;
 //	int i = 0;
