@@ -1500,37 +1500,37 @@
 //	return 0;
 //}
 
-#include<stdio.h>
-int main()
-{
-	int n = 0;
-	scanf("%d", &n);
-	int num = 0;
-	int cn = n;
-	while (cn)//求数的位数
-	{
-		cn /= 10;
-		num++;
-	}
-	int arr[100] = { 0 };
-	for (int i = 0; i < num; i++)//将数字的每位顺序放入数组
-	{
-		arr[num - 1 - i] = n % 10;
-		n /= 10;
-	}
-	for (int j = 0; j < num; j++)
-	{
-		int flag = 0;//判断是否有相等的数，有1否0
-		for (int k = 0; k < num; k++)
-		{
-			if (arr[j] == arr[k] && j != k)
-			{
-				flag = 1;
-				break;
-			}
-		}
-		if (flag == 0)
-			printf("%d ", arr[j]);
-	}
-	return 0;
-}
+//#include<stdio.h>//找单身狗
+//int main()
+//{
+//	int n = 0;
+//	scanf("%d", &n);
+//	int num = 0;
+//	int cn = n;
+//	while (cn)//求数的位数
+//	{
+//		cn /= 10;
+//		num++;
+//	}
+//	int arr[100] = { 0 };
+//	for (int i = 0; i < num; i++)//将数字的每位顺序放入数组
+//	{
+//		arr[num - 1 - i] = n % 10;
+//		n /= 10;
+//	}
+//	for (int j = 0; j < num; j++)
+//	{
+//		int flag = 0;//判断是否有相等的数，有1否0
+//		for (int k = 0; k < num; k++)
+//		{
+//			if (arr[j] == arr[k] && j != k)
+//			{
+//				flag = 1;
+//				break;
+//			}
+//		}
+//		if (flag == 0)
+//			printf("%d ", arr[j]);
+//	}
+//	return 0;
+//}

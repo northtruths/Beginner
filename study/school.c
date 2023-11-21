@@ -293,3 +293,105 @@
 //		printf("Impossible");
 //	return 0;
 //}
+
+//#include<stdio.h>
+//int main()
+//{
+//	int arr[6] = { 0, 99, 90, 85, 100, 79 };
+//	int c = 0;
+//	printf("请输入要查成绩的学号：");
+//	scanf("%d", &c);
+//	switch (c)
+//	{
+//	case 1:
+//		printf("%d", arr[1]);
+//		break;
+//	case 2:
+//		printf("%d", arr[2]);
+//		break;
+//	case 3:
+//		printf("%d", arr[3]);
+//		break;
+//	case 4:
+//		printf("%d", arr[4]);
+//		break;
+//	case 5:
+//		printf("%d", arr[5]);
+//		break;
+//	}
+//	return 0;
+//}
+
+//#include<stdio.h>
+//int main()
+//{
+//	int road = 0;
+//	printf("马路长度为(m)：");
+//	scanf("%d", &road);
+//	int tree = road;
+//	int sw = 0;
+//	printf("地铁长度为（m）：");
+//	scanf("%d", &sw);
+//	int de_tree = sw;
+//	printf("还剩%d棵树", tree - de_tree);
+//	return 0;
+//}
+
+//#include<stdio.h>
+//int main()
+//{
+//	int arr[5][5] = { {1, 2, 3, 4, 5}, {6,7,8,9,10},{11,12,13,14,15},{16,17,18,19,20},{21,22,23,24,25} };
+//	int n = 0;
+//	int m = 0;
+//	printf("请输入要交换的行数：\n");
+//	scanf("%d%d", &n, &m);
+//	printf("交换前：\n");
+//	for (int i = 0; i < 5; i++)
+//	{
+//		for (int j = 0; j < 5; j++)
+//		{
+//			printf("%d ", arr[i][j]);
+//		}
+//		printf("\n");
+//	}
+//	for (int i = 0; i < 5; i++)
+//	{
+//		int emp = 0;
+//		emp = arr[n - 1][i];
+//		arr[n - 1][i] = arr[m - 1][i];
+//		arr[m - 1][i] = emp;
+//	}
+//	printf("交换后：\n");
+//	for (int i = 0; i < 5; i++)
+//	{
+//		for (int j = 0; j < 5; j++)
+//		{
+//			printf("%d ", arr[i][j]);
+//		}
+//		printf("\n");
+//	}
+//	return 0;
+//}
+
+//#include<stdio.h>
+//#include<string.h>
+//int main()
+//{
+//	char fruit[7][12] = { "applees", "bananas","peaches", "cherries", "pears", "oranges", "strawberies" };
+//	char s[12] = { 0 };
+//	printf("请输入要查找的水果：");
+//	scanf("%s", s);
+//	for (int i = 0; i < 7; i++)
+//	{
+//		if (strcmp(s, *(fruit + i)) == 0)
+//			*(fruit + i) = "Brussels sprouts";
+//	}
+//	return 0;
+//}
+
+#include<stdio.h>
+int main()
+{
+
+	return 0;
+}
