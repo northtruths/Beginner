@@ -1534,3 +1534,82 @@
 //	}
 //	return 0;
 //}
+
+//#include<stdio.h>
+//#include<string.h>
+//int main()
+//{
+//	char arr[6] = { "abcdef" };
+//	printf("%d", strlen(arr));
+//	return 0;
+//}
+
+#include<stdio.h>//用冒泡排序模拟 qsort 函数
+#include<string.h>
+struct stu
+{
+	char name[20];
+	int age;
+};
+int compare_int(const void* x, const void* y)
+{
+	return *(int*)x - *(int*)y;
+}
+
+int compare_struct(const void* x, const* y)
+{
+	return strcmp(((struct stu*)x)->name, ((struct stu*)y)->name);
+}
+
+void swap(char* p1, char* p2, int width)
+{
+	for (int i = 0; i < width; i++)
+	{
+		char emp = *p1;
+		*p1 = *p2;
+		*p2 = emp;
+		p1++;
+		p2++;
+	}
+}
+bubble_sort(void* base, size_t sz, size_t width, int(*compare)(const void* x, const void*y))
+{
+	for (int i = 0; i < sz; i++)//冒泡的趟数
+	{
+		for (int j = 0; j < sz - 1 - i; j++)//冒泡每趟交换的次数
+		{
+			if ((*compare)((char*)base + j*width, (char*)base + (j + 1) * width) > 0)
+				swap((char*)base + j * width, (char*)base + (j + 1) * width, width);
+		}
+	}
+}
+int main()
+{
+	int arr[5] = { 4, 1, 2, 5, 7 };
+	int sz = sizeof(arr) / sizeof(arr[0]);
+	for (int i = 0; i < sz; i++)
+	{
+		printf("%d", arr[i]);
+	}
+	printf("\n");
+	bubble_sort(arr, sz, sizeof(arr[0]), compare_int);
+	printf("排序后\n");
+	for (int i = 0; i < sz; i++)
+	{
+		printf("%d", arr[i]);
+	}
+	printf("\n");
+	struct stu arr1[4] = { {"zhangsan", 32} , {"lisi", 24}, {"wangwu", 43}, {"laoliu", 16}};
+	size_t sz1 = sizeof(arr1) / sizeof(arr1[0]);
+	for (int i = 0; i < sz1; i++)
+	{
+		printf("%s %d\n", arr1[i].name, arr1[i].age);
+	}
+	bubble_sort(arr1, sz1, sizeof(arr1[0]), compare_struct);
+	printf("排序后\n");
+	for (int i = 0; i < sz1; i++)
+	{
+		printf("%s %d\n", arr1[i].name, arr1[i].age);
+	}
+	return 0;
+}
