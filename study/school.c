@@ -377,21 +377,104 @@
 //#include<string.h>
 //int main()
 //{
-//	char fruit[7][12] = { "applees", "bananas","peaches", "cherries", "pears", "oranges", "strawberies" };
-//	char s[12] = { 0 };
+//	char fruit[7][20] = { "applees", "bananas","peaches", "cherries", "pears", "oranges", "strawberies" };
+//	char s[20] = { 0 };
+//	char b[] = "Brussels sprouts";
+//	size_t len = strlen(b);
 //	printf("请输入要查找的水果：");
 //	scanf("%s", s);
 //	for (int i = 0; i < 7; i++)
 //	{
-//		if (strcmp(s, *(fruit + i)) == 0)
-//			*(fruit + i) = "Brussels sprouts";
+//		if (strcmp(s, fruit[i]) == 0)
+//			for (int j = 0; j < len; j++)
+//			{
+//				*(fruit[i] + j) = *(b + j);
+//			}
 //	}
 //	return 0;
 //}
 
 //#include<stdio.h>
+//#include<string.h>
 //int main()
 //{
-//
+//	char arr[100] = { 0 };
+//	printf("请输入要判断的字符串：");
+//	scanf("%s", arr);
+//	size_t len = strlen(arr);
+//	int flag = 0;
+//	for (int i = 0; i < (len + 1) / 2; i++)
+//	{
+//		if (arr[i] != arr[len - 1 - i])
+//		{
+//			flag = 1;
+//			break;
+//		}
+//	}
+//	if (flag = 1)
+//		printf("YES");
+//	else
+//		printf("NO");
 //	return 0;
 //}
+
+//#include<stdio.h>//选择你喜欢的水果
+//#include<string.h>
+//
+//void swap(char* p1, char* p2, size_t len, int num, int sz)
+//{
+//	char a[100] = { 0 };
+//	strcpy(a, p1 + num + sz);//把水果后的字符串存起来
+//	strcpy(p1 + num, "Brussels sprouts");//从水果开始替换为 Brussels sprouts
+//	size_t B = strlen("Brussels sprouts");//从 Brussels sprouts 后开始替换为原来存起来的字符串
+//	strcpy(p1 + num + B, a);
+//}
+//int main()
+//{
+//	char fruit[7][100] = { "apples", "bananas","peaches", "cherries", "pears", "oranges", "strawberies" };
+//	char s[100] = { 0 };
+//	while (gets(s) != EOF)
+//	{
+//		size_t len = strlen(s);
+//		int cflag = 0;//判断是否找到水果
+//		for (int i = 0; i < 7; i++)//每个水果与字符串比较
+//		{
+//			size_t f = strlen(fruit[i]);
+//			for (int j = 0; j < len - f + 1; j++)//从第一个字符开始，每和水果字符比较后就从下一个字符再开始比较
+//			{
+//				int flag = 0;//判断字符相同的个数
+//				for (int k = 0; k < f; k++)
+//				{
+//					if (*(fruit[i] + k) == *(s + k + j))//字符串中的多少个字符和每个水果的字符比较
+//						flag++;
+//					if (flag == f)//若字符相同个数和水果字符数相同则找到了
+//					{
+//						swap(s, fruit[i], len, j, f);
+//						cflag = 1;
+//					}
+//				}
+//			}
+//		}
+//
+//		if (cflag == 0)
+//			printf("you must not enjoy fruit\n");
+//		else
+//			puts(s);
+//	}
+//	return 0;
+//}
+
+//#include<stdio.h>//字符串的替换
+//#include<string.h>
+//int main()
+//{
+//	char arr[100] = { "I love apples too" };
+//	char arra[100] = { 0 };
+//	strcpy(arra, arr + 13);//把 apples 后面的字符串传给 arra
+//	char arr1[100] = { "Brussels sprouts" };
+//	strcpy(arr + 7, arr1);//从 apples 的 a 开始，用 Brussels sprouts 将其覆盖
+//	strcpy(arr + 23, arra);//从 Brussels sprouts 后，把前面存在 arra 里的字符串放在后面
+//	puts(arr);
+//	return 0;
+//}
+
