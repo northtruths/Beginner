@@ -1625,3 +1625,45 @@
 //	p1 = p2;//*p1 就为 6  
 //	return 0;
 //}
+
+//#include<stdio.h>
+//int main()
+//{
+//	int a = 0x000013;
+//	printf("%p\n", a);
+//	printf("%d", a);
+//}
+
+//#include<stdio.h>
+//int main()
+//{
+//	char* s[] = { "abc\0def" , "qwer"};
+//	char** ps = s;
+//	printf("%s", *ps);
+//	/*printf("%c", *ps);*/
+//	/*(int*)ps;
+//	printf("%s", *ps);*/
+//	return 0;
+//}
+
+//#include<stdio.h>
+//int main()
+//{
+//	char s = 0;
+//	scanf("%c", &s);
+//	if (s >= 'A' && s <= 'Z')
+//		printf("大写");
+//	else
+//		printf("小写");
+//	return 0;
+//}
+
+#include<stdio.h>
+#include<ctype.h>
+int main()
+{
+	char a = getchar();
+	if (isupper(a))
+		printf("大写");
+	return 0;
+}
