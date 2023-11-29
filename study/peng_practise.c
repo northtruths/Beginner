@@ -1658,12 +1658,41 @@
 //	return 0;
 //}
 
-#include<stdio.h>
-#include<ctype.h>
+//#include<stdio.h>
+//#include<ctype.h>
+//int main()
+//{
+//	char a = getchar();
+//	if (isupper(a))
+//		printf("大写");
+//	return 0;
+//}
+
+//#include<stdio.h>
+//#include<string.h>
+//int main()
+//{
+//	char arr[] = { "abcdef" };
+//	char arr1[] = { "abc" };
+//	if ((int)(strlen(arr1) - strlen(arr)) > 0)
+//		printf("大于");
+//	else
+//		printf("小于等于");
+//	return 0;
+//}
+
+#include<stdio.h>//写一个函数，不使用临时变量，求字符串的长度
+size_t my_strlen(char* str)
+{
+	if (*str)
+		return 1 + my_strlen(++str);
+	else
+		return 0;
+}
 int main()
 {
-	char a = getchar();
-	if (isupper(a))
-		printf("大写");
+	char arr[] = { "abcdef" };
+	size_t len = my_strlen(arr);
+	printf("%d", len);
 	return 0;
 }
