@@ -1681,18 +1681,222 @@
 //	return 0;
 //}
 
-#include<stdio.h>//写一个函数，不使用临时变量，求字符串的长度
-size_t my_strlen(char* str)
+//#include<stdio.h>//写一个函数，不使用临时变量，求字符串的长度
+//size_t my_strlen(char* str)
+//{
+//	if (*str)
+//		return 1 + my_strlen(++str);
+//	else
+//		return 0;
+//}
+//int main()
+//{
+//	char arr[] = { "abcdef" };
+//	size_t len = my_strlen(arr);
+//	printf("%d", len);
+//	return 0;
+//}
+
+//#include<stdio.h>
+//#include<string.h>
+//int main()
+//{
+//	char arr[] = { "abcdefghijkl" };
+//	char arr1[] = { "qwer" };
+//	strcpy(arr, arr1);
+//	printf("%s", arr);
+//	return 0;
+//}
+
+//#include<stdio.h>//后置 ++ 的原理，其实变量已经加 1 ，不过是创建了一个临时变量而使用其进行运算的，前置 ++ 也一样
+//int main()
+//{
+//	char arr[] = { "abcdef" };
+//	char* p = arr;
+//	printf("%c %c", *(p++ + 1) + 1, *p);
+//	return 0;
+//}
+
+//#include<stdio.h>//越界
+//#include<string.h>
+//int main()
+//{
+//	char arr1[] = "hello ";
+//	char arr2[] = "world";
+//	strcat(arr1, arr2);
+//	printf("%s", arr1);
+//	return 0;
+//}
+
+//#include<stdio.h>
+//#include<string.h>
+//int main()
+//{
+//	char arr[20] = "hello";
+//	strcat(arr, arr);
+//	printf("%s", arr);
+//	return 0;
+//}
+
+//#include<stdio.h>//strcmp 比较是以 \0 为停止标识的
+//#include<string.h>
+//int main()
+//{
+//	char arr1[] = { "a\0bcdef" };
+//	char arr2[] = { "abc" };
+//	int ret = strcmp(arr1, arr2);
+//	printf("%d", ret);
+//	return 0;
+//}
+
+//#include<stdio.h>
+//int main()
+//{
+//	char arr[] = "abcd";
+//	const char* p = arr;
+//	*(p + 1) = 'c';
+//	printf("%s", p);
+//	return 0;
+//}
+
+//#include<stdio.h>//strcmp的模拟
+//int my_strcmp(const char* p1, const char* p2)
+//{
+//	while (*p1 == *p2 && *p1 != '\0')
+//	{
+//		p1++;
+//		p2++;
+//	}
+//	return *p1 - *p2;
+//}
+//int main()
+//{
+//	char arr1[] = "abcdef";
+//	char arr2[] = "abccef";
+//	int ret = my_strcmp(arr1, arr2);
+//	if (ret > 0)
+//		printf("大于");
+//	else if (ret == 0)
+//		printf("相同");
+//	else
+//		printf("小于");
+//	return 0;
+//}
+
+//#include<stdio.h>
+//int main()
+//{
+//	size_t a = 3;
+//	size_t b = 1;
+//	size_t c = b - a;
+//	printf("%zd\n", c);
+//	printf("%d", c);
+//	return 0;
+//}
+
+//#include<stdio.h>
+//#include<string.h>
+//int main()
+//{
+//	char arr[] = "abcdef";
+//	char arr1[] = "abcdee";
+//	int ret = strncmp(arr, arr1, 10);
+//	printf("%d", ret);
+//	return 0;
+//}
+
+//#include<stdio.h>
+//#include<string.h>
+//int main()
+//{
+//	char arr1[20] = "ab\0cdefxxxxxxxxxxx";
+//	char arr2[] = "nnnn";
+//	//strncpy(arr1, arr2, 7);
+//	strncat(arr1, arr2, 7);
+//	return 0;
+//}
+
+//#include<stdio.h>//模拟实现strlen
+//size_t my_strlen(char* arr)
+//{
+//	if (*arr)
+//	{
+//		return 1 + my_strlen(arr + 1);
+//	}
+//	else
+//		return 0;
+//}
+//int main()
+//{
+//	char arr[] = "abcdef";
+//	size_t len = my_strlen(arr);
+//	printf("%d", len);
+//	return 0;
+//}
+
+//#include<stdio.h>//模拟实现 strcpy
+//#include<assert.h>
+//void my_strcpy(char* str1, const char* str2)
+//{
+//	assert(str1 && str2);
+//	while (*str2)
+//	{
+//		*str1 = *str2;
+//		str1++;
+//		str2++;
+//	}
+//	*str1 = *str2;
+//}
+//int main()
+//{
+//	char arr1[20] = "abcdef";
+//	char arr2[] = "qwer";
+//	my_strcpy(arr1, arr2);
+//	puts(arr1);
+//	return 0;
+//}
+
+//#include<stdio.h>//模拟 strcmp
+//int my_strcmp(const char* str1,const char* str2)
+//{
+//	while (*str1 == *str2 && *str1 != '\0')
+//	{
+//		str1++;
+//		str2++;
+//	}
+//	return *str1 - *str2;
+//}
+//int main()
+//{
+//	char arr1[] = "abcdef";
+//	char arr2[] = "abcdef";
+//	int ret = my_strcmp(arr1, arr2);
+//	if (ret > 0)
+//		printf("大于");
+//	else if (ret == 0)
+//		printf("等于");
+//	else
+//		printf("小于");
+//	return 0;
+//}
+
+#include<stdio.h>//模拟实现 strcat
+#include<assert.h>
+char* my_strcat(char* str1, const char* str2)
 {
-	if (*str)
-		return 1 + my_strlen(++str);
-	else
-		return 0;
+	char* ret = str1;
+	while (*str1)
+	{
+		str1++;
+	}
+	while ((*str1++ = *str2++));
+	return ret;
 }
 int main()
 {
-	char arr[] = { "abcdef" };
-	size_t len = my_strlen(arr);
-	printf("%d", len);
+	char arr1[20] = "i love ";
+	char arr2[] = "myself";
+	my_strcat(arr1, arr2);
+	puts(arr1);
 	return 0;
 }
