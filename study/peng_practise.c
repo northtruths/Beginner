@@ -1880,23 +1880,88 @@
 //	return 0;
 //}
 
-#include<stdio.h>//模拟实现 strcat
-#include<assert.h>
-char* my_strcat(char* str1, const char* str2)
-{
-	char* ret = str1;
-	while (*str1)
-	{
-		str1++;
-	}
-	while ((*str1++ = *str2++));
-	return ret;
-}
+//#include<stdio.h>//模拟实现 strcat
+//#include<assert.h>
+//char* my_strcat(char* str1, const char* str2)
+//{
+//	char* ret = str1;
+//	while (*str1)
+//	{
+//		str1++;
+//	}
+//	while ((*str1++ = *str2++));
+//	return ret;
+//}
+//int main()
+//{
+//	char arr1[20] = "i love ";
+//	char arr2[] = "myself";
+//	my_strcat(arr1, arr2);
+//	puts(arr1);
+//	return 0;
+//}
+
+//#include<stdio.h>//模拟实现 strstr
+//#include<string.h>
+//char* my_strstr(char* str1, char* str2)
+//{
+//	char* u = str1;
+//	char* s1 = NULL;
+//	char* s2 = NULL;
+//	while (*u)
+//	{
+//		s1 = u;
+//		s2 = str2;
+//		while (*s1 == *s2 && *s1 && *s2)
+//		{
+//			s1++;
+//			s2++;
+//		}
+//		if (*s2 == '\0')
+//			return u;
+//		u++;
+//	}
+//}
+//int main()
+//{
+//	char arr1[] = "abcdef";
+//	char arr2[] = "def";
+//	puts(my_strstr(arr1, arr2));
+//	return 0;
+//}
+
+//#include<stdio.h>
+//#include<string.h>
+//int main()
+//{
+//	char arr1[] = "hello bit";
+//	char arr2[20] = {0};
+//	memcpy(arr2, arr1, 5);
+//	printf("%s", arr2);
+//	return 0;
+//}
+
+//#include<stdio.h>
+//#include<string.h>
+//int main()
+//{
+//	char arr1[20] = "hello w\0ordxxxxxxxx";
+//	char arr2[] = "ceshi";
+//	strncat(arr1, arr2, sizeof(arr2));
+//	return 0;
+//}
+
+#include<stdio.h>
+#include<string.h>
 int main()
 {
-	char arr1[20] = "i love ";
-	char arr2[] = "myself";
-	my_strcat(arr1, arr2);
-	puts(arr1);
+	int arr1[] = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
+	int arr2[] = { 7,7,7,7,7 };
+	memmove(arr1, arr2, 20);
+	for (int i = 0; i < sizeof(arr1) / sizeof(arr1[0]); i++)
+	{
+		printf("%d ", arr1[i]);
+	}
+	
 	return 0;
 }
