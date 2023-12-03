@@ -1951,17 +1951,407 @@
 //	return 0;
 //}
 
+//#include<stdio.h>
+//#include<string.h>
+//int main()
+//{
+//	int arr1[] = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
+//	int arr2[] = { 7,7,7,7,7 };
+//	memmove(arr1, arr2, 20);
+//	for (int i = 0; i < sizeof(arr1) / sizeof(arr1[0]); i++)
+//	{
+//		printf("%d ", arr1[i]);
+//	}
+//	
+//	return 0;
+//}
+
+//#include<stdio.h>
+//#include<string.h>
+//int main()
+//{
+//	char arr[] = "hello bit";
+//	memset(arr, 'x', sizeof(arr) - 1);
+//	printf("%s", arr);
+//	return 0;
+//}
+//	
+
+//#include<stdio.h>//判断数据大小端储存方式
+//int main()
+//{
+//	int a = 0x00000001;
+//	int* p = &a;
+//	if (*(char*)p == 0x1)
+//		printf("小端");
+//	else
+//		printf("大端");
+//	return 0;
+//}
+
+//#include<stdio.h>
+//int main()
+//{
+//	char a = '1000';
+//	printf("%c\n", a);
+//	printf("%d", a);
+//	return 0;
+//
+//}
+
+//#include<stdio.h>
+//int main()
+//{
+//    char a[1000] = { 0 };
+//    int i = 0;
+//    for (i = 0; i < 1000; i++)
+//    {
+//        a[i] = -1 - i;
+//    }
+//    printf("%d", strlen(a));
+//    return 0;
+//}
+
+//#include<stdio.h>//模拟实现strncpy
+//#include<string.h>
+//
+//char* my_strncpy(char* str1, char* str2, size_t num)
+//{
+//	char* ret = str1;
+//	while (num--)
+//	{
+//		*str1 = *str2;
+//		str1++;
+//		str2++;
+//	}
+//	return ret;
+//}
+//int main()
+//{
+//	char arr1[20] = "hello world";
+//	char arr2[] = "NONO";
+//	puts(my_strncpy(arr1, arr2, 3));
+//	return 0;
+//}
+
+//#include<stdio.h>
+//int main()
+//{
+//	char a = 127+128;
+//	printf("%d\n", a);
+//	return 0;
+//}
+
+//#include<stdio.h>
+//#include<math.h>
+//int main()
+//{
+//	long long a = pow(2,2023);
+//	long long ret = a % 1000;
+//	printf("%lld", ret);
+//	return 0;
+//}
+
+//#include<stdio.h>
+//int main()
+//{
+//	int count = 0;
+//	for (int i = 0; i < 10000; i++)
+//	{
+//		for (int j = 0; j < 32; j++)
+//		{
+//			&i
+//		}
+//	}
+//	return 0;
+//}
+
+//#include<stdio.h>
+//#include<math.h>
+//int main()
+//{
+//	long long  arr[] = { 393353, 901440, 123481, 850930, 423154, 240461,
+//  373746, 232926, 396677, 486579, 744860, 468782,
+//  941389, 777714, 992588, 343292, 385198, 876426,
+//  483857, 241899, 544851, 647930, 772403, 109929,
+//  882745, 372491, 877710, 340000, 659788, 658675,
+//  296521, 491295, 609764, 718967, 842000,670302 };
+//	for (int i = 0; i < 36; i++)
+//	{
+//		int count = 0;
+//		for (int j = 0; j < sqrt(arr[i]); j++)
+//		{
+//			if ((long double)arr[i] / j == (long double)arr[i] / j)
+//			{
+//				count++;
+//			}
+//		}
+//		printf("%d ", count);
+//	}
+//
+//	return 0;
+//}
+
+//#include<stdio.h>
+//int main()
+//{
+//	{
+//		int arr[30][40] = { {0,0,0,0,1,0,0,0,1,0,0,0,0,0,0,1,1,0,1,0,1,0,1,0,1,0,0,1,0,0,1,1,0,0,0,0,0,0,1,1},
+//{0,1,0,1,1,1,1,0,0,1,1,1,1,1,0,1,1,1,0,1,1,1,1,0,0,0,0,0,1,0,1,0,1,0,0,1,1,1,1,1},
+//  1000010000011101010110000000001011010100
+//  0110101010110000000101100100000101001001
+//  0000011010100000111111001101100010101001
+//  0110000110000000110100000000010010100011
+//  0100110010000110000000100010000101110000
+//  0010011010100110001111001101100110100010
+//  1111000111101000001110010001001011101101
+//  0011110100011000000001101001101110100001
+//  0000000101011000010011111001010011011100
+//  0000100000011001000100101000111011101100
+//  0010110000001000001010100011000010100011
+//  0110110000100011011010011010001101011011
+//  0000100100000001010000101100000000000010
+//  0011001000001000000010011001100101000110
+//  1110101000011000000100011001001100111010
+//  0000100100111000001101001000001010010001
+//  0100010010000110100001100000110111110101
+//  1000001001100010011001111101011001110001
+//  0000000010100101000000111100110010101101
+//  0010110101001100000100000010000010110011
+//  0000011101001001000111011000100111010100
+//  0010001100100000011000101011000000010101
+//  1001111010010110011010101110000000101110
+//  0110011101000010100001000101001001100010
+//  1101000000010010011001000100110010000101
+//  1001100010100010000100000101111111111100
+//  1001011010101100001000000011000110110000
+//  0011000100011000010111101000101110110001 }
+//	return 0;
+//}
+
+//#include<stdio.h>//6
+//#include<assert.h>
+//#include<math.h>
+//int main()
+//{
+//	int x = 0;
+//	int r = 0;
+//	int arr[6] = { 0 };
+//	scanf("%d", &x);
+//	int cx = x;
+//	assert(99999 < x < 1000000 && x / 10000 % 10 != 0 && x / 100000 != 0);
+//		for (int i = 0; i < 6; i++)
+//		{
+//			arr[5 - i] = cx % 10;
+//			cx /= 10;
+//		}
+//		int s = arr[0];
+//		for (int j = 0; j < 5; j++)
+//		{
+//			arr[j] = arr[j + 1];
+//		}
+//		arr[5] = s;
+//		for (int k = 0; k < 6; k++)
+//		{
+//			r += arr[k] * pow(10, 5 - k);
+//		}
+//		printf("%d", r);
+//	return 0;
+//}
+
+//#include<stdio.h>//7
+//int main()
+//{
+//	char arr[1000] = { 0 };
+//	gets(arr);
+//	int len = strlen(arr);
+//	for (int i = 0; i < len; i++)
+//	{
+//		if (arr[len - i - 1] == 'a' || arr[len - i - 1] == 'e' || arr[len - i - 1] == 'i' || arr[len - i - 1] == 'o' || arr[len - i - 1] == 'u')
+//		{
+//			printf("%c", arr[len - i - 1]);
+//			break;
+//		}
+//	}
+//	return 0;
+//}
+
+//#include<stdio.h>//8
+//void pack(long long* arr, int count, long long num)
+//{
+//	for (int i = 0; i < count; i++)
+//	{
+//		arr[count - i - 1] = num % 10;
+//		num /= 10;
+//	}
+//}
+
+//long long trans(long long* arr, int count)
+//{
+//	long long r = 1;
+//	for (int i = 0; i < count; i++)
+//	{
+//		if (arr[i] == 0)
+//			arr[i] = 1;
+//		r *= arr[i];
+//	}
+//	return r;
+//}
+//int main()
+//{
+//	long long n = 0;
+//	scanf("%lld", &n);
+//	long long r = n;
+//	while (r >= 10)
+//	{
+//		long long cr = r;
+//		int count = 0;
+//		while (cr)
+//		{
+//			cr /= 10;
+//			count++;
+//		}
+//		long long arr[count];
+//		pack(arr, count, r);
+//		r = trans(arr, count);
+//		printf("%lld\n", r);
+//	}
+//	printf("%lld\n", r);
+//	return 0;
+//}
+
+//#include<stdio.h>
+//int count = 0;
+//int gongyue(long long a, long long b)
+//{
+//	int i = 0;
+//	if (a > b)
+//		i = b;
+//	else
+//		i = a;
+//	for (i; i > 1; i++)
+//	{
+//		if (a % i == 0 && b % i == 0)
+//		{
+//			count++;
+//			return 1;
+//		}
+//	}
+//	return 0;
+//}
+//void move(long long arr[3][4], int r, int c)
+//{
+//	if (gongyue(arr[r][c], arr[r - 1][c]))
+//	{
+//		arr[r][c] = 1;
+//		move(arr, r - 1, c);
+//	}
+//	else if (gongyue(arr[r][c], arr[r + 1][c]))
+//	{
+//		arr[r][c] = 1;
+//		move(arr, r + 1, c);
+//	}
+//	else if ((gongyue(arr[r][c], arr[r][c - 1])))
+//	{
+//		arr[r][c] = 1;
+//		move(arr, r, c - 1);
+//	}
+//	else if ((gongyue(arr[r][c], arr[r][c + 1])))
+//	{
+//		arr[r][c] = 1;
+//		move(arr, r, c + 1);
+//	}
+//}
+//int main()
+//{
+//	int n = 0;
+//	int m = 0;
+//	scanf("%d%d", &n, &m);
+//	long long arr[3][4];
+//	for(int i = 0; i < n; i++)
+//		for (int j = 0; j < m; j++)
+//		{
+//			scanf("%d", &arr[i][j]);
+//		}
+//	int r = 0;
+//	int c = 0;
+//	scanf("%d%d", &r, &c);
+//	move(arr, r, c);
+//	printf("%d", count);
+//	return 0;
+//}
+
+//#include<stdio.h>
+//int main()
+//{
+//	int arr[10] = { 0 };
+//	for (int i = 0; i < 10; i++)
+//	{
+//		scanf("%d", &arr[i]);
+//		/*if (getchar() == '\n')
+//			break;*/
+//	}
+//	for (int i = 0; i < 10; i++)
+//	{
+//		printf("%d", arr[i]);
+//	}
+//	return 0;
+//}
+
+//#include<stdio.h>
+//
+//int main()
+//{
+//	int n = 0;
+//	int k = 0;
+//	int r = 0;
+//	scanf("%d%d", &n, &k);
+//	int arr[100000] = { 0 };
+//	for (int g = 0;; g++)
+//	{
+//		scanf("%d", &arr[g]);
+//		if (getchar() == '\n')
+//			break;
+//	}
+//	for (int i = 0; i < n - k; i++)
+//	{
+//		int a = 0;
+//		int b = 0;
+//		for (int j = 0; j < k; j++)
+//		{
+//			a += arr[i + j];
+//		}
+//		for (int l = 0; l < k; l++)
+//		{
+//			b += arr[i + l + 1];
+//		}
+//		if (a > b)
+//			r = a;
+//		else
+//			r = b;
+//	}
+//	printf("%d", r);
+//	return 0;
+//}
+
+//#include<stdio.h>
+//#include<math.h>
+//int main()
+//{
+//	long long a = pow(2, 2023);
+//	int r = a % 1000;
+//	printf("%d", r);
+//	return 0;
+//}
+
 #include<stdio.h>
-#include<string.h>
 int main()
 {
-	int arr1[] = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
-	int arr2[] = { 7,7,7,7,7 };
-	memmove(arr1, arr2, 20);
-	for (int i = 0; i < sizeof(arr1) / sizeof(arr1[0]); i++)
+	long long a = 2;
+	for (int i = 1; i <= 12; i++)
 	{
-		printf("%d ", arr1[i]);
+		a = a * 2 % 1000;
 	}
-	
+	printf("%d", a);
 	return 0;
 }
