@@ -2356,11 +2356,94 @@
 //	return 0;
 //}
 
-#include<stdio.h>
+//#include<stdio.h>
+//int main()
+//{
+//	char a[] = "好人";
+//	printf("%d", sizeof(a) - 1);
+//	printf("%d", strlen(a));
+//	return 0;
+//}
+
+//#include<stdio.h>//模拟strncat
+//char* my_strncat(char* ptr1, char* ptr2, size_t num)
+//{
+//	char* ret = ptr1;
+//	while (*ptr1 != '\0')
+//	{
+//		ptr1++;
+//	}
+//	while (num)
+//	{
+//		*ptr1++ = *ptr2++;
+//		num--;
+//	}
+//	if (*(ptr1 - 1) != '\0')
+//		*ptr1 = '\0';
+//	return ret;
+//}
+//int main()
+//{
+//	char arr1[20] = "I love ";
+//	char arr2[] = "myself";
+//	puts(my_strncat(arr1, arr2, 7));
+//	return 0;
+//}
+
+//#include<stdio.h>//模拟memcpy
+//void* my_memcpy(void* dest, const void* src, size_t num)
+//{
+//	void* ret = dest;
+//	while (num)
+//	{
+//		*(char*)dest = *(char*)src;
+//		dest = (char*)dest + 1;
+//		src = (char*)src + 1;
+//		num--;
+//	}
+//	return ret;
+//}
+//int main()
+//{
+//	int a = 0x11223344;
+//	int b = 0x55667788;
+//	printf("%x\n", *(int*)my_memcpy(&a, &b, 1));//0x11223388
+//	printf("%x\n", *(int*)my_memcpy(&a, &b, 2));//0x11227788
+//	return 0;
+//}
+
+#include<stdio.h>//模拟memmove
+void* my_memmove(void* dest, void* src, size_t num)
+{
+	char* ret = dest;
+	if (dest > src)
+	{
+		char* p1 = (char*)dest;
+		char* p2 = (char*)src;
+		p1 = p1 + num - 1;
+		p2 = p2 + num - 1;
+		while (num)
+		{
+			*p1-- = *p2--;
+			num--;
+		}
+	}
+	else
+	{
+		while (num)
+		{
+			*(char*)dest = *(char*)src;
+			dest = (char*)dest + 1;
+			src = (char*)src + 1;
+			num--;
+		}
+	}
+	return ret;
+}
 int main()
 {
-	char a[] = "好人";
-	printf("%d", sizeof(a) - 1);
-	printf("%d", strlen(a));
+	char arr[] = "i wanna eat banabb";
+	my_memmove(arr + 15, arr + 13, 3);
+	puts(arr);
 	return 0;
 }
