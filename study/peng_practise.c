@@ -2412,38 +2412,55 @@
 //	return 0;
 //}
 
-#include<stdio.h>//模拟memmove
-void* my_memmove(void* dest, void* src, size_t num)
-{
-	char* ret = dest;
-	if (dest > src)
-	{
-		char* p1 = (char*)dest;
-		char* p2 = (char*)src;
-		p1 = p1 + num - 1;
-		p2 = p2 + num - 1;
-		while (num)
-		{
-			*p1-- = *p2--;
-			num--;
-		}
-	}
-	else
-	{
-		while (num)
-		{
-			*(char*)dest = *(char*)src;
-			dest = (char*)dest + 1;
-			src = (char*)src + 1;
-			num--;
-		}
-	}
-	return ret;
-}
-int main()
-{
-	char arr[] = "i wanna eat banabb";
-	my_memmove(arr + 15, arr + 13, 3);
-	puts(arr);
-	return 0;
-}
+//#include<stdio.h>//模拟memmove
+//void* my_memmove(void* dest, void* src, size_t num)
+//{
+//	char* ret = dest;
+//	if (dest > src)
+//	{
+//		char* p1 = (char*)dest;
+//		char* p2 = (char*)src;
+//		p1 = p1 + num - 1;
+//		p2 = p2 + num - 1;
+//		while (num)
+//		{
+//			*p1-- = *p2--;
+//			num--;
+//		}
+//	}
+//	else
+//	{
+//		while (num)
+//		{
+//			*(char*)dest = *(char*)src;
+//			dest = (char*)dest + 1;
+//			src = (char*)src + 1;
+//			num--;
+//		}
+//	}
+//	return ret;
+//}
+//int main()
+//{
+//	char arr[] = "i wanna eat banabb";
+//	my_memmove(arr + 15, arr + 13, 3);
+//	puts(arr);
+//	return 0;
+//}
+
+//#include<stdio.h>
+//
+//enum s
+//{
+//	a ,
+//	b ,
+//	c 
+//};
+//int main()
+//{
+//
+//	printf("%d\n", a);
+//	printf("%d\n", b);
+//	printf("%d\n", c);
+//	return 0;
+//}
