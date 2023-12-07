@@ -478,3 +478,35 @@
 //	return 0;
 //}
 
+//#include<stdio.h>//给人名排序
+//#include<stdlib.h>
+//#include<string.h>
+//int compare(const void* p1, const void* p2)
+//{
+//	return strcmp((char*)p1, (char*)p2);
+//}
+//int main()
+//{
+//	int N = 0;
+//	scanf("%d", &N);
+//	char arr[N][50];
+//	for (int i = 0; i < N; i++)
+//	{
+//		scanf("%s", arr[i]);
+//	}
+//	qsort(arr, N, sizeof(arr[0]), compare);
+//	for (int j = 0; j < N; j++)
+//	{
+//		printf("%s\n", arr[j]);
+//	}
+//	return 0;
+//}
+
+#include<stdio.h>//数字转换为非对位 ASCII 的字符
+int main()
+{
+	float A = 0;
+	float B = 0;
+	scanf("%f%f", &A, &B);
+	float c = A / B;
+}
