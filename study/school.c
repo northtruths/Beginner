@@ -502,11 +502,21 @@
 //	return 0;
 //}
 
-#include<stdio.h>//数字转换为非对位 ASCII 的字符
-int main()
-{
-	float A = 0;
-	float B = 0;
-	scanf("%f%f", &A, &B);
-	float c = A / B;
-}
+//#include<stdio.h>//数字转换为非对位 ASCII 的字符
+//int main()
+//{
+//	float A = 0;
+//	float B = 0;
+//	scanf("%f%f", &A, &B);
+//	int c = A / B * 100000; 
+//	int arr[5] = { 0 };
+//	for (int i = 0; i < 5; i++)
+//	{
+//		arr[4 - i] = c % 10;
+//		c /= 10;
+//	}
+//	for (int j = 0; j < 5; j++)
+//	{
+//		printf("%c", arr[j] + 65);
+//	}
+//}
