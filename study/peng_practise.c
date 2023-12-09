@@ -2465,9 +2465,182 @@
 //	return 0;
 //}
 
-#include<stdio.h>
-int main()
-{
-	int b = -3;
-	return 0;
-}
+//int main()
+//{
+//	int b = -3;
+//	return 0;
+//}
+
+//#include<stdio.h>
+//int main()
+//{
+//	void* p1 = 0x1122334455667788;
+//	int* p2 = p1;
+//	return 0;
+//}
+
+//#include<stdio.h>
+//#include<stdlib.h>
+//int main()
+//{
+//	int* p = malloc(40);
+//	free(p);
+//	free(p);
+//	return 0;
+//}
+
+//#include<stdio.h>
+//int main()
+//{
+//	char arr[] = { "hello" };
+//	int arr1[] = { 1,2,3 };
+//	printf(arr1);
+//	return 0;
+//}
+
+//#include<stdio.h>//对未初始化的指针解引用是错误的
+//int main()
+//{
+//	char* p;
+//	*p = 0x11223344;
+//	printf("%x", *p);
+//	return 0;
+//}
+
+//#include<stdio.h>
+//#include<stdlib.h>
+//int main()
+//{
+//	char arr1[] = "123def";
+//	char arr2[] = "ab3def";
+//	char arr3[] = "1b3def";
+//	int ret1 = atoi(arr1);
+//	int ret2 = atoi(arr2);
+//	int ret3 = atoi(arr3);
+//	printf("%d\n", ret1);//123
+//	printf("%d\n", ret2);//0
+//	printf("%d\n", ret3);//1
+//	return 0;
+//}
+
+//#include<stdio.h>//模拟 atoi 函数
+//int my_atoi(const char* ptr)
+//{
+//	int ret = 0;
+//	int flag = 0;
+//	while (1)
+//	{
+//		if (*ptr >= 48 && *ptr <= 57 || *ptr == '-' || (*ptr >= 0 && *ptr <= 32))
+//		{
+//			if (*ptr >= 0 && *ptr <= 32)
+//				ptr++;
+//			else
+//			{
+//				if (*ptr == '-')
+//				{
+//					flag = 1;
+//					ptr++;
+//				}
+//				else
+//				{
+//					ret *= 10;
+//					ret += *ptr - 48;
+//					ptr++;
+//				}
+//			}
+//		}
+//		else
+//		{
+//			if (flag == 1)
+//				ret = -ret;
+//			return ret;
+//		}
+//	}
+//}
+//int main()
+//{
+//	char arr1[] = "-123def";
+//	char arr2[] = "ab3def";
+//	char arr3[] = " 1b3def";
+//	char arr4[] = "123456";
+//	int ret1 = my_atoi(arr1);
+//	int ret2 = my_atoi(arr2);
+//	int ret3 = my_atoi(arr3);
+//	int ret4 = my_atoi(arr4);
+//	printf("%d\n", ret1);//123
+//	printf("%d\n", ret2);//0
+//	printf("%d\n", ret3);//1
+//	printf("%d\n", ret4);//1
+//	return 0;
+//}
+
+//#include<stdio.h>//验证位段是怎么内存对齐的
+//int main()
+//{
+//	struct S1
+//	{
+//		char a;
+//		int b : 1;
+//	}s1;
+//	struct S2
+//	{
+//		char a;
+//		int b;
+//	}s2;
+//	printf("%d\n", sizeof(s1));
+//	printf("%d\n", sizeof(s2));
+//	return 0;
+//}
+
+//#include<stdio.h>
+//int main()
+//{
+//	enum s
+//	{
+//		a = 1.1,
+//
+//	};
+//	return 0;
+//}
+
+//#include<stdio.h>//用联合体判断大小端
+//int jug(void)
+//{
+//	union U
+//	{
+//		int a;
+//		struct S
+//		{
+//			char q;
+//			char w;
+//			char e;
+//			char r;
+//		}s;
+//	}u;
+//	u.a = 1;
+//	return u.s.q;
+//
+//}
+//int main()
+//{
+//	int ret = jug();
+//	if (ret == 1)
+//		printf("小端\n");
+//	else
+//		printf("大端");
+//	return 0;
+//}
+
+
+//#include<stdio.h>
+//#include<math.h>
+//int main()
+//{
+//	int i = 14610;
+//	int r = 0;
+//	for (int j = 4; j >= 0; j--)
+//	{
+//		int a = i;
+//		r = a / pow(10, j);
+//	}
+//}

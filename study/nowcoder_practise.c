@@ -615,3 +615,24 @@
 //    printf("%u", (a + b) % 100);
 //    return 0;
 //}
+
+#include<stdio.h>//BC38
+#include<math.h>
+int main()
+{
+    for (int i = 14610; i < 100000; i++)
+    {
+        int r = 0;
+        for (int j = 4; j > 0; j--)
+        {
+            int a = i;
+            //int b = a / pow(10, j);
+            //int c = a % (int)pow(10, j);
+           r += (a / pow(10, j)) * (a % (int)pow(10, j));
+            //r += b * c;
+        }
+        if (r == i)
+            printf("%d ", i);
+    }
+    return 0;
+}
