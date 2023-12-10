@@ -2644,3 +2644,124 @@
 //		r = a / pow(10, j);
 //	}
 //}
+
+//#include<stdio.h>
+//int main()
+//{
+//	int arr[5] = { 1, 2, 3, 4, 5 };
+//	size_t s = sizeof(arr + 1);
+//	printf("%zd", s);
+//}
+
+//#include<stdio.h>
+//#include<stdlib.h>
+//int main()
+//{
+//	int* pm = (int*)malloc(40);
+//	if (pm == NULL)
+//	{
+//		perror("malloc");
+//		return 1;
+//	}
+//	for (int i = 0; i < 10; i++)
+//	{
+//		*(pm + i) = i;
+//	}
+//	char* pc = (char*)calloc(10, 1);
+//	if (pc == NULL)
+//	{
+//		perror("calloc"); 
+//		return 1;
+//	}
+//	int* ptr = (int*)realloc(pm, 80);
+//	int* pr = NULL;
+//	if (ptr == NULL)
+//	{
+//		perror("realloc");
+//		return 1;
+//	}
+//	else
+//		pr = ptr;
+//	free(pr);
+//	pr = NULL;
+//	pm = NULL;
+//	free(pc);
+//	pc = NULL;
+//	return 0;
+//}
+
+//#include<stdio.h>//malloc模拟二维数组
+//#include<stdlib.h>
+//int main()
+//{
+//	int** p = (int**)malloc(3 * sizeof(int*));
+//	if (p == NULL)
+//	{
+//		perror("malloc");
+//		return 1;
+//	}
+//	int* p1 = (int*)malloc(5 * sizeof(int));
+//	int* p2 = (int*)malloc(5 * sizeof(int));
+//	int* p3 = (int*)malloc(5 * sizeof(int));
+//	if (p1 == NULL || p2 == NULL || p3 == NULL)
+//	{
+//		perror("malloc p1 p2 p3");
+//		return 1;
+//	}
+//	*p = p1;
+//	*(p + 1) = p2;
+//	*(p + 2) = p3;
+//	for (int i = 0; i < 3; i++)
+//	{
+//		for (int j = 0; j < 5; j++)
+//		{
+//			p[i][j] = i + j;
+//		}
+//	}
+//	for (int i = 0; i < 3; i++)
+//	{
+//		for (int j = 0; j < 5; j++)
+//		{
+//			printf("%d ", p[i][j]);
+//		}
+//		printf("\n");
+//	}
+//	free(p);
+//	p = NULL;
+//	free(p1);
+//	p1 = NULL;
+//	free(p2);
+//	p2 = NULL;
+//	free(p3);
+//	p3 = NULL;
+//	return 0;
+//}
+
+//#include<stdio.h>//测试 union 是否能有柔性数组
+//union s
+//{
+//	int a;
+//	int arr[0];
+//};
+//int main()
+//{
+//	//int arr[0];
+//	return 0;
+//}
+
+#include<stdio.h>
+#include<stdlib.h>
+int main()
+{
+    int nums[] = { 1, 2, 3 };
+    int n = sizeof(nums) / sizeof(nums[0]);
+    int* ans = (int*)malloc(2 * n * sizeof(int));
+    for (int i = 0; i < 2 * n; i++)
+    {
+        if (i < n)
+            ans[i] = nums[i];
+        else if (i >= n)
+            ans[i] = nums[i - n];
+    }
+	return 0;
+}

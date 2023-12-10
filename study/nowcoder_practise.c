@@ -616,23 +616,69 @@
 //    return 0;
 //}
 
-#include<stdio.h>//BC38
-#include<math.h>
-int main()
-{
-    for (int i = 14610; i < 100000; i++)
-    {
-        int r = 0;
-        for (int j = 4; j > 0; j--)
-        {
-            int a = i;
-            //int b = a / pow(10, j);
-            //int c = a % (int)pow(10, j);
-           r += (a / pow(10, j)) * (a % (int)pow(10, j));
-            //r += b * c;
-        }
-        if (r == i)
-            printf("%d ", i);
-    }
-    return 0;
-}
+//#include<stdio.h>//BC38-变种水仙花数,数据类型对运算结果的影响很大
+//#include<math.h>
+//int main()
+//{
+//    for (int i = 10000; i < 100000; i++)
+//    {
+//        int r = 0;
+//        for (int j = 4; j > 0; j--)
+//        {
+//            int a = i;
+//            r += (a / (int)pow(10, j)) * (a % (int)pow(10, j));//用这行就什么都不输出
+//            //int b = a / pow(10, j);//写成这种形式又可以
+//            //int c = a % (int)pow(10, j);
+//            //r += b * c;
+//        }
+//        if (r == i)
+//            printf("%d ", i);
+//    }
+//    return 0;
+//}
+
+//# include<stdio.h>//BC98 序列中删除指定数字
+//void Delete(int* p)
+//{
+//    while (*p != 0)
+//    {
+//        *p = *(p + 1);
+//        p++;
+//    }
+//
+//}
+//int main()
+//{
+//    int N = 0;
+//    scanf("%d", &N);
+//    int arr[N];
+//    for (int i = 0; i < N; i++)
+//    {
+//        scanf("%d", &arr[i]);
+//    }
+//    int m = 0;
+//    scanf("%d", &m);
+//    int count = 0;
+//    for (int i = 0; i < N; i++)
+//    {
+//        if (arr[i] == m)
+//        {
+//            if (arr[i + 1] == arr[i])
+//            {
+//                Delete(&arr[i]);
+//                N--;
+//                i--;
+//            }
+//            else
+//            {
+//                Delete(&arr[i]);
+//                N--;
+//            }
+//        }
+//    }
+//    for (int j = 0; j < N; j++)
+//    {
+//        printf("%d ", arr[j]);
+//    }
+//    return 0;
+//}

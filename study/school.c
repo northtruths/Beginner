@@ -520,3 +520,104 @@
 //		printf("%c", arr[j] + 65);
 //	}
 //}
+
+//#include<stdio.h>
+//int main()
+//{
+//	int arr[3][3] = { 0 };
+//	for (int i = 0; i < 3; i++)
+//	{
+//		scanf("%d %d %d", &arr[i][0], &arr[i][1], &arr[i][2]);
+//	}
+//	arr[0][0] += 10;
+//	arr[0][2] += 10;
+//	arr[1][1] += 10;
+//	arr[2][0] += 10;
+//	arr[2][2] += 10;
+//	for (int j = 0; j < 3; j++)
+//	{
+//		for (int k = 0; k < 3; k++)
+//		{
+//			printf("%d ", arr[j][k]);
+//		}
+//		printf("\n");
+//	}
+//	return 0;
+//}
+
+//#include<stdio.h>
+//#include<stdlib.h>
+//int main()
+//{
+//	int N = 0;
+//	int M = 0;
+//	scanf("%d%d", &N, &M);
+//	int* p = NULL;
+//	(int *)calloc(N, sizeof(int));
+//	if ((int*)calloc(N, sizeof(int)) == NULL)//创建 N 个 大小为 int 的空间，并初始化 0
+//	{
+//		perror("calloc");
+//		return 1;
+//	}
+//	else
+//		p = (int*)calloc(N, sizeof(int));
+//	for (int m = 1; m <= M; m++)
+//	{
+//		for (int n = 1; n <= N; n++)
+//		{
+//			if (n % m == 0)
+//				*(p + n - 1) ^= 1;
+//		}
+//	}
+//	for (int i = 0; i < N; i++)
+//	{
+//		if (*(p + i) == 1)// 0 为开， 1为关
+//			printf("%d,", i + 1); 
+//	}
+//	printf("\b ");
+//	free(p);
+//	p = NULL;
+//	return 0;
+//}
+
+//#include<stdio.h>
+//#include<stdlib.h>
+//int main()
+//{
+//	int n = 0;
+//	scanf("%d", &n);
+//	int* p = NULL;
+//	(int*)calloc(n, sizeof(int));
+//	if ((int*)calloc(n, sizeof(int)) == NULL)//创建 N 个 大小为 int 的空间，并初始化 0
+//	{
+//		perror("calloc");
+//		return 1;
+//	}
+//	else
+//		p = (int*)calloc(n, sizeof(int));
+//	for (int i = 0; ; i++)
+//	{
+//		scanf("%d", p + i);
+//		if (getchar() == '\n')
+//			break;
+//	}
+//	int max = 0;
+//	int flag = 0;
+//	for (int j = 0; j < n - 1; j++)
+//	{
+//		if (*(p + j) > *(p + 1 + j) && max < *(p + j))
+//		{
+//			max = *(p + j);
+//			flag = j + 1;
+//		}
+//		else if (*(p + j) < *(p + 1 + j) && max < *(p + 1 + j))
+//		{
+//			max = *(p + 1 + j);
+//			flag = j + 2;
+//		}
+//	}
+//	free(p);
+//	p = NULL;
+//	printf("%d %d", max, flag);
+//	return 0;
+//}
