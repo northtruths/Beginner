@@ -2749,19 +2749,67 @@
 //	return 0;
 //}
 
+//#include<stdio.h>
+//#include<stdlib.h>
+//int main()
+//{
+//    int nums[] = { 1, 2, 3 };
+//    int n = sizeof(nums) / sizeof(nums[0]);
+//    int* ans = (int*)malloc(2 * n * sizeof(int));
+//    for (int i = 0; i < 2 * n; i++)
+//    {
+//        if (i < n)
+//            ans[i] = nums[i];
+//        else if (i >= n)
+//            ans[i] = nums[i - n];
+//    }
+//	return 0;
+//}
+
+//#include<stdio.h>
+//#include<stdlib.h>
+//int main()
+//{
+//	malloc(0);
+//	return 0;
+//}
+
+//struct student
+//{
+//    int age;
+//    char name[20];
+//    int ID;
+//}a, b, c;
+//
+//#include<stdio.h>
+//#include<string.h>
+//int main()
+//{
+//    a.age = 17;
+//    struct student* pa = &a;
+//    pa->ID = 20231123;
+//    pa->name[49] = 's';
+//    a.name[] = "lisi";
+//    struct student d = { 17, "lisi", 101};
+//   puts()
+//   /* char arr[20] = { 0 };
+//    *arr = 'w';
+//    puts(arr);*/
+//	return 0;
+//}
+
 #include<stdio.h>
-#include<stdlib.h>
+#include<string.h>
+struct student 
+{
+    int age;
+    char name[50];
+    int ID;
+}a = {17, "lisi", 101}, b, c;
+
 int main()
 {
-    int nums[] = { 1, 2, 3 };
-    int n = sizeof(nums) / sizeof(nums[0]);
-    int* ans = (int*)malloc(2 * n * sizeof(int));
-    for (int i = 0; i < 2 * n; i++)
-    {
-        if (i < n)
-            ans[i] = nums[i];
-        else if (i >= n)
-            ans[i] = nums[i - n];
-    }
-	return 0;
+    struct student d;
+    puts(a.name);
+    return 0;
 }
