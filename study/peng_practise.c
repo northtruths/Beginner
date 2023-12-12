@@ -2798,18 +2798,100 @@
 //	return 0;
 //}
 
-#include<stdio.h>
-#include<string.h>
-struct student 
-{
-    int age;
-    char name[50];
-    int ID;
-}a = {17, "lisi", 101}, b, c;
+//#include<stdio.h>
+//#include<string.h>
+//struct student 
+//{
+//    int age;
+//    char name[50];
+//    int ID;
+//}a = {17, "lisi", 101}, b, c;
+//
+//int main()
+//{
+//    struct student d;
+//    puts(a.name);
+//    return 0;
+//}
 
+//#include<stdio.h>//两个结构体创建相同的变量，只有在前面的结构体变量创建成功；同一个结构体创建相同名字的变量，也只有在前面的变量创建成功；两个不同的结构体当中的成员变量不会有命名冲突。
+//struct s1
+//{
+//	int a;
+//	int b;
+//	char c;
+//}a;
+//
+//struct s2
+//{
+//	int a;
+//	int b;
+//	char b;
+//}b;
+//
+//int main()
+//{
+//	struct s1 arr;
+//	struct s2 arr;
+//	int c = 0;
+//	char c = 0;
+//	c = 10;
+//	c
+//	return 0;
+//}
+
+//#include<stdio.h>
+//struct s1
+//{
+//	char a;
+//	char b;
+//	int c;
+//};
+//struct s2
+//{
+//	char a;
+//	char b;
+//	struct s1 c;
+//};
+//int main()
+//{
+//	int r1 = sizeof(struct s1);
+//	int r2 = sizeof(struct s2);
+//	char* p = &"w";
+//	//printf("%d\n%d", r1, r2);
+//	printf("%c", '97 + 1');
+//	printf("%x", p);
+//	return 0;
+//}
+
+//#include<stdio.h>
+//int main()
+//{
+//	struct S3
+//	{
+//		double d;//8
+//		char c;
+//		int i;
+//	};
+//	printf("%d\n", sizeof(struct S3));
+//	//练习4-结构体嵌套问题
+//	struct S4
+//	{
+//		char c1;//1
+//		struct S3 s3;//8
+//		double d;//8
+//	};
+//	printf("%d\n", sizeof(struct S4));
+//	return 0;
+//}
+
+#include<stdio.h>
 int main()
 {
-    struct student d;
-    puts(a.name);
-    return 0;
+	FILE* p1 = fopen("\\.text1", "w");
+	if (p1 == NULL)
+	{
+		perror("fopen\\.\\..text1");
+		return 1;
+	}
 }
