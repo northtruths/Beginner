@@ -621,3 +621,59 @@
 //	printf("%d %d", max, flag);
 //	return 0;
 //}
+
+//#include<stdio.h>
+//int max(int a, int b, int c)
+//{
+//	if (a >= b && a >= c)
+//		return a;
+//	else if (b >= a && b >= c)
+//		return b;
+//	else if (c >= a && c >= b)
+//		return c;
+//}
+//int main()
+//{
+//	int a = 0;
+//	int b = 0;
+//	int c = 0;
+//	scanf("%d%d%d", &a, &b, &c);
+//	float m = (float)max(a, b, c) / ((float)max(a + b, b, c) * (float)max(a, b, b + c));
+//	printf("%f", m);
+//	return 0;
+//}
+
+//#include<stdio.h>
+//#include<stdlib.h>
+//int findmax(int* p, int n)
+//{
+//	int m = 0;
+//	for (int i = 0; i < n - 1; i++)
+//	{
+//		if (*(p + i) >= *(p + 1 + i) && *(p + i) >= m)
+//			m = *(p + i);
+//		else if (*(p + i) <= *(p + 1 + i) && *(p + 1 + i) >= m)
+//			m = *(p + 1 + i);
+//	}
+//	return m;
+//}
+//int main()
+//{
+//	int n = 0;
+//	scanf("%d", &n);
+//	int* p = malloc(n * sizeof(int));
+//	if (p == NULL)
+//	{ 
+//		perror("malloc");
+//		return 1;
+//	}
+//	for (int i = 0; i < n; i++)
+//	{
+//		scanf("%d", p + i);
+//	}
+//	int r = findmax(p, n);
+//	printf("%d", r);
+//	free(p);
+//	p = NULL;
+//	return 0;
+//}

@@ -2888,10 +2888,22 @@
 #include<stdio.h>
 int main()
 {
-	FILE* p1 = fopen("\\.text1", "w");
+	FILE* p1 = fopen(".\\..\\text1.txt", "w");//文件1
 	if (p1 == NULL)
 	{
-		perror("fopen\\.\\..text1");
+		perror("fopen text1");
 		return 1;
+	}
+	for (int t = 0; t < 3; t++)
+	{
+		fputc(('a' + 1), p1);
+	}
+	char arr[3] = { 0 };
+	char A = 0;
+	for (int t = 0; t < 3; t++)
+	{
+		 arr[t] = fgetc(p1);
+		 A = fgetc(p1);
+
 	}
 }
