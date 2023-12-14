@@ -2885,25 +2885,125 @@
 //	return 0;
 //}
 
-#include<stdio.h>
+#include<stdio.h>//顺序读写函数练习
 int main()
 {
-	FILE* p1 = fopen(".\\..\\text1.txt", "w");//文件1
+	FILE* p1 = fopen("./../text1.txt", "w");//文件1输入流
 	if (p1 == NULL)
 	{
-		perror("fopen text1");
+		perror("fopen text1 w");
 		return 1;
 	}
 	for (int t = 0; t < 3; t++)
 	{
-		fputc(('a' + 1), p1);
+		fputc(('a' + t + 10), p1);
+	}
+	FILE* p2 = fopen("./../text1.txt", "r");//文件1输出流
+	if (p2 == NULL)
+	{
+		perror("fopen text1 r");
+		return 1;
 	}
 	char arr[3] = { 0 };
-	char A = 0;
 	for (int t = 0; t < 3; t++)
 	{
-		 arr[t] = fgetc(p1);
-		 A = fgetc(p1);
-
+		arr[t] = fgetc(p2);
+		printf("%c ", arr[t]);//输出乱码
 	}
+	fclose(p1);
+	p1 = NULL;
+	fclose(p2);
+	p2 = NULL;
+//注意以上代码在 stdout 上输出的是乱码，因为同一个文件不能同时进行读和写
+	printf("\n");
+	FILE* p3 = fopen("./../text2.txt", "r");//文本2输入流
+	if (p3 == NULL)
+	{
+		perror("read text2.txt");
+		return 1;
+	}
+	char arr1[50] = { 0 };
+	puts(fgets(arr1, 15, p3));
+	FILE* p4 = fopen("./../text3.txt", "w");//文本3输出流
+	if (p4 == NULL)
+	{
+		perror("write to text3.txt");
+		return 1;
+	}
+	fputs(arr1, p4);
+	fclose(p3);
+	p3 = NULL;
+	fclose(p4);
+	p4 = NULL;
+	FILE* p5 = fopen("./../text4.txt", "w");//文本4输出流
+	if (p5 == NULL)
+	{
+		perror("write to text4");
+		return 1;
+	}
+	fprintf(p5, "%s", "练习 fprintf");
+	FILE* p6 = fopen("./../text5.txt", "r");
+	if (p6 == NULL)
+	{
+		perror("read text5.txt");
+		return 1;
+	}
+	char arr2[50] = { 0 };
+	fscanf(p6, "%s", arr2);
+	puts(arr2);
+	fclose(p5);
+	p5 = NULL;
+	fclose(p6);
+	p6 = NULL;
+	//------------------------------------------
+	//练习 fread 和 fwrite
+	printf("\n");
+	FILE* p7 = fopen("./../text6.txt", "wb");//文件6输出流
+	if (p7 == NULL)
+	{
+		perror("read text6.txt");
+		return 1;
+	}
+	int a = 3;
+	fwrite(&a, sizeof(int), 1, p7);
+	FILE* p8 = fopen("./../text7.txt", "rb");
+	if (p8 == NULL)
+	{
+		perror("write text6.txt");
+		return 1;
+	}
+	int b = 0;
+	fread(&b, sizeof(int), 1, p8);
+	printf("%d", b);
 }
+
+
+//#include<stdio.h>//拷贝文件
+//int main()
+//{
+//	FILE* p1 = fopen("./../text1.txt", "r");
+//	if (p1 == NULL)
+//	{
+//		perror("open text1 r");
+//		return 1;
+//	}
+//	FILE* p2 = fopen("./../text2.txt", "w");
+//	if (p2 == NULL)
+//	{
+//		fclose(p1);
+//		p1 = NULL;
+//		perror("open text1 r");
+//		("open text1 w");
+//		return 1;
+//	}
+//	int c = 0;
+//	while ((c = fgetc(p1)) != EOF)
+//	{
+//		fputc(c, p2);
+//	}
+//	fclose(p1);
+//	p1 == NULL;
+//	fclose(p2);
+//	p2 == NULL;
+//	return 0;
+//}
