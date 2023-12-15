@@ -2885,97 +2885,101 @@
 //	return 0;
 //}
 
-#include<stdio.h>//顺序读写函数练习
-int main()
-{
-	FILE* p1 = fopen("./../text1.txt", "w");//文件1输入流
-	if (p1 == NULL)
-	{
-		perror("fopen text1 w");
-		return 1;
-	}
-	for (int t = 0; t < 3; t++)
-	{
-		fputc(('a' + t + 10), p1);
-	}
-	FILE* p2 = fopen("./../text1.txt", "r");//文件1输出流
-	if (p2 == NULL)
-	{
-		perror("fopen text1 r");
-		return 1;
-	}
-	char arr[3] = { 0 };
-	for (int t = 0; t < 3; t++)
-	{
-		arr[t] = fgetc(p2);
-		printf("%c ", arr[t]);//输出乱码
-	}
-	fclose(p1);
-	p1 = NULL;
-	fclose(p2);
-	p2 = NULL;
-//注意以上代码在 stdout 上输出的是乱码，因为同一个文件不能同时进行读和写
-	printf("\n");
-	FILE* p3 = fopen("./../text2.txt", "r");//文本2输入流
-	if (p3 == NULL)
-	{
-		perror("read text2.txt");
-		return 1;
-	}
-	char arr1[50] = { 0 };
-	puts(fgets(arr1, 15, p3));
-	FILE* p4 = fopen("./../text3.txt", "w");//文本3输出流
-	if (p4 == NULL)
-	{
-		perror("write to text3.txt");
-		return 1;
-	}
-	fputs(arr1, p4);
-	fclose(p3);
-	p3 = NULL;
-	fclose(p4);
-	p4 = NULL;
-	FILE* p5 = fopen("./../text4.txt", "w");//文本4输出流
-	if (p5 == NULL)
-	{
-		perror("write to text4");
-		return 1;
-	}
-	fprintf(p5, "%s", "练习 fprintf");
-	FILE* p6 = fopen("./../text5.txt", "r");
-	if (p6 == NULL)
-	{
-		perror("read text5.txt");
-		return 1;
-	}
-	char arr2[50] = { 0 };
-	fscanf(p6, "%s", arr2);
-	puts(arr2);
-	fclose(p5);
-	p5 = NULL;
-	fclose(p6);
-	p6 = NULL;
-	//------------------------------------------
-	//练习 fread 和 fwrite
-	printf("\n");
-	FILE* p7 = fopen("./../text6.txt", "wb");//文件6输出流
-	if (p7 == NULL)
-	{
-		perror("read text6.txt");
-		return 1;
-	}
-	int a = 3;
-	fwrite(&a, sizeof(int), 1, p7);
-	FILE* p8 = fopen("./../text7.txt", "rb");
-	if (p8 == NULL)
-	{
-		perror("write text6.txt");
-		return 1;
-	}
-	int b = 0;
-	fread(&b, sizeof(int), 1, p8);
-	printf("%d", b);
-}
+//#include<stdio.h>//顺序读写函数练习
+//int main()
+//{
+//	FILE* p1 = fopen("./../text1.txt", "w");//文件1输入流
+//	if (p1 == NULL)
+//	{
+//		perror("fopen text1 w");
+//		return 1;
+//	}
+//	for (int t = 0; t < 3; t++)
+//	{
+//		fputc(('a' + t + 10), p1);
+//	}
+//	FILE* p2 = fopen("./../text1.txt", "r");//文件1输出流
+//	if (p2 == NULL)
+//	{
+//		perror("fopen text1 r");
+//		return 1;
+//	}
+//	char arr[3] = { 0 };
+//	for (int t = 0; t < 3; t++)
+//	{
+//		arr[t] = fgetc(p2);
+//		printf("%c ", arr[t]);//输出乱码
+//	}
+//	fclose(p1);
+//	p1 = NULL;
+//	fclose(p2);
+//	p2 = NULL;
+////注意以上代码在 stdout 上输出的是乱码，因为同一个文件不能同时进行读和写
+//	printf("\n");
+//	FILE* p3 = fopen("./../text2.txt", "r");//文本2输入流
+//	if (p3 == NULL)
+//	{
+//		perror("read text2.txt");
+//		return 1;
+//	}
+//	char arr1[50] = { 0 };
+//	puts(fgets(arr1, 15, p3));
+//	FILE* p4 = fopen("./../text3.txt", "w");//文本3输出流
+//	if (p4 == NULL)
+//	{
+//		perror("write to text3.txt");
+//		return 1;
+//	}
+//	fputs(arr1, p4);
+//	fclose(p3);
+//	p3 = NULL;
+//	fclose(p4);
+//	p4 = NULL;
+//	FILE* p5 = fopen("./../text4.txt", "w");//文本4输出流
+//	if (p5 == NULL)
+//	{
+//		perror("write to text4");
+//		return 1;
+//	}
+//	fprintf(p5, "%s", "练习 fprintf");
+//	FILE* p6 = fopen("./../text5.txt", "r");
+//	if (p6 == NULL)
+//	{
+//		perror("read text5.txt");
+//		return 1;
+//	}
+//	char arr2[50] = { 0 };
+//	fscanf(p6, "%s", arr2);
+//	puts(arr2);
+//	fclose(p5);
+//	p5 = NULL;
+//	fclose(p6);
+//	p6 = NULL;
+//	//------------------------------------------
+//	//练习 fread 和 fwrite
+//	printf("\n");
+//	FILE* p7 = fopen("./../text6.txt", "wb");//文件6输出流
+//	if (p7 == NULL)
+//	{
+//		perror("read text6.txt");
+//		return 1;
+//	}
+//	int a = 3;
+//	fwrite(&a, sizeof(int), 1, p7);
+//	FILE* p8 = fopen("./../text7.txt", "rb");//文件7输入流
+//	if (p8 == NULL)
+//	{
+//		perror("write text6.txt");
+//		return 1;
+//	}
+//	int b = 0;
+//	fread(&b, sizeof(int), 1, p8);
+//	printf("%d", b);
+//	fclose(p7);
+//	p7 = NULL;
+//	fclose(p8);
+//	p8 = NULL;
+//}
 
 
 //#include<stdio.h>//拷贝文件
@@ -3007,3 +3011,65 @@ int main()
 //	p2 == NULL;
 //	return 0;
 //}
+
+//#include<stdio.h>
+//int main()
+//{
+//	FILE* p1 = fopen("./../text3.txt", "r");
+//	if (p1 == NULL)
+//	{
+//		perror("text3");
+//		return 1;
+//	}
+//	char a = fgetc(p1);
+//	printf("%c\n", a);
+//	FILE* p2 = fopen("./../text5.txt", "r");
+//	if (p2 == NULL)
+//	{
+//		perror("text5");
+//		return 1;
+//	}
+//	char b = fgetc(p2);
+//	printf("%c\n", b);
+//	a = fgetc(p1);
+//	printf("%c\n", a);
+//	b = fgetc(p2);
+//	printf("%c\n", b);
+//	return 0;
+//}
+
+//#include<stdio.h>
+//#include<string.h>
+//int main()
+//{
+//	char arr[20] = { 0 };
+//	int num = sprintf(arr, "hello world");
+//	int l = strlen("hello world");
+//	printf("%d %d", num, l);
+//	return 0;
+//}
+
+//#include<stdio.h>
+//int main()
+//{
+//	FILE* pf = fopen("text1.c", "w");//以写的形式打开文件 text1.c（相当于打开了文件 text1.c 的输出流）
+//	if (pf == NULL)//判断文件打开是否成功
+//	{
+//		perror("write to text1.c");
+//		return 1;
+//	}
+//	//向文件 text1.c 写入数据
+//	// ...
+//	fclose(pf);//关闭文件
+//	pf = NULL;//pf 置为空指针，避免野指针
+//	return 0;
+//}
+
+#include<stdio.h>
+int main()
+{
+	int a = 0;
+	fscanf(stdin, "%d", &a);
+	fprintf(stdout, "%d", a);
+	return 0;
+}
