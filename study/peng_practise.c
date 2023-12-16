@@ -3065,11 +3065,42 @@
 //	return 0;
 //}
 
-#include<stdio.h>
-int main()
-{
-	int a = 0;
-	fscanf(stdin, "%d", &a);
-	fprintf(stdout, "%d", a);
-	return 0;
-}
+//#include<stdio.h>
+//int main()
+//{
+//	int a = 0;
+//	fscanf(stdin, "%d", &a);
+//	fprintf(stdout, "%d", a);
+//	return 0;
+//}
+
+//#include<stdio.h>
+//int main()
+//{
+//	FILE* pf = fopen("./../text.txt", "w");//打开文件，写
+//	if (pf == NULL)
+//	{
+//		perror("write to text.txt");
+//		return 1;
+//	}
+//	fputs("测试", pf);
+//	//
+//	//
+//	fclose(pf);
+//	pf = NULL;
+//	return 0;
+//}
+
+//#include<stdio.h>
+//int main()
+//{
+//	int arr[10] = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };//创建一个 10 个元素的整型数组
+//	int* p1 = arr;//这里 arr 是首元素地址
+//	int(*p2)[10] = &arr;// 这里 &arr 是整个数组的地址，与首元素地址值一样，类型不同
+//	++p1;//向后走 1，不过 p1 是首元素地址，指向数组第二个元素 2
+//	++p2;//向后走 1，不过 p2 是整个数组地址，指向第十个元素后面的一个元素，是未知值
+//	int a = *p1;//解引用 p1 获得 2
+//	int b = *((int*)p2 - 1);//将 p2 转换为 int* 类型，指针向前移动一个整型，指向第十个元素 10
+//	printf("%d\n%d", a, b);
+//	return 0;
+//}
