@@ -117,12 +117,83 @@
 //	return 0;
 //}
 
-#include<stdio.h>
-int main()
-{
-	int A, B, C;
-	scanf("%d%d%d", &A, &B, &C);
-	int scores = A * 0.2 + B * 0.3 + C * 0.5;
-	printf("%d", scores);
-	return 0;
-}
+//#include<stdio.h>//P3954 [NOIP2017 普及组] 成绩
+//int main()
+//{
+//	int A, B, C;
+//	scanf("%d%d%d", &A, &B, &C);
+//	int scores = A * 0.2 + B * 0.3 + C * 0.5;
+//	printf("%d", scores);
+//	return 0;
+//}
+
+
+//	【入门2】分支结构
+
+
+//#include<stdio.h>//P2433 【深基1-2】小学数学 N 合一
+//#include<math.h>
+//int main()
+//{
+//	int num = 0;
+//	scanf("%d", & num);
+//	int m = 110;
+//	int n = 10;
+//	int r = 110;
+//	switch (num)
+//	{
+//	case 1:
+//		printf("I love Luogu!");
+//		break;
+//	case 2:
+//		printf("%d %d", 6, 4);
+//		break;
+//	case 3:
+//		printf("%d\n%d\n%d", 3, 12, 2);
+//		break;
+//	case 4:
+//		printf("%.3lf", 500.0 / 3);
+//		break;
+//	case 5:
+//		printf("%d", (260 + 220) / (12 + 20));
+//		break;
+//	case 6:
+//		printf("%.4lf", sqrt(6 * 6 + 9 * 9));
+//		break;
+//	case 7:
+//		printf("%d\n%d\n%d\n", 110, 90, 0);
+//		break;
+//	case 8:
+//		printf("%.4lf\n%.4lf\n%.3lf", 2 * 3.141593 * 5, 3.141593 * 25, 4.0 / 3 * (3.141593 * pow(5, 3)));
+//		break;
+//	case 9:
+//		printf("%d", (((((1 + 1) * 2) + 1) * 2) + 1) * 2);
+//		break;
+//	case 10:
+//		printf("%d", 9);
+//		break;
+//	case 11:
+//		printf("%.4lf", 100.0 / 3.0);
+//		break;
+//	case 12:
+//		printf("%d\n%c", 'M' - 64, 18 + 64);
+//		break;
+//	case 13:
+//		printf("%d", (int)pow(4.0 / 3 * 3.141593 * pow(4, 3) + 4.0 / 3 * 3.141593 * pow(10, 3), 1 / 3.0));
+//		break;
+//	case 14:
+//		for (int i = 1; i < 110; i++)
+//		{
+//			m = 110 - i;
+//			n = 10 + i;
+//			if (m * n >= 3500 && r > m)
+//			{
+//				r = m;
+//			}
+//		}
+//		printf("%d", (int)r);
+//		break;
+//	}
+//
+//	return 0;
+//}

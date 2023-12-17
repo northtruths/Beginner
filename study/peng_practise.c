@@ -3104,3 +3104,39 @@
 //	printf("%d\n%d", a, b);
 //	return 0;
 //}
+
+//#include<stdio.h>
+//int main()
+//{
+//	union U
+//	{
+//		int a;
+//		char b;
+//		int c;
+//	}n;
+//	n.a = 0x11223344;
+//	printf("%x\n%c\n%x", n.a, n.b, n.c);
+//	return 0;
+//}
+
+//#include<stdio.h>
+//int main()
+//{
+//	enum Sex
+//
+//	{
+//		男 = 3, 
+//		女,  
+//		保密 = 7  
+//	};
+//	int people = 0;
+//	printf("请输入性别：男3，女4，保密5\n");
+//	scanf("%d", &people);
+//	////////////////////////////////////////
+//	if (people == 3)
+//		printf("男性\n");
+//	//////////////////////////////////////
+//	if (people == 女)
+//		printf("女性\n");
+//	return 0;
+//}
