@@ -678,16 +678,36 @@
 //	return 0;
 //}
 
+//#include<stdio.h>
+//int main()
+//{
+//	int n = 0;
+//	scanf("%d", &n);
+//	scanf("%*c");
+//	char a = 0;
+//	while ((a = getchar()) != '\n')
+//	{
+//		printf("%c", a);
+//	}
+//	return 0;
+//}
+
 #include<stdio.h>
 int main()
 {
-	int n = 0;
-	scanf("%d", &n);
-	scanf("%*c");
-	char a = 0;
-	while ((a = getchar()) != '\n')
+	int m = 0;
+	int t = 0;
+	int s = 0;
+	int r = 0;
+	scanf("%d%d%d", &m, &t, &s);
+	if (s % t == 0)
 	{
-		printf("%c", a);
+		r = m - s / t;
 	}
+	else
+	{
+		r = (int)(m - (double)s / t + 1);
+	}
+	printf("%d", r);
 	return 0;
 }
