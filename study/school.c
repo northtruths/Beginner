@@ -695,18 +695,23 @@
 #include<stdio.h>
 int main()
 {
-	int m = 0;
-	int t = 0;
-	int s = 0;
-	int r = 0;
+	int m = 0;//苹果
+	int t = 0;//一个苹果时间
+	int s = 0;//时间
+	int r = 0;//返回
 	scanf("%d%d%d", &m, &t, &s);
-	if (s % t == 0)
+	if (m == 0)
+	{
+		printf("%d", 0);
+		return 0;
+	}
+	else if (s % t == 0)//如果整除则没有半个苹果出现
 	{
 		r = m - s / t;
 	}
 	else
 	{
-		r = (int)(m - (double)s / t + 1);
+		r = (int)(m - (double)s / t);
 	}
 	printf("%d", r);
 	return 0;
