@@ -439,20 +439,86 @@
 //	return 0;
 //}
 
+//#include<stdio.h>//P1424 小鱼的航程（改进版）
+//int main()
+//{
+//	int x, n;
+//	scanf("%d%d", &x, &n);
+//	int i = 0;
+//	int s = 0;
+//	while (n)
+//	{
+//		if ((x + i) % 7 != 6 && (x + i) % 7 != 0)
+//			s += 250;
+//		--n;
+//		++i;
+//	}
+//	printf("%d", s);
+//	return 0;
+//}
+
+//#include<stdio.h>
+//#include<stdlib.h>
+//int compare(const void* a, const void* b)
+//{
+//	return *(int*)a - *(int*)b;
+//}
+//int main()
+//{
+//	int arr[3] = { 0 };
+//	int i = 0;
+//	for (i = 0; i < 3; i++)
+//	{
+//		scanf("%d", &arr[i]);
+//	}
+//	qsort(arr, 3, 4, compare);
+//	int s1 = arr[0];
+//	int s2 = arr[2];
+//	int r = 0;
+//	r = s2 % s1;
+//	while (r)
+//	{	
+//		s1 = s2;
+//		s2 = r;
+//		r = s1 % s2;
+//	}
+//	printf("%d/%d", arr[0] / s2, arr[2] / s2);
+//	return 0;
+//}
+
+//#include<stdio.h>//	[NOIP2005 普及组] 陶陶摘苹果
+//int main()
+//{
+//	int arr[10] = { 0 };
+//	for (int i = 0; i < 10; ++i)
+//	{
+//		scanf("%d", &arr[i]);
+//	}
+//	int h = 0;
+//	scanf("%d", &h);
+//	int count = 0;
+//	for (int j = 0; j < 10; ++j)
+//	{
+//		if (h + 30 >= arr[j])
+//			++count;
+//	}
+//	printf("%d", count);
+//	return 0;
+//}
+
 #include<stdio.h>
+#include<stdlib.h>
+int compare(const void* a, const void* b)
+{
+	return *(int*)a - *(int*)b;
+}
 int main()
 {
-	int x, n;
-	scanf("%d%d", &x, &n);
-	int i = 0;
-	int s = 0;
-	while (n)
-	{
-		if ((x + i) % 7 != 6 && (x + i) % 7 != 0)
-			s += 250;
-		--n;
-		++i;
-	}
-	printf("%d", s);
+	int arr1[3] = { 0 };
+	scanf("%d%d%d", &arr1[0], &arr1[1], &arr1[2]);
+	qsort(arr1, 3, 4, compare);
+	char arr2[4] = { 0 };
+	scanf("%c%c%c", &arr2[0], &arr2[1], &arr2[2]);
+	printf("%d %d %d", arr1[arr2[0] - 65], arr1[arr2[1] - 65], arr1[arr2[2] - 65])
 	return 0;
 }
