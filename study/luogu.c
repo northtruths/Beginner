@@ -506,19 +506,51 @@
 //	return 0;
 //}
 
+//#include<stdio.h>//P4414 [COCI2006-2007#2] ABC
+//#include<stdlib.h>
+//int compare(const void* a, const void* b)
+//{
+//	return *(int*)a - *(int*)b;
+//}
+//int main()
+//{
+//	int arr1[3] = { 0 };
+//	scanf("%d%d%d", &arr1[0], &arr1[1], &arr1[2]);
+//	qsort(arr1, 3, 4, compare);
+//	char arr2[4] = { 0 };
+//	scanf("%*c%c%c%c", &arr2[0], &arr2[1], &arr2[2]);
+//	printf("%d %d %d", arr1[(arr2[0] - 65)], arr1[(arr2[1] - 65)], arr1[(arr2[2] - 65)]);
+//	return 0;
+//}
+
 #include<stdio.h>
-#include<stdlib.h>
-int compare(const void* a, const void* b)
-{
-	return *(int*)a - *(int*)b;
-}
+#include<string.h>
 int main()
 {
-	int arr1[3] = { 0 };
-	scanf("%d%d%d", &arr1[0], &arr1[1], &arr1[2]);
-	qsort(arr1, 3, 4, compare);
-	char arr2[4] = { 0 };
-	scanf("%c%c%c", &arr2[0], &arr2[1], &arr2[2]);
-	printf("%d %d %d", arr1[arr2[0] - 65], arr1[arr2[1] - 65], arr1[arr2[2] - 65])
+	char arr[14] = { 0 };
+	arr[13] = '\0';
+	for (int i = 0; i < 13; ++i)
+	{
+		arr[i] = getchar();
+	}
+	int jug = ((arr[0] - 48) * 1 + (arr[2] - 48) * 2 + (arr[3] - 48) * 3 + (arr[4] - 48) * 4 + (arr[6] - 48) * 5 + (arr[7] - 48) * 6 + (arr[8] - 48) * 7 + (arr[9] - 48) * 8 + (arr[10] - 48) * 9) % 11;
+	if (jug == 10)
+		jug = 'X';
+	if ((arr[12] - 48) == jug)
+		printf("Right");
+	else
+	{
+		if(jug == 'X')
+		{
+			strncpy(arr + 12, &jug, 1);
+			puts(arr);
+		}
+		else
+		{
+			jug += 48;
+			strncpy(arr + 12, &jug, 1);
+			puts(arr);
+		}
+	}
 	return 0;
 }
