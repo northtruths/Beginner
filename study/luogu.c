@@ -523,33 +523,203 @@
 //	return 0;
 //}
 
+//#include<stdio.h>//[NOIP2008 普及组] ISBN 号码
+//#include<string.h>
+//int main()
+//{
+//	char arr[15] = { 0 };
+//	for (int i = 0; i < 13; ++i)//0-670-83162-0
+//	{
+//		arr[i] = getchar();
+//	}
+//	int jug = ((arr[0] - 48) * 1 + (arr[2] - 48) * 2 + (arr[3] - 48) * 3 + (arr[4] - 48) * 4 + (arr[6] - 48) * 5 + (arr[7] - 48) * 6 + (arr[8] - 48) * 7 + (arr[9] - 48) * 8 + (arr[10] - 48) * 9) % 11;//识别码
+//	if ((arr[12] - 48) == jug || (arr[12] == 'X' && jug == 10))
+//		printf("Right");
+//	else
+//	{
+//		if(jug == 10)
+//		{
+//			arr[12] = 'X';
+//			puts(arr);
+//		}
+//		else 
+//		{
+//			jug += 48;
+//			arr[12] = jug;
+//			puts(arr);
+//		}
+//	}
+//	return 0;
+//}
+
+//#include<stdio.h>//p1035 [noip2002 普及组] 级数求和
+//#include<math.h>
+//int main()
+//{
+//	int k = 0;
+//	scanf("%d", &k);
+//	long long n = 0;
+//	double sn = 0;
+//	for (n = 1; sn <= k; ++n)
+//	{
+//		sn += pow(n, -1);
+//	}
+//	printf("%lld", n - 1);
+//	return 0;
+//}
+
+//#include<stdio.h>//上面的题解
+//int main() 
+//{
+//    int k, n = 0;
+//    scanf("%d", &k);
+//    for (double Sn = 0; Sn <= k; ++n, Sn += 1.0 / n);
+//    printf("%d", n);
+//    return 0;
+//}
+
+//#include<stdio.h>//	[NOIP2015 普及组] 金币
+//#include<math.h>
+//int main()
+//
+//{
+//	int k = 0;
+//	scanf("%d", &k);
+//	int arr[143] = { 0 };//此大小正好装下10000个天数
+//	for (int i = 0; i <= 142; ++i)//把每一段天数看作一个元素
+//	{
+//		arr[i] = i + 1;
+//	}
+//	int sum = 0;
+//	int i = 0;
+//	for (i = 0; (sum += i) < k; ++i)//看天数在数组哪个段
+//	{
+//		;
+//	}
+//	int sum1 = 0;
+//	for (int j = 1; j < i; ++j)//把 i 段前面的加起来
+//	{
+//		sum1 += j;
+//	}
+//	int more = k - sum1;//多出的不完整段数的天数
+//	long long gold = 0;
+//	for (int z = 1; z <= i; ++z)
+//	{
+//		if (z == i)
+//		{
+//			gold += z * more;
+//		}
+//		else
+//		{
+//			gold += pow(z, 2);
+//		}
+//	}
+//	printf("%lld", gold);
+//	return 0;
+//}
+
+//#include<stdio.h>//【深基4.例11】数列求和
+//int main()
+//{
+//	int sum = 0;
+//	int n = 0;
+//	scanf("%d", &n);
+//	for (int i = 1; i <= n; ++i)
+//	{
+//		sum += i;
+//	}
+//	printf("%d", sum);
+//	return 0;
+//}
+
+//#include<stdio.h>//【深基4.例13】质数口袋
+//#include<math.h>
+//int jug(int i)
+//{
+//	int flag = 0;
+//	for (int j = i - 1; j >= sqrt(i); --j)
+//	{
+//		if (i % j == 0)//不是质数
+//		{
+//			flag = 1;
+//			break;
+//		}
+//	}
+//	return flag;//1 不是，0是
+//}
+//int main()
+//{
+//	int L = 0;
+//	scanf("%d", &L);
+//	int sum = 0;
+//	int count = 0;
+//	for (int i = 2; sum < L; ++i)
+//	{
+//		if (jug(i) == 0)
+//		{
+//			sum += i;
+//			if(sum <= L)
+//			{
+//				++count;
+//				printf("%d\n", i);
+//			}
+//		}
+//	}
+//	printf("%d", count);
+//	return 0;
+//}
+
 #include<stdio.h>
-#include<string.h>
+#include<math.h>
+int jug1(int i)//判断素数
+{
+	int flag = 0;//0 是质素，1不是
+	if (i != 2 && i % 2 == 0)
+		goto end;
+	for (int j = i - 1; j >= sqrt(i); --j)
+	{
+		if (i % j == 0)//不是质数
+		{
+			flag = 1;
+			break;
+		}
+	}
+end:
+	return flag;//1 不是，0是
+}
+int jug2(int i)//判断回文数
+{
+	char arr[10] = { 0 };
+	int count = 0;//位数
+	while (i)
+	{
+		arr[count] = i % 10;
+		i /= 10;
+		++count;
+	}
+	int flag = 0;//0 是，1不是
+	for (int k = 0; k <= count / 2; ++k)
+	{
+		if (arr[k] != arr[count - 1 - k])
+		{
+			flag = 1;
+			break;
+		}
+	}
+	return flag;
+}
 int main()
 {
-	char arr[14] = { 0 };
-	arr[13] = '\0';
-	for (int i = 0; i < 13; ++i)
+	int i = 0;
+	int a, b;
+	scanf("%d%d", &a, &b);
+	if (b > 10000000)
+		b = 9999999;
+	for (i = a; i <= b; i += 2)
 	{
-		arr[i] = getchar();
-	}
-	int jug = ((arr[0] - 48) * 1 + (arr[2] - 48) * 2 + (arr[3] - 48) * 3 + (arr[4] - 48) * 4 + (arr[6] - 48) * 5 + (arr[7] - 48) * 6 + (arr[8] - 48) * 7 + (arr[9] - 48) * 8 + (arr[10] - 48) * 9) % 11;
-	if (jug == 10)
-		jug = 'X';
-	if ((arr[12] - 48) == jug)
-		printf("Right");
-	else
-	{
-		if(jug == 'X')
+		if (jug2(i) == 0 && jug1(i) == 0)
 		{
-			strncpy(arr + 12, &jug, 1);
-			puts(arr);
-		}
-		else
-		{
-			jug += 48;
-			strncpy(arr + 12, &jug, 1);
-			puts(arr);
+			printf("%d\n", i);
 		}
 	}
 	return 0;
