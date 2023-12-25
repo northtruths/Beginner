@@ -669,58 +669,292 @@
 //	return 0;
 //}
 
+//#include<stdio.h>//[USACO1.5] 回文质数 Prime Palindromes
+//#include<math.h>
+//int jug1(int i)//判断素数
+//{
+//	for (int j = 2; j <= sqrt(i); ++j)
+//	{
+//		if (i % j == 0)//不是质数
+//		{
+//			return 1;
+//		}
+//	}
+//	return 0;//1 不是，0是
+//}
+//int jug2(int i)//判断回文数
+//{
+//	char arr[10] = { 0 };
+//	int count = 0;//位数
+//	while (i)
+//	{
+//		arr[count] = i % 10;
+//		i /= 10;
+//		++count;
+//	}
+//	for (int k = 0; k <= count / 2; ++k)
+//	{
+//		if (arr[k] != arr[count - 1 - k])
+//			return 1;
+//	}
+//	return 0;
+//}
+//int jug3(int i)//判断位数
+//{
+//	if ((1000 <= i && i <= 9999) || (100000 <= i && i <= 999999))
+//		return 0;
+//	return 1;
+//}
+//int main()
+//{
+//	int i = 0;
+//	int a, b;
+//	scanf("%d%d", &a, &b);
+//	if (b >= 10000000)
+//		b = 9999999;
+//	if (a % 2 == 0)
+//		a -= 1;
+//	for (i = a; i <= b; i += 2)
+//	{
+//		if (jug3(i) == 1 && jug2(i) == 0 && jug1(i) == 0)
+//		{
+//			printf("%d\n", i);
+//		}
+//	}
+//	return 0;
+//}
+
+//#include<stdio.h>
+//#include<math.h>
+//int l, r;
+//int check1(int x)//检查位数
+//{
+//	if ((1000 <= x && x <= 9999) || (100000 <= x && x <= 999999)) return 0;//不知道&&和||优先级的可以打个括号 
+//	return 1;
+//}
+//int check2(int x)//检查是否回文
+//{
+//	int a[20], flag = 1;//反正开得下，多开点
+//	while (x > 0)
+//	{
+//		a[flag] = x % 10;
+//		x /= 10;
+//		flag++;
+//	}
+//	for (int i = 1; i <= flag / 2; i++)
+//		if (a[i] != a[flag - i]) return 0;//不符合回文 
+//	return 1;
+//}
+//int check3(int x)//检查是否为质数 
+//{
+//	if (x == 2) return 1;
+//	for (int i = 2; i <= sqrt(x); i++)
+//		if (x % i == 0) return 0;
+//	return 1;
+//}
+//int main()
+//{
+//	scanf("%d %d", &l, &r);
+//	if (l == 2) printf("2\n");//一定要注意2！！！ 
+//	if (l % 2 == 0) l++;
+//	if (r >= 10000000)//再大的数都不可能是回文质数
+//		r = 9999999;
+//	for (int i = l; i <= r; i = i + 2)//枚举每一个奇数
+//	{
+//		if (check1(i) == 0) continue;
+//		if (check2(i) == 0) continue;
+//		if (check3(i) == 0) continue;
+//		printf("%d\n", i);//printf会比cout快很多 
+//	}
+//	return 0;
+//}
+
+//#include<stdio.h>//P1423 小玉在游泳
+//#include<math.h>
+//int main()
+//{
+//	double s = 0;
+//	scanf("%lf", &s);
+//	int step = 0;
+//	double sn = 0;
+//	do
+//	{
+//		++step;
+//		sn += 2 * pow(0.98, step);
+//	} while (sn < s);
+//	printf("%d", step);
+//	return 0;
+//}
+
+//#include<stdio.h>//P1307 [NOIP2011 普及组] 数字反转
+//#include<string.h>
+//#include<math.h>
+//int main()
+//{
+//	int n = 0;
+//	scanf("%d", &n);
+//	int count = 0;
+//	int n1 = n;
+//	int n2 = n;
+//	while (n1)
+//	{
+//		++count;
+//		n1 /= 10;
+//	}
+//	char arr[11] = { 0 };
+//	int i = 0;
+//	if (n2 < 0)
+//	{
+//		arr[0] = '-';
+//		++i;
+//		++count;
+//		n2 = -n2;
+//	}
+//	for (i; i < count; ++i)
+//	{
+//		{
+//			arr[i] = n2 % 10 + 48;
+//			n2 /= 10;
+//		}
+//	}
+//	int r = 0;
+//	int k = 0;
+//	if (n < 0)
+//		++k;
+//	for (k; k < count; ++k)
+//	{
+//		r += (arr[k] - 48) * pow(10, count - 1 - k);
+//	}
+//	if (n < 0)
+//		r = -r;
+//	printf("%d", r);
+//	return 0;
+//}
+
+//#include<stdio.h>//P1720 月落乌啼算钱（斐波那契数列）
+//#include<math.h>
+//int main()
+//{
+//	int n = 0;
+//	scanf("%d", &n);
+//	double Fn = (pow((1 + sqrt(5)) / 2.0, n) - (pow((1 - sqrt(5)) / 2.0, n))) / sqrt(5);
+//	printf("%.2lf", Fn);
+//	return 0;
+//}
+
+//#include<stdio.h>//【深基4.习5】求极差 / 最大跨度值
+//#include<stdlib.h>
+//int compare(const void* a, const void* b)
+//{
+//	return *(int*)a - *(int*)b;
+//}
+//int main()
+//{
+//	int n = 0;
+//	scanf("%d", &n);
+//	int arr[100] = { 0 };
+//	for (int i = 0; i < n; ++i)
+//	{
+//		scanf("%d", &arr[i]);
+//	}
+//	qsort(arr, n, 4, compare);
+//	printf("%d", arr[n - 1] - arr[0]);
+//}
+
+//#include<stdio.h>//	最长连号
+//int count = 1;
+//int max = 1;
+//void jug(int* p1)
+//{
+//	if (*p1 + 1== *(p1 + 1))
+//	{
+//		++count;
+//		if (max < count)
+//		{
+//			max = count;
+//		}
+//		jug(p1 + 1);
+//	}
+//}
+//int main()
+//{
+//	int n = 0;
+//	scanf("%d", &n);
+//	int arr[10001] = { 0 };
+//	for (int i = 0; i < n; ++i)
+//	{
+//		scanf("%d", &arr[i]);
+//	}
+//	int* p1 = &arr[0];
+//	int* p2 = &arr[0];
+//	for (int j = 0; j < n; ++j)
+//	{
+//		jug(p1);
+//		++p2;
+//		p1 = p2;
+//		count = 1;
+//	}
+//	printf("%d", max);
+//	return 0;
+//}
+
 #include<stdio.h>
-#include<math.h>
-int jug1(int i)//判断素数
-{
-	int flag = 0;//0 是质素，1不是
-	if (i != 2 && i % 2 == 0)
-		goto end;
-	for (int j = i - 1; j >= sqrt(i); --j)
-	{
-		if (i % j == 0)//不是质数
-		{
-			flag = 1;
-			break;
-		}
-	}
-end:
-	return flag;//1 不是，0是
-}
-int jug2(int i)//判断回文数
-{
-	char arr[10] = { 0 };
-	int count = 0;//位数
-	while (i)
-	{
-		arr[count] = i % 10;
-		i /= 10;
-		++count;
-	}
-	int flag = 0;//0 是，1不是
-	for (int k = 0; k <= count / 2; ++k)
-	{
-		if (arr[k] != arr[count - 1 - k])
-		{
-			flag = 1;
-			break;
-		}
-	}
-	return flag;
-}
 int main()
 {
-	int i = 0;
-	int a, b;
-	scanf("%d%d", &a, &b);
-	if (b > 10000000)
-		b = 9999999;
-	for (i = a; i <= b; i += 2)
+	int n = 0;
+	scanf("%d", &n);
+	int i= 0;
+	for (i = 2; i <= n; ++i)
 	{
-		if (jug2(i) == 0 && jug1(i) == 0)
-		{
-			printf("%d\n", i);
-		}
+		if (n % i == 0)
+			break;
 	}
+	printf("%d", n / i);
 	return 0;
 }
+
+//#include<stdio.h>
+//int main()
+//{
+//	int flag = 0;
+//	for (int i = 1; i < 14000; i += 2)
+//	{
+//		flag = 0;
+//		for (int j = 2; j < i; ++j)
+//		{
+//			if (i % j == 0)
+//			{
+//				flag = 1;
+//				break;
+//			}
+//		}
+//		if (flag = 1)
+//			break;
+//		else
+//			printf("%d\n", i);
+//	}
+//	return 0;
+//}
+
+//#include<stdio.h>
+//#include<math.h>
+//int jug(int i)//判断素数
+//{
+//	for (int j = 2; j <= sqrt(i); ++j)
+//	{
+//		if (i % j == 0)//不是质数
+//		{
+//			return 1;
+//		}
+//	}
+//	return 0;//1 不是，0是
+//}
+//int main()
+//{
+//	for (int i = 11111; i < 14000; i += 2)
+//	{
+//		if (jug(i) == 0)
+//			printf("%d\n", i);
+//	}
+//	return 0;
+//}
