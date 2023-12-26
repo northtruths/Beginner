@@ -898,20 +898,20 @@
 //	return 0;
 //}
 
-#include<stdio.h>
-int main()
-{
-	int n = 0;
-	scanf("%d", &n);
-	int i= 0;
-	for (i = 2; i <= n; ++i)
-	{
-		if (n % i == 0)
-			break;
-	}
-	printf("%d", n / i);
-	return 0;
-}
+//#include<stdio.h>//	[NOIP2012 普及组] 质因数分解
+//int main()
+//{
+//	int n = 0;
+//	scanf("%d", &n);
+//	int i= 0;
+//	for (i = 2; i <= n; ++i)
+//	{
+//		if (n % i == 0)
+//			break;
+//	}
+//	printf("%d", n / i);
+//	return 0;
+//}
 
 //#include<stdio.h>
 //int main()
@@ -956,5 +956,113 @@ int main()
 //		if (jug(i) == 0)
 //			printf("%d\n", i);
 //	}
+//	return 0;
+//}
+
+//#include<stdio.h>//【深基4.习8】求三角形
+//int main()
+//{
+//	int n = 0;
+//	scanf("%d", &n);
+//	int i = 1;
+//	int j = 1;
+//	for (i; i <= n; ++i)//打印正方形
+//	{
+//		for (j; j <= n * i; ++j)
+//		{
+//			printf("%02d", j);
+//		}
+//		printf("\n");
+//	}
+//	printf("\n");
+//	i = 1;
+//	j = 1;
+//	int p = 0;
+//	for (i; i <= n; ++i)
+//	{
+//		int k = 0;
+//		for (j = 1; j <= i; ++j)
+//		{
+//			++p;
+//			for (k; k < n - i; ++k)
+//				printf("  ");
+//			printf("%02d", p);
+//		}
+//		printf("\n");
+//	}
+//	return 0;
+//}
+
+//#include<stdio.h>//【深基4.习9】打分
+//#include<stdlib.h>
+//int compare(const void* a, const void* b)
+//{
+//	return *(int*)a - *(int*)b;
+//}
+//int main()
+//{
+//	int n = 0;
+//	scanf("%d", &n);
+//	int arr[1000] = { 0 };
+//	for (int i = 0; i < n; ++i)
+//	{
+//		scanf("%d", &arr[i]);
+//	}
+//	qsort(arr, n, 4, compare);
+//	int sum = 0;
+//	for (int j = 1; j < n - 1; ++j)
+//	{
+//		sum += arr[j];
+//	}
+//	printf("%.2lf", (double)sum / (double)(n - 2));
+//	return 0;
+//}
+
+//#include<stdio.h>//	[COCI2017-2018#6] Davor
+//int main()
+//{
+//	int n = 0;
+//	scanf("%d", &n);
+//	int x = 1;
+//	int k = 1;
+//	for (x = 100; x >= 1; --x)
+//	{
+//		for (k = 1; k <= (n - 700) / 1092.0; ++k)
+//		{
+//			if ((7 * x + 21 * k) * 52 == n)
+//				goto end;
+//		}
+//		if ((7 * x + 21 * k) * 52 == n)
+//			goto end;
+//	}
+//end:
+//	printf("%d\n%d", x, k);
+//	return 0;
+//}
+
+//#include<stdio.h>//	[NOIP2004 提高组] 津津的储蓄计划
+//int main()
+//{
+//	int arr[12] = { 0 };
+//	for (int i = 0; i < 12; ++i)
+//	{
+//		scanf("%d", &arr[i]);
+//	}
+//	int m = 0;
+//	int r = 0;
+//	for (int i = 0; i < 12; ++i)
+//	{
+//		m += 300;
+//		if (m < arr[i])
+//		{
+//			printf("-%d", i + 1);
+//			goto end;
+//		}
+//		m -= arr[i];
+//		r += m / 100;
+//		m %= 100;
+//	}
+//	printf("%.0lf", m + r * 100 * 1.2);
+//end:
 //	return 0;
 //}
