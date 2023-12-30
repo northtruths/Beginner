@@ -1066,3 +1066,30 @@
 //end:
 //	return 0;
 //}
+
+
+//【入门4】数组
+
+//#include<stdio.h>//P1428	小鱼比可爱
+//int main()
+//{
+//	int n = 0;
+//	scanf("%d", &n);
+//	int arr[100] = { 0 };
+//	for (int i = 0; i < n; ++i)
+//	{
+//		scanf("%d", &arr[i]);
+//	}
+//	for (int i = 0; i < n; ++i)
+//	{
+//		int count = 0;
+//		for (int j = 0; j < i; ++j)
+//		{
+//			if (arr[j] < arr[i])
+//				++count;
+//		}
+//		printf("%d ", count);
+//	}
+//	return 0;
+//}
+

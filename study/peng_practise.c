@@ -3140,3 +3140,64 @@
 //		printf("女性\n");
 //	return 0;
 //}
+
+//蓝桥杯模拟
+
+//#include<stdio.h>//2
+//int main()
+//{
+//	int count = 0;
+//	int arr[30] = { 0 };
+//	for (int i = 0; i < 30; ++i)
+//	{
+//		scanf("%d", &arr[i]);
+//	}
+//	for (int i = 0; i < 30; ++i)
+//	{
+//		for (int j = i + 1; j < 30; ++j)
+//		{
+//			if ((arr[i] * arr[j] >= 2022) && (i != j))
+//				++count;
+//		}
+//	}
+//	printf("%d", count);
+//	return 0;
+//}
+
+#include <stdio.h>
+#include <stdlib.h>
+
+int main(int argc, char* argv[])
+{
+    // 请在此输入您的代码
+    int n, m;
+    scanf("%d%d", &n, &m);
+    int t = 0;
+    scanf("%d", &t);
+    int arr[100][100] = { 0 };
+    while (t)
+    {
+        int r1 = 0, c1 = 0, r2 = 0, c2 = 0;
+        scanf("%d%d%d%d", &r1, &c1, &r2, &c2);
+        --r1;
+        --r2;
+        --c1;
+        --c2;
+        for (int i = r1; i <= r2; ++i)
+        {
+            for (int j = c1; j <= c2; ++j)
+            {
+                arr[i][j] = 1;
+            }
+        }
+        --t;
+    }
+    int count = 0;
+    for (int i = 0; i < n * m; ++i)
+    {
+        if (arr[0][i] == 0)
+            ++count;
+    }
+    printf("%d", count);
+    return 0;
+}
