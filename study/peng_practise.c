@@ -3164,40 +3164,115 @@
 //	return 0;
 //}
 
-#include <stdio.h>
-#include <stdlib.h>
+//#include <stdio.h>//4
+//#include <stdlib.h>
+//
+//int main(int argc, char* argv[])
+//{
+//    // 请在此输入您的代码
+//    int n, m;
+//    scanf("%d%d", &n, &m);
+//    int t = 0;
+//    scanf("%d", &t);
+//    int arr[100][100] = { 0 };
+//    while (t)
+//    {
+//        int r1 = 0, c1 = 0, r2 = 0, c2 = 0;
+//        scanf("%d%d%d%d", &r1, &c1, &r2, &c2);
+//        --r1;
+//        --r2;
+//        --c1;
+//        --c2;
+//        for (int i = r1; i <= r2; ++i)
+//        {
+//            for (int j = c1; j <= c2; ++j)
+//            {
+//                arr[i][j] = 1;
+//            }
+//        }
+//        --t;
+//    }
+//    int count = 0;
+//    for (int i = 0; i < n * m; ++i)
+//    {
+//        if (arr[0][i] == 0)
+//            ++count;
+//    }
+//    printf("%d", count);
+//    return 0;
+//}
 
-int main(int argc, char* argv[])
+//#include<stdio.h>//错误
+//int main()
+//{
+//	char arr[26] = { 0 };
+//	for (int i = 0; i < 26; ++i)
+//	{
+//		arr[i] = i + 65;
+//	}
+//	for (int i = 0; i < 26; ++i)
+//	{
+//		for (int j = 0; j < 26; ++j)
+//		{
+//			for (int k = 0; k < 26; ++k)
+//			{
+//				if ((i * 26 * 26) + (j * 26) + (k + 1) + 26 == 2022)
+//				{
+//					printf("%c%c%c", arr[i], arr[j], arr[k]);
+//					goto end;
+//				}
+//			}
+//		}
+//	}
+//	end:
+//	return 0;
+//}
+
+#include<stdio.h>
+int count = 0;
+int max = 0;
+int find(int i, int j, int** arr)
 {
-    // 请在此输入您的代码
-    int n, m;
-    scanf("%d%d", &n, &m);
-    int t = 0;
-    scanf("%d", &t);
-    int arr[100][100] = { 0 };
-    while (t)
-    {
-        int r1 = 0, c1 = 0, r2 = 0, c2 = 0;
-        scanf("%d%d%d%d", &r1, &c1, &r2, &c2);
-        --r1;
-        --r2;
-        --c1;
-        --c2;
-        for (int i = r1; i <= r2; ++i)
-        {
-            for (int j = c1; j <= c2; ++j)
-            {
-                arr[i][j] = 1;
-            }
-        }
-        --t;
-    }
-    int count = 0;
-    for (int i = 0; i < n * m; ++i)
-    {
-        if (arr[0][i] == 0)
-            ++count;
-    }
-    printf("%d", count);
-    return 0;
+	if (i < 1 || i >30 || j < 1 || j > 60)//条件不满足退出
+		return 0;
+	if (arr[i][j] == 1)
+	{
+		++count;
+		arr[i][j] = 0;
+		find(i - 1, j, arr);
+		find(i + 1, j, arr);
+		find(i, j + 1, arr);
+		find(i, j - 1, arr);
+	}
+	else
+		return 0;
 }
+int main()
+{
+	int arr[32][62] = { 0 };
+	int i = 0;
+	int j = 0;
+	for(i = 1; i < 31; ++i)
+	{
+		for (j = 1; j < 61; ++j)
+		{
+			arr[i][j] = getchar() - 48;
+		}
+		scanf("%*c");
+	}
+	for(i = 1; i < 31; ++i)
+	{
+		for(j = 1; j < 61; ++j)
+		{
+			find(i, j, &arr);
+			count = 0;
+			if (max < count)
+				max = count;
+		}
+	}
+	printf("%d", max);
+	return 0;
+}
+
+
+
