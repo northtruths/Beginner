@@ -3228,51 +3228,172 @@
 //	return 0;
 //}
 
-#include<stdio.h>
-int count = 0;
-int max = 0;
-int find(int i, int j, int** arr)
+//#include<stdio.h>//最大连通，注意因为所有联通的都是联通的，所以一个地点计算一次即可
+//int count = 0;//计数连通
+//int max = 0;//最大连通
+//int find(int i, int j, int (*arr)[62])
+//{
+//	if (i < 1 || i >30 || j < 1 || j > 60)//条件不满足退出
+//		return 0;
+//	if (arr[i][j] == 1)
+//	{
+//		++count;
+//		arr[i][j] = 0;
+//		find(i - 1, j, arr);
+//		find(i + 1, j, arr);
+//		find(i, j + 1, arr);
+//		find(i, j - 1, arr);
+//	}
+//	else
+//		return 0;
+//}
+//int main()
+//{
+//	int arr[32][62] = { 0 };//行和列多都多出两行避免越界
+//	int i = 0;
+//	int j = 0;
+//	for(i = 1; i < 31; ++i)//输入
+//	{
+//		for (j = 1; j < 61; ++j)
+//		{
+//			arr[i][j] = getchar() - 48;
+//		}
+//		scanf("%*c");
+//	}
+//	for(i = 1; i < 31; ++i)//行
+//	{
+//		for(j = 1; j < 61; ++j)//列
+//		{
+//			find(i, j, arr);//计算连通数
+//			if (max < count)
+//				max = count;
+//			count = 0;//连通数置零
+//		}
+//	}
+//	printf("%d", max);
+//	return 0;
+//}
+
+//#include<stdio.h>//信号覆盖
+//#include<math.h>
+//
+//int main()
+//{
+//	int W = 0;//横坐标
+//	int H = 0;//纵坐标
+//	int n = 0;
+//	int R = 0;
+//	scanf("%d%d%d%d", &W, &H, &n, &R);
+//	scanf("%*c");
+//	int count = 0;//计数
+//	int p[101][101] = { 0 };//判断是否计算过
+//	while(n)
+//	{
+//		int x = 0;
+//		int y = 0;
+//		scanf("%d%d", &x, &y);//每次输入不同的x，y
+//		scanf("%*c");
+//		for (int i = 0; i <= W; ++i)
+//		{
+//			for (int j = 0; j <= H; ++j)
+//			{
+//				if (p[i][j] == 0 && sqrt(pow(x - i, 2) + pow(y - j, 2)) <= R)//没有计数过的话计数加一，标志赋值 1
+//				{
+//					++count;
+//					p[i][j] = 1;
+//				}
+//			}
+//		}
+//		--n;
+//	}
+//	printf("%d", count);
+//	return 0;
+//}
+
+//#include<stdio.h>//附近最小
+//#include<stdlib.h>
+//int main()
+//{
+//	int n = 0;
+//	scanf("%d%*c", &n);
+//	int* arr = (int*)calloc(n, sizeof(int));
+//	if (arr == NULL)
+//	{
+//		perror("arr");
+//		return 0;
+//	}
+//	for (int i = 0; i < n; ++i)
+//	{
+//		scanf("%d", &arr[i]);
+//	}
+//	scanf("%*c");
+//	int k = 0;
+//	scanf("%d", &k);
+//	for(int i = 0; i < n; ++i)
+//	{
+//		int min = 1000000;
+//		for (int m ; m <= 2 * k; ++m)
+//		{
+//			if (i - k + m < 0 || i - k + m > n - 1)
+//				continue;
+//			
+//			if (min > arr[i - k + m])
+//				min = arr[i - k + m];
+//		}
+//		printf("%d ", min);
+//	}
+//	free(arr);
+//	arr = NULL;
+//	return 0;
+//}
+
+//#include <stdio.h>//第三小,自己版，超时
+//#include <stdlib.h>
+//#include<string.h>
+//int compare(const void* a, const void* b)
+//{
+//	return *(int*)a - *(int*)b;
+//}
+//int main()
+//{
+//	int n = 0;
+//	scanf("%d%*c", &n);
+//	int* arr = (int*)malloc(3 * sizeof(int));
+//	scanf("%d%d", &arr[0], &arr[1]);
+//	int count = 0;
+//	while (n - 2)
+//	{
+//		scanf("%d", &arr[2 + count]);
+//		qsort(arr, 3 + count, 4, compare);
+//		printf("%d ", arr[2]);
+//		++count;
+//		arr = (int*)realloc(arr, (3 + count) * 4);
+//		--n;
+//	}
+//	return 0;
+//}
+
+#include<stdio.h>//第三小，看了题解思路版
+#include<stdlib.h>
+int compare(const void* a, const void* b)
 {
-	if (i < 1 || i >30 || j < 1 || j > 60)//条件不满足退出
-		return 0;
-	if (arr[i][j] == 1)
-	{
-		++count;
-		arr[i][j] = 0;
-		find(i - 1, j, arr);
-		find(i + 1, j, arr);
-		find(i, j + 1, arr);
-		find(i, j - 1, arr);
-	}
-	else
-		return 0;
+	return *(int*)a - *(int*)b;
 }
 int main()
 {
-	int arr[32][62] = { 0 };
-	int i = 0;
-	int j = 0;
-	for(i = 1; i < 31; ++i)
+	int n = 0;
+	scanf("%d%*c", &n);
+	int arr[3] = { 1000000, 1000000, 1000000 };
+	scanf("%d%d", &arr[0], &arr[1]);
+	int s = 0;
+	while (n - 2)
 	{
-		for (j = 1; j < 61; ++j)
-		{
-			arr[i][j] = getchar() - 48;
-		}
-		scanf("%*c");
+		scanf("%d", &s);
+		if (s < arr[2])
+			arr[2] = s;
+		qsort(arr, 3, 4, compare);
+		printf("%d ", arr[2]);
+		--n;
 	}
-	for(i = 1; i < 31; ++i)
-	{
-		for(j = 1; j < 61; ++j)
-		{
-			find(i, j, &arr);
-			count = 0;
-			if (max < count)
-				max = count;
-		}
-	}
-	printf("%d", max);
 	return 0;
 }
-
-
-
