@@ -3373,27 +3373,72 @@
 //	return 0;
 //}
 
-#include<stdio.h>//第三小，看了题解思路版
-#include<stdlib.h>
-int compare(const void* a, const void* b)
-{
-	return *(int*)a - *(int*)b;
-}
-int main()
-{
-	int n = 0;
-	scanf("%d%*c", &n);
-	int arr[3] = { 1000000, 1000000, 1000000 };
-	scanf("%d%d", &arr[0], &arr[1]);
-	int s = 0;
-	while (n - 2)
-	{
-		scanf("%d", &s);
-		if (s < arr[2])
-			arr[2] = s;
-		qsort(arr, 3, 4, compare);
-		printf("%d ", arr[2]);
-		--n;
-	}
-	return 0;
-}
+//#include<stdio.h>//第三小，看了题解思路版
+//#include<stdlib.h>
+//int compare(const void* a, const void* b)
+//{
+//	return *(int*)a - *(int*)b;
+//}
+//int main()
+//{
+//	int n = 0;
+//	scanf("%d%*c", &n);
+//	int arr[3] = { 1000000, 1000000, 1000000 };
+//	scanf("%d%d", &arr[0], &arr[1]);
+//	int s = 0;
+//	while (n - 2)
+//	{
+//		scanf("%d", &s);
+//		if (s < arr[2])
+//			arr[2] = s;
+//		qsort(arr, 3, 4, compare);
+//		printf("%d ", arr[2]);
+//		--n;
+//	}
+//	return 0;
+//}
+
+//#include<stdio.h>//特殊日期
+//int is_leap_year(int year)
+//{
+//	if (year % 400 == 0 || (year % 100 != 0 && year % 4 == 0))
+//		return 1;//是
+//	else
+//		return 0;//不是
+//}
+//int main()
+//
+//{
+//	int arr[13] = { 0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
+//	int rarr[13] = { 0, 31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
+//	int year = 2000;
+//	int month = 0;
+//	int count = 0;
+//	for (year; year <= 1999999; ++year)
+//	{
+//		if(is_leap_year(year))
+//		{
+//			for (month = 1; month <= 12; ++month)
+//			{
+//				for (int day = 1; day <= rarr[month]; ++day)
+//				{
+//					if (year % day == 0 && year % month == 0)
+//						++count;
+//				}
+//			}
+//		}
+//		else
+//		{
+//			for (month = 1; month <= 12; ++month)
+//			{
+//				for (int day = 1; day <= arr[month]; ++day)
+//				{
+//					if (year % day == 0 && year % month == 0)
+//						++count;
+//				}
+//			}
+//		}
+//	}
+//	printf("%d", count + 1);
+//	return 0;
+//}
