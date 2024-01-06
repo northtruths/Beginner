@@ -3442,3 +3442,27 @@
 //	printf("%d", count + 1);
 //	return 0;
 //}
+
+#include<stdio.h>
+int main()
+{
+	int num = 0;//满足条件的个数
+	int res = 0;//当前的数
+	int i = 0;//复制 res 判断 1 的个数
+	int count = 0;//计数 1 的个数
+	for (res = 3; num < 23; ++res)//当 count 为 23 个时退出循环，此时 res 为 答案 + 1
+	{
+		i = res;
+		count = 0;
+		while(i)
+		{
+			if ((i ^ 1) < i)
+				++count;
+			i >>= 1;
+		}
+		if (count == 3)
+			++num;
+	}
+	printf("%d", res - 1);
+	return 0;
+}
