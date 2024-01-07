@@ -3443,26 +3443,66 @@
 //	return 0;
 //}
 
-#include<stdio.h>
-int main()
-{
-	int num = 0;//满足条件的个数
-	int res = 0;//当前的数
-	int i = 0;//复制 res 判断 1 的个数
-	int count = 0;//计数 1 的个数
-	for (res = 3; num < 23; ++res)//当 count 为 23 个时退出循环，此时 res 为 答案 + 1
-	{
-		i = res;
-		count = 0;
-		while(i)
-		{
-			if ((i ^ 1) < i)
-				++count;
-			i >>= 1;
-		}
-		if (count == 3)
-			++num;
-	}
-	printf("%d", res - 1);
-	return 0;
-}
+//#include<stdio.h>
+//int main()
+//{
+//	int num = 0;//满足条件的个数
+//	int res = 0;//当前的数
+//	int i = 0;//复制 res 判断 1 的个数
+//	int count = 0;//计数 1 的个数
+//	for (res = 3; num < 23; ++res)//当 count 为 23 个时退出循环，此时 res 为 答案 + 1
+//	{
+//		i = res;
+//		count = 0;
+//		while(i)
+//		{
+//			if ((i ^ 1) < i)
+//				++count;
+//			i >>= 1;
+//		}
+//		if (count == 3)
+//			++num;
+//	}
+//	printf("%d", res - 1);
+//	return 0;
+//}
+
+////思路：
+////1.先在 m+1 个字符中找到序数最小的，将其与后面的字符串复制到目标字符串中（删掉前面的 x 个字符）
+////2.再从剩下的 m-x+1 个字符中找到序数最小的，以此循环/递归
+//#include <stdio.h>
+//#include <stdlib.h>
+//#include<string.h>
+//int min = 0;//记录最小的序数偏移量(当前删掉的字符数)
+//int x = 0;//删掉的字符数总数
+//char res[1000000] = { 0 };//目标字符串
+//int count = 0;//递归次数，关系到字符串复制时的初始位置
+//int del(char* res, char* arr, int n, int m, int cm)
+//{
+//    min = 0;
+//    for (int i = 0; i < m; ++i)
+//    {
+//        if (arr[i] < arr[i + 1] && arr[i] < arr[min])
+//            min = i;
+//        else if (arr[i] > arr[i + 1] && arr[i + 1] < arr[min])
+//            min = i + 1;
+//    }
+//    x += min;
+//    strcpy(res + count, arr + min);
+//    ++count;
+//    if (x == cm)
+//        return 0;
+//    else
+//        del(res, arr + min + 1, n, m - x, cm);
+//}
+//int main()
+//{
+//    int n, m;
+//    scanf("%d%d%*c", &n, &m);
+//    char arr[1000000];
+//    scanf("%s", arr);
+//    int cm = m;//用于比较删掉的字符数和需要删掉的字符数以结束递归
+//    del(res, arr, n, m, cm);
+//    puts(res);
+//    return 0;
+//}
