@@ -3506,3 +3506,38 @@
 //    puts(res);
 //    return 0;
 //}
+
+#include <stdio.h>
+#include <stdlib.h>
+int main()
+{
+    int arr[6] = { 0 };
+    int min[6] = { 0 };
+    int n = 64;
+    int sum = 0;
+    int mins = 9 * 6;
+    while (n)
+    {
+        sum = 0;
+        for (int i = 0; i < 6; ++i)
+        {
+            arr[i] = getchar() - 48;
+            sum += arr[i];
+        }
+        getchar();
+        if (sum < mins)
+        {
+            mins = sum;
+            for (int i = 0; i < 6; ++i)
+            {
+                min[i] = arr[i];
+            }
+        }
+        --n;
+    }
+    for (int i = 0; i < 6; ++i)
+    {
+        printf("%d", min[i]);
+    }
+    return 0;
+}
