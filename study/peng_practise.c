@@ -3542,10 +3542,53 @@
 //    return 0;
 //}
 
+//#include<stdio.h>
+//int main()
+//{
+//	static int a;
+//	printf("%d%d", a);
+//	return 0;
+//}
+
+//#include <stdio.h>
+//#include <stdlib.h>
+//int main()
+//{
+//	int sum = 3 * 3 * 4;
+//	int num = 2023 / sum;
+//	printf("%d", num);
+//	return 0;
+//}
+
+//#include <stdio.h>//统计次数
+//#include <stdlib.h>
+//#include<string.h>
+//int main()
+//{
+//    char arr[10000] = { 0 };
+//    int i = 0;
+//    while ((arr[i] = getchar()) != EOF)
+//    {
+//        ++i;
+//    }
+//    int num = strlen(arr);
+//    int put[10] = { 0 };
+//    for (i = 0; i < num; ++i)
+//    {
+//        put[arr[i] - 48] += 1;
+//    }
+//    for (i = 0; i < 10; ++i)
+//    {
+//        printf("%d ", put[i]);
+//    }
+//    return 0;
+//}
+
 #include<stdio.h>
 int main()
 {
-	static int a;
-	scanf("%d%d", &a);
+	float a = 0;
+	scanf("%f", &a);
+	printf("%f", a);
 	return 0;
 }
