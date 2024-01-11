@@ -3584,11 +3584,50 @@
 //    return 0;
 //}
 
-#include<stdio.h>
-int main()
-{
-	float a = 0;
-	scanf("%f", &a);
-	printf("%f", a);
-	return 0;
-}
+//#include<stdio.h>
+//int main()
+//{
+//	float a = 0;
+//	scanf("%f", &a);
+//	printf("%f", a);
+//	return 0;
+//}
+
+//#include <stdio.h>
+//#include <stdlib.h>
+//int main()
+//{
+//    long double L = 0;
+//    scanf("%llf", &L);
+//    int count = 0;
+//    while (L > 1)
+//    {
+//        L /= 2;
+//        ++count;
+//    }
+//    printf("%d", count);
+//    return 0;
+//}
+
+//#include <stdio.h>
+//#include <stdlib.h>
+//int main()
+//{
+//    int P = 0;
+//    int i = 1;
+//    scanf("%d", &P);
+//    while (P)
+//    {
+//        ++i;
+//        if (i == 4)
+//            i = 1;
+//        --P;
+//    }
+//    if (i == 1)
+//        printf("low");
+//    else if (i == 2)
+//        printf("mid");
+//    else if (i == 3)
+//        printf("high");
+//    return 0;
+//}
