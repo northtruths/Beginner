@@ -3663,43 +3663,55 @@
 //1584 8119 1764 1598 3958 6205 1970 7925 8173 1094 8456 8579 3657 6227 8868 2921 7962 4787 8786 9714
 //3495 3036 7617 8448 3219 1455 4797 8053 8208 9694 7293 4144 1244 7065 3223 7796 9161 4435 1928 8227
 
-#include<stdio.h>
-#include<math.h>
-int max = 0;
-void find(int(*arr)[20], int i, int j)
-{
-	for (int x = i - 5; x <= i + 5; ++x)//x,y为偏移后的坐标
-	{
-		for (int y = j - 5; y <= j + 5; ++y)
-		{
-			if (!(x >= 0 && x <= 29 && y >= 0 && y <= 19))
-				continue;
-			if (abs(i - x) + abs(j - y) <= 5)
-			{
-				if (abs(arr[i][j] - arr[x][y]) > max)
-					max = abs(arr[i][j] - arr[x][y]);
-			}
-		}
-	}
-}
-int main()
-{
-	int arr[30][20] = { 0 };
-	for (int i = 0; i < 30; ++i)
-	{
-		for (int j = 0; j < 20; j++)
-		{
-			scanf("%d", &arr[i][j]);
-		}
-		scanf("%*c");
-	}
-	for (int i = 0; i < 30; ++i)
-	{
-		for (int j = 0; j < 20; j++)
-		{
-			find(arr, i, j);
-		}
-	}
-	printf("%d", max);
-	return 0;
-}
+//#include<stdio.h>
+//#include<math.h>
+//int max = 0;
+//void find(int(*arr)[20], int i, int j)
+//{
+//	for (int x = i - 5; x <= i + 5; ++x)//x,y为偏移后的坐标
+//	{
+//		for (int y = j - 5; y <= j + 5; ++y)
+//		{
+//			if (!(x >= 0 && x <= 29 && y >= 0 && y <= 19))
+//				continue;
+//			if (abs(i - x) + abs(j - y) <= 5)
+//			{
+//				if (abs(arr[i][j] - arr[x][y]) > max)
+//					max = abs(arr[i][j] - arr[x][y]);
+//			}
+//		}
+//	}
+//}
+//int main()
+//{
+//	int arr[30][20] = { 0 };
+//	for (int i = 0; i < 30; ++i)
+//	{
+//		for (int j = 0; j < 20; j++)
+//		{
+//			scanf("%d", &arr[i][j]);
+//		}
+//		scanf("%*c");
+//	}
+//	for (int i = 0; i < 30; ++i)
+//	{
+//		for (int j = 0; j < 20; j++)
+//		{
+//			find(arr, i, j);
+//		}
+//	}
+//	printf("%d", max);
+//	return 0;
+//}
+
+//#include<stdio.h>
+//int main()
+//{
+//	int n = 0; 
+//	scanf("%d", &n);
+//	if (n == 0)
+//		printf("yes");
+//	printf("yyy");
+//	else
+//		printf("no");
+//}
