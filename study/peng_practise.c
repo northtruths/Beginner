@@ -3715,3 +3715,80 @@
 //	else
 //		printf("no");
 //}
+
+//#include<stdio.h>//最尖位置
+//int main()
+//{
+//    int n = 0;
+//    scanf("%d", &n);
+//    int arr[n];
+//    scanf("%*c");
+//    for (int i = 0; i < n; ++i)
+//    {
+//        scanf("%d", &arr[i]);
+//    }
+//    int max = 0;
+//    for (int i = 1; i < n - 1; ++i)
+//    {
+//        int cmax = 0;
+//        if (arr[i] < arr[i - 1] && arr[i] < arr[i + 1])
+//            cmax = (arr[i - 1] - arr[i]) * (arr[i + 1] - arr[i]);
+//        if (cmax > max)
+//            max = cmax;
+//    }
+//    printf("%d", max);
+//    return 0;
+//}
+
+//#include"stdio.h"
+//int main()
+//{
+//	printf("根据原理那么包含库函数的头文件也可以用\"\"而非一定是<>");
+//	return 0;
+//}
+
+//#include<stdio.h>
+//typedef int MM;
+//typedef MM NN;
+//typedef int UU;
+//typedef double MM;
+//int main()
+//{
+//	int a = 10;
+//	MM b = 100;
+//	NN c = 1000;
+//	UU d = 10000;
+//	printf("%d\n%d\n%d\n%d\n", a, b, c, d);
+//	printf("%d", sizeof(MM));
+//	return 0;
+//}
+
+#include<stdio.h>
+#include<math.h>
+int main()
+{
+    int n = 0;
+    int num = 0;
+    int a = 1;
+    for (n = 1; num < 23; ++n)
+    {
+        for (a = 1; a <= n; ++a)//a
+        {
+            for (int b = a - 2; b <= a + 2; ++b)//b
+            {
+                for (int c = a - 2; c <= a + 2; ++c)//c
+                {
+                    if(abs(b - c) <= 2 && a * b * c == n)
+                    {
+                        ++num;
+                        goto next;
+                    }
+                }
+            }
+        }
+    next:;
+    }
+    --n;
+    printf("%d", n);
+    return 0;
+}
