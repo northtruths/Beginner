@@ -3763,32 +3763,93 @@
 //	return 0;
 //}
 
+//#include<stdio.h>//相近分解
+//#include<math.h>
+//int main()
+//{
+//    int n = 0;
+//    int num = 0;
+//    int a = 1;
+//    for (n = 1; num < 23; ++n)
+//    {
+//        for (a = 1; a <= n; ++a)//a
+//        {
+//            for (int b = a - 2; b <= a + 2; ++b)//b
+//            {
+//                for (int c = a - 2; c <= a + 2; ++c)//c
+//                {
+//                    if(abs(b - c) <= 2 && a * b * c == n)
+//                    {
+//                        ++num;
+//                        goto next;
+//                    }
+//                }
+//            }
+//        }
+//    next:;
+//    }
+//    --n;
+//    printf("%d", n);
+//    return 0;
+//}
+
+//#include<stdio.h>
+//#include<stdlib.h>
+//int main()
+//{
+//	int n = 0;
+//	scanf("%d", &n);
+//	//scanf("%*c");
+//	int* p = (int*)calloc(n, 4);
+//	if (p == NULL)
+//	{
+//		perror("calloc p");
+//		return 1;
+//	}
+//	for (int i = 0; i < n; ++i)
+//	{
+//		scanf("%d", p + i);
+//	}
+//	//for (int i = 0; i < n; ++i)
+//	//{
+//	//	printf("%d", *(p + i));
+//	//}
+//	printf("%d ", 0);
+//	int count = 0;
+//	for (int j = 1; j < n; ++j)
+//	{
+//		count = 0;
+//		for (int k = 0; k <= j - 1; ++k)
+//		{
+//			if (*(p + j) >= *(p + k))
+//				++count;
+//		}
+//		printf("%d ", count);
+//	}
+//	free(p);
+//	p = NULL;
+//	return 0;
+//}
+
+//int max(int a, int b)
+//{
+//	if (a > b)
+//		return a;
+//	else return b;
+//}
+//
+//#include<stdio.h>
+//int main()
+//{
+//
+//	int max(int a, int b);
+//}
+
 #include<stdio.h>
-#include<math.h>
 int main()
 {
-    int n = 0;
-    int num = 0;
-    int a = 1;
-    for (n = 1; num < 23; ++n)
-    {
-        for (a = 1; a <= n; ++a)//a
-        {
-            for (int b = a - 2; b <= a + 2; ++b)//b
-            {
-                for (int c = a - 2; c <= a + 2; ++c)//c
-                {
-                    if(abs(b - c) <= 2 && a * b * c == n)
-                    {
-                        ++num;
-                        goto next;
-                    }
-                }
-            }
-        }
-    next:;
-    }
-    --n;
-    printf("%d", n);
-    return 0;
+	int a, b, c;
+	a = b = c = 1;
+	printf("%d %d", a, c);
+	return 0;
 }
