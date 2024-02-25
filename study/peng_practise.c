@@ -3870,29 +3870,29 @@
 //	return 0;
 //}
 
-#include<stdio.h>
-int main()
-{
-	int n = 0;
-	scanf("%d", &n);
-	int arr[10000];
-	int i = 0;
-	for (i = 0; n != 1; ++i)
-	{
-		arr[i] = n;
-		if (n % 2 == 0)
-		{
-			n /= 2;
-		}
-		else
-		{
-			n = n * 3 + 1;
-		}
-	}
-	arr[i] = 1;
-	for (int j = i; j >= 0; --j)
-	{
-		printf("%d ", arr[j]);
-	}
-	return 0;
-}
+//#include<stdio.h>//	【深基5.例3】冰雹猜想
+//int main()
+//{
+//	int n = 0;
+//	scanf("%d", &n);
+//	int arr[10000];
+//	int i = 0;
+//	for (i = 0; n != 1; ++i)
+//	{
+//		arr[i] = n;
+//		if (n % 2 == 0)
+//		{
+//			n /= 2;
+//		}
+//		else
+//		{
+//			n = n * 3 + 1;
+//		}
+//	}
+//	arr[i] = 1;
+//	for (int j = i; j >= 0; --j)
+//	{
+//		printf("%d ", arr[j]);
+//	}
+//	return 0;
+//}
