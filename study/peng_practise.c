@@ -3854,18 +3854,18 @@
 //	return 0;
 //}
 
-#include<stdio.h>
-int main()
-{
-	int arr[10000];
-	int i = 0;
-	for (i = 0; arr[i - 1] != 0; ++i)
-	{
-		scanf("%d", &arr[i]);
-	}
-	for (int j = i - 2; j >= 0; --j)
-	{
-		printf("%d ", arr[j]);
-	}
-	return 0;
-}
+//#include<stdio.h>//P1427 小鱼的数字游戏
+//int main()
+//{
+//	int arr[10000];
+//	int i = 0;
+//	for (i = 0; arr[i - 1] != 0; ++i)
+//	{
+//		scanf("%d", &arr[i]);
+//	}
+//	for (int j = i - 2; j >= 0; --j)
+//	{
+//		printf("%d ", arr[j]);
+//	}
+//	return 0;
+//}
