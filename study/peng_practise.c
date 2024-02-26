@@ -3896,3 +3896,30 @@
 //	}
 //	return 0;
 //}
+
+#include<stdio.h>
+#include<stdlib.h>
+int main()
+{
+	int l, m, u, v;
+	scanf("%d%d%*c", &l, &m);
+	//树的棵树为 l + 1，因为坐标 0 处也有一颗
+	int* arr = (int*)calloc(l + 1, sizeof(int));
+	for (m; m > 0; --m)
+	{
+		scanf("%d%d%*c", &u, &v);
+		for (u; u <= v; ++u)
+		{
+			arr[u] = 1;
+		}
+	}
+	int count = 0;
+	for (int k = 0; k < l + 1; ++k)
+	{
+		count += arr[k];
+	}
+	printf("%d", l + 1 - count);
+	free(arr);
+	arr = NULL;
+	return 0;
+}
