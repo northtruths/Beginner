@@ -3897,29 +3897,59 @@
 //	return 0;
 //}
 
+//#include<stdio.h>//	[NOIP2005 普及组] 校门外的树
+//#include<stdlib.h>
+//int main()
+//{
+//	int l, m, u, v;
+//	scanf("%d%d%*c", &l, &m);
+//	//树的棵树为 l + 1，因为坐标 0 处也有一颗
+//	int* arr = (int*)calloc(l + 1, sizeof(int));
+//	for (m; m > 0; --m)
+//	{
+//		scanf("%d%d%*c", &u, &v);
+//		for (u; u <= v; ++u)
+//		{
+//			arr[u] = 1;
+//		}
+//	}
+//	int count = 0;
+//	for (int k = 0; k < l + 1; ++k)
+//	{
+//		count += arr[k];
+//	}
+//	printf("%d", l + 1 - count);
+//	free(arr);
+//	arr = NULL;
+//	return 0;
+//}
+
 #include<stdio.h>
-#include<stdlib.h>
+#include<math.h>
 int main()
 {
-	int l, m, u, v;
-	scanf("%d%d%*c", &l, &m);
-	//树的棵树为 l + 1，因为坐标 0 处也有一颗
-	int* arr = (int*)calloc(l + 1, sizeof(int));
-	for (m; m > 0; --m)
+	int N = 0;
+	scanf("%d%*c", &N);
+	typedef struct stu
 	{
-		scanf("%d%d%*c", &u, &v);
-		for (u; u <= v; ++u)
-		{
-			arr[u] = 1;
-		}
+		int chinese;
+		int math;
+		int english;
+	}Stu;
+	Stu arr[1000];
+	for (int i = 0; i < N; ++i)
+	{
+		scanf("%d%d%d%*c", &arr[i].chinese, &arr[i].english, &arr[i].math);
 	}
 	int count = 0;
-	for (int k = 0; k < l + 1; ++k)
+	for (int j = 0; j < N; ++j)
 	{
-		count += arr[k];
+		for (int k = j + 1; k < N; ++k)
+		{
+			if (abs(arr[j].chinese - arr[k].chinese) <= 5 && abs(arr[j].math - arr[k].math) <= 5 && abs(arr[j].english - arr[k].english) <= 5 && abs(arr[j].chinese + arr[j].math + arr[j].english - arr[k].chinese - arr[k].math - arr[k].english) <= 10)
+				++count;
+		}
 	}
-	printf("%d", l + 1 - count);
-	free(arr);
-	arr = NULL;
+	printf("%d", count);
 	return 0;
 }
