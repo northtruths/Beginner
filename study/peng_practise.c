@@ -3854,102 +3854,45 @@
 //	return 0;
 //}
 
-//#include<stdio.h>//P1427 小鱼的数字游戏
-//int main()
+
+//#define INT_PTR int*
+//typedef int* int_ptr;
+//INT_PTR a, b;
+//int_ptr c, d;
+//
+//int* e, f;
+
+
+//#include<stdio.h>//模拟实现宏offsetof
+//typedef struct test
 //{
-//	int arr[10000];
-//	int i = 0;
-//	for (i = 0; arr[i - 1] != 0; ++i)
-//	{
-//		scanf("%d", &arr[i]);
-//	}
-//	for (int j = i - 2; j >= 0; --j)
-//	{
-//		printf("%d ", arr[j]);
-//	}
+//	int a;
+//	char b;
+//	int c;
+//	double d;
+//}Test;
+//#define Offsetof(type, member_name) (size_t)&(((type*)0)->member_name)
+//int main() {
+//	printf("%zd\n", Offsetof(Test, a));//0
+//	printf("%zd\n", Offsetof(Test, b));//4
+//	printf("%zd\n", Offsetof(Test, c));//8
+//	printf("%zd\n", Offsetof(Test, d));//16
 //	return 0;
 //}
 
-//#include<stdio.h>//	【深基5.例3】冰雹猜想
-//int main()
-//{
-//	int n = 0;
-//	scanf("%d", &n);
-//	int arr[10000];
-//	int i = 0;
-//	for (i = 0; n != 1; ++i)
-//	{
-//		arr[i] = n;
-//		if (n % 2 == 0)
-//		{
-//			n /= 2;
-//		}
-//		else
-//		{
-//			n = n * 3 + 1;
-//		}
-//	}
-//	arr[i] = 1;
-//	for (int j = i; j >= 0; --j)
-//	{
-//		printf("%d ", arr[j]);
-//	}
+//#include<stdio.h>//复习宏需要注意什么，因为你仅仅没加那一个括号，害你看了好久哪思路错了//只是优先级搞错了
+//#define swap(number) (((number&0x55555555)<<1) + ((number&0xaaaaaaaa)>>1))
+//int main() {
+//	printf("%x\n", swap(0x12));//0x12 -> 010010 -> 100001 ->0x21
+//	printf("%x\n", swap(0x8));//0x8 -> 1000 -> 0100 -> 4
 //	return 0;
 //}
 
-//#include<stdio.h>//	[NOIP2005 普及组] 校门外的树
-//#include<stdlib.h>
+//#define N 3
+//#define f(a) a+N
+//#include<stdio.h>
 //int main()
 //{
-//	int l, m, u, v;
-//	scanf("%d%d%*c", &l, &m);
-//	//树的棵树为 l + 1，因为坐标 0 处也有一颗
-//	int* arr = (int*)calloc(l + 1, sizeof(int));
-//	for (m; m > 0; --m)
-//	{
-//		scanf("%d%d%*c", &u, &v);
-//		for (u; u <= v; ++u)
-//		{
-//			arr[u] = 1;
-//		}
-//	}
-//	int count = 0;
-//	for (int k = 0; k < l + 1; ++k)
-//	{
-//		count += arr[k];
-//	}
-//	printf("%d", l + 1 - count);
-//	free(arr);
-//	arr = NULL;
+//	printf("%d", N * (f(1 + N)));
 //	return 0;
 //}
-
-#include<stdio.h>
-#include<math.h>
-int main()
-{
-	int N = 0;
-	scanf("%d%*c", &N);
-	typedef struct stu
-	{
-		int chinese;
-		int math;
-		int english;
-	}Stu;
-	Stu arr[1000];
-	for (int i = 0; i < N; ++i)
-	{
-		scanf("%d%d%d%*c", &arr[i].chinese, &arr[i].english, &arr[i].math);
-	}
-	int count = 0;
-	for (int j = 0; j < N; ++j)
-	{
-		for (int k = j + 1; k < N; ++k)
-		{
-			if (abs(arr[j].chinese - arr[k].chinese) <= 5 && abs(arr[j].math - arr[k].math) <= 5 && abs(arr[j].english - arr[k].english) <= 5 && abs(arr[j].chinese + arr[j].math + arr[j].english - arr[k].chinese - arr[k].math - arr[k].english) <= 10)
-				++count;
-		}
-	}
-	printf("%d", count);
-	return 0;
-}
