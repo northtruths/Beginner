@@ -697,3 +697,113 @@
 //    return 0;
 //}
 
+//#include<stdio.h>
+//#include<stdlib.h>
+////定义链表节点
+//typedef struct peo
+//{
+//    int id;
+//    struct peo* next;
+//}peo;
+//
+////创建节点
+//peo* Node(peo* ptail, int id)
+//{
+//    peo* newnode = (peo*)malloc(sizeof(peo));
+//    newnode->id = id;
+//    newnode->next = NULL;
+//    ptail->next = newnode;
+//    return newnode;
+//}
+//
+//int main()
+//{
+//    int n = 0, m = 0;
+//    scanf("%d%d", &n, &m);
+//    //创建环形链表
+//    peo* phead = (peo*)malloc(sizeof(peo));
+//    phead->id = 1;
+//    phead->next = NULL;
+//    peo* pcur = phead;
+//    peo* ptail = phead;
+//    for (int i = 2; i <= n; ++i)
+//    {
+//        ptail = Node(ptail, i);
+//    }
+//    //尾节点连头节点
+//    ptail->next = phead;
+//    //
+//    int count = 1;
+//    peo* prev = NULL;
+//    while (pcur->next != pcur)
+//    {
+//        if (count == m)
+//        {
+//            prev->next = pcur->next;
+//            pcur = pcur->next;
+//            count = 1;
+//        }
+//        else
+//        {
+//            count++;
+//            prev = pcur;
+//            pcur = pcur->next;
+//        }
+//    }
+//    return pcur->id;
+//}
+//
+
+#include <stdarg.h>
+#include<stdio.h>
+#include<stdlib.h>
+typedef struct ListNode
+{
+    int val;
+    struct ListNode* next;
+}ListNode;
+int main()
+{
+    int n = 0;
+    scanf("%d%*c", &n);
+    ListNode* phead = NULL;
+    ListNode* ptail = phead;
+    ListNode* newnode = NULL;
+    do
+    {
+        if (phead == NULL)
+        {
+            phead = (ListNode*)malloc(sizeof(ListNode));
+            scanf("%d", &phead->val);
+            ptail = phead;
+            ptail->next = NULL;
+        }
+        else {
+            newnode = (ListNode*)malloc(sizeof(ListNode));
+            scanf("%d", &newnode->val);
+            ptail->next = newnode;
+            ptail = newnode;
+            ptail->next = NULL;
+        }
+        --n;
+    } while (n);
+    int k = 0;
+    scanf("%d", &k);
+    ListNode* pcur = phead;
+    int count = 0;
+    while (pcur)
+    {
+        pcur = pcur->next;
+        ++count;
+    }
+    pcur = phead;
+    for (int i = 0; i < count - k + 1; ++i)
+    {
+        pcur = pcur->next;
+    }
+    // if(pcur == NULL)
+    // return NULL;
+    // else
+    printf("%d", pcur->val);
+    return 0;
+}
