@@ -754,56 +754,50 @@
 //}
 //
 
-#include <stdarg.h>
-#include<stdio.h>
-#include<stdlib.h>
-typedef struct ListNode
-{
-    int val;
-    struct ListNode* next;
-}ListNode;
-int main()
-{
-    int n = 0;
-    scanf("%d%*c", &n);
-    ListNode* phead = NULL;
-    ListNode* ptail = phead;
-    ListNode* newnode = NULL;
-    do
-    {
-        if (phead == NULL)
-        {
-            phead = (ListNode*)malloc(sizeof(ListNode));
-            scanf("%d", &phead->val);
-            ptail = phead;
-            ptail->next = NULL;
-        }
-        else {
-            newnode = (ListNode*)malloc(sizeof(ListNode));
-            scanf("%d", &newnode->val);
-            ptail->next = newnode;
-            ptail = newnode;
-            ptail->next = NULL;
-        }
-        --n;
-    } while (n);
-    int k = 0;
-    scanf("%d", &k);
-    ListNode* pcur = phead;
-    int count = 0;
-    while (pcur)
-    {
-        pcur = pcur->next;
-        ++count;
-    }
-    pcur = phead;
-    for (int i = 0; i < count - k + 1; ++i)
-    {
-        pcur = pcur->next;
-    }
-    // if(pcur == NULL)
-    // return NULL;
-    // else
-    printf("%d", pcur->val);
-    return 0;
-}
+//#include <stdarg.h>//HJ51 输出单向链表中倒数第k个结点
+//#include<stdio.h>
+//#include<stdlib.h>
+//typedef struct ListNode {
+//    int val;
+//    struct ListNode* next;
+//} ListNode;
+//int main() {
+//    int n = 0;
+//    while (scanf("%d", &n) != EOF) {
+//        ListNode* phead = NULL;
+//        ListNode* ptail = phead;
+//        ListNode* newnode = NULL;
+//        do {
+//            if (phead == NULL) {
+//                phead = (ListNode*)malloc(sizeof(ListNode));
+//                scanf("%d", &phead->val);
+//                ptail = phead;
+//                ptail->next = NULL;
+//            }
+//            else {
+//                newnode = (ListNode*)malloc(sizeof(ListNode));
+//                scanf("%d", &newnode->val);
+//                ptail->next = newnode;
+//                ptail = newnode;
+//                ptail->next = NULL;
+//            }
+//            --n;
+//        } while (n);
+//        int k = 0;
+//        scanf("%d", &k);
+//        ListNode* pcur = phead;
+//        int count = 0;
+//        while (pcur) {
+//            pcur = pcur->next;
+//            ++count;
+//        }
+//        pcur = phead;
+//        ListNode* dest = NULL;
+//        for (int i = 0; i < count - k + 1; ++i) {
+//            dest = pcur;
+//            pcur = pcur->next;
+//        }
+//        printf("%d\n", dest->val);
+//    }
+//    return 0;
+//}
