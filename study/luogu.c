@@ -1213,24 +1213,24 @@
 //	return 0;
 //}
 
-#include<stdio.h>
-#include<stdlib.h>
-int compare(const void* a, const void* b)
-{
-    return *(int*)a - *(int*)b;
-}
-int main()
-{
-    int arr[3] = { 0 };
-    scanf("%d%d%d%*c", &arr[0], &arr[1], &arr[2]);
-    char Arr[3] = { 0 };
-    scanf("%c%c%c", &Arr[0], &Arr[1], &Arr[2]);
-    qsort(arr, 3, 4, compare);
-    int ret[3] = { 0 };
-    ret[0] = arr[Arr[0] - 65];
-    ret[1] = arr[Arr[1] - 65];
-    ret[2] = arr[Arr[2] - 65];
-    for (int i = 0; i < 3; ++i)
-        printf("%d ", ret[i]);
-    return 0;
-}
+//#include<stdio.h>
+//#include<stdlib.h>
+//int compare(const void* a, const void* b)
+//{
+//    return *(int*)a - *(int*)b;
+//}
+//int main()
+//{
+//    int arr[3] = { 0 };
+//    scanf("%d%d%d%*c", &arr[0], &arr[1], &arr[2]);
+//    char Arr[3] = { 0 };
+//    scanf("%c%c%c", &Arr[0], &Arr[1], &Arr[2]);
+//    qsort(arr, 3, 4, compare);
+//    int ret[3] = { 0 };
+//    ret[0] = arr[Arr[0] - 65];
+//    ret[1] = arr[Arr[1] - 65];
+//    ret[2] = arr[Arr[2] - 65];
+//    for (int i = 0; i < 3; ++i)
+//        printf("%d ", ret[i]);
+//    return 0;
+//}

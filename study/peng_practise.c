@@ -3897,3 +3897,13 @@
 //	return 0;
 //}
 
+#include<locale.h>
+#include<stdio.h>
+int main()
+{
+
+	setlocale(LC_ALL, "");
+	printf("%s\n", setlocale(LC_ALL, NULL));
+	wprintf(L"%lc", L'●');
+	return 0;
+}
