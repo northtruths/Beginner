@@ -692,3 +692,39 @@
 //	return 0;
 //}
 
+//#include<stdio.h>
+//#include<stdlib.h>
+//int main()
+//{
+//	int* p = NULL;
+//	int arr[10] = { 0 };
+//	p = (int*)malloc(sizeof(int));
+//	int i = 0;
+//	for (i = 0; i < 10; ++i)
+//	{
+//		arr[i] = i + 10;
+//	}
+//	p = arr;
+//	for (i = 0; i < 10; ++i)
+//	{
+//		printf("")
+//	}
+//}
+
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+
+typedef struct Student
+{
+	int id;
+	char name[20];
+	int score;
+}Stu;
+
+int main()
+{
+	Stu stu1;
+	
+	return 0;
+}

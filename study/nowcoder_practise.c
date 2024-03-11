@@ -801,3 +801,56 @@
 //    }
 //    return 0;
 //}
+
+//#include<stdio.h>
+//int main()
+//{
+//    int i = 0;
+//    while (scanf("%d", &i) != EOF)
+//    {
+//        if (i % 2 == 0)
+//            printf("Even\n");
+//        else
+//            printf("Odd\n");
+//    }
+//    return 0;
+//}
+
+//#include <stdio.h>
+//#include <stdlib.h>
+//#include<math.h>
+//int main() {
+//    double a, b, c;
+//    while (scanf("%lf%lf%lf", &a, &b, &c) != EOF)
+//    {
+//        double x1 = 0, x2 = 0;
+//
+//        if (a == 0)
+//        {
+//            printf("Not quadratic equation\n");
+//            return 0;
+//        }
+//        double derta = b * b - 4 * a * c;
+//        if (derta > 0)
+//        {
+//            x1 = (((-b) - (sqrt(derta))) / (2.0 * a));
+//            x2 = (((-b) + (sqrt(derta))) / (2.0 * a));
+//            printf("x1=%.2lf;x2=%.2lf\n", x1 + 0, x2 + 0);
+//        }
+//        else if (derta == 0)
+//        {
+//            x1 = (((-b) + (sqrt(derta))) / (2.0 * a));
+//            printf("x1=x2=%.2lf\n", x1 + 0);
+//        }
+//        else
+//        {
+//            double real = 0;
+//            double imag = 0;
+//            real = -b / (2 * a);
+//            imag = sqrt(-derta) / (2 * a);
+//            printf("x1=%.2lf-%.2lfi;x2=%.2lf+%.2lfi\n", real + 0, imag + 0, real + 0, imag + 0);
+//        }
+//
+//    }
+//    return 0;
+//}
