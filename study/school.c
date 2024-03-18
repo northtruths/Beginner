@@ -711,20 +711,21 @@
 //	}
 //}
 
-#include<stdio.h>
-#include<stdlib.h>
-#include<string.h>
+//#include<stdio.h>
+//#include<stdlib.h>
+//#include<string.h>
+//
+//typedef struct Student
+//{
+//	int id;
+//	char name[20];
+//	int score;
+//}Stu;
+//
+//int main()
+//{
+//	Stu stu1;
+//	
+//	return 0;
+//}
 
-typedef struct Student
-{
-	int id;
-	char name[20];
-	int score;
-}Stu;
-
-int main()
-{
-	Stu stu1;
-	
-	return 0;
-}
