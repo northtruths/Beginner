@@ -3907,3 +3907,15 @@
 //	wprintf(L"%lc", L'●');
 //	return 0;
 //}
+
+//void 测试VS函数名是否能用中文()
+//{
+//	printf("真能用！nb！");
+//}
+//
+//#include<stdio.h>
+//int main()
+//{
+//	测试VS函数名是否能用中文();
+//	return 0;
+//}

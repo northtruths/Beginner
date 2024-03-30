@@ -729,3 +729,5 @@
 //	return 0;
 //}
 
+//typedef char ElemType;
+
