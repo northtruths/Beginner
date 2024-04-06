@@ -115,21 +115,136 @@
 //	return 0;
 //}
 
-#include<iostream>
+//#include<iostream>
+//
+//struct swapp
+//{
+//	void swap(int a, int b)//局部变量优先，所以自己赋值给自己了
+//	{
+//		int temp = a;
+//		a = b;
+//		b = temp;
+//	}
+//	int a, b;
+//};
+//int main()
+//{
+//	swapp a;
+//	struct swapp b;
+//	return 0;
+//}
 
-struct swapp
-{
-	void swap(int a, int b)
-	{
-		int temp = a;
-		a = b;
-		b = temp;
-	}
-	int a, b;
-};
+//#include<iostream>
+//#include"practise.h"
+//using namespace std;
+//int a = 0;
+//
+//int f(int a, int b)
+//{
+//	return a + b;
+//}
+//int main()
+//{
+//	char a = 'a';
+//	cout << f();
+//	return 0;
+//}
+
+//#include<iostream>
+//using namespace std;
+//
+//int main()
+//{
+//	int* p = NULL;
+//	int& tp = *p;
+//	
+//	tp = 17;
+//	return 0;
+//}
+
+//#include<iostream>
+//using namespace std;
+//
+//int main()
+//{
+//	int a = 10;
+//	const int& b = a;  //这样权限被缩小了，是允许的
+//	int& c = b;  //权限平移，是允许的
+//	cout << a << b << c;
+//	return 0;
+//}
+
+//#include<iostream>
+//using namespace std;
+//
+//struct test1
+//{
+//	int a;
+//};
+//
+//class test2
+//{
+//	void f()
+//	{
+//		cout << "f()";
+//	}
+//public:
+//	int b;
+//private:
+//	int c;
+//
+//};
+//
+//int main()
+//{
+//	test1 t1;
+//	t1.a = 20;
+//	class test2 t2;
+//	t2.b = 10;
+//	/*t2.f();
+//	t2.c;*/
+//	cout << t1.a;
+//	return 0;
+//}
+
+//#include<iostream>
+//using namespace std;
+//
+//class test1
+//{
+//public:
+//	void swap(int a)
+//	{
+//		_a += a;
+//	}
+//private:
+//	int _a = 10;
+//	int _b = 20;
+//};
+//
+////int a = 0;
+////void swap(int& a, int& b)
+////{
+////	a = b;
+////}
+//
+//int main()
+//{
+//	//int a = 5;
+//	//int b = 10;
+//	//test1 t1;
+//	////swap(a, b);
+//	////cout << a << b;//10 10
+//	//t1.swap(a, b);
+//	//cout << a << b;//5 5
+//	test1* pt1 = nullptr;
+//	pt1->swap(10);
+//	return 0;
+//}
+
 int main()
 {
-	swapp a;
-	struct swapp b;
+	int* p = nullptr;
+	*p = 0;
 	return 0;
 }
