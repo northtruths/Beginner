@@ -242,9 +242,9 @@
 //	return 0;
 //}
 
-int main()
-{
-	int* p = nullptr;
-	*p = 0;
-	return 0;
-}
+//int main()
+//{
+//	int* p = nullptr;
+//	*p = 0;//”Ô∑®Œ¥¥Ì£¨‘À––¥Ì
+//	return 0;
+//}

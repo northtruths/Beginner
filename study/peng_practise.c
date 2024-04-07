@@ -3919,3 +3919,21 @@
 //	测试VS函数名是否能用中文();
 //	return 0;
 //}
+
+//#include<stdio.h>
+//
+//void f(int a)
+//{
+//	printf("int\n");
+//}
+//
+//void f1(int* a)
+//{
+//	printf("int*\n");
+//}
+//
+//int main()
+//{
+//	f(NULL);
+//	return 0;
+//}
