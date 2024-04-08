@@ -248,3 +248,34 @@
 //	*p = 0;//语法未错，运行错
 //	return 0;
 //}
+
+namespace t1
+{
+	int a = 10;
+	int b = 20;
+	int Add(int a, int b)
+	{
+		return a + b;
+	}
+}
+
+namespace t2
+{
+	int a = 1;
+	int b = 2;
+	int Add(int a, int b)
+	{
+		return (a + b) * 10;
+	}
+}
+
+using namespace t2;
+int main()
+{
+	t1::a++; // 单独临时取出 t1 命名空间中的 a 拿来 ++
+	using t1::b; // 将 t1 命名空间中的 b 完全拿出来，后续可以直接使用 b，
+				//	 这里是在局部展开的，所以只能在局部用，在全局展开话就能全局用
+	b++; // t1 中的 b ++
+
+	return 0;
+}
