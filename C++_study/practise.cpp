@@ -249,33 +249,134 @@
 //	return 0;
 //}
 
-namespace t1
-{
-	int a = 10;
-	int b = 20;
-	int Add(int a, int b)
-	{
-		return a + b;
-	}
-}
+//namespace t1
+//{
+//	int a = 10;
+//	int b = 20;
+//	int Add(int a, int b)
+//	{
+//		return a + b;
+//	}
+//}
+//
+//namespace t2
+//{
+//	int a = 1;
+//	int b = 2;
+//	int Add(int a, int b)
+//	{
+//		return (a + b) * 10;
+//	}
+//}
+//
+//using namespace t2; // 全展开 t2 
+//int main()
+//{
+//	t1::a++; // 单独临时取出 t1 命名空间中的 a 拿来 ++
+//	using t1::b; // 将 t1 命名空间中的 b 完全拿出来，后续可以直接使用 b，
+//				//	 这里是在局部展开的，所以只能在局部用，在全局展开话就能全局用
+//	b++; // 虽然上面 t2 全展开了，t2 中也有一个 b，但这里局部变量优先，所以 t1 中的 b++
+//	a++; // t2 中 a++
+//	return 0;
+//}
 
-namespace t2
-{
-	int a = 1;
-	int b = 2;
-	int Add(int a, int b)
-	{
-		return (a + b) * 10;
-	}
-}
+//#include <iostream>
+//using namespace std;
+//int main()
+//{
+//    // 请在此输入您的代码
+//    int arr[100] = { 0 };
+//    for (int i = 0; i < 100; ++i)
+//    {
+//        scanf("%d", &arr[i]);
+//    }
+//    int count = 0;
+//    for (int i = 0; i < 100; ++i)
+//    {
+//        if (arr[i] != 2)
+//            continue;
+//        for (int j = i; j < 100; ++j)
+//        {
+//            if (arr[j] != 0)
+//                continue;
+//            for (int k = j; k < 100; ++k)
+//            {
+//                if (arr[k] != 2)
+//                    continue;
+//                for (int a = k; a < 100; ++a)
+//                {
+//                    if (arr[a] != 3)
+//                        continue;
+//                    for (int b = a; b < 100; ++b)//月
+//                    {
+//                        if (arr[b] > 1)
+//                            continue;
+//                        for (int c = b; c < 100; ++c)
+//                        {
+//                            if (((arr[b] == 1 && arr[c] > 2)) || (arr[b] == 0 && arr[c] == 0))
+//                                continue;
+//                            for (int d = c; d < 100; ++d)//日
+//                            {
+//                                if (arr[d] > 3)
+//                                    continue;
+//                                for (int e = d; e < 100; ++e)
+//                                {
+//                                    if (arr[d] == 0 && arr[e] == 0)
+//                                        continue;
+//                                    if (arr[d] * 10 + arr[e] > 31)
+//                                        continue;
+//                                    if ((arr[b] == 0 && arr[c] == 2) && (arr[d] * 10 + arr[e]) > 28)
+//                                        continue;
+//                                    if (((arr[a] * 10 + arr[b]) == 1 || (arr[a] * 10 + arr[b]) == 3 || (arr[a] * 10 + arr[b]) == 5 || (arr[a] * 10 + arr[b]) == 7 || (arr[a] * 10 + arr[b]) == 8
+//                                        || (arr[a] * 10 + b) == 10 || (arr[a] * 10 + arr[b]) == 12) && (arr[d] * 10 + arr[e]) > 31)
+//                                        continue;
+//                                    if (((arr[a] * 10 + arr[b]) == 4 || (arr[a] * 10 + arr[b]) == 6 || (arr[a] * 10 + arr[b]) == 9 || (arr[a] * 10 + arr[b]) == 11) && (arr[d] * 10 + arr[e]) > 30)
+//                                        continue;
+//
+//                                    ++count;
+//                                }
+//                            }
+//                        }
+//                    }
+//                }
+//            }
+//        }
+//    }
+//    printf("%d", count);
+//    return 0;
+//}
 
-using namespace t2;
+#include <iostream>
+#include<cstring>
+using namespace std;
 int main()
 {
-	t1::a++; // 单独临时取出 t1 命名空间中的 a 拿来 ++
-	using t1::b; // 将 t1 命名空间中的 b 完全拿出来，后续可以直接使用 b，
-				//	 这里是在局部展开的，所以只能在局部用，在全局展开话就能全局用
-	b++; // t1 中的 b ++
-
-	return 0;
+    // 请在此输入您的代码
+    int min = 0;
+    int n = 0, k = 0;
+    scanf("%d%d", &n, &k);
+    int* arr = (int*)malloc(sizeof(int) * n);
+    for (int i = 0; i < n; ++i)
+    {
+        scanf("%d", &arr[i]);
+    }
+    int size = n;
+    while (k--)
+    {
+        min = 0;
+        for (int i = 0; i < size; ++i)
+        {
+            if (arr[i] < arr[min])
+                min = i;
+        }
+        arr[min - 1] += arr[min];
+        arr[min + 1] += arr[min];
+        memmove(arr + min, arr + min + 1, sizeof(int)*(size - min - 1));
+        --size;
+    }
+    for (int i = 0; i < size; ++i)
+    {
+        printf("%d ", arr[i]);
+    }
+    return 0;
 }
