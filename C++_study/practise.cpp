@@ -346,37 +346,41 @@
 //    return 0;
 //}
 
-#include <iostream>
-#include<cstring>
-using namespace std;
-int main()
-{
-    // 请在此输入您的代码
-    int min = 0;
-    int n = 0, k = 0;
-    scanf("%d%d", &n, &k);
-    int* arr = (int*)malloc(sizeof(int) * n);
-    for (int i = 0; i < n; ++i)
-    {
-        scanf("%d", &arr[i]);
-    }
-    int size = n;
-    while (k--)
-    {
-        min = 0;
-        for (int i = 0; i < size; ++i)
-        {
-            if (arr[i] < arr[min])
-                min = i;
-        }
-        arr[min - 1] += arr[min];
-        arr[min + 1] += arr[min];
-        memmove(arr + min, arr + min + 1, sizeof(int)*(size - min - 1));
-        --size;
-    }
-    for (int i = 0; i < size; ++i)
-    {
-        printf("%d ", arr[i]);
-    }
-    return 0;
+//#include <iostream>
+//#include<cstring>
+//using namespace std;
+//int main()
+//{
+//    // 请在此输入您的代码
+//    int min = 0;
+//    int n = 0, k = 0;
+//    scanf("%d%d", &n, &k);
+//    int* arr = (int*)malloc(sizeof(int) * n);
+//    for (int i = 0; i < n; ++i)
+//    {
+//        scanf("%d", &arr[i]);
+//    }
+//    int size = n;
+//    while (k--)
+//    {
+//        min = 0;
+//        for (int i = 0; i < size; ++i)
+//        {
+//            if (arr[i] < arr[min])
+//                min = i;
+//        }
+//        arr[min - 1] += arr[min];
+//        arr[min + 1] += arr[min];
+//        memmove(arr + min, arr + min + 1, sizeof(int)*(size - min - 1));
+//        --size;
+//    }
+//    for (int i = 0; i < size; ++i)
+//    {
+//        printf("%d ", arr[i]);
+//    }
+//    return 0;
+//}
+
+int main() {
+	new
 }
