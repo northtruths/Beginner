@@ -381,6 +381,38 @@
 //    return 0;
 //}
 
+#include<iostream>
+using namespace std;
+class Data
+{
+public:
+	Data(int year = 2, int month = 2, int day = 2)
+	{
+		_year = year;
+		_month = month;
+		_day = day;
+	}
+
+
+private:public:
+	int _year = 1;
+	int _month = 1;
+	int _day = 1;
+
+};
 int main() {
-	new
+	Data d1;
+	printf("%d", d1._year);
+	printf("%d", d1._month);
+	printf("%d", d1._day);
+#define J 
+#ifdef J
+#define O
+#undef J
+#endif
+
+#ifdef O
+#define J
+#undef O
+#endif
 }
