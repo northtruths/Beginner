@@ -413,18 +413,26 @@ using namespace std;
 
 class Data
 {
+public:
+	void Fun(int a, Data* this)
+	{
+		this->Fun(1);
+		Data d;
+	}
+private:
 	int _year = 1;
 	int _month = 1;
 	int _day = 1;
 };
 
-Data Fun()
-{
-	Data d;
-	return d;
-}
+
+
+void f1(int i, int k);
+
+void f1(char i, char k);
 int main()
 {
+
 
 	Data d1 = Fun();
 	return 0;
