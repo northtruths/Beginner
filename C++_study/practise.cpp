@@ -408,32 +408,128 @@
 //
 //}
 
+//#include<iostream>
+//using namespace std;
+//
+//class Data
+//{
+//public:
+//	void Fun(int a, Data* this)
+//	{
+//		this->Fun(1);
+//		Data d;
+//	}
+//private:
+//	int _year = 1;
+//	int _month = 1;
+//	int _day = 1;
+//};
+//
+//
+//
+//void f1(int i, int k);
+//
+//void f1(char i, char k);
+//int main()
+//{
+//
+//
+//	Data d1 = Fun();
+//	return 0;
+//}
+
+//#include<iostream>
+//using namespace std;
+//
+//class D
+//{
+//public:
+//
+//private:
+//};
+//
+//int main()
+//{
+//	D d1;
+//	D d2;
+//	d2 = d1;
+//	return 0;
+//}
+
 #include<iostream>
 using namespace std;
 
-class Data
+class A
 {
+	/*friend ostream& operator<<(ostream out, const A& a);*/
 public:
-	void Fun(int a, Data* this)
+	A(int a = 0, int b = 0)
+		:_a(a)
+		,_b(b)
 	{
-		this->Fun(1);
-		Data d;
+		cout << "A(int a = 0)" << endl;
 	}
-private:
-	int _year = 1;
-	int _month = 1;
-	int _day = 1;
+	A& operator=(A& a)
+	{
+		_a = a._a;
+		_b = a._b;
+		cout << "A& operator=(A& a)" << endl;
+	}
+//private:
+	int _a;
+	int _b;
 };
 
+//class stack
+//{
+//	//friend ostream& operator<<(ostream out, const A& a);
+//public:
+//	stack()
+//	{
+//		for (int i = 0; i < 5; ++i)
+//		{
+//			_arr[i] = 0;
+//			_size = 0;
+//		}
+//	}
+//	void push(const A& a)
+//	{
+//		_arr[_size] = a;
+//		_size++;
+//	}
+////private:
+//	A _arr[5];
+//	int _size = 0;
+//};
 
+//ostream& operator<<(ostream& out, const A& a)
+//{
+//	cout << a._a << " ";
+//	return out;
+//}
 
-void f1(int i, int k);
+class stack
+{
+public:
 
-void f1(char i, char k);
+private:
+	A a1 = { 5 , 5 };
+};
 int main()
 {
+	//stack st;
+	//A a1(1);
+	//for (int i = 0; i < 5; ++i) {
+	//	st.push(i);
 
+	//}
+	//for (int i = 0; i < st._size; ++i)
+	//{
+	//	cout << st._arr[i];
+	//}
 
-	Data d1 = Fun();
+	//A a1(1, 2);
+	//A a2 = { 3, 4 };
+	stack s1;
 	return 0;
 }
