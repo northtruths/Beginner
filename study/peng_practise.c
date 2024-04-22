@@ -3937,3 +3937,16 @@
 //	f(NULL);
 //	return 0;
 //}
+
+//#include<stdio.h>
+//struct A
+//{
+//	const a;
+//};
+//
+//int main()
+//{
+//	struct A a1 = { 0 };
+//	printf("%d", a1.a);
+//	return 0;
+//}
