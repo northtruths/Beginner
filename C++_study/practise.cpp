@@ -639,149 +639,209 @@
 //}
 //用c的结构体类型，不初始化 const 等，看看弊端->没弊端，就是定义出实例时要手动初始化罢了
 
-#include <iostream>
-using namespace std;
+//#include <iostream>
+//using namespace std;
+//
+//class Data
+//{
+//public:
+//	Data(int year, int month, int day)
+//	{
+//		_year = year;
+//		_month = month;
+//		_day = day;
+//	}
+//	int GetDay(int year, int month) const
+//	{
+//		int arr[13] = { 0,31,28,31,30,31,30,31,31,30,31,30,31 };
+//		if (month == 2 && (year % 4 == 0 && year % 100 != 0 || year % 400 == 0))
+//		{
+//			return 28;
+//		}
+//		else
+//		{
+//			return arr[month];
+//		}
+//	}
+//	Data& operator-=(int day)
+//	{
+//		_day -= day;
+//		while (_day <= 0)
+//		{
+//			--_month;
+//			if (_month == 0)
+//			{
+//				_month = 12;
+//				--_year;
+//			}
+//			_day += GetDay(_year, _month);
+//		}
+//		return *this;
+//	}
+//	Data& operator+=(int day)
+//	{
+//		if (day < 0)
+//		{
+//			return *this -= -day;
+//		}
+//		_day += day;
+//		while (_day > GetDay(_year, _month))
+//		{
+//			_day -= GetDay(_year, _month);
+//			++_month;
+//			if (_month == 13)
+//			{
+//				++_year;
+//				_month = 1;
+//			}
+//		}
+//		return *this;
+//	}
+//	Data& operator++()
+//	{
+//		*this += 1;
+//		return *this;
+//	}
+//	bool operator>(const Data& d) const
+//	{
+//		if (!(_year > d._year))
+//		{
+//			if (_year == d._year)
+//			{
+//				if (!(_month > d._month))
+//				{
+//					if (_month == d._month)
+//					{
+//						return (_day - d._day) > 0;
+//					}
+//					return false;
+//				}
+//			}
+//			return false;
+//		}
+//
+//		return true;
+//	}
+//	bool operator==(const Data& d) const
+//	{
+//		return (_year == d._year
+//			&& _month == d._month
+//			&& _day == d._day);
+//	}
+//	bool operator>=(const Data& d) const
+//	{
+//		return *this > d || *this == d;
+//	}
+//	bool operator<(const Data& d) const
+//	{
+//		return !(*this >= d);
+//	}
+//	bool operator<=(const Data& d) const
+//	{
+//		return !(*this > d);
+//	}
+//	int operator-(const Data& d) const
+//	{
+//		Data max = *this;
+//		Data min = d;
+//		if (max < min)
+//		{
+//			max = d;
+//			min = *this;
+//		}
+//		int ret1 = 0;//大年的最后一年多出的天数
+//		int ret2 = 0;//小年
+//		for (int i = 1; i < max._month; ++i)
+//		{
+//			ret1 += GetDay(max._year, i);
+//		}
+//		ret1 += max._day;
+//		for (int i = 1; i < min._month; ++i)
+//		{
+//			ret2 += GetDay(min._year, i);
+//		}
+//		ret2 += min._day;
+//		int ret3 = 0;
+//		for (int i = min._year; i <= max._year; ++i)
+//		{
+//			if (i % 4 == 0 && i % 100 != 0 || i % 400 == 0)
+//				++ret3;
+//		}
+//		return abs((max._year - min._year) * 365 + (ret1 - ret2)) + ret3;
+//	}
+//private:
+//	int _year = 1;
+//	int _month = 1;
+//	int _day = 1;
+//};
+//
+//int main() {
+//	int year1, month1, day1;
+//	int year2, month2, day2;
+//	scanf("%4d%2d%2d", &year1, &month1, &day1);
+//	scanf("%4d%2d%2d", &year2, &month2, &day2);
+//	Data d1(year1, month1, day1);
+//	Data d2(year2, month2, day2);
+//	printf("%d", d1 - d2 + 1);
+//	return 0;
+//}
 
-class Data
-{
-public:
-	Data(int year, int month, int day)
-	{
-		_year = year;
-		_month = month;
-		_day = day;
-	}
-	int GetDay(int year, int month) const
-	{
-		int arr[13] = { 0,31,28,31,30,31,30,31,31,30,31,30,31 };
-		if (month == 2 && (year % 4 == 0 && year % 100 != 0 || year % 400 == 0))
-		{
-			return 28;
-		}
-		else
-		{
-			return arr[month];
-		}
-	}
-	Data& operator-=(int day)
-	{
-		_day -= day;
-		while (_day <= 0)
-		{
-			--_month;
-			if (_month == 0)
-			{
-				_month = 12;
-				--_year;
-			}
-			_day += GetDay(_year, _month);
-		}
-		return *this;
-	}
-	Data& operator+=(int day)
-	{
-		if (day < 0)
-		{
-			return *this -= -day;
-		}
-		_day += day;
-		while (_day > GetDay(_year, _month))
-		{
-			_day -= GetDay(_year, _month);
-			++_month;
-			if (_month == 13)
-			{
-				++_year;
-				_month = 1;
-			}
-		}
-		return *this;
-	}
-	Data& operator++()
-	{
-		*this += 1;
-		return *this;
-	}
-	bool operator>(const Data& d) const
-	{
-		if (!(_year > d._year))
-		{
-			if (_year == d._year)
-			{
-				if (!(_month > d._month))
-				{
-					if (_month == d._month)
-					{
-						return (_day - d._day) > 0;
-					}
-					return false;
-				}
-			}
-			return false;
-		}
-
-		return true;
-	}
-	bool operator==(const Data& d) const
-	{
-		return (_year == d._year
-			&& _month == d._month
-			&& _day == d._day);
-	}
-	bool operator>=(const Data& d) const
-	{
-		return *this > d || *this == d;
-	}
-	bool operator<(const Data& d) const
-	{
-		return !(*this >= d);
-	}
-	bool operator<=(const Data& d) const
-	{
-		return !(*this > d);
-	}
-	int operator-(const Data& d) const
-	{
-		Data max = *this;
-		Data min = d;
-		if (max < min)
-		{
-			max = d;
-			min = *this;
-		}
-		int ret1 = 0;//大年的最后一年多出的天数
-		int ret2 = 0;//小年
-		for (int i = 1; i < max._month; ++i)
-		{
-			ret1 += GetDay(max._year, i);
-		}
-		ret1 += max._day;
-		for (int i = 1; i < min._month; ++i)
-		{
-			ret2 += GetDay(min._year, i);
-		}
-		ret2 += min._day;
-		int ret3 = 0;
-		for (int i = min._year; i <= max._year; ++i)
-		{
-			if (i % 4 == 0 && i % 100 != 0 || i % 400 == 0)
-				++ret3;
-		}
-		return abs((max._year - min._year) * 365 + (ret1 - ret2)) + ret3;
-	}
-private:
-	int _year = 1;
-	int _month = 1;
-	int _day = 1;
-};
-
-int main() {
-	int year1, month1, day1;
-	int year2, month2, day2;
-	scanf("%4d%2d%2d", &year1, &month1, &day1);
-	scanf("%4d%2d%2d", &year2, &month2, &day2);
-	Data d1(year1, month1, day1);
-	Data d2(year2, month2, day2);
-	printf("%d", d1 - d2 + 1);
-	return 0;
-}
+//#include <iostream>
+//using namespace std;
+//class Data
+//{
+//public:
+//    int GetDay(int year, int month)
+//    {
+//        int arr[13] = { 0,31,28,31,30,31,30,31,31,30,31,30,31 };
+//        if (month == 2 && (year % 4 == 0 && year % 100 != 0 || year % 400 == 0))
+//        {
+//            return 29;
+//        }
+//        else
+//        {
+//            return arr[month];
+//        }
+//    }
+//
+//    Data(int year = 1, int day = 0, int month = 1)
+//        :_year(year)
+//        , _day(day)
+//        , _month(month)
+//    {
+//
+//    }
+//    Data& operator+=(int day)
+//    {
+//        _day += day;
+//        while (_day > GetDay(_year, _month))
+//        {
+//            _day -= GetDay(_year, _month);
+//            ++_month;
+//            if (_month == 13)
+//            {
+//                ++_year;
+//                _month = 1;
+//            }
+//        }
+//        return *this;
+//    }
+//    //private:
+//    int _year = 1;
+//    int _month = 1;
+//    int _day = 0;
+//};
+//int main()
+//{
+//    int n;
+//    cin >> n;
+//    int y, m, d, day;
+//    Data d1;
+//    for (int i = 0; i < n; ++i)
+//    {
+//        cin >> y >> m >> d >> day;
+//        d1 = { y, d, m };
+//        d1 += day;
+//        printf("%d-%02d-%02d\n", d1._year, d1._month, d1._day);
+//    }
+//}
