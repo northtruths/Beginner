@@ -845,3 +845,24 @@
 //        printf("%d-%02d-%02d\n", d1._year, d1._month, d1._day);
 //    }
 //}
+
+#include<iostream>
+using namespace std;
+
+template<typename T>
+class Data
+{
+public:
+	void Printf();
+private:
+};
+template <class T>
+void Data<T>::Printf()
+{
+
+}
+
+int main()
+{
+	return 0;
+}
