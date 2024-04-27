@@ -846,23 +846,102 @@
 //    }
 //}
 
+//#include<iostream>
+//using namespace std;
+//
+//template<typename T>
+//class Data
+//{
+//public:
+//	void Printf();
+//private:
+//};
+//template <class T>
+//void Data<T>::Printf()
+//{
+//
+//}
+//
+//int main()
+//{
+//	return 0;
+//}
+
+
+
+//void Print()
+//{
+//	//...
+//}
+//
+//template<class T>
+//class Data
+//{
+//public:
+//	void Print()
+//	{
+//		//...
+//	}
+//	Data(int year = 1, int month = 1, int day = 1)
+//	{
+//		_year = year;
+//		_month = month;
+//		_day = day;
+//	}
+//
+//private:
+//	int _year;
+//	int _month;
+//	int _day;
+//};
+//
+//int main()
+//{
+//	int* p = new int[10] {1, 2, 3, 4, 5};//前五个初始化为12345
+//	int* p1 = new int(10);//初始化为10
+//	Data<int>* pd1 = new Data<int>;
+//	Data<int>* pd2 = new Data<int>();
+//	Data<int>* pd3 = new Data<int>(2, 2, 2);
+//	Data<int>* pd4 = new Data<int>[5]();
+//	Data<int>* pd5 = new Data<int>[5] {5, 5, 5};
+//	Data<int>* pd6 = new Data<int>[5] {{5, 5, 5}, { 5, 5, 5 }, { 5, 5, 5 }};
+//
+//	return 0;
+//}
+
 #include<iostream>
 using namespace std;
-
-template<typename T>
 class Data
 {
 public:
-	void Printf();
-private:
-};
-template <class T>
-void Data<T>::Printf()
-{
 
-}
+	Data(int year = 1, int month = 1, int day = 1)
+	{
+		_year = year;
+		_month = month;
+		_day = day;
+	}
+
+private:
+	int _year;
+	int _month;
+	int _day;
+};
 
 int main()
 {
+	int* p = new int[10] {1, 2, 3, 4, 5};//前五个初始化为12345
+	int* p1 = new int(10);//初始化为10
+	Data* pd1 = new Data;//调默认构造，默认值
+	Data* pd2 = new Data();//调默认构造，默认值
+	Data* pd3 = new Data(2, 2, 2);//调默认构造，传参222
+	Data* pd4 = new Data[5]();//全部调默认构造，默认值
+	Data* pd5 = new Data[5] {5, 5, 5};//前三个对象每个传一个参数5，其余的、包括前三个剩下未传参的数据都为默认值
+	Data* pd6 = new Data[5] { {5, 5, 5}, { 5, 5, 5 }, { 5, 5, 5 }};//前三个对象传参555，剩下两个对象默认构造默认值
+
+	delete p;
+	delete p1;
+	delete pd1;
+	delete pd4;
 	return 0;
 }
