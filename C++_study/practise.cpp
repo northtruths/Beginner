@@ -909,39 +909,104 @@
 //	return 0;
 //}
 
+//#include<iostream>
+//using namespace std;
+//class Data
+//{
+//public:
+//
+//	Data(int year = 1, int month = 1, int day = 1)
+//	{
+//		_year = year;
+//		_month = month;
+//		_day = day;
+//	}
+//
+//private:
+//	int _year;
+//	int _month;
+//	int _day;
+//};
+//
+//int main()
+//{
+//	int* p = new int[10] {1, 2, 3, 4, 5};//前五个初始化为12345
+//	int* p1 = new int(10);//初始化为10
+//	Data* pd1 = new Data;//调默认构造，默认值
+//	Data* pd2 = new Data();//调默认构造，默认值
+//	Data* pd3 = new Data(2, 2, 2);//调默认构造，传参222
+//	Data* pd4 = new Data[5]();//全部调默认构造，默认值
+//	Data* pd5 = new Data[5] {5, 5, 5};//前三个对象每个传一个参数5，其余的、包括前三个剩下未传参的数据都为默认值
+//	Data* pd6 = new Data[5] { {5, 5, 5}, { 5, 5, 5 }, { 5, 5, 5 }};//前三个对象传参555，剩下两个对象默认构造默认值
+//
+//	delete p;
+//	delete p1;
+//	delete pd1;
+//	delete pd4;
+//	return 0;
+//}
+
+//#include<iostream>
+//using namespace std;
+
+//template<typename T>
+//void Print(T& a)
+//{
+//    cout << a;
+//}
+////根据传的参数类型，编译器就会将 T 变为对应的类型然后生成一个函数
+//int main()
+//{
+//    int a = 10;
+//    Print(a);    //编译器自动推演 T 为 int 类型
+//}
+//
+//template<typename T>
+//void Print(int a)
+//{
+//    T b;    //类型为 T 的变量
+//    while (a--)    //循环 a 次
+//    {
+//        cout << b;    //其实这里语法有点错误，因为 T 类型可能不能直接输出的，不过为了方便理解就这样，理解即可
+//    }
+//}
+////这里传参是传给 int 类型的形参 a，没有任何 T 接受了传参，编译器无法推演
+//int main()
+//{
+//    int a = 10;
+//    Print<int>(10);//其中<int>就是现实实例化，直接指定 T 为 int类型
+//    //不过放在上面代码上，因为 b 未初始化，所以打印十遍随机值
+//    Print<int>(2.0);
+//    return 0;
+//}
+
 #include<iostream>
 using namespace std;
-class Data
+
+void Print(int a, int b)
 {
-public:
+	cout << a << endl << b << endl;
+}
+template<typename T>
+void print(T& a, T& b)
+{
+	cout << a << endl << b << endl;
+}
+template <typename T1, typename T2>
+void Print(T1& a, T2& b)
+{
+	cout << a << endl << b << endl;
+}
 
-	Data(int year = 1, int month = 1, int day = 1)
-	{
-		_year = year;
-		_month = month;
-		_day = day;
-	}
-
-private:
-	int _year;
-	int _month;
-	int _day;
-};
 
 int main()
 {
-	int* p = new int[10] {1, 2, 3, 4, 5};//前五个初始化为12345
-	int* p1 = new int(10);//初始化为10
-	Data* pd1 = new Data;//调默认构造，默认值
-	Data* pd2 = new Data();//调默认构造，默认值
-	Data* pd3 = new Data(2, 2, 2);//调默认构造，传参222
-	Data* pd4 = new Data[5]();//全部调默认构造，默认值
-	Data* pd5 = new Data[5] {5, 5, 5};//前三个对象每个传一个参数5，其余的、包括前三个剩下未传参的数据都为默认值
-	Data* pd6 = new Data[5] { {5, 5, 5}, { 5, 5, 5 }, { 5, 5, 5 }};//前三个对象传参555，剩下两个对象默认构造默认值
-
-	delete p;
-	delete p1;
-	delete pd1;
-	delete pd4;
+	int x = 10;
+	int x1 = 20;
+	double y = 1.0;
+	double y1 = 2.0;
+	Print(x, x1);	//调用现成的“void Print(int a, int b)”
+	Print(y, y1);	//调用“void print(T& a, T& b)”，参数是同类型的，一个顶俩
+	Print(x, y);	//
 	return 0;
 }
