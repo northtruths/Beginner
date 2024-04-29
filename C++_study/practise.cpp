@@ -1005,8 +1005,8 @@ int main()
 	int x1 = 20;
 	double y = 1.0;
 	double y1 = 2.0;
-	Print(x, x1);	//调用现成的“void Print(int a, int b)”
-	Print(y, y1);	//调用“void print(T& a, T& b)”，参数是同类型的，一个顶俩
-	Print(x, y);	//
+	Print(x, x1);//匹配俩int，调用现成的“void Print(int a, int b)”
+	Print(y, y1);//匹配俩double，调用“void print(T& a, T& b)”，形参是同类型的，推演出一个就相当于推演所有的了，更省事
+	Print(x, y);//匹配一个int一个double，调用“void Print(T1& a, T2& b)”，因为两个实参类型不同，前两个函数或函数模板的形参都不能直接匹配
 	return 0;
 }

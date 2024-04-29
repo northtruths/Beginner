@@ -3950,3 +3950,159 @@
 //	printf("%d", a1.a);
 //	return 0;
 //}
+
+//#include<stdio.h>
+//#include<stdbool.h>
+// struct TreeNode {
+//    int val;
+//    struct TreeNode* left;
+//    struct TreeNode* right;
+//    
+//};
+//typedef struct TreeNode TreeNode;
+//
+//int _n = 0;
+//TreeNode* _arr[1000] = { NULL };
+//
+//bool isleave(TreeNode* root)
+//{
+//    if (root == NULL)
+//        return false;
+//
+//    else if (root != NULL || (root->left == NULL && root->right == NULL))
+//        return true;
+//    else
+//        return false;
+//}
+//
+//
+//
+//TreeNode* Find(TreeNode* root)
+//{
+//    if (root != NULL && (isleave(root->left) || isleave(root->right)))
+//    {
+//        _arr[_n] = root;
+//        ++_n;
+//    }
+//    if (root == NULL)
+//        return NULL;
+//    Find(root->left);
+//    Find(root->right);
+//    return NULL;
+//}
+//int sumOfLeftLeaves(struct TreeNode* root) {
+//    // write code here
+//
+//    int sum = 0;
+//    Find(root);
+//    for (int i = 0; i < _n; ++i)
+//    {
+//        if (_arr[i]->left != NULL)
+//        {
+//            sum += _arr[i]->left->val;
+//        }
+//    }
+//    return sum;
+//}
+//
+//int main()
+//{
+//    TreeNode t1;
+//    TreeNode t2;
+//    t1.val = 1;
+//    t1.left = &t2;
+//    t1.right = NULL;
+//    t2.val = 2;
+//    t2.left = NULL;
+//    t2.right = NULL;
+//
+//    printf("%d", sumOfLeftLeaves(&t1));
+//
+//    return 0;
+//}
+
+
+//#include<stdio.h>
+//#include<stdlib.h>
+//void sort(int* arr, int* temp, int begin, int end)
+//{
+//    if (begin >= end)
+//        return;
+//    int end1 = (begin + end) / 2;
+//    int begin1 = end1 + 1;
+//    sort(arr, temp, begin, end1);
+//    sort(arr, temp, begin1, end);
+//    int curleft = begin;
+//    int curright = begin1;
+//    int curtemp = begin;
+//    while (curleft < begin1 && curright <= end)
+//    {
+//        if (arr[curleft] <= arr[curright])
+//        {
+//            temp[curtemp++] = arr[curleft++];
+//        }
+//        else
+//        {
+//            temp[curtemp++] = arr[curright++];
+//        }
+//    }
+//    while (curleft < begin1)
+//    {
+//        temp[curtemp++] = arr[curleft++];
+//    }
+//    while (curright <= end)
+//    {
+//        temp[curtemp++] = arr[curright++];
+//    }
+//
+//    for (int i = begin; i <= end; ++i)
+//    {
+//        arr[i] = temp[i];
+//    }
+//}
+//
+//int main()
+//{
+//    int n = 0;
+//    scanf("%d", &n);
+//    int t[6];
+//    int* arr = (int*)malloc(sizeof(int)*n);
+//    printf("%zd\n", sizeof(t));
+//    for (int i = 0; i < n; ++i)
+//    {
+//        scanf("%d", &arr[i]);
+//    }
+//    int* temp = (int*)malloc(sizeof(arr));
+//    //int* temp = (int*)malloc(sizeof(int) * n);
+//    printf("%zd\n", sizeof(temp));
+//    for (int i = 0; i < n; ++i)
+//    {
+//        temp[i] = arr[i];
+//    }
+//    sort(arr, temp, 0, n - 1);
+//    for (int i = 0; i < n; ++i)
+//    {
+//        printf("%d ", arr[i]);
+//    }
+//    free(arr);
+//    free(temp);
+//    
+//    return 0;
+//}
+
+
+
+#include<stdio.h>
+#include<stdlib.h>
+
+int main()
+{
+	int n = 0;
+	scanf("%d", &n);
+	int* arr = (int*)malloc(sizeof(int) * n);
+	printf("%d\n", sizeof(arr));
+	int* tmp = (int*)malloc(sizeof(arr)); 
+	free(arr);
+	free(tmp);
+	return 0;
+}
