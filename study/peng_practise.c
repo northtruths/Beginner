@@ -4065,15 +4065,12 @@
 //{
 //    int n = 0;
 //    scanf("%d", &n);
-//    int t[6];
 //    int* arr = (int*)malloc(sizeof(int)*n);
-//    printf("%zd\n", sizeof(t));
 //    for (int i = 0; i < n; ++i)
 //    {
 //        scanf("%d", &arr[i]);
 //    }
-//    int* temp = (int*)malloc(sizeof(arr));
-//    //int* temp = (int*)malloc(sizeof(int) * n);
+//    int* temp = (int*)malloc(sizeof(int) * n);
 //    printf("%zd\n", sizeof(temp));
 //    for (int i = 0; i < n; ++i)
 //    {
@@ -4092,17 +4089,17 @@
 
 
 
-#include<stdio.h>
-#include<stdlib.h>
-
-int main()
-{
-	int n = 0;
-	scanf("%d", &n);
-	int* arr = (int*)malloc(sizeof(int) * n);
-	printf("%d\n", sizeof(arr));
-	int* tmp = (int*)malloc(sizeof(arr)); 
-	free(arr);
-	free(tmp);
-	return 0;
-}
+//#include<stdio.h>
+//#include<stdlib.h>
+//
+//int main()
+//{
+//	int n = 0;
+//	scanf("%d", &n);
+//	int* arr = (int*)malloc(sizeof(int) * n);
+//	printf("%d\n", sizeof(arr));
+//	int* tmp = (int*)malloc(sizeof(arr)); 
+//	free(arr);
+//	free(tmp);
+//	return 0;
+//}
