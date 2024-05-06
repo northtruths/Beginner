@@ -1,4 +1,4 @@
-#define _CRT_SECURE_NO_WARNINGS
+ï»¿#define _CRT_SECURE_NO_WARNINGS
 
 //#include"practise.h"
 //
@@ -119,7 +119,7 @@
 //
 //struct swapp
 //{
-//	void swap(int a, int b)//¾Ö²¿±äÁ¿ÓÅÏÈ£¬ËùÒÔ×Ô¼º¸³Öµ¸ø×Ô¼ºÁË
+//	void swap(int a, int b)//å±€éƒ¨å˜é‡ä¼˜å…ˆï¼Œæ‰€ä»¥è‡ªå·±èµ‹å€¼ç»™è‡ªå·±äº†
 //	{
 //		int temp = a;
 //		a = b;
@@ -168,8 +168,8 @@
 //int main()
 //{
 //	int a = 10;
-//	const int& b = a;  //ÕâÑùÈ¨ÏŞ±»ËõĞ¡ÁË£¬ÊÇÔÊĞíµÄ
-//	int& c = b;  //È¨ÏŞÆ½ÒÆ£¬ÊÇÔÊĞíµÄ
+//	const int& b = a;  //è¿™æ ·æƒé™è¢«ç¼©å°äº†ï¼Œæ˜¯å…è®¸çš„
+//	int& c = b;  //æƒé™å¹³ç§»ï¼Œæ˜¯å…è®¸çš„
 //	cout << a << b << c;
 //	return 0;
 //}
@@ -245,7 +245,7 @@
 //int main()
 //{
 //	int* p = nullptr;
-//	*p = 0;//Óï·¨Î´´í£¬ÔËĞĞ´í
+//	*p = 0;//è¯­æ³•æœªé”™ï¼Œè¿è¡Œé”™
 //	return 0;
 //}
 
@@ -269,14 +269,14 @@
 //	}
 //}
 //
-//using namespace t2; // È«Õ¹¿ª t2 
+//using namespace t2; // å…¨å±•å¼€ t2 
 //int main()
 //{
-//	t1::a++; // µ¥¶ÀÁÙÊ±È¡³ö t1 ÃüÃû¿Õ¼äÖĞµÄ a ÄÃÀ´ ++
-//	using t1::b; // ½« t1 ÃüÃû¿Õ¼äÖĞµÄ b ÍêÈ«ÄÃ³öÀ´£¬ºóĞø¿ÉÒÔÖ±½ÓÊ¹ÓÃ b£¬
-//				//	 ÕâÀïÊÇÔÚ¾Ö²¿Õ¹¿ªµÄ£¬ËùÒÔÖ»ÄÜÔÚ¾Ö²¿ÓÃ£¬ÔÚÈ«¾ÖÕ¹¿ª»°¾ÍÄÜÈ«¾ÖÓÃ
-//	b++; // ËäÈ»ÉÏÃæ t2 È«Õ¹¿ªÁË£¬t2 ÖĞÒ²ÓĞÒ»¸ö b£¬µ«ÕâÀï¾Ö²¿±äÁ¿ÓÅÏÈ£¬ËùÒÔ t1 ÖĞµÄ b++
-//	a++; // t2 ÖĞ a++
+//	t1::a++; // å•ç‹¬ä¸´æ—¶å–å‡º t1 å‘½åç©ºé—´ä¸­çš„ a æ‹¿æ¥ ++
+//	using t1::b; // å°† t1 å‘½åç©ºé—´ä¸­çš„ b å®Œå…¨æ‹¿å‡ºæ¥ï¼Œåç»­å¯ä»¥ç›´æ¥ä½¿ç”¨ bï¼Œ
+//				//	 è¿™é‡Œæ˜¯åœ¨å±€éƒ¨å±•å¼€çš„ï¼Œæ‰€ä»¥åªèƒ½åœ¨å±€éƒ¨ç”¨ï¼Œåœ¨å…¨å±€å±•å¼€è¯å°±èƒ½å…¨å±€ç”¨
+//	b++; // è™½ç„¶ä¸Šé¢ t2 å…¨å±•å¼€äº†ï¼Œt2 ä¸­ä¹Ÿæœ‰ä¸€ä¸ª bï¼Œä½†è¿™é‡Œå±€éƒ¨å˜é‡ä¼˜å…ˆï¼Œæ‰€ä»¥ t1 ä¸­çš„ b++
+//	a++; // t2 ä¸­ a++
 //	return 0;
 //}
 
@@ -284,7 +284,7 @@
 //using namespace std;
 //int main()
 //{
-//    // ÇëÔÚ´ËÊäÈëÄúµÄ´úÂë
+//    // è¯·åœ¨æ­¤è¾“å…¥æ‚¨çš„ä»£ç 
 //    int arr[100] = { 0 };
 //    for (int i = 0; i < 100; ++i)
 //    {
@@ -307,7 +307,7 @@
 //                {
 //                    if (arr[a] != 3)
 //                        continue;
-//                    for (int b = a; b < 100; ++b)//ÔÂ
+//                    for (int b = a; b < 100; ++b)//æœˆ
 //                    {
 //                        if (arr[b] > 1)
 //                            continue;
@@ -315,7 +315,7 @@
 //                        {
 //                            if (((arr[b] == 1 && arr[c] > 2)) || (arr[b] == 0 && arr[c] == 0))
 //                                continue;
-//                            for (int d = c; d < 100; ++d)//ÈÕ
+//                            for (int d = c; d < 100; ++d)//æ—¥
 //                            {
 //                                if (arr[d] > 3)
 //                                    continue;
@@ -351,7 +351,7 @@
 //using namespace std;
 //int main()
 //{
-//    // ÇëÔÚ´ËÊäÈëÄúµÄ´úÂë
+//    // è¯·åœ¨æ­¤è¾“å…¥æ‚¨çš„ä»£ç 
 //    int min = 0;
 //    int n = 0, k = 0;
 //    scanf("%d%d", &n, &k);
@@ -637,7 +637,7 @@
 //	//A().f1({1,2});
 //	return 0;
 //}
-//ÓÃcµÄ½á¹¹ÌåÀàĞÍ£¬²»³õÊ¼»¯ const µÈ£¬¿´¿´±×¶Ë->Ã»±×¶Ë£¬¾ÍÊÇ¶¨Òå³öÊµÀıÊ±ÒªÊÖ¶¯³õÊ¼»¯°ÕÁË
+//ç”¨cçš„ç»“æ„ä½“ç±»å‹ï¼Œä¸åˆå§‹åŒ– const ç­‰ï¼Œçœ‹çœ‹å¼Šç«¯->æ²¡å¼Šç«¯ï¼Œå°±æ˜¯å®šä¹‰å‡ºå®ä¾‹æ—¶è¦æ‰‹åŠ¨åˆå§‹åŒ–ç½¢äº†
 
 //#include <iostream>
 //using namespace std;
@@ -749,8 +749,8 @@
 //			max = d;
 //			min = *this;
 //		}
-//		int ret1 = 0;//´óÄêµÄ×îºóÒ»Äê¶à³öµÄÌìÊı
-//		int ret2 = 0;//Ğ¡Äê
+//		int ret1 = 0;//å¤§å¹´çš„æœ€åä¸€å¹´å¤šå‡ºçš„å¤©æ•°
+//		int ret2 = 0;//å°å¹´
 //		for (int i = 1; i < max._month; ++i)
 //		{
 //			ret1 += GetDay(max._year, i);
@@ -897,8 +897,8 @@
 //
 //int main()
 //{
-//	int* p = new int[10] {1, 2, 3, 4, 5};//Ç°Îå¸ö³õÊ¼»¯Îª12345
-//	int* p1 = new int(10);//³õÊ¼»¯Îª10
+//	int* p = new int[10] {1, 2, 3, 4, 5};//å‰äº”ä¸ªåˆå§‹åŒ–ä¸º12345
+//	int* p1 = new int(10);//åˆå§‹åŒ–ä¸º10
 //	Data<int>* pd1 = new Data<int>;
 //	Data<int>* pd2 = new Data<int>();
 //	Data<int>* pd3 = new Data<int>(2, 2, 2);
@@ -930,14 +930,14 @@
 //
 //int main()
 //{
-//	int* p = new int[10] {1, 2, 3, 4, 5};//Ç°Îå¸ö³õÊ¼»¯Îª12345
-//	int* p1 = new int(10);//³õÊ¼»¯Îª10
-//	Data* pd1 = new Data;//µ÷Ä¬ÈÏ¹¹Ôì£¬Ä¬ÈÏÖµ
-//	Data* pd2 = new Data();//µ÷Ä¬ÈÏ¹¹Ôì£¬Ä¬ÈÏÖµ
-//	Data* pd3 = new Data(2, 2, 2);//µ÷Ä¬ÈÏ¹¹Ôì£¬´«²Î222
-//	Data* pd4 = new Data[5]();//È«²¿µ÷Ä¬ÈÏ¹¹Ôì£¬Ä¬ÈÏÖµ
-//	Data* pd5 = new Data[5] {5, 5, 5};//Ç°Èı¸ö¶ÔÏóÃ¿¸ö´«Ò»¸ö²ÎÊı5£¬ÆäÓàµÄ¡¢°üÀ¨Ç°Èı¸öÊ£ÏÂÎ´´«²ÎµÄÊı¾İ¶¼ÎªÄ¬ÈÏÖµ
-//	Data* pd6 = new Data[5] { {5, 5, 5}, { 5, 5, 5 }, { 5, 5, 5 }};//Ç°Èı¸ö¶ÔÏó´«²Î555£¬Ê£ÏÂÁ½¸ö¶ÔÏóÄ¬ÈÏ¹¹ÔìÄ¬ÈÏÖµ
+//	int* p = new int[10] {1, 2, 3, 4, 5};//å‰äº”ä¸ªåˆå§‹åŒ–ä¸º12345
+//	int* p1 = new int(10);//åˆå§‹åŒ–ä¸º10
+//	Data* pd1 = new Data;//è°ƒé»˜è®¤æ„é€ ï¼Œé»˜è®¤å€¼
+//	Data* pd2 = new Data();//è°ƒé»˜è®¤æ„é€ ï¼Œé»˜è®¤å€¼
+//	Data* pd3 = new Data(2, 2, 2);//è°ƒé»˜è®¤æ„é€ ï¼Œä¼ å‚222
+//	Data* pd4 = new Data[5]();//å…¨éƒ¨è°ƒé»˜è®¤æ„é€ ï¼Œé»˜è®¤å€¼
+//	Data* pd5 = new Data[5] {5, 5, 5};//å‰ä¸‰ä¸ªå¯¹è±¡æ¯ä¸ªä¼ ä¸€ä¸ªå‚æ•°5ï¼Œå…¶ä½™çš„ã€åŒ…æ‹¬å‰ä¸‰ä¸ªå‰©ä¸‹æœªä¼ å‚çš„æ•°æ®éƒ½ä¸ºé»˜è®¤å€¼
+//	Data* pd6 = new Data[5] { {5, 5, 5}, { 5, 5, 5 }, { 5, 5, 5 }};//å‰ä¸‰ä¸ªå¯¹è±¡ä¼ å‚555ï¼Œå‰©ä¸‹ä¸¤ä¸ªå¯¹è±¡é»˜è®¤æ„é€ é»˜è®¤å€¼
 //
 //	delete p;
 //	delete p1;
@@ -954,59 +954,324 @@
 //{
 //    cout << a;
 //}
-////¸ù¾İ´«µÄ²ÎÊıÀàĞÍ£¬±àÒëÆ÷¾Í»á½« T ±äÎª¶ÔÓ¦µÄÀàĞÍÈ»ºóÉú³ÉÒ»¸öº¯Êı
+////æ ¹æ®ä¼ çš„å‚æ•°ç±»å‹ï¼Œç¼–è¯‘å™¨å°±ä¼šå°† T å˜ä¸ºå¯¹åº”çš„ç±»å‹ç„¶åç”Ÿæˆä¸€ä¸ªå‡½æ•°
 //int main()
 //{
 //    int a = 10;
-//    Print(a);    //±àÒëÆ÷×Ô¶¯ÍÆÑİ T Îª int ÀàĞÍ
+//    Print(a);    //ç¼–è¯‘å™¨è‡ªåŠ¨æ¨æ¼” T ä¸º int ç±»å‹
 //}
 //
 //template<typename T>
 //void Print(int a)
 //{
-//    T b;    //ÀàĞÍÎª T µÄ±äÁ¿
-//    while (a--)    //Ñ­»· a ´Î
+//    T b;    //ç±»å‹ä¸º T çš„å˜é‡
+//    while (a--)    //å¾ªç¯ a æ¬¡
 //    {
-//        cout << b;    //ÆäÊµÕâÀïÓï·¨ÓĞµã´íÎó£¬ÒòÎª T ÀàĞÍ¿ÉÄÜ²»ÄÜÖ±½ÓÊä³öµÄ£¬²»¹ıÎªÁË·½±ãÀí½â¾ÍÕâÑù£¬Àí½â¼´¿É
+//        cout << b;    //å…¶å®è¿™é‡Œè¯­æ³•æœ‰ç‚¹é”™è¯¯ï¼Œå› ä¸º T ç±»å‹å¯èƒ½ä¸èƒ½ç›´æ¥è¾“å‡ºçš„ï¼Œä¸è¿‡ä¸ºäº†æ–¹ä¾¿ç†è§£å°±è¿™æ ·ï¼Œç†è§£å³å¯
 //    }
 //}
-////ÕâÀï´«²ÎÊÇ´«¸ø int ÀàĞÍµÄĞÎ²Î a£¬Ã»ÓĞÈÎºÎ T ½ÓÊÜÁË´«²Î£¬±àÒëÆ÷ÎŞ·¨ÍÆÑİ
+////è¿™é‡Œä¼ å‚æ˜¯ä¼ ç»™ int ç±»å‹çš„å½¢å‚ aï¼Œæ²¡æœ‰ä»»ä½• T æ¥å—äº†ä¼ å‚ï¼Œç¼–è¯‘å™¨æ— æ³•æ¨æ¼”
 //int main()
 //{
 //    int a = 10;
-//    Print<int>(10);//ÆäÖĞ<int>¾ÍÊÇÏÖÊµÊµÀı»¯£¬Ö±½ÓÖ¸¶¨ T Îª intÀàĞÍ
-//    //²»¹ı·ÅÔÚÉÏÃæ´úÂëÉÏ£¬ÒòÎª b Î´³õÊ¼»¯£¬ËùÒÔ´òÓ¡Ê®±éËæ»úÖµ
+//    Print<int>(10);//å…¶ä¸­<int>å°±æ˜¯ç°å®å®ä¾‹åŒ–ï¼Œç›´æ¥æŒ‡å®š T ä¸º intç±»å‹
+//    //ä¸è¿‡æ”¾åœ¨ä¸Šé¢ä»£ç ä¸Šï¼Œå› ä¸º b æœªåˆå§‹åŒ–ï¼Œæ‰€ä»¥æ‰“å°åééšæœºå€¼
 //    Print<int>(2.0);
 //    return 0;
+//}
+
+//#include<iostream>
+//using namespace std;
+//
+//void Print(int a, int b)
+//{
+//	cout << a << endl << b << endl;
+//}
+//template<typename T>
+//void print(T& a, T& b)
+//{
+//	cout << a << endl << b << endl;
+//}
+//template <typename T1, typename T2>
+//void Print(T1& a, T2& b)
+//{
+//	cout << a << endl << b << endl;
+//}
+//
+//
+//int main()
+//{
+//	int x = 10;
+//	int x1 = 20;
+//	double y = 1.0;
+//	double y1 = 2.0;
+//	Print(x, x1);//åŒ¹é…ä¿©intï¼Œè°ƒç”¨ç°æˆçš„â€œvoid Print(int a, int b)â€
+//	Print(y, y1);//åŒ¹é…ä¿©doubleï¼Œè°ƒç”¨â€œvoid print(T& a, T& b)â€ï¼Œå½¢å‚æ˜¯åŒç±»å‹çš„ï¼Œæ¨æ¼”å‡ºä¸€ä¸ªå°±ç›¸å½“äºæ¨æ¼”æ‰€æœ‰çš„äº†ï¼Œæ›´çœäº‹
+//	Print(x, y);//åŒ¹é…ä¸€ä¸ªintä¸€ä¸ªdoubleï¼Œè°ƒç”¨â€œvoid Print(T1& a, T2& b)â€ï¼Œå› ä¸ºä¸¤ä¸ªå®å‚ç±»å‹ä¸åŒï¼Œå‰ä¸¤ä¸ªå‡½æ•°æˆ–å‡½æ•°æ¨¡æ¿çš„å½¢å‚éƒ½ä¸èƒ½ç›´æ¥åŒ¹é…
+//	return 0;
+//}
+
+
+//class Solution {
+//public:
+//    /**
+//     * ä»£ç ä¸­çš„ç±»åã€æ–¹æ³•åã€å‚æ•°åå·²ç»æŒ‡å®šï¼Œè¯·å‹¿ä¿®æ”¹ï¼Œç›´æ¥è¿”å›æ–¹æ³•è§„å®šçš„å€¼å³å¯
+//     *
+//     *
+//     * @param root TreeNodeç±»
+//     * @return intæ•´å‹
+//     */
+//    bool isleave(TreeNode* root)
+//    {
+//        if (root->left == NULL && root->right == NULL)
+//            return true;
+//        else
+//            return false;
+//    }
+//    TreeNode* Find(TreeNode* root)
+//    {
+//        if (!isleave(root) &&
+//            ((root->left->left == NULL && root->left->right == NULL)
+//                || (root->right->left == NULL && root->right->right == NULL))
+//            )
+//        {
+//            _arr[_n] = root;
+//            ++_n;
+//        }
+//        Find(root->left);
+//        Find(root->right);
+//        return NULL;
+//    }
+//    int sumOfLeftLeaves(TreeNode* root) {
+//        // write code here
+//        //1.æ‰¾åˆ°å¶å­ç»“ç‚¹çš„çˆ¶èŠ‚ç‚¹ï¼Œ2.åˆ¤æ–­æ˜¯å¦æœ‰å³ç»“ç‚¹
+//        int sum = 0;
+//        Find(root);
+//        for (int i = 0; i < _n; ++i)
+//        {
+//            if (_arr[i]->left != NULL)
+//            {
+//                sum += _arr[i]->left->val;
+//            }
+//        }
+//        return sum;
+//    }
+//    int _n = 0;
+//    TreeNode* _arr[1000] = { NULL };
+//};
+
+
+//#include<iostream>
+//using namespace std;
+//
+//int main(int argc, char* argv[])
+//
+//{
+//
+//	string a = "hello world";
+//
+//	string b = a;
+//	printf("%s\n", a.c_str());
+//	printf("%s\n", b.c_str());
+//	if (a.c_str() == b.c_str())
+//
+//	{
+//
+//
+//		cout << "true" << endl;
+//
+//	}
+//
+//	else cout << "false" << endl;
+//
+//	string c = b;
+//
+//	c = "";
+//	printf("%s\n", a.c_str());
+//	printf("%s\n", b.c_str());
+//	if (a.c_str() == b.c_str())
+//
+//	{
+//
+//
+//		cout << "true" << endl;
+//
+//	}
+//
+//	else cout << "false" << endl;
+//
+//	a = "";
+//	printf("%s\n", a.c_str());
+//	printf("%s\n", b.c_str());
+//	if (a.c_str() == b.c_str())
+//
+//	{
+//
+//		cout << "true" << endl;
+//
+//	}
+//
+//	else cout << "false" << endl;
+//
+//	return 0;
+//
+//}
+
+//#include<iostream>
+//using namespace std;
+//int main(int argc, char* argv[])
+//
+//{
+//
+//	string strText = "How are you?";
+//
+//	string strSeparator = " ";
+//
+//	string strResult;
+//
+//	int size_pos = 0;
+//
+//	int size_prev_pos = 0;
+//
+//	while ((size_pos = strText.find_first_of(strSeparator, size_pos)) != string::npos)
+//
+//	{
+//
+//		strResult = strText.substr(size_prev_pos, size_pos - size_prev_pos);
+//
+//		cout << strResult << " ";
+//
+//		size_prev_pos = ++size_pos;
+//
+//	}
+//
+//	if (size_prev_pos != strText.size())
+//
+//	{
+//
+//		strResult = strText.substr(size_prev_pos, size_pos - size_prev_pos);
+//
+//		cout << strResult << " ";
+//
+//	}
+//
+//	cout << endl;
+//
+//	return 0;
+//
+//}
+
+//#include<iostream>
+//using namespace std;
+//
+//int main()
+//{
+//	char a[] = "1111";
+//	char b[] = "666";
+//	printf("%d", strcmp(a, b));
+//
+//	return 0;
 //}
 
 #include<iostream>
 using namespace std;
 
-void Print(int a, int b)
-{
-	cout << a << endl << b << endl;
-}
-template<typename T>
-void print(T& a, T& b)
-{
-	cout << a << endl << b << endl;
-}
-template <typename T1, typename T2>
-void Print(T1& a, T2& b)
-{
-	cout << a << endl << b << endl;
-}
+class Solution {
+public:
 
+    int myAtoi(string str) {
+        if (str.empty())
+        {
+            return 0;
+        }
+        //1.è¯»å–æ•°å­—å­—ç¬¦éƒ¨åˆ†
+        //2.åˆ¤æ–­å¤§å°æ˜¯å¦åœ¨æ•´æ•°èŒƒå›´å†…
+        //3.è½¬æ¢
+        string temp;
+        int num = 0;//è®°å½•æ•°å­—å‰çš„éæ•°å­—å­—ç¬¦ä¸ªæ•°
+        int begini = 0;
+        string::iterator begin = str.begin();
+        while (begin != str.end())
+        {
+            if (48 <= *begin && *begin <= 57)
+            {
+                break;
+            }
+            if (*begin != ' ' && *begin != '-' && *begin != '+')//å¦‚æœæ•°å­—å‰ä¸æ˜¯è¿™ä¸‰ä¸ªå°±ç›´æ¥è¿”å›
+            {
+                if (*begin != ' ')
+                {
+                    ++num;//è®°å½• +- å·çš„ä¸ªæ•°ï¼Œå¤šäºä¸€ä¸ªä¹Ÿæ˜¯
+                }
+                return 0;
+            }
+            ++begini;
+            ++begin;
+        }
+        if (num > 1)
+            return 0;
+        int endi = begini;
+        string::iterator end = str.begin() += begini;
+        while (end != str.end())
+        {
+            if (!(48 <= *end && *end <= 57))
+            {
+                break;
+            }
+            ++endi;
+            ++end;
+        }
+        --endi;
+        int flag = 1;
+        if (begini != 0 && str[begini - 1] == '-')
+        {
+            flag = -1;
+        }
+        //printf("%d", INT_MAX);//2147483647:10
+        while (str[begini] == '0' && begini != endi)
+        {
+            ++begini;
+        }
+        temp = str.substr(begini, endi - begini + 1);
+        if (temp.size() > 10)
+        {
+            if (flag == 1)
+                return pow(2, 31) * flag - 1;
+            else
+                return pow(2, 31) * flag;
+        }
+        char max[] = "2147483647";
+        if (temp.size() == 10)
+        {
+            if (strcmp(temp.c_str(), max) > 0)
+            {
+                if (flag == 1)
+                    return pow(2, 31) * flag - 1;
+                else
+                    return pow(2, 31) * flag;
+            }
+        }
+        string::reverse_iterator tbegin = temp.rbegin();
+        string::reverse_iterator tend = temp.rend();
+        int index = 1;
+        int ret = 0;
+        while (tbegin != tend)
+        {
+            ret += (*tbegin - 48) * index;
+            index *= 10;
+            ++tbegin;
+        }
+        return ret * flag;
+    }
+
+};
 
 int main()
 {
-	int x = 10;
-	int x1 = 20;
-	double y = 1.0;
-	double y1 = 2.0;
-	Print(x, x1);//Æ¥ÅäÁ©int£¬µ÷ÓÃÏÖ³ÉµÄ¡°void Print(int a, int b)¡±
-	Print(y, y1);//Æ¥ÅäÁ©double£¬µ÷ÓÃ¡°void print(T& a, T& b)¡±£¬ĞÎ²ÎÊÇÍ¬ÀàĞÍµÄ£¬ÍÆÑİ³öÒ»¸ö¾ÍÏàµ±ÓÚÍÆÑİËùÓĞµÄÁË£¬¸üÊ¡ÊÂ
-	Print(x, y);//Æ¥ÅäÒ»¸öintÒ»¸ödouble£¬µ÷ÓÃ¡°void Print(T1& a, T2& b)¡±£¬ÒòÎªÁ½¸öÊµ²ÎÀàĞÍ²»Í¬£¬Ç°Á½¸öº¯Êı»òº¯ÊıÄ£°åµÄĞÎ²Î¶¼²»ÄÜÖ±½ÓÆ¥Åä
-	return 0;
+
+    Solution a;
+    printf("%d\n", a.myAtoi("   -42"));
+    //printf("%d\n", a.myAtoi("words and 987"));
+
+    return 0;
 }
