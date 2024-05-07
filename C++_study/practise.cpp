@@ -1173,105 +1173,328 @@
 //	return 0;
 //}
 
+//#include<iostream>
+//using namespace std;
+//
+//class Solution {
+//public:
+//
+//
+//    int myAtoi(string str) {
+//        if (str.empty())
+//        {
+//            return 0;
+//        }
+//        //1.读取数字字符部分
+//        //2.判断大小是否在整数范围内
+//        //3.转换
+//        string temp;
+//        int num = 0;//记录数字前的非数字字符个数
+//        int begini = 0;
+//        string::iterator begin = str.begin();
+//        while (begin != str.end())
+//        {
+//            if (48 <= *begin && *begin <= 57)
+//            {
+//                break;
+//            }
+//            if (*begin != ' ' && *begin != '-' && *begin != '+')//如果数字前不是这三个就直接返回
+//            {
+//                return 0;
+//            }
+//            else if (*begin != ' ')
+//            {
+//                ++num;//记录 +- 号的个数，多于一个也是
+//            }
+//            ++begini;
+//            ++begin;
+//        }
+//        if (num > 1)
+//            return 0;
+//        if (begini != 0 && str[begini - 1] == ' ' && num == 1)
+//            return 0;
+//        int endi = begini;
+//        string::iterator end = str.begin() += begini;
+//        while (end != str.end())
+//        {
+//            if (!(48 <= *end && *end <= 57))
+//            {
+//                break;
+//            }
+//            ++endi;
+//            ++end;
+//        }
+//        --endi;
+//        int flag = 1;
+//        if (begini != 0 && str[begini - 1] == '-')
+//        {
+//            flag = -1;
+//        }
+//        //printf("%d", INT_MAX);//2147483647:10
+//        while (str[begini] == '0' && begini != endi)
+//        {
+//            ++begini;
+//        }
+//        temp = str.substr(begini, endi - begini + 1);
+//        if (temp.size() > 10)
+//        {
+//            if (flag == 1)
+//                return pow(2, 31) * flag - 1;
+//            else
+//                return pow(2, 31) * flag;
+//        }
+//        char max[] = "2147483647";
+//        if (temp.size() == 10)
+//        {
+//            if (strcmp(temp.c_str(), max) > 0)
+//            {
+//                if (flag == 1)
+//                    return pow(2, 31) * flag - 1;
+//                else
+//                    return pow(2, 31) * flag;
+//            }
+//        }
+//        string::reverse_iterator tbegin = temp.rbegin();
+//        string::reverse_iterator tend = temp.rend();
+//        long index = 1;
+//        int ret = 0;
+//        while (tbegin != tend)
+//        {
+//            ret += (*tbegin - 48) * index;
+//            index *= 10;
+//            ++tbegin;
+//        }
+//        return ret * flag;
+//    }
+//};
+//
+//int main()
+//{
+//
+//    Solution a;
+//    //printf("%d\n", a.myAtoi("   -42"));
+//    printf("%d\n", a.myAtoi("+-2"));
+//
+//    return 0;
+//}
+
+//#include<iostream>
+//using namespace std;
+//
+//class Solution {
+//public:
+//    string addStrings(string num1, string num2) {
+//        //1.迭代器从俩字符串末尾开始加，逢十进一
+//        //2.若一边走完则使后续都加 0
+//        string::reverse_iterator begin1 = num1.rbegin();
+//        string::reverse_iterator begin2 = num2.rbegin();
+//        int n1 = 0, n2 = 0;
+//        int next = 0;
+//        string ret;
+//        while (begin1 != num1.rend() && begin2 != num2.rend())
+//        {
+//            n1 = *begin1 - 48;
+//            n2 = *begin2 - 48;
+//            ret += ((n1 + n2 + next) % 10) + '0';
+//            next = (n1 + n2 + next) / 10;
+//            ++begin1;
+//            ++begin2;
+//        }
+//        while (begin1 != num1.rend())
+//        {
+//            n1 = *begin1 - 48;
+//            ret += (n1 + next) % 10 + '0';
+//            next = (n1 + next) / 10;
+//            ++begin1;
+//        }
+//        while (begin2 != num2.rend())
+//        {
+//            n2 = *begin2 - 48;
+//            ret += (n2 + next) % 10 + '0';
+//            next = (n2 + next) / 10;
+//            ++begin2;
+//        }
+//
+//        if (next != 0)
+//        {
+//            ret += next + '0';
+//        }
+//
+//        // string rret;
+//        // string::reverse_iterator ret_begin = ret.rbegin();
+//        // while (ret_begin != ret.rend())
+//        // {
+//        //     rret += *ret_begin;
+//        //     ++ret_begin;
+//        // }
+//        reverse(ret.begin(), ret.end());
+//        return ret;
+//    }
+//};
+//
+//int main()
+//{
+//    Solution a;
+//    printf("%s", (a.addStrings("11", "123")));
+//    return 0;
+//}
+
+//#include<iostream>
+//using namespace std;
+//class Solution {
+//public:
+//    bool isalp(char a)
+//    {
+//        if ((65 <= a && a <= 90) || (97 <= a && a <= 122))
+//            return true;
+//        else
+//            return false;
+//    }
+//    bool isPalindrome(string s) {
+//        string ret;
+//        for (int i = 0; i < s.size(); ++i)
+//        {
+//            if (isalp(s[i]))
+//            {
+//                ret += s[i];//取出字母部分
+//            }
+//        }
+//        for (int i = 0; i < ret.size(); ++i)
+//        {
+//            if (ret[i] < 97)
+//            {
+//                ret[i] += 32;//大写转小写
+//            }
+//        }
+//        int b = 0;
+//        int e = ret.size() - 1;
+//        while (b < e)
+//        {
+//            if (ret[b] != ret[e])
+//                return false;
+//            ++b;
+//            --e;
+//        }
+//        return true;
+//    }
+//};
+//int main()
+//{
+//    Solution a;
+//    if (a.isPalindrome("0P"))
+//        printf("T");
+//    else
+//        printf("F");
+//	return 0;
+//}
+
 #include<iostream>
 using namespace std;
-
 class Solution {
 public:
+    string addStrings(string num1, string num2) {
+        //1.迭代器从俩字符串末尾开始加，逢十进一
+        //2.若一边走完则使后续都加 0
+        string::reverse_iterator begin1 = num1.rbegin();
+        string::reverse_iterator begin2 = num2.rbegin();
+        int n1 = 0, n2 = 0;
+        int next = 0;
+        string ret;
+        while (begin1 != num1.rend() && begin2 != num2.rend())
+        {
+            n1 = *begin1 - 48;
+            n2 = *begin2 - 48;
+            ret += ((n1 + n2 + next) % 10) + '0';
+            next = (n1 + n2 + next) / 10;
+            ++begin1;
+            ++begin2;
+        }
+        while (begin1 != num1.rend())
+        {
+            n1 = *begin1 - 48;
+            ret += (n1 + next) % 10 + '0';
+            next = (n1 + next) / 10;
+            ++begin1;
+        }
+        while (begin2 != num2.rend())
+        {
+            n2 = *begin2 - 48;
+            ret += (n2 + next) % 10 + '0';
+            next = (n2 + next) / 10;
+            ++begin2;
+        }
 
-    int myAtoi(string str) {
-        if (str.empty())
+        if (next != 0)
         {
-            return 0;
+            ret += next + '0';
         }
-        //1.读取数字字符部分
-        //2.判断大小是否在整数范围内
-        //3.转换
-        string temp;
-        int num = 0;//记录数字前的非数字字符个数
-        int begini = 0;
-        string::iterator begin = str.begin();
-        while (begin != str.end())
-        {
-            if (48 <= *begin && *begin <= 57)
-            {
-                break;
-            }
-            if (*begin != ' ' && *begin != '-' && *begin != '+')//如果数字前不是这三个就直接返回
-            {
-                if (*begin != ' ')
-                {
-                    ++num;//记录 +- 号的个数，多于一个也是
-                }
-                return 0;
-            }
-            ++begini;
-            ++begin;
-        }
-        if (num > 1)
-            return 0;
-        int endi = begini;
-        string::iterator end = str.begin() += begini;
-        while (end != str.end())
-        {
-            if (!(48 <= *end && *end <= 57))
-            {
-                break;
-            }
-            ++endi;
-            ++end;
-        }
-        --endi;
-        int flag = 1;
-        if (begini != 0 && str[begini - 1] == '-')
-        {
-            flag = -1;
-        }
-        //printf("%d", INT_MAX);//2147483647:10
-        while (str[begini] == '0' && begini != endi)
-        {
-            ++begini;
-        }
-        temp = str.substr(begini, endi - begini + 1);
-        if (temp.size() > 10)
-        {
-            if (flag == 1)
-                return pow(2, 31) * flag - 1;
-            else
-                return pow(2, 31) * flag;
-        }
-        char max[] = "2147483647";
-        if (temp.size() == 10)
-        {
-            if (strcmp(temp.c_str(), max) > 0)
-            {
-                if (flag == 1)
-                    return pow(2, 31) * flag - 1;
-                else
-                    return pow(2, 31) * flag;
-            }
-        }
-        string::reverse_iterator tbegin = temp.rbegin();
-        string::reverse_iterator tend = temp.rend();
-        int index = 1;
-        int ret = 0;
-        while (tbegin != tend)
-        {
-            ret += (*tbegin - 48) * index;
-            index *= 10;
-            ++tbegin;
-        }
-        return ret * flag;
+
+        // string rret;
+        // string::reverse_iterator ret_begin = ret.rbegin();
+        // while (ret_begin != ret.rend())
+        // {
+        //     rret += *ret_begin;
+        //     ++ret_begin;
+        // }
+        reverse(ret.begin(), ret.end());
+        return ret;
     }
 
+    string multiply(string num1, string num2) {
+        //1.用字符串相加一样的方法，不过是每位相乘再加起来
+        if (num1[0] == '0' || num2[0] == '0')
+        {
+            return "0";
+        }
+        long add = 0;//进位
+        long n1 = 0;//num1 的每位
+        long n2 = 0;//num2 的每位
+        string::reverse_iterator rbegin1 = num1.rbegin();
+        string::reverse_iterator rbegin2 = num2.rbegin();
+        string ret;//返回的字符串
+        string temp;//每次临时算出的字符串
+        long index = 0;//补零的次数
+        while (rbegin2 != num2.rend())
+        {
+            temp.clear();
+            add = 0;
+            rbegin1 = num1.rbegin();
+            while (rbegin1 != num1.rend())
+            {
+                n1 = *rbegin1 - 48;
+                n2 = *rbegin2 - 48;
+                temp += (n1 * n2 + add) % 10 + '0';
+                add = (n1 * n2 + add) / 10;
+                ++rbegin1;
+            }
+            if (add != 0 && add < 10)
+            {
+                temp += add + '0';
+            }
+            else if (add != 0 && add > 10)
+            {
+                while (add)
+                {
+                    temp += add % 10 + '0';
+                    add /= 10;
+                }
+            }
+            reverse(temp.begin(), temp.end());
+            for (int i = 0; i < index; ++i)
+            {
+                temp += "0";
+            }
+            ret = addStrings(ret, temp);
+            ++rbegin2;
+            ++index;
+        }
+        return ret;
+    }
 };
 
 int main()
 {
-
     Solution a;
-    printf("%d\n", a.myAtoi("   -42"));
-    //printf("%d\n", a.myAtoi("words and 987"));
-
+    a.multiply("123", "456");
     return 0;
 }
