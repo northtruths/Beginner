@@ -1388,113 +1388,158 @@
 //	return 0;
 //}
 
+//#include<iostream>
+//using namespace std;
+//class Solution {
+//public:
+//    string addStrings(string num1, string num2) {
+//        //1.迭代器从俩字符串末尾开始加，逢十进一
+//        //2.若一边走完则使后续都加 0
+//        string::reverse_iterator begin1 = num1.rbegin();
+//        string::reverse_iterator begin2 = num2.rbegin();
+//        int n1 = 0, n2 = 0;
+//        int next = 0;
+//        string ret;
+//        while (begin1 != num1.rend() && begin2 != num2.rend())
+//        {
+//            n1 = *begin1 - 48;
+//            n2 = *begin2 - 48;
+//            ret += ((n1 + n2 + next) % 10) + '0';
+//            next = (n1 + n2 + next) / 10;
+//            ++begin1;
+//            ++begin2;
+//        }
+//        while (begin1 != num1.rend())
+//        {
+//            n1 = *begin1 - 48;
+//            ret += (n1 + next) % 10 + '0';
+//            next = (n1 + next) / 10;
+//            ++begin1;
+//        }
+//        while (begin2 != num2.rend())
+//        {
+//            n2 = *begin2 - 48;
+//            ret += (n2 + next) % 10 + '0';
+//            next = (n2 + next) / 10;
+//            ++begin2;
+//        }
+//
+//        if (next != 0)
+//        {
+//            ret += next + '0';
+//        }
+//
+//        // string rret;
+//        // string::reverse_iterator ret_begin = ret.rbegin();
+//        // while (ret_begin != ret.rend())
+//        // {
+//        //     rret += *ret_begin;
+//        //     ++ret_begin;
+//        // }
+//        reverse(ret.begin(), ret.end());
+//        return ret;
+//    }
+//
+//    string multiply(string num1, string num2) {
+//        //1.用字符串相加一样的方法，不过是每位相乘再加起来
+//        if (num1[0] == '0' || num2[0] == '0')
+//        {
+//            return "0";
+//        }
+//        long add = 0;//进位
+//        long n1 = 0;//num1 的每位
+//        long n2 = 0;//num2 的每位
+//        string::reverse_iterator rbegin1 = num1.rbegin();
+//        string::reverse_iterator rbegin2 = num2.rbegin();
+//        string ret;//返回的字符串
+//        string temp;//每次临时算出的字符串
+//        long index = 0;//补零的次数
+//        while (rbegin2 != num2.rend())
+//        {
+//            temp.clear();
+//            add = 0;
+//            rbegin1 = num1.rbegin();
+//            while (rbegin1 != num1.rend())
+//            {
+//                n1 = *rbegin1 - 48;
+//                n2 = *rbegin2 - 48;
+//                temp += (n1 * n2 + add) % 10 + '0';
+//                add = (n1 * n2 + add) / 10;
+//                ++rbegin1;
+//            }
+//            if (add != 0 && add < 10)
+//            {
+//                temp += add + '0';
+//            }
+//            else if (add != 0 && add > 10)
+//            {
+//                while (add)
+//                {
+//                    temp += add % 10 + '0';
+//                    add /= 10;
+//                }
+//            }
+//            reverse(temp.begin(), temp.end());
+//            for (int i = 0; i < index; ++i)
+//            {
+//                temp += "0";
+//            }
+//            ret = addStrings(ret, temp);
+//            ++rbegin2;
+//            ++index;
+//        }
+//        return ret;
+//    }
+//};
+//
+//int main()
+//{
+//    Solution a;
+//    a.multiply("123", "456");
+//    return 0;
+//}
+
 #include<iostream>
 using namespace std;
-class Solution {
-public:
-    string addStrings(string num1, string num2) {
-        //1.迭代器从俩字符串末尾开始加，逢十进一
-        //2.若一边走完则使后续都加 0
-        string::reverse_iterator begin1 = num1.rbegin();
-        string::reverse_iterator begin2 = num2.rbegin();
-        int n1 = 0, n2 = 0;
-        int next = 0;
-        string ret;
-        while (begin1 != num1.rend() && begin2 != num2.rend())
-        {
-            n1 = *begin1 - 48;
-            n2 = *begin2 - 48;
-            ret += ((n1 + n2 + next) % 10) + '0';
-            next = (n1 + n2 + next) / 10;
-            ++begin1;
-            ++begin2;
-        }
-        while (begin1 != num1.rend())
-        {
-            n1 = *begin1 - 48;
-            ret += (n1 + next) % 10 + '0';
-            next = (n1 + next) / 10;
-            ++begin1;
-        }
-        while (begin2 != num2.rend())
-        {
-            n2 = *begin2 - 48;
-            ret += (n2 + next) % 10 + '0';
-            next = (n2 + next) / 10;
-            ++begin2;
-        }
 
-        if (next != 0)
-        {
-            ret += next + '0';
-        }
+int main(int argc, char* argv[])
 
-        // string rret;
-        // string::reverse_iterator ret_begin = ret.rbegin();
-        // while (ret_begin != ret.rend())
-        // {
-        //     rret += *ret_begin;
-        //     ++ret_begin;
-        // }
-        reverse(ret.begin(), ret.end());
-        return ret;
-    }
-
-    string multiply(string num1, string num2) {
-        //1.用字符串相加一样的方法，不过是每位相乘再加起来
-        if (num1[0] == '0' || num2[0] == '0')
-        {
-            return "0";
-        }
-        long add = 0;//进位
-        long n1 = 0;//num1 的每位
-        long n2 = 0;//num2 的每位
-        string::reverse_iterator rbegin1 = num1.rbegin();
-        string::reverse_iterator rbegin2 = num2.rbegin();
-        string ret;//返回的字符串
-        string temp;//每次临时算出的字符串
-        long index = 0;//补零的次数
-        while (rbegin2 != num2.rend())
-        {
-            temp.clear();
-            add = 0;
-            rbegin1 = num1.rbegin();
-            while (rbegin1 != num1.rend())
-            {
-                n1 = *rbegin1 - 48;
-                n2 = *rbegin2 - 48;
-                temp += (n1 * n2 + add) % 10 + '0';
-                add = (n1 * n2 + add) / 10;
-                ++rbegin1;
-            }
-            if (add != 0 && add < 10)
-            {
-                temp += add + '0';
-            }
-            else if (add != 0 && add > 10)
-            {
-                while (add)
-                {
-                    temp += add % 10 + '0';
-                    add /= 10;
-                }
-            }
-            reverse(temp.begin(), temp.end());
-            for (int i = 0; i < index; ++i)
-            {
-                temp += "0";
-            }
-            ret = addStrings(ret, temp);
-            ++rbegin2;
-            ++index;
-        }
-        return ret;
-    }
-};
-
-int main()
 {
-    Solution a;
-    a.multiply("123", "456");
-    return 0;
+
+	string strText = "How are you?";
+
+	string strSeparator = " ";
+
+	string strResult;
+
+	int size_pos = 0;
+
+	int size_prev_pos = 0;
+
+	while ((size_pos = strText.find_first_of(strSeparator, size_pos)) != string::npos)
+
+	{
+
+		strResult = strText.substr(size_prev_pos, size_pos - size_prev_pos);
+
+		cout << strResult << " ";
+
+		size_prev_pos = ++size_pos;
+
+	}
+
+	if (size_prev_pos != strText.size())
+
+	{
+
+		strResult = strText.substr(size_prev_pos, size_pos - size_prev_pos);
+
+		cout << strResult << " ";
+
+	}
+
+	cout << endl;
+
+	return 0;
+
 }
