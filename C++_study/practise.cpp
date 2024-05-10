@@ -1499,47 +1499,94 @@
 //    return 0;
 //}
 
+//#include<iostream>
+//using namespace std;
+//
+//int main(int argc, char* argv[])
+//
+//{
+//
+//	string strText = "How are you?";
+//
+//	string strSeparator = " ";
+//
+//	string strResult;
+//
+//	int size_pos = 0;
+//
+//	int size_prev_pos = 0;
+//
+//	while ((size_pos = strText.find_first_of(strSeparator, size_pos)) != string::npos)
+//
+//	{
+//
+//		strResult = strText.substr(size_prev_pos, size_pos - size_prev_pos);
+//
+//		cout << strResult << " ";
+//
+//		size_prev_pos = ++size_pos;
+//
+//	}
+//
+//	if (size_prev_pos != strText.size())
+//
+//	{
+//
+//		strResult = strText.substr(size_prev_pos, size_pos - size_prev_pos);
+//
+//		cout << strResult << " ";
+//
+//	}
+//
+//	cout << endl;
+//
+//	return 0;
+//
+//}
+
+//#include<iostream>
+//using namespace std;
+//
+//class Solution {
+//public:
+//    string reverseStr(string s, int k) {
+//        int pre = 0, post = k - 1;
+//        while (post < s.size())
+//        {
+//            reverse(s.begin() + pre, s.begin() + post + 1);
+//            pre += 2 * k;
+//            post += 2 * k;
+//        }
+//        if (pre < s.size())
+//        {
+//            reverse(s.begin() + pre, s.end());
+//        }
+//        return s;
+//    }
+//    Solution(const char* s)
+//    {
+//        _s = s;
+//    }
+//    string _s;
+//};
+//int main()
+//{
+//    Solution t1("abcdefg");
+//    t1.reverseStr(t1._s, 2);
+//    return 0;
+//}
+
+#include<string>
 #include<iostream>
+#include<algorithm>
+#include<vector>
 using namespace std;
 
-int main(int argc, char* argv[])
-
+int main()
 {
-
-	string strText = "How are you?";
-
-	string strSeparator = " ";
-
-	string strResult;
-
-	int size_pos = 0;
-
-	int size_prev_pos = 0;
-
-	while ((size_pos = strText.find_first_of(strSeparator, size_pos)) != string::npos)
-
-	{
-
-		strResult = strText.substr(size_prev_pos, size_pos - size_prev_pos);
-
-		cout << strResult << " ";
-
-		size_prev_pos = ++size_pos;
-
-	}
-
-	if (size_prev_pos != strText.size())
-
-	{
-
-		strResult = strText.substr(size_prev_pos, size_pos - size_prev_pos);
-
-		cout << strResult << " ";
-
-	}
-
-	cout << endl;
+	string t1 = "zbdcajrnz";
+	vector<int> v1 = { 4, 3, 6, 1, 2, 6, 7, 6, 8 };
+	sort(v1.rbegin(), v1.rend());
 
 	return 0;
-
 }
