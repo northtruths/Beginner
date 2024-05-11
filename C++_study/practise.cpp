@@ -1576,17 +1576,51 @@
 //    return 0;
 //}
 
-#include<string>
+//#include<string>
+//#include<iostream>
+//#include<algorithm>
+//#include<vector>
+//using namespace std;
+//
+//int main()
+//{
+//	string t1 = "zbdcajrnz";
+//	vector<int> v1 = { 4, 3, 6, 1, 2, 6, 7, 6, 8 };
+//	sort(v1.rbegin(), v1.rend());
+//
+//	return 0;
+//}
+
 #include<iostream>
-#include<algorithm>
+#include<cctype>
 #include<vector>
+#include<algorithm>
 using namespace std;
 
 int main()
 {
-	string t1 = "zbdcajrnz";
-	vector<int> v1 = { 4, 3, 6, 1, 2, 6, 7, 6, 8 };
-	sort(v1.rbegin(), v1.rend());
+	//char t1 = 'a';
+	//char t2 = 'A';
+	//char t3 = '1';
+	//printf("%c", tolower(t1));
+	//printf("%c", tolower(t2));
+	//printf("%c", tolower(t3));
+	vector<int> t1 = { 1, 2, 3 };//全排列
+	vector<int> t2 = { 4, 4, 4 };//全排列
 
+	do
+	{
+		int flag = 0;
+		for (auto e : t1)
+		{
+			cout << e << " ";
+			++flag;
+			if (flag == t1.size())
+			{
+				cout << endl;
+			}
+		}
+	} while (next_permutation(t1.begin(), t1.end()));
+	swap(t1, t2);
 	return 0;
 }
