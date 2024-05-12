@@ -1591,36 +1591,435 @@
 //	return 0;
 //}
 
-#include<iostream>
-#include<cctype>
-#include<vector>
-#include<algorithm>
-using namespace std;
+//#include<iostream>
+//#include<cctype>
+//#include<vector>
+//#include<algorithm>
+//#include<list>
+//using namespace std;
+//
+//int main()
+//{
+//	//char t1 = 'a';
+//	//char t2 = 'A';
+//	//char t3 = '1';
+//	//printf("%c", tolower(t1));
+//	//printf("%c", tolower(t2));
+//	//printf("%c", tolower(t3));
+//	//vector<int> t1 = { 1, 2, 3 };//全排列
+//	//vector<int> t2 = { 4, 4, 4 };//全排列
+//
+//	//do
+//	//{
+//	//	int flag = 0;
+//	//	for (auto e : t1)
+//	//	{
+//	//		cout << e << " ";
+//	//		++flag;
+//	//		if (flag == t1.size())
+//	//		{
+//	//			cout << endl;
+//	//		}
+//	//	}
+//	//} while (next_permutation(t1.begin(), t1.end()));
+//	//swap(t1, t2);
+//
+//	list<int> l1 = { 0, 0, 0, 0};
+//	list<int>::iterator i1 = l1.begin();
+//	l1.insert(i1++, 2);//00200
+//	list<int>::iterator i2 = l1.end();
+//	l1.insert(i2--, 2);//002200
+//
+//	return 0;
+//}
 
+//#include<iostream>
+//#include<queue>
+//#include<algorithm>
+//using namespace std;
+//
+//int main()//优先队列
+//{
+//	priority_queue<int> q1;
+//	q1.push(3);
+//	q1.push(1);
+//	q1.push(5);
+//	q1.push(4);
+//	q1.push(0);
+//	priority_queue <int, vector<int>, greater<int>> q2;
+//	q2.push(3);
+//	q2.push(1);
+//	q2.push(5);
+//	q2.push(4);
+//	q2.push(0);
+//	
+//	return 0;
+//}
+
+//#include <iostream>
+//#include<vector>
+//#include<algorithm>
+//#include<math.h>
+//using namespace std;
+//int main()//思路是错的，因为房子不能动
+//{
+//    int t = 0;
+//    cin >> t;
+//    while (t--)
+//    {
+//        int n = 0, k = 0;
+//        cin >> n >> k;
+//        vector<int> v;
+//        int e = 0;
+//        for(int i = 0 ; i < n ; ++i)
+//        {
+//            cin >> e;
+//            v.push_back(e);
+//        }
+//        sort(v.begin(), v.end());//输入到排序
+//        int cur = 0, max_count = 0, count = 0;//当前计数的数字，最大计数，当前计数
+//        for (auto m : v)
+//        {
+//            if (m == cur)
+//            {
+//                ++count;//当前计数
+//            }
+//            if (m != cur)
+//            {
+//                cur = m;//准备开始计数下一个数字
+//                if (count > max_count)
+//                {
+//                    max_count = count;//记录最大计数
+//                }
+//                count = 1;
+//            }
+//        }
+//        cout << ceil((n - max_count) / (float)k) << endl;//把所有其他的都涂为计数最多的颜色，向上取整
+//
+//
+//    }
+//    // 请在此输入您的代码
+//    return 0;
+//}
+//1
+//20 3
+//11 2 55 1 4 1 22 5 1 33 2 1 4 88 55 22 6 11 2 1 2
+
+//#include <iostream>
+//#include <vector>
+//#include <unordered_set>
+//using namespace std;
+//int main() {
+//    int t; cin >> t;
+//    for (int i = 0, n, k; i < t; i++) {
+//        cin >> n >> k;
+//        vector<int> arr(n);
+//        unordered_set<int> s;
+//        for (int j = 0; j < n; j++) {
+//            cin >> arr[j];
+//            s.insert(arr[j]);  //一个集合，防止重复记录
+//        }
+//        int ans = INT_MAX;
+//        for (auto& x : s) {
+//            int cnt = 0;
+//            for (int j = 0; j < n; j++) {
+//                if (arr[j] == x) continue;  //如果当前颜色和我要涂的颜色一样，那么跳过
+//                cnt += 1;
+//                j += k - 1;   //否则将k区间内的颜色全部涂该种颜色，由于上面有j++,这里要-1
+//            }
+//            ans = min(ans, cnt);  //记录最小的就是答案
+//        }
+//        cout << ans << endl;
+//    }
+//    return 0;
+//}
+
+//#include<iostream>
+//#include<vector>
+//#include<algorithm>
+//using namespace std;
+//int main()
+//{
+//	std::vector<int> v1 = { 1, 1, 1, 2, 3, 4 ,5, 5 };
+//	//std::unique(v1.begin(), v1.end());
+//	vector<int>::iterator begin = v1.begin() += 3;
+//	cout << *begin;
+//	cout << *begin << endl << *(++begin) << endl;
+//	while (1)
+//	{
+//		int a = 0;
+//		++a;
+//		++a;
+//	}
+//	return 0;
+//}
+
+//#include <iostream>
+//#include<vector>
+//#include<algorithm>
+//#include<math.h>
+////#include<limits.h>
+//using namespace std;
+//int main()
+//{
+//    int t = 0;
+//    cin >> t;
+//    while (t--)
+//    {
+//        int n = 0, k = 0;
+//        cin >> n >> k;
+//        vector<int> v1;
+//        int e = 0;
+//        for (int i = 0; i < n; ++i)
+//        {
+//            cin >> e;
+//            v1.push_back(e);
+//        }
+//        vector<int> v2(v1);
+//        sort(v2.begin(), v2.end());//输入到排序
+//
+//        vector<int>::iterator begin2 = v2.begin();
+//        vector<int>::iterator end2 = v2.end();
+//        end2 = unique(begin2, end2);
+//        vector<int> v3;
+//        while (begin2 != end2)//每个颜色（数字）对应的映像
+//        {
+//            v3.push_back(*begin2);
+//            ++begin2;
+//        }
+//
+//        vector<int>::iterator begin3 = v3.begin();
+//        vector<int>::iterator end3 = v3.end();
+//
+//        int cur = 0, min_count = INT_MAX, count = 0;
+//        while (begin3 != end3)//每种颜色
+//        {
+//            count = 0;
+//            cur = *begin3;
+//            v2 = v1;
+//            begin2 = v2.begin();
+//            end2 = v2.end();
+//            while (begin2 != end2)
+//            {
+//                if (*begin2 == cur)
+//                {
+//                    ++begin2;
+//                    continue;
+//                }
+//                //此时跟要涂的颜色不一样
+//                int flag = 0;
+//                for (int i = 0; i < k; ++i)
+//                {
+//                    if (begin2 + i == end2)
+//                    {
+//                        flag = 1;//标记到末尾了
+//                        break;
+//                    }
+//                    *(begin2 + i) = cur;
+//                }
+//                ++count;
+//                if(flag)
+//                {
+//                    begin2 = end2;
+//                }
+//                else
+//                {
+//                    begin2 += k;
+//                }
+//            }
+//            if (count < min_count)
+//            {
+//                min_count = count;
+//            }
+//            ++begin3;//下种颜色
+//        }
+//        cout << min_count << endl;
+//    }
+//    // 请在此输入您的代码
+//    return 0;
+//}
+
+//#include <iostream>
+//#include<vector>
+//using namespace std;
+//int main()
+//{
+//    int t = 0;
+//    cin >> t;
+//    while (t--)
+//    {
+//        int n = 0;
+//        cin >> n;
+//        vector<int> v1;
+//        int e = 0;
+//        for (int i = 0; i < n; ++i)
+//        {
+//            cin >> e;
+//            v1.push_back(e);
+//        }
+//
+//        int count = 0;
+//        vector<int>::iterator begin1 = v1.begin();
+//        //统计负数 0 和正数 的个数，与和
+//        int arr[4] = { 0 };
+//        for (auto& i : v1)
+//        {
+//            if (i < 0)
+//                ++arr[0];
+//            else if (i == 0)
+//                ++arr[1];
+//            else
+//                ++arr[2];
+//            arr[3] += i;
+//        }
+//        //使arr满足负数个数为偶数，没有0，和为正则达成条件
+//        if (arr[0] % 2 == 1 && arr[1] > 0)
+//        {
+//            arr[0] += 1;
+//            arr[1] -= 1;
+//            arr[3] -= 1;
+//        }
+//        cout << arr[3] + 1 - arr[1] << endl;
+//    }
+//    cout << 666 << endl;
+//    return 0;
+//}
+
+#include  <iostream>
+#include  <string>
+#include  <vector>
+#include<utility>
+using namespace std;
 int main()
 {
-	//char t1 = 'a';
-	//char t2 = 'A';
-	//char t3 = '1';
-	//printf("%c", tolower(t1));
-	//printf("%c", tolower(t2));
-	//printf("%c", tolower(t3));
-	vector<int> t1 = { 1, 2, 3 };//全排列
-	vector<int> t2 = { 4, 4, 4 };//全排列
+    //遍历两边数组，第一遍找能互换的，第二边强行换
+    int n = 0;
+    int count = 0;
+    cin >> n;
+    vector<char> v1;
+    vector<pair<char, int>> v2;//第二个标记是否有配对
+    for (int i = 0; i < n; ++i)
+    {
+        char a = 0;
+        cin >> a;
+        v1.push_back(a);
+    }
+    for (int i = 0; i < n; ++i)
+    {
+        char a = 0;
+        cin >> a;
+        v2.push_back(make_pair(a, 0));
+    }
+    int arr[4] = { 0 };//以此记录 A T C G 待配对的数 ascll 65 84 67 71
+    vector<pair<int, int>> v3;//待交换的下标
+    for (int i = 0; i < n; ++i)
+    {
+        if (v1[i] == v2[i].first && v2[i].second == 0)//找到可以匹配，记录个数，并放进 v3 去等待匹配或匹配已有的
+        {
+            if (v1[i] == 'A' && arr[1] != 0)
+            {
+                for (auto& e : v3)
+                {
+                    if (v1[e.first] == 'T')
+                    {
+                        //匹配到了
+                        --arr[1];
+                        v2[i].second = 1;
+                        v2[e.first].second = 1;
+                        //交换
+                        char temp = v2[i].first;
+                        v2[i].first = v2[e.first].first;
+                        v2[e.first].first = temp;
+                        ++count;
+                        break;
+                    }
+                }
+            }
+            else if (v1[i] == 'T' && arr[0] != 0)
+            {
+                for (auto& e : v3)
+                {
+                    if (v1[e.first] == 'A')
+                    {
+                        //匹配到了
+                        --arr[0];
+                        v2[i].second = 1;
+                        v2[e.first].second = 1;
+                        //交换
+                        char temp = v2[i].first;
+                        v2[i].first = v2[e.first].first;
+                        v2[e.first].first = temp;
+                        ++count;
+                        break;
+                    }
+                }
+            }
+            else if (v1[i] == 'C' && arr[3] != 0)
+            {
+                for (auto& e : v3)
+                {
+                    if (v1[e.first] == 'G')
+                    {
+                        //匹配到了
+                        --arr[3];
+                        v2[i].second = 1;
+                        v2[e.first].second = 1;
+                        //交换
+                        char temp = v2[i].first;
+                        v2[i].first = v2[e.first].first;
+                        v2[e.first].first = temp;
+                        ++count;
+                        break;
+                    }
+                }
+            }
+            else if (v1[i] == 'G' && arr[2] != 0)
+            {
+                for (auto& e : v3)
+                {
+                    if (v1[e.first] == 'C')
+                    {
+                        //匹配到了
+                        --arr[2];
+                        v2[i].second = 1;
+                        v2[e.first].second = 1;
+                        //交换
+                        char temp = v2[i].first;
+                        v2[i].first = v2[e.first].first;
+                        v2[e.first].first = temp;
+                        ++count;
+                        break;
+                    }
+                }
+            }
+            else
+            {
+                v3.push_back(make_pair(i, NULL));
+                if (v1[i] == 'A')
+                    arr[0]++;
+                if (v1[i] == 'T')
+                    arr[1]++;
+                if (v1[i] == 'C')
+                    arr[2]++;
+                if (v1[i] == 'G')
+                    arr[3]++;
+               
+            }
+        }
+    }
 
-	do
-	{
-		int flag = 0;
-		for (auto e : t1)
-		{
-			cout << e << " ";
-			++flag;
-			if (flag == t1.size())
-			{
-				cout << endl;
-			}
-		}
-	} while (next_permutation(t1.begin(), t1.end()));
-	swap(t1, t2);
-	return 0;
+    for (int i = 0; i < n; ++i)
+    {
+        if (!(
+            (v1[i] == 'A' && v2[i].first == 'T')
+            || (v1[i] == 'T' && v2[i].first == 'A')
+            || (v1[i] == 'C' && v2[i].first == 'G')
+            || (v1[i] == 'G' && v2[i].first == 'C')
+            ))
+        {
+            ++count;
+        }
+    }
+    cout << count << endl;
+    return 0;
 }
