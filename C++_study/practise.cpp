@@ -1885,141 +1885,258 @@
 //    return 0;
 //}
 
-#include  <iostream>
-#include  <string>
-#include  <vector>
-#include<utility>
+//#include  <iostream>
+//#include  <string>
+//#include  <vector>
+//#include<utility>
+//using namespace std;
+//int main()
+//{
+//    //遍历两边数组，第一遍找能互换的，第二边强行换
+//    int n = 0;
+//    int count = 0;
+//    cin >> n;
+//    vector<char> v1;
+//    vector<pair<char, int>> v2;//第二个标记是否有配对
+//    for (int i = 0; i < n; ++i)
+//    {
+//        char a = 0;
+//        cin >> a;
+//        v1.push_back(a);
+//    }
+//    for (int i = 0; i < n; ++i)
+//    {
+//        char a = 0;
+//        cin >> a;
+//        v2.push_back(make_pair(a, 0));
+//    }
+//    int arr[4] = { 0 };//以此记录 A T C G 待配对的数 ascll 65 84 67 71
+//    vector<pair<int, int>> v3;//待交换的下标
+//    for (int i = 0; i < n; ++i)
+//    {
+//        if (v1[i] == v2[i].first && v2[i].second == 0)//找到可以匹配，记录个数，并放进 v3 去等待匹配或匹配已有的
+//        {
+//            if (v1[i] == 'A' && arr[1] != 0)
+//            {
+//                for (auto& e : v3)
+//                {
+//                    if (v1[e.first] == 'T')
+//                    {
+//                        //匹配到了
+//                        --arr[1];
+//                        v2[i].second = 1;
+//                        v2[e.first].second = 1;
+//                        //交换
+//                        char temp = v2[i].first;
+//                        v2[i].first = v2[e.first].first;
+//                        v2[e.first].first = temp;
+//                        ++count;
+//                        break;
+//                    }
+//                }
+//            }
+//            else if (v1[i] == 'T' && arr[0] != 0)
+//            {
+//                for (auto& e : v3)
+//                {
+//                    if (v1[e.first] == 'A')
+//                    {
+//                        //匹配到了
+//                        --arr[0];
+//                        v2[i].second = 1;
+//                        v2[e.first].second = 1;
+//                        //交换
+//                        char temp = v2[i].first;
+//                        v2[i].first = v2[e.first].first;
+//                        v2[e.first].first = temp;
+//                        ++count;
+//                        break;
+//                    }
+//                }
+//            }
+//            else if (v1[i] == 'C' && arr[3] != 0)
+//            {
+//                for (auto& e : v3)
+//                {
+//                    if (v1[e.first] == 'G')
+//                    {
+//                        //匹配到了
+//                        --arr[3];
+//                        v2[i].second = 1;
+//                        v2[e.first].second = 1;
+//                        //交换
+//                        char temp = v2[i].first;
+//                        v2[i].first = v2[e.first].first;
+//                        v2[e.first].first = temp;
+//                        ++count;
+//                        break;
+//                    }
+//                }
+//            }
+//            else if (v1[i] == 'G' && arr[2] != 0)
+//            {
+//                for (auto& e : v3)
+//                {
+//                    if (v1[e.first] == 'C')
+//                    {
+//                        //匹配到了
+//                        --arr[2];
+//                        v2[i].second = 1;
+//                        v2[e.first].second = 1;
+//                        //交换
+//                        char temp = v2[i].first;
+//                        v2[i].first = v2[e.first].first;
+//                        v2[e.first].first = temp;
+//                        ++count;
+//                        break;
+//                    }
+//                }
+//            }
+//            else
+//            {
+//                v3.push_back(make_pair(i, NULL));
+//                if (v1[i] == 'A')
+//                    arr[0]++;
+//                if (v1[i] == 'T')
+//                    arr[1]++;
+//                if (v1[i] == 'C')
+//                    arr[2]++;
+//                if (v1[i] == 'G')
+//                    arr[3]++;
+//               
+//            }
+//        }
+//    }
+//
+//    for (int i = 0; i < n; ++i)
+//    {
+//        if (!(
+//            (v1[i] == 'A' && v2[i].first == 'T')
+//            || (v1[i] == 'T' && v2[i].first == 'A')
+//            || (v1[i] == 'C' && v2[i].first == 'G')
+//            || (v1[i] == 'G' && v2[i].first == 'C')
+//            ))
+//        {
+//            ++count;
+//        }
+//    }
+//    cout << count << endl;
+//    return 0;
+//}
+
+//#include <iostream>
+//#include<math.h>
+//#include<stdbool.h>
+//using namespace std;
+//
+//bool my_is_num(int n)
+//{
+//    for (int i = 2; i <= (int)sqrt(n); ++i)
+//    {
+//        if (n % i == 0)
+//            return false;
+//    }
+//    return true;
+//}
+//int main()
+//{
+//    int count = 0;
+//    int m = 0;
+//    for (int i = 6; i <= 2198; ++i)
+//    {
+//        for (int j = i + 1; j <= 4830459; ++j)
+//        {
+//            if (!(my_is_num(i) && my_is_num(j)))
+//                continue;
+//            if (i == j)
+//                continue;
+//            m = i * i * j * j;
+//            if (2333 <= m && m <= 23333333333333)
+//            {
+//                ++count;
+//            }
+//        }
+//    }
+//    cout << count;
+//    return 0;
+//}
+
+#include <iostream>
+#include<algorithm>
+#include <vector>
 using namespace std;
 int main()
 {
-    //遍历两边数组，第一遍找能互换的，第二边强行换
+    int ans = 0;
     int n = 0;
-    int count = 0;
     cin >> n;
-    vector<char> v1;
-    vector<pair<char, int>> v2;//第二个标记是否有配对
+    int count1 = 0;//记录匹配的 id 数
+    int count2 = 0;//记录除了最开始一对，多余的重复id
+    vector<int> v1;
     for (int i = 0; i < n; ++i)
     {
-        char a = 0;
+        int a = 0;
         cin >> a;
         v1.push_back(a);
     }
-    for (int i = 0; i < n; ++i)
+    sort(v1.begin(), v1.end());
+    vector<int> v2;//记录已经有相同的id
+    //vector::iterator end2 = v2.end();
+    for (int i = 0; i < v1.size() - 1; ++i)
     {
-        char a = 0;
-        cin >> a;
-        v2.push_back(make_pair(a, 0));
-    }
-    int arr[4] = { 0 };//以此记录 A T C G 待配对的数 ascll 65 84 67 71
-    vector<pair<int, int>> v3;//待交换的下标
-    for (int i = 0; i < n; ++i)
-    {
-        if (v1[i] == v2[i].first && v2[i].second == 0)//找到可以匹配，记录个数，并放进 v3 去等待匹配或匹配已有的
+        int flag = 0;
+        if (v1[i] == v1[i + 1])//若前后相等，检查是否是多余重复 id
         {
-            if (v1[i] == 'A' && arr[1] != 0)
+            for (int e : v2)
             {
-                for (auto& e : v3)
+                if (v1[i] == e)
                 {
-                    if (v1[e.first] == 'T')
-                    {
-                        //匹配到了
-                        --arr[1];
-                        v2[i].second = 1;
-                        v2[e.first].second = 1;
-                        //交换
-                        char temp = v2[i].first;
-                        v2[i].first = v2[e.first].first;
-                        v2[e.first].first = temp;
-                        ++count;
-                        break;
-                    }
+                    ++count2;
+                    flag = 1;
+                    break;
                 }
-            }
-            else if (v1[i] == 'T' && arr[0] != 0)
-            {
-                for (auto& e : v3)
-                {
-                    if (v1[e.first] == 'A')
-                    {
-                        //匹配到了
-                        --arr[0];
-                        v2[i].second = 1;
-                        v2[e.first].second = 1;
-                        //交换
-                        char temp = v2[i].first;
-                        v2[i].first = v2[e.first].first;
-                        v2[e.first].first = temp;
-                        ++count;
-                        break;
-                    }
-                }
-            }
-            else if (v1[i] == 'C' && arr[3] != 0)
-            {
-                for (auto& e : v3)
-                {
-                    if (v1[e.first] == 'G')
-                    {
-                        //匹配到了
-                        --arr[3];
-                        v2[i].second = 1;
-                        v2[e.first].second = 1;
-                        //交换
-                        char temp = v2[i].first;
-                        v2[i].first = v2[e.first].first;
-                        v2[e.first].first = temp;
-                        ++count;
-                        break;
-                    }
-                }
-            }
-            else if (v1[i] == 'G' && arr[2] != 0)
-            {
-                for (auto& e : v3)
-                {
-                    if (v1[e.first] == 'C')
-                    {
-                        //匹配到了
-                        --arr[2];
-                        v2[i].second = 1;
-                        v2[e.first].second = 1;
-                        //交换
-                        char temp = v2[i].first;
-                        v2[i].first = v2[e.first].first;
-                        v2[e.first].first = temp;
-                        ++count;
-                        break;
-                    }
-                }
-            }
-            else
-            {
-                v3.push_back(make_pair(i, NULL));
-                if (v1[i] == 'A')
-                    arr[0]++;
-                if (v1[i] == 'T')
-                    arr[1]++;
-                if (v1[i] == 'C')
-                    arr[2]++;
-                if (v1[i] == 'G')
-                    arr[3]++;
-               
             }
         }
-    }
+        else
+        {
+            for (int e : v2)//前后不等，检查是单独的id 还是多余重复 id
+            {
+                if (v1[i] == e)
+                {
+                    ++count2;
+                    break;
+                }
+            }
+            continue;
+        }
+        if (flag == 1) continue;
 
-    for (int i = 0; i < n; ++i)
+        v2.push_back(v1[i]);//匹配的 id
+        count1 += 2;
+        //end = unique(v2.begin(), end);
+        v1[i] = 0;
+        v1[i + 1] = 0;
+    }
+    for(int i = v2.size() - 1; i >= 0; --i)//前面是没有检查最后一个id的，这里检查
     {
-        if (!(
-            (v1[i] == 'A' && v2[i].first == 'T')
-            || (v1[i] == 'T' && v2[i].first == 'A')
-            || (v1[i] == 'C' && v2[i].first == 'G')
-            || (v1[i] == 'G' && v2[i].first == 'C')
-            ))
+        if (v1[v1.size() - 1] == v2[i])
         {
-            ++count;
+            ++count2;
+            break;
         }
     }
-    cout << count << endl;
+    int count3 = n - count1 - count2;//单独没有重复的 id
+    if (count3 == count2)
+    {
+        cout << count3;
+    }
+    else if (count3 < count2)
+    {
+        cout << count3 + (count2 - count3) / 2;
+    }
+    else
+    {
+        cout << count2 + (count3 - count2) / 2;
+    }
     return 0;
 }
