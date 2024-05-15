@@ -2061,82 +2061,257 @@
 //    return 0;
 //}
 
+//#include <iostream>
+//#include<algorithm>
+//#include <vector>
+//using namespace std;
+//int main()
+//{
+//    int ans = 0;
+//    int n = 0;
+//    cin >> n;
+//    int count1 = 0;//记录匹配的 id 数
+//    int count2 = 0;//记录除了最开始一对，多余的重复id
+//    vector<int> v1;
+//    for (int i = 0; i < n; ++i)
+//    {
+//        int a = 0;
+//        cin >> a;
+//        v1.push_back(a);
+//    }
+//    sort(v1.begin(), v1.end());
+//    vector<int> v2;//记录已经有相同的id
+//    //vector::iterator end2 = v2.end();
+//    for (int i = 0; i < v1.size() - 1; ++i)
+//    {
+//        int flag = 0;
+//        if (v1[i] == v1[i + 1])//若前后相等，检查是否是多余重复 id
+//        {
+//            for (int e : v2)
+//            {
+//                if (v1[i] == e)
+//                {
+//                    ++count2;
+//                    flag = 1;
+//                    break;
+//                }
+//            }
+//        }
+//        else
+//        {
+//            for (int e : v2)//前后不等，检查是单独的id 还是多余重复 id
+//            {
+//                if (v1[i] == e)
+//                {
+//                    ++count2;
+//                    break;
+//                }
+//            }
+//            continue;
+//        }
+//        if (flag == 1) continue;
+//
+//        v2.push_back(v1[i]);//匹配的 id
+//        count1 += 2;
+//        //end = unique(v2.begin(), end);
+//        v1[i] = 0;
+//        v1[i + 1] = 0;
+//    }
+//    for(int i = v2.size() - 1; i >= 0; --i)//前面是没有检查最后一个id的，这里检查
+//    {
+//        if (v1[v1.size() - 1] == v2[i])
+//        {
+//            ++count2;
+//            break;
+//        }
+//    }
+//    int count3 = n - count1 - count2;//单独没有重复的 id
+//    if (count3 == count2)
+//    {
+//        cout << count3;
+//    }
+//    else if (count3 < count2)
+//    {
+//        cout << count3 + (count2 - count3) / 2;
+//    }
+//    else
+//    {
+//        cout << count2 + (count3 - count2) / 2;
+//    }
+//    return 0;
+//}
+
+//#include<iostream>
+//#include<string>
+//using namespace std;
+//int main()
+//{
+//    char a = 0, b = 0, c = 0, d = 0;
+//    long long count = 0;
+//    string s;
+//    for (int i = 1; i <= 2023; ++i)
+//    {
+//        int a = i;
+//        int flag = 0;
+//        while (a)
+//        {
+//            if (a % 10 == 2 || a % 10 == 0 || a % 10 == 3)
+//            {
+//                flag = 1;
+//                break;
+//            }
+//        }
+//        if(flag)
+//        {
+//            s += to_string(i);
+//        }
+//    }
+//    for (int i = 0; i < s.size() - 3; ++i)
+//    {
+//        a = s[i];
+//        if (a == '2')
+//        {
+//            for (int j = i + 1; j < s.size() - 2; ++j)
+//            {
+//                b = s[j];
+//                if (b == '0')
+//                {
+//                    for (int k = j + 1; k < s.size() - 1; ++k)
+//                    {
+//                        c = s[k];
+//                        if (c == '2')
+//                        {
+//                            for (int m = k + 1; m < s.size(); ++m)
+//                            {
+//                                d = s[m];
+//                                if (d == '3')
+//                                {
+//                                    ++count;
+//                                }
+//                            }
+//                        }
+//                    }
+//                }
+//            }
+//        }
+//    }
+//    printf("%lld", count);
+//    return 0;
+//}
+
+//#include <iostream>
+//#include<string>
+//using namespace std;
+//int main()
+//{
+//    int N = 0;
+//    cin >> N;
+//    string s1, s2;
+//    cin >> s1 >> s2;
+//    for (auto& e : s2)
+//    {
+//        if (e == 'A')  e = 'T';
+//        else if (e == 'T')  e = 'A';
+//        else if (e == 'C')  e = 'G';
+//        else e = 'C';
+//    }
+//    int n = 0;//记录 A-T 的对数
+//    int m = 0;//记录 C-G 的对数
+//    int s = 0;//记录碱基相同的数量
+//    for (int i = 0; i < N; ++i)
+//    {
+//        if ((s1[i] == 'A' && s2[i] == 'T') || (s1[i] == 'T' && s2[i] == 'A'))
+//        {
+//            ++n;
+//        }
+//        if ((s1[i] == 'C' && s2[i] == 'G') || (s1[i] == 'G' && s2[i] == 'C'))
+//        {
+//            ++m;
+//        }
+//        if (s1[i] == s2[i])
+//        {
+//            ++s;
+//        }
+//    }
+//    int res = (m / 2 + m % 2) + (n / 2 + n % 2) + (N - m - n - s);
+//    cout << res << endl;
+//    return 0;
+//}
+
+//#include<iostream>
+//#include<string>
+//#include<vector>
+//using namespace std;
+//
+//int main()
+//{
+//	vector<char> v;
+//	string s;
+//	cin >> s;
+//	//cin >> v;没有
+//	bool a = 0;
+//	return 0;
+//}
+
 #include <iostream>
-#include<algorithm>
-#include <vector>
+#include<string>
+#include<vector>
+#include<utility>
 using namespace std;
+bool is_match(char& a, char& b)
+{
+    if ((a == 'A' && b == 'T') || (a == 'T' && b == 'A')
+        || (a == 'C' && b == 'G') || (a == 'G' && b == 'C'))
+        return true;
+    else return false;
+}
+
 int main()
 {
-    int ans = 0;
-    int n = 0;
-    cin >> n;
-    int count1 = 0;//记录匹配的 id 数
-    int count2 = 0;//记录除了最开始一对，多余的重复id
-    vector<int> v1;
-    for (int i = 0; i < n; ++i)
+    int N = 0;
+    cin >> N;
+    vector<char> s1;
+    vector<pair<char, int>> s2;
+    for (int i = 0; i < N; ++i)
     {
-        int a = 0;
-        cin >> a;
-        v1.push_back(a);
+        char in = 0;
+        cin >> in;
+        s1.push_back(in);
     }
-    sort(v1.begin(), v1.end());
-    vector<int> v2;//记录已经有相同的id
-    //vector::iterator end2 = v2.end();
-    for (int i = 0; i < v1.size() - 1; ++i)
+    for (int i = 0; i < N; ++i)
     {
-        int flag = 0;
-        if (v1[i] == v1[i + 1])//若前后相等，检查是否是多余重复 id
+        char in = 0;
+        cin >> in;
+        s2.push_back(make_pair(in, 0));
+    }
+    int n = 0;//原本就匹配
+    int m = 0;//交换次数，乘二就是交换的数量了
+    // N - 2*m - n 就是需强换的个数
+    for (int i = 0; i < N; ++i)
+    {
+        if (((s1[i] == 'A' && s2[i].first == 'T') || (s1[i] == 'T' && s2[i].first == 'A')
+            || (s1[i] == 'C' && s2[i].first == 'G') || (s1[i] == 'G' && s2[i].first == 'C'))
+            && s2[i].second == 0)
         {
-            for (int e : v2)
-            {
-                if (v1[i] == e)
-                {
-                    ++count2;
-                    flag = 1;
-                    break;
-                }
-            }
-        }
-        else
-        {
-            for (int e : v2)//前后不等，检查是单独的id 还是多余重复 id
-            {
-                if (v1[i] == e)
-                {
-                    ++count2;
-                    break;
-                }
-            }
+            ++n;
             continue;
         }
-        if (flag == 1) continue;
 
-        v2.push_back(v1[i]);//匹配的 id
-        count1 += 2;
-        //end = unique(v2.begin(), end);
-        v1[i] = 0;
-        v1[i + 1] = 0;
-    }
-    for(int i = v2.size() - 1; i >= 0; --i)//前面是没有检查最后一个id的，这里检查
-    {
-        if (v1[v1.size() - 1] == v2[i])
+        for (int j = i + 1; j < N; ++j)
         {
-            ++count2;
-            break;
+            if (s2[i].second == 0 && s2[j].second == 0 && (is_match(s1[i], s2[j].first) && is_match(s2[i].first, s1[j])))
+            {
+                char temp = s2[i].first;
+                s2[i].first = s2[j].first;
+                s2[j].first = temp;
+                s2[i].second = 1;
+                s2[j].second = 1;
+                ++m;
+                break;
+            }
         }
     }
-    int count3 = n - count1 - count2;//单独没有重复的 id
-    if (count3 == count2)
-    {
-        cout << count3;
-    }
-    else if (count3 < count2)
-    {
-        cout << count3 + (count2 - count3) / 2;
-    }
-    else
-    {
-        cout << count2 + (count3 - count2) / 2;
-    }
-    return 0;
+
+    int res = m + (N - 2 * m - n);
+    cout << res << endl;
 }
