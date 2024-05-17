@@ -2253,65 +2253,161 @@
 //	return 0;
 //}
 
+//#include <iostream>
+//#include<string>
+//#include<vector>
+//#include<utility>
+//using namespace std;
+//bool is_match(char& a, char& b)
+//{
+//    if ((a == 'A' && b == 'T') || (a == 'T' && b == 'A')
+//        || (a == 'C' && b == 'G') || (a == 'G' && b == 'C'))
+//        return true;
+//    else return false;
+//}
+//
+//int main()
+//{
+//    int N = 0;
+//    cin >> N;
+//    vector<char> s1;
+//    vector<pair<char, int>> s2;
+//    for (int i = 0; i < N; ++i)
+//    {
+//        char in = 0;
+//        cin >> in;
+//        s1.push_back(in);
+//    }
+//    for (int i = 0; i < N; ++i)
+//    {
+//        char in = 0;
+//        cin >> in;
+//        s2.push_back(make_pair(in, 0));
+//    }
+//    int n = 0;//原本就匹配
+//    int m = 0;//交换次数，乘二就是交换的数量了
+//    // N - 2*m - n 就是需强换的个数
+//    for (int i = 0; i < N; ++i)
+//    {
+//        if (((s1[i] == 'A' && s2[i].first == 'T') || (s1[i] == 'T' && s2[i].first == 'A')
+//            || (s1[i] == 'C' && s2[i].first == 'G') || (s1[i] == 'G' && s2[i].first == 'C'))
+//            && s2[i].second == 0)
+//        {
+//            ++n;
+//            continue;
+//        }
+//
+//        for (int j = i + 1; j < N; ++j)
+//        {
+//            if (s2[i].second == 0 && s2[j].second == 0 && (is_match(s1[i], s2[j].first) && is_match(s2[i].first, s1[j])))
+//            {
+//                char temp = s2[i].first;
+//                s2[i].first = s2[j].first;
+//                s2[j].first = temp;
+//                s2[i].second = 1;
+//                s2[j].second = 1;
+//                ++m;
+//                break;
+//            }
+//        }
+//    }
+//
+//    int res = m + (N - 2 * m - n);
+//    cout << res << endl;
+//}
+
+//#include <iostream>
+//#include<vector>
+//#include<math.h>
+//using namespace std;
+//int main()
+//{
+//    int n = 0, k = 0;
+//    cin >> n >> k;
+//
+//    vector<int> arr(0);
+//    for (int i = 0; i < n; ++i)
+//    {
+//        auto e = 0;
+//        cin >> e;
+//        arr.push_back(e);
+//    }
+//    if (k == 1)
+//    {
+//        long long sum = 0;
+//        for (int i = 0; i < n; ++i)
+//        {
+//            sum += arr[i];
+//        }
+//        if (sum % 2 == 0)
+//        {
+//            cout << "Bob" << endl;
+//            return 0;
+//        }
+//        else
+//        {
+//            cout << "Alice" << endl;
+//            return 0;
+//        }
+//    }
+//    int W = -1;//1 是 alice，-1是 bob
+//    for (int i = 0; i < n; ++i)
+//    {
+//        int m = 0;
+//        while (pow(k, m) <= arr[i])
+//        {
+//            ++m;
+//        }
+//        arr[i] -= pow(k, m - 1);
+//        if (arr[i] > 0) --i;
+//        W *= -1;
+//    }
+//    if (W == 1)
+//        cout << "Alice" << endl;
+//    else
+//        cout << "Bob" << endl;
+//    return 0;
+//}
+
 #include <iostream>
-#include<string>
 #include<vector>
 #include<utility>
+#include<math.h>
+#include<algorithm>
 using namespace std;
-bool is_match(char& a, char& b)
-{
-    if ((a == 'A' && b == 'T') || (a == 'T' && b == 'A')
-        || (a == 'C' && b == 'G') || (a == 'G' && b == 'C'))
-        return true;
-    else return false;
-}
-
 int main()
 {
-    int N = 0;
-    cin >> N;
-    vector<char> s1;
-    vector<pair<char, int>> s2;
-    for (int i = 0; i < N; ++i)
+    int n = 0;
+    cin >> n;
+    int max = 0;
+    vector<pair<long long, long long>> v;
+    for (int i = 0; i < n; ++i)
     {
-        char in = 0;
-        cin >> in;
-        s1.push_back(in);
+        long long w = 0, p = 0;
+        cin >> w >> p;
+        if (max < p) max = p;
+        v.push_back(make_pair(p, w));
     }
-    for (int i = 0; i < N; ++i)
+    sort(v.begin(), v.end());
+    for (int i = 0; i < v.size(); ++i)
     {
-        char in = 0;
-        cin >> in;
-        s2.push_back(make_pair(in, 0));
-    }
-    int n = 0;//原本就匹配
-    int m = 0;//交换次数，乘二就是交换的数量了
-    // N - 2*m - n 就是需强换的个数
-    for (int i = 0; i < N; ++i)
-    {
-        if (((s1[i] == 'A' && s2[i].first == 'T') || (s1[i] == 'T' && s2[i].first == 'A')
-            || (s1[i] == 'C' && s2[i].first == 'G') || (s1[i] == 'G' && s2[i].first == 'C'))
-            && s2[i].second == 0)
+        while (i + 1 < v.size() && v[i].first == v[i + 1].first)
         {
-            ++n;
-            continue;
-        }
-
-        for (int j = i + 1; j < N; ++j)
-        {
-            if (s2[i].second == 0 && s2[j].second == 0 && (is_match(s1[i], s2[j].first) && is_match(s2[i].first, s1[j])))
-            {
-                char temp = s2[i].first;
-                s2[i].first = s2[j].first;
-                s2[j].first = temp;
-                s2[i].second = 1;
-                s2[j].second = 1;
-                ++m;
-                break;
-            }
+            v[i].second += v[i + 1].second;
+            v.erase(v.begin() + (i + 1));
         }
     }
-
-    int res = m + (N - 2 * m - n);
-    cout << res << endl;
+    unsigned long long sum = 0;
+    unsigned long long ret = -1;
+    for (int i = 1; i < v.size(); ++i)
+    {
+        for (auto e : v)
+        {
+            sum += e.second * (abs(e.first - i));
+        }
+        if (ret > sum)
+            ret = sum;
+    }
+    cout << ret << endl;
+    return 0;
 }
