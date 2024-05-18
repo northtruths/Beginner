@@ -2369,45 +2369,271 @@
 //    return 0;
 //}
 
+//#include <iostream>
+//#include<vector>
+//#include<utility>
+//#include<math.h>
+//#include<algorithm>
+//using namespace std;
+//int main()
+//{
+//    int n = 0;
+//    cin >> n;
+//    long long max = 0;
+//    vector<pair<long long, long long>> v;
+//    for (int i = 0; i < n; ++i)
+//    {
+//        long long w = 0, p = 0;
+//        cin >> w >> p;
+//        if (max < p) max = p;
+//        v.push_back(make_pair(p, w));
+//    }
+//    sort(v.begin(), v.end());
+//    for (int i = 0; i < v.size(); ++i)
+//    {
+//        while (i + 1 < v.size() && v[i].first == v[i + 1].first)
+//        {
+//            v[i].second += v[i + 1].second;
+//            v.erase(v.begin() + (i + 1));
+//        }
+//    }
+//    unsigned long long sum = 0;
+//    unsigned long long ret = -1;
+//    for (int i = 1; i < v.size(); ++i)
+//    {
+//        for (auto e : v)
+//        {
+//            sum += e.second * (abs(e.first - i));
+//        }
+//        if (ret > sum)
+//            ret = sum;
+//    }
+//    cout << ret << endl;
+//    return 0;
+//}
+
+//#include <iostream>
+//#include<vector>
+//#include<utility>
+//#include<math.h>
+//#include<algorithm>
+//#include<limits.h>
+//using namespace std;
+//int main()
+//{
+//    int n = 0;
+//    cin >> n;
+//    long long max = 0;//最大位置
+//    vector<pair<long long, long long>> v;
+//    for (int i = 0; i < n; ++i)
+//    {
+//        long long w = 0;
+//        long long p = 0;
+//        cin >> w >> p;
+//        if (max < p) max = p;
+//        v.push_back(make_pair(p, w));
+//    }
+//    sort(v.begin(), v.end());
+//    //for (int i = 0; i < v.size(); ++i)
+//    //{
+//    //    while (i + 1 < v.size() && v[i].first == v[i + 1].first)
+//    //    {
+//    //        v[i].second += v[i + 1].second;
+//    //        v.erase(v.begin() + (i + 1));
+//    //    }
+//    //}
+//    //相当于将石头分两份，位置的左边一份右边一份,左边和右边移到中间这个石头的费用的最小值就为答案
+//    long long left[3] = { 0 };//左边 i-1 个石头移动到第 i 这个石头 的总消耗
+//    long long right[3] = { 0 };
+//    long long w = 0;
+//    for (int i = 1; i <  n; ++i)
+//    {
+//        int s = v[i].first - v[i - 1].first;//这颗石头到上颗的距离
+//        left[i] = (left[i - 1] + v[i - 1].second) * s;
+//    }
+//    for (int i = n - 2; i >= 0; --i)
+//    {
+//        int s = v[i + 1].first - v[i].first;
+//        right[i] = (right[i + 1] + v[i + 1].second) * s;
+//    }
+//    long long res = LLONG_MAX;
+//    for (int i = 0; i < n; ++i)
+//    {
+//        res = min(res, left[i] + right[i]);
+//    }
+//    cout << res << endl;
+//    return 0;
+//}
+
+//#include <iostream>
+//#include<vector>
+//#include<utility>
+//#include<math.h>
+//#include<algorithm>
+//#include<limits.h>
+//using namespace std;
+//int main()
+//{
+//    int n = 0;
+//    cin >> n;
+//    vector<pair<long long, long long>> v;
+//    for (int i = 0; i < n; ++i)
+//    {
+//        long long w = 0;
+//        long long p = 0;
+//        cin >> w >> p;
+//        v.push_back(make_pair(p, w));
+//    }
+//    sort(v.begin(), v.end());
+//    //相当于将石头分两份，位置的左边一份右边一份,左边和右边移到中间这个石头的费用的最小值就为答案
+//    long long left[3] = { 0 };//左边 i-1 个石头移动到第 i 这个石头 的总消耗
+//    long long right[3] = { 0 };
+//    long long w = 0;
+//    for (int i = 1; i < n; ++i)
+//    {
+//        int s = v[i].first - v[i - 1].first;//这颗石头到上颗的距离
+//        left[i] = (left[i - 1] + v[i - 1].second) * s;
+//    }
+//    for (int i = n - 2; i >= 0; --i)
+//    {
+//        int s = v[i + 1].first - v[i].first;
+//        right[i] = (right[i + 1] + v[i + 1].second) * s;
+//    }
+//    long long res = LLONG_MAX;
+//    for (int i = 0; i < n; ++i)
+//    {
+//        res = min(res, left[i] + right[i]);
+//    }
+//    cout << res << endl;
+//    return 0;
+//}
+
+//#include <iostream>
+//#include<vector>
+//#include<algorithm>
+//using namespace std;
+//int main()
+//{
+//    int t = 0;
+//    cin >> t;
+//    while (t--)
+//    {
+//        int n = 0, k = 0;
+//        cin >> n >> k;
+//        vector<int> v;
+//        for (int i = 0; i < n; ++i)
+//        {
+//            int add = 0;
+//            cin >> add;
+//            v.push_back(add);
+//        }
+//        sort(v.begin(), v.end());
+//
+//        int min = 0;//最小宝石下标
+//        int max = v.size() - 1;//最大宝石下标
+//        while (k--)
+//        {
+//            if (v[min] + v[min + 1] > v[max])
+//            {
+//                --max;
+//            }
+//            else
+//            {
+//                min += 2;
+//            }
+//        }
+//        long long sum = 0;
+//        for (int i = min; i <= max; ++i)
+//        {
+//            sum += v[i];
+//        }
+//
+//        cout << sum << endl;
+//    }
+//
+//    return 0;
+//}
+//2
+//11 4
+//4 10 3 1 7 8 2 6 11 5 9
+//19 8
+//17 16 6 9 14 10 8 11 5 3 19 2 18 4 13 7 15 12 1
+
+//#include <iostream>
+//#include<vector>
+//#include<algorithm>
+//#include<limits.h>
+//using namespace std;
+//int main()
+//{
+//    int t = 0;
+//    cin >> t;
+//    while (t--)
+//    {
+//        int n = 0, k = 0;
+//        cin >> n >> k;
+//        vector<int> v;
+//        for (int i = 0; i < n; ++i)
+//        {
+//            int add = 0;
+//            cin >> add;
+//            v.push_back(add);
+//        }
+//        sort(v.begin(), v.end());
+//
+//        int prefix[130000];
+//        prefix[0] = 0;
+//        for (int i = 1; i <= n; ++i)
+//        {
+//            prefix[i] = prefix[i - 1] + v[i - 1];
+//        }
+//        int i = 0;//去小次数
+//        int j = k - i;//去大次数
+//        long long sum = 0;//减去的价值和
+//        long long MIN = LLONG_MAX;
+//        for (i = 0; i <= k; ++i)
+//        {
+//            j = k - i;
+//            sum = prefix[i*2] + (prefix[n] - prefix[n - j]);
+//            MIN = min(MIN, sum);
+//        }
+//        cout << prefix[n] - MIN << endl;
+//    }
+//
+//    return 0;
+//}
+
 #include <iostream>
 #include<vector>
-#include<utility>
-#include<math.h>
-#include<algorithm>
 using namespace std;
 int main()
 {
     int n = 0;
-    cin >> n;
-    int max = 0;
-    vector<pair<long long, long long>> v;
+    int arr[n];
+    vector<int> v;
+    int count = 0;
     for (int i = 0; i < n; ++i)
     {
-        long long w = 0, p = 0;
-        cin >> w >> p;
-        if (max < p) max = p;
-        v.push_back(make_pair(p, w));
-    }
-    sort(v.begin(), v.end());
-    for (int i = 0; i < v.size(); ++i)
-    {
-        while (i + 1 < v.size() && v[i].first == v[i + 1].first)
-        {
-            v[i].second += v[i + 1].second;
-            v.erase(v.begin() + (i + 1));
-        }
-    }
-    unsigned long long sum = 0;
-    unsigned long long ret = -1;
-    for (int i = 1; i < v.size(); ++i)
-    {
+        cin >> arr[i];
+        int flag = 0;
         for (auto e : v)
         {
-            sum += e.second * (abs(e.first - i));
+            if (e == arr[i])
+            {
+                flag = 1;
+                break;
+            }
         }
-        if (ret > sum)
-            ret = sum;
+        if (flag == 0)
+        {
+            v.push_back(arr[i]);
+        }
+        if (v.size() >= 4)
+        {
+            cout << "YES" << endl;
+        }
     }
-    cout << ret << endl;
+
+    cout << "NO" << endl;
     return 0;
 }
