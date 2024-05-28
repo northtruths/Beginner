@@ -2603,37 +2603,69 @@
 //    return 0;
 //}
 
-#include <iostream>
-#include<vector>
+//#include <iostream>
+//#include<vector>
+//using namespace std;
+//int main()
+//{
+//    int n = 0;
+//    cin >> n;
+//    int arr[100];
+//    vector<int> v;
+//    int count = 0;
+//    for (int i = 0; i < n; ++i)
+//    {
+//        cin >> arr[i];
+//        int flag = 0;
+//        for (auto e : v)
+//        {
+//            if (e == arr[i])
+//            {
+//                flag = 1;
+//                break;
+//            }
+//        }
+//        if (flag == 0)
+//        {
+//            v.push_back(arr[i]);
+//        }
+//        if (v.size() >= 4)
+//        {
+//            cout << "YES" << endl;
+//            return 0;
+//        }
+//    }
+//
+//    cout << "NO" << endl;
+//    return 0;
+//}
+
+#include<iostream>
+#include<string>
 using namespace std;
+
 int main()
 {
-    int n = 0;
-    int arr[n];
-    vector<int> v;
-    int count = 0;
-    for (int i = 0; i < n; ++i)
-    {
-        cin >> arr[i];
-        int flag = 0;
-        for (auto e : v)
-        {
-            if (e == arr[i])
-            {
-                flag = 1;
-                break;
-            }
-        }
-        if (flag == 0)
-        {
-            v.push_back(arr[i]);
-        }
-        if (v.size() >= 4)
-        {
-            cout << "YES" << endl;
-        }
-    }
+//	string s1;
+	char ch[100] = { 0 };
+	//while (cin >> ch)
+	//{
+	//	s1 += ch;
+	//}
+	//string s2;
+	//istream& is = cin;
+	//while (ch = is.get() != '\n')
+	//{
+	//	s2 += ch;
+	//}
+	string s3;
+	while (scanf("%s", &ch) != '\n')
+	{
+		s3 += ch;
+	}
+	//cout << s1 << endl;
+//	cout << s2 << endl;
+	cout << s3 << endl;
 
-    cout << "NO" << endl;
-    return 0;
+	return 0;
 }
