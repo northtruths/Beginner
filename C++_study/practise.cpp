@@ -2640,32 +2640,180 @@
 //    return 0;
 //}
 
-#include<iostream>
-#include<string>
-using namespace std;
+//#include<iostream>
+//#include<string>
+//using namespace std;
+//
+//int main()
+//{
+////	string s1;
+//	char ch[100] = { 0 };
+//	//while (cin >> ch)
+//	//{
+//	//	s1 += ch;
+//	//}
+//	//string s2;
+//	//istream& is = cin;
+//	//while (ch = is.get() != '\n')
+//	//{
+//	//	s2 += ch;
+//	//}
+//	string s3;
+//	while (scanf("%s", &ch) != '\n')
+//	{
+//		s3 += ch;
+//	}
+//	//cout << s1 << endl;
+////	cout << s2 << endl;
+//	cout << s3 << endl;
+//
+//	return 0;
+//}
 
-int main()
-{
-//	string s1;
-	char ch[100] = { 0 };
-	//while (cin >> ch)
-	//{
-	//	s1 += ch;
-	//}
-	//string s2;
-	//istream& is = cin;
-	//while (ch = is.get() != '\n')
-	//{
-	//	s2 += ch;
-	//}
-	string s3;
-	while (scanf("%s", &ch) != '\n')
-	{
-		s3 += ch;
-	}
-	//cout << s1 << endl;
-//	cout << s2 << endl;
-	cout << s3 << endl;
+//#include<iostream>
+//#include<vector>
+//
+//using namespace std;
+//
+//class Solution {
+//public:
+//    Solution()
+//        :cost(4)
+//    {
+//        cost[0] = 0;
+//        cost[1] = 10;
+//        cost[2] = 15;
+//        cost[3] = 20;
+//    }
+//
+//    int Cost(vector<int>& cost, vector<int>& dp, int i)
+//    {
+//        if (i == 0 || i == 1) return 0;
+//        int cost1 = Cost(cost, dp, i - 1) + cost[i - 1];
+//        int cost2 = Cost(cost, dp, i - 2) + cost[i - 2];
+//        dp[i] = cost1 < cost2 ? cost1 : cost2;
+//        return dp[i];
+//    }
+//
+//    int minCostClimbingStairs(vector<int>& cost) {
+//        //1.dp表,第i层楼梯的最小花费
+//        //2.初始化
+//        //3.填表
+//        //4.返回
+//        vector<int> dp(cost.size() + 1);
+//        int i = cost.size();
+//        return Cost(cost, dp, i);
+//
+//    }
+//
+//    vector<int> cost;
+//};
+//
+//int main()
+//{
+//    Solution s1;
+//    cout << s1.minCostClimbingStairs(s1.cost);
+//    return 0;
+//}
 
-	return 0;
-}
+
+
+//#include<vector>
+//#include<iostream>
+//using namespace std;
+//vector<vector<int>> generate(int numRows) {
+//    vector<vector<int>> ret(numRows);
+//    for (int i = 0; i < numRows; ++i)
+//    {
+//        for (int j = 0; j <= i; ++j)
+//        {
+//            if (j == 0 || j == i)
+//            {
+//                ret[i].push_back(1);
+//            }
+//            else
+//            {
+//                ret[i].push_back(ret[i - 1][j - 1] + ret[i - 1][j]);
+//            }
+//        }
+//    }
+//    return ret;
+//}
+//
+//int main()
+//{
+//    generate(5);
+//    return 0;
+//}
+
+//#include<vector>
+//#include<algorithm>
+//using namespace std;
+//
+//int removeDuplicates(vector<int>& nums) {
+//    //std::iterator<vector<int>> new = unique(nums.begin(), nums.end());
+//    std::vector<int>::iterator new_it = unique(nums.begin(), nums.end());
+//    nums.erase(new_it, nums.end());
+//    return nums.size();
+//}
+
+
+//#include<iostream>
+//#include<vector>
+//#include<algorithm>
+//using namespace std;
+//
+//
+//vector<int> singleNumber(vector<int>& nums) {
+//    vector<int> ret;
+//    int count = 0;//找到的一次元素的个数
+//    sort(nums.begin(), nums.end());
+//
+//    std::vector<int>::iterator mid = unique(nums.begin(), nums.end());
+//    std::vector<int>::iterator start = nums.begin();
+//    auto& i = mid;
+//    sort(mid, nums.end());
+//    for(i; i != nums.end(); ++i)
+//    {
+//        while (mid != nums.end() && *mid != *(start + count))
+//        {
+//            ret.push_back(*(start + count));
+//            ++count;
+//        }
+//        ++start;
+//        if (ret.size() == 2) break;
+//    }
+//    return ret;
+//}
+//
+//
+//int main()
+//{
+//    vector<int> v1 = { 1,2,1,3,2,5 };
+//    //singleNumber(v1);
+//    sort(v1.begin(), v1.end());
+//    for (auto& e : v1)
+//    {
+//        cout << e << ' ';
+//    }
+//    cout << endl;
+//    unique(v1.begin(), v1.end());
+//    for (auto& e : v1)
+//    {
+//        cout << e << ' ';
+//    }
+//    cout << endl;
+//    return 0;
+//}
+
+//#include<iostream>
+//using namespace std;
+//
+//int main()
+//{
+//	for (int i = 0; i <= 100; ++i)
+//	{
+//		cout << (i & 4) << endl;
+//	}
+//	return 0;
+//}
