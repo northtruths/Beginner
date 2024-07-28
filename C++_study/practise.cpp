@@ -2817,3 +2817,100 @@
 //	}
 //	return 0;
 //}
+
+
+
+//#include<iostream>
+//#include<stack>
+//#include<vector>
+//using namespace std;
+//
+//class MinStack {
+//public:
+//    MinStack() {
+//        
+//    }
+//
+//    void push(int val) {
+//        _in_put.push(val);
+//        if(_ret_min.empty())
+//            _ret_min.push(val);
+//        else if (val <= _ret_min.top())
+//            _ret_min.push(val);
+//    }
+//
+//    void pop() {
+//        int temp = _in_put.top();
+//        _in_put.pop();
+//        if (temp == _ret_min.top())
+//            _ret_min.pop();
+//    }
+//
+//    int top() {
+//        return _in_put.top();
+//    }
+//
+//    int getMin() {
+//        return _ret_min.top();
+//    }
+//private:
+//    stack<int> _in_put;
+//    stack<int> _ret_min;
+//};
+//
+//int main()
+//{
+//    MinStack s1;
+//    s1.push(5);
+//    s1.push(3);
+//    s1.push(1);
+//    s1.push(4);
+//    s1.push(1);
+//    cout << s1.top() << endl;
+//    return 0;
+//}
+
+
+
+//#include<iostream>
+//#include<vector>
+//using namespace std;
+//
+//class Solution {
+//public:
+//    int findKthLargest(vector<int>& nums, int k) {
+//        int max = INT_MIN;
+//        int min = INT_MAX;
+//        for (const int& e : nums)
+//        {
+//            if (e > max) max = e;
+//            if (e < min) min = e;
+//        }
+//        vector<int> ret(max - min + 1);
+//
+//        for (const int& e : nums)
+//        {
+//            ++ret[e - min];
+//        }
+//        for (int i = max - min; i >= 0; --i)
+//        {
+//            while (ret[i] && k > 1)
+//            {
+//                --ret[i];
+//                --k;
+//            }
+//            if (k == 1 && ret[i])
+//                return  i + min;
+//        }
+//        return 0;
+//    }
+//};
+//
+//
+//int main()
+//{
+//    vector<int> v = {-1, -1};
+//    Solution s;
+//    cout << s.findKthLargest(v, 2) << endl;
+//    return 0;
+//}
