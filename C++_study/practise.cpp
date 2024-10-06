@@ -2914,3 +2914,23 @@
 //    cout << s.findKthLargest(v, 2) << endl;
 //    return 0;
 //}
+
+
+//#include<iostream>
+//using namespace std;
+//
+//int main()
+//{
+//
+//	class Car
+//	{
+//	public:
+//		virtual void Drive() final {}
+//	};
+//	class Benz :public Car
+//	{
+//	public:
+//		virtual void Drive() { cout << "Benz-舒适" << endl; }
+//	};
+//	return 0;
+//}
