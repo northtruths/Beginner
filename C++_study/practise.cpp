@@ -2934,3 +2934,98 @@
 //	};
 //	return 0;
 //}
+
+//#include<iostream>
+//using namespace std;
+//
+//class A
+//{
+//public:
+//	int _a = 0;
+//	int test()
+//	{
+//		cout << "A" << endl;
+//		return 0;
+//	}
+//};
+//
+//class B : protected A
+//{
+//public:
+//	int _b = 1;
+//	int _a = 10;
+//
+//	int test()
+//	{
+//		cout << "B" << endl;
+//		return 0;
+//	}
+//};
+//
+//int main()
+//{
+//	A t0;
+//	t0._a;
+//	B t1;
+//	t1._b;
+//	//t1._a;
+//	cout << t1._a << endl;
+//	t1.test();
+//	return 0;
+//}
+
+//#include<iostream>
+//using namespace std;
+//
+//class A
+//{
+//
+//public:
+//
+//  void f() { cout << "A::f()" << endl; }
+//
+//  int a;
+//
+//};
+//
+//
+//
+//class B : public A
+//
+//{
+//
+//public:
+//
+//	void f(int a) { cout << "B::f()" << endl; }
+//
+//	int a;
+//
+//};
+//
+//
+//
+//int main()
+//
+//{
+//
+//	B b;
+//
+//	b.f();
+//
+//	return 0;
+//
+//}
+//
+
+
+#include<iostream>
+using namespace std;
+
+int main()
+{
+	long a = 10;
+	long* p1 = &a;
+	int* p2 = (int*)&a;
+	cout << p1 << endl << p2 << endl;
+	return 0;
+}
