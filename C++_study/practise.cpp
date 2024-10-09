@@ -3021,11 +3021,19 @@
 #include<iostream>
 using namespace std;
 
+	char* test()
+	{
+		static char s[5] = "1234";
+		return s;
+	}
+
 int main()
 {
 	long a = 10;
 	long* p1 = &a;
 	int* p2 = (int*)&a;
 	cout << p1 << endl << p2 << endl;
+	
+
 	return 0;
 }
