@@ -3018,22 +3018,564 @@
 //
 
 
+//#include<iostream>
+//using namespace std;
+//
+//	char* test()
+//	{
+//		static char s[5] = "1234";
+//		return s;
+//	}
+//
+//int main()
+//{
+//	long a = 10;
+//	long* p1 = &a;
+//	int* p2 = (int*)&a;
+//	cout << p1 << endl << p2 << endl;
+//	
+//
+//	return 0;
+//}
+
+
+//#include<string>
+//#include<iostream>
+//using namespace std;
+//
+//
+// struct TreeNode {
+//    int val;
+//    TreeNode* left;
+//    TreeNode* right;
+//    TreeNode() : val(0), left(nullptr), right(nullptr) {}
+//    TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+//    TreeNode(int x, TreeNode* left, TreeNode* right) : val(x), left(left), right(right) {}
+//    
+//};
+//
+//string tree2str(TreeNode* root) {
+//    //一个节点有左右子树，则左右子树分别括起来
+//    //若只有左子树，只括左子树，右边空树可省略
+//    //若只有右子树，左空子树要括号，右边也括
+//    //若没有子树，可直接省略
+//    //合起来就是，右边有就不能省略，右边没有就能省略
+//    static string ret;//static是错的，大概会在所以例子都生效，会叠加答案
+//    ret += to_string(root->val);
+//    if (root->right != nullptr)
+//    {
+//        if (root->left == nullptr)
+//        {
+//            ret += "()";
+//        }
+//        else
+//        {
+//            ret += "(";
+//            tree2str(root->left);
+//            ret += ")";
+//        }
+//        ret += "(";
+//        tree2str(root->right);
+//        ret += ")";
+//    }
+//    else {
+//        if (root->left != nullptr)
+//        {
+//            ret += "(";
+//            tree2str(root->left);
+//            ret += ")";
+//        }
+//    }
+//    return ret;
+//}
+//
+//int main()
+//{
+//    TreeNode* head = new TreeNode;
+//    head->val = 1;
+//    head->left = new TreeNode;
+//    head->left->val = 2;
+//    head->left->right = new TreeNode;
+//    head->left->right->val = 4;
+//    head->left->left = nullptr;
+//    head->right = new TreeNode;
+//    head->right->val = 3;
+//
+//    cout << tree2str(head) << endl;
+//    return 0;
+//
+//}
+
+//#include<vector>
+//#include<queue>
+//#include<utility>
+//#include<iostream>
+//using namespace std;
+//
+//
+//
+//struct TreeNode {
+//    int val;
+//    TreeNode* left;
+//    TreeNode* right;
+//    TreeNode() : val(0), left(nullptr), right(nullptr) {}
+//    TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+//    TreeNode(int x, TreeNode* left, TreeNode* right) : val(x), left(left), right(right) {}
+//    
+//};
+//
+//class Solution {
+//public:
+//    vector<vector<int>> levelOrder(TreeNode* root) {
+//        queue<pair<TreeNode*, int>> ret;
+//        ret.push(pair<TreeNode*, int>(root, root->val));
+//        while (ret.empty())
+//        {
+//            if (ret.front().first->left)
+//            {
+//                pair<TreeNode*, int> temp1(ret.front().first->left, ret.front().first->left->val);
+//                ret.push(temp1);
+//            }
+//            if (ret.front().first->right)
+//            {
+//                pair<TreeNode*, int> temp2(ret.front().first->right, ret.front().first->right->val);
+//                ret.push(temp2);
+//            }
+//            r.push_back(ret.front().first->val);
+//            ret.pop();
+//        }
+//    }
+//    vector<int> r;
+//};
+//
+//int main()
+//{
+//    return 0;
+//}
+
+
+
+
+//#include<vector>
+//#include<queue>
+//#include<utility>
+//#include<iostream>
+//using namespace std;
+//
+//  struct TreeNode {
+//      int val;
+//      TreeNode *left;
+//     TreeNode *right;
+//      TreeNode() : val(0), left(nullptr), right(nullptr) {}
+//     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+//      TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+// };
+//
+//  class Solution {
+//  public:
+//      vector<vector<int>> levelOrder(TreeNode* root) {
+//          return mylevelOrder(root, depth);
+//      }
+//
+//      vector<vector<int>> mylevelOrder(TreeNode* root, int depth)
+//      {
+//
+//          if (root == nullptr)
+//              return ret;       
+//          if (depth + 1 > ret.size())
+//              ret.resize(depth + 1);
+//          ret[depth].push_back(root->val);
+//          mylevelOrder(root->left, depth + 1);
+//          mylevelOrder(root->right, depth + 1);
+//          return ret;
+//      }
+//
+//  private:
+//      vector<vector<int>> ret;
+//      int depth = 0;
+//  };
+//
+//
+//  int main()
+//  {
+//    TreeNode* head = new TreeNode;
+//    head->val = 1;
+//    head->left = new TreeNode;
+//    head->left->val = 2;
+//    head->left->right = new TreeNode;
+//    head->left->right->val = 4;
+//    head->left->left = nullptr;
+//    head->right = new TreeNode;
+//    head->right->val = 3;
+//    Solution s;
+//    vector<vector<int>> ret = s.levelOrder(head);
+//
+//      return 0;
+//  }
+
+//#include<iostream>
+//using namespace std;
+//
+//struct TreeNode {
+//	int val;
+//	struct TreeNode *left;
+//	struct TreeNode *right;
+//	TreeNode(int x) :
+//			val(x), left(NULL), right(NULL) {
+//	}
+//};
+//
+//class Solution {
+//public:
+//	TreeNode* Convert(TreeNode* pRootOfTree) {
+//		TreeNode* ret = FindMin(pRootOfTree->left);
+//		resovle(pRootOfTree);
+//		return ret;
+//	}
+//
+//	void resovle(TreeNode* root)
+//	{
+//		//left为子，right为父
+//		//对于一个根，它左子树找最大相互连起来，右子树找最小
+//		//中序
+//
+//		if (root == nullptr)
+//			return;
+//		resovle(root->left);
+//		resovle(root->right);
+//
+//		TreeNode* max = FindMax(root->left);
+//		TreeNode* min = FindMin(root->right);
+//		if (max)
+//		{
+//			max->right = root;
+//			root->left = max;
+//		}
+//		if (min)
+//		{
+//			min->left = root;
+//			root->right = min;
+//		}
+//		return;
+//	}
+//
+//	TreeNode* FindMin(TreeNode* root)
+//	{
+//		if (root == nullptr)
+//			return nullptr;
+//		if (root->left == nullptr)
+//			return root;
+//		return FindMin(root->left);
+//	}
+//
+//	TreeNode* FindMax(TreeNode* root)
+//	{
+//		if (root == nullptr)
+//			return nullptr;
+//		if (root->right == nullptr)
+//			return root;
+//		return FindMax(root->right);
+//	}
+//};
+//
+//
+//int main()
+//{
+//
+//	TreeNode* head = new TreeNode(3);
+//    head->left = new TreeNode(1);
+//    head->left->right = new TreeNode(2);
+//    head->right = new TreeNode(4);
+//	Solution s;
+//	TreeNode* ret = s.Convert(head);
+//	
+//	return 0;
+//}
+
+
+
+
+
+
+//#include<iostream>
+//#include<vector>
+//using namespace std;
+//
+//  struct TreeNode {
+//      int val;
+//      TreeNode *left;
+//      TreeNode *right;
+//      TreeNode() : val(0), left(nullptr), right(nullptr) {}
+//      TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+//      TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+//  };
+// 
+//class Solution {
+//public:
+//    TreeNode* buildTree(vector<int>& preorder, vector<int>& inorder) {
+//        return my_buildTree(preorder, inorder);
+//    }
+//
+//    TreeNode* my_buildTree(vector<int>& preorder, vector<int>& inorder)
+//    {
+//        TreeNode* ret = new TreeNode(preorder[_num]);
+//        vector<int>::iterator _end = inorder.begin();
+//        while (*_end != preorder[_num])//找到根节点
+//        {
+//            ++_end;
+//        }
+//        if (inorder.size() == 1)
+//        {
+//            ret->left = nullptr;
+//            ret->right = nullptr;
+//            return ret;
+//        }
+//
+//        if (_end == inorder.begin())
+//        {
+//            ret->right = nullptr;
+//        }
+//        else
+//        {
+//            ++_num;
+//            vector<int> temp1(inorder.begin(), _end);
+//            ret->left = my_buildTree(preorder, temp1);
+//        }
+//
+//        if (_end + 1 == inorder.end())
+//        {
+//            ret->right = nullptr;
+//        }
+//        else
+//        {
+//            ++_num;
+//            vector<int> temp2(++_end, inorder.end());
+//            ret->right = my_buildTree(preorder, temp2);
+//            return ret;
+//        }
+//    }
+//
+//    int _num = 0;//先序遍历的下标
+//};
+//
+//int main()
+//{
+//    vector<int> pre{ 1,2};
+//    vector<int> in{1,2};
+//    Solution s;
+//    TreeNode* ret = s.buildTree(pre, in);
+//    int a = 0;
+//    return 0;
+//}
+
+//#include<utility>
+//#include<vector>
+//#include<iostream>
+//#include<stack>
+//using namespace std;
+//
+//struct TreeNode {
+//    int val;
+//    TreeNode* left;
+//    TreeNode* right;
+//    TreeNode() : val(0), left(nullptr), right(nullptr) {}
+//    TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+//    TreeNode(int x, TreeNode* left, TreeNode* right) : val(x), left(left), right(right) {}
+//    
+//};
+//
+//class Solution {
+//public:
+//    vector<int> preorderTraversal(TreeNode* root) {
+//        if (root == nullptr)
+//            return ret;
+//        stack<TreeNode*> s;
+//        s.push(root);
+//        while(!s.empty())
+//        {
+//            TreeNode* cur = s.top();
+//            ret.push_back(cur->val);
+//            s.pop();
+//            if (cur->right)
+//            {
+//                s.push(cur->right);
+//            }
+//            if (cur->left)
+//            {
+//                s.push(cur->left);
+//            }
+//        }
+//        return ret;
+//    }
+//    vector<int> ret;
+//};
+//int main()
+//{
+//    	TreeNode* head = new TreeNode(3);
+//    head->left = new TreeNode(1);
+//    head->left->right = new TreeNode(2);
+//    head->right = new TreeNode(4);
+//    Solution s;
+//    vector<int> ret = s.preorderTraversal(head);
+//    for (auto& e: ret)
+//    {
+//        cout << e << " ";
+//    }
+//	return 0;
+//}
+
+
+//#include<iostream>
+//#include<vector>
+//#include<stack>
+//using namespace std;
+//
+// struct TreeNode {
+//    int val;
+//    TreeNode* left;
+//    TreeNode* right;
+//    TreeNode() : val(0), left(nullptr), right(nullptr) {}
+//    TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+//    TreeNode(int x, TreeNode* left, TreeNode* right) : val(x), left(left), right(right) {}
+//    
+//};
+//
+//class Solution {
+//public:
+//    vector<int> inorderTraversal(TreeNode* root) {
+//        stack<TreeNode*> s;
+//        TreeNode* cur = root;
+//        while (cur || !s.empty())
+//        {
+//            while (cur)
+//            {
+//                s.push(cur);
+//                cur = cur->left;
+//            }
+//            cur = s.top();
+//            ret.push_back(cur->val);
+//            s.pop();
+//            cur = cur->right;
+//        }
+//        return ret;
+//    }
+//
+//    vector<int> ret;
+//};
+//
+//
+//int main()
+//{
+//        	TreeNode* head = new TreeNode(3);
+//    head->left = new TreeNode(1);
+//    head->left->right = new TreeNode(2);
+//    head->right = new TreeNode(4);
+//    Solution s;
+//    vector<int> ret = s.inorderTraversal(head);
+//    for (auto& e: ret)
+//    {
+//        cout << e << " ";
+//    }
+//    return 0;
+//}
+
+
+
+
+//#include<iostream>
+//#include<vector>
+//#include<stack>
+//using namespace std;
+//
+// struct TreeNode {
+//    int val;
+//    TreeNode* left;
+//    TreeNode* right;
+//    TreeNode() : val(0), left(nullptr), right(nullptr) {}
+//    TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+//    TreeNode(int x, TreeNode* left, TreeNode* right) : val(x), left(left), right(right) {}
+//    
+//};
+//
+// class Solution {
+// public:
+//     vector<int> postorderTraversal(TreeNode* root) {
+//         if (root == nullptr)
+//             return ret;
+//         int flag = 0;
+//         int flag1 = 0;//是否有左树
+//         if (root->left)
+//             flag1 = 1;
+//         stack<TreeNode*> s;
+//         TreeNode* cur = root;
+//         s.push(cur);
+//         while (!s.empty())
+//         {
+//             if (cur->right)
+//                 s.push(cur->right);
+//             if (cur->left)
+//                 s.push(cur->left);
+//
+//             cur = s.top();
+//             if(cur->left == nullptr && cur->right == nullptr)
+//             {
+//                 while (s.size() > 2 && flag1)
+//                 {
+//                     TreeNode* add = s.top();
+//                     s.pop();
+//                     ret.push_back(add->val);
+//                 }
+//                 while (!s.empty() && flag)
+//                 {
+//                     TreeNode* add = s.top();
+//                     s.pop();
+//                     ret.push_back(add->val);
+//                 }
+//                 flag = 1;
+//                 if(!s.empty())
+//                     cur = s.top();
+//             }
+//         }
+//         return ret;
+//     }
+//
+//     vector<int> ret;
+// };
+//
+//
+//int main()
+//{
+//    //TreeNode* head = new TreeNode(3);
+//    //head->left = new TreeNode(1);
+//    //head->left->right = new TreeNode(2);
+//    //head->right = new TreeNode(4);
+//
+//    TreeNode* head = new TreeNode(1);
+//    head->right = new TreeNode(2);
+//    head->right->right = new TreeNode(3);
+//
+//    Solution s;
+//    vector<int> ret = s.postorderTraversal(head);
+//    for (auto& e: ret)
+//    {
+//        cout << e << " ";
+//    }
+//    return 0;
+//}
+
+
+
+#include<vector>
 #include<iostream>
 using namespace std;
 
-	char* test()
-	{
-		static char s[5] = "1234";
-		return s;
-	}
-
 int main()
 {
-	long a = 10;
-	long* p1 = &a;
-	int* p2 = (int*)&a;
-	cout << p1 << endl << p2 << endl;
-	
-
+	vector<int> v = { 1,2,3,4,5 };
+	reverse(v.begin(), v.end());
+	for (auto& e : v)
+	{
+		cout << e << " ";
+	}
 	return 0;
 }
