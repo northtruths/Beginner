@@ -3565,17 +3565,149 @@
 
 
 
-#include<vector>
+//#include<vector>
+//#include<iostream>
+//using namespace std;
+//
+//int main()
+//{
+//	vector<int> v = { 1,2,3,4,5 };
+//	reverse(v.begin(), v.end());
+//	for (auto& e : v)
+//	{
+//		cout << e << " ";
+//	}
+//	return 0;
+//}
+
+//#include<map>
+//#include<vector>
+//#include<string>
+//#include<algorithm>
+//#include<iostream>
+//using namespace std;
+//
+//class Solution {
+//public:
+//
+//    struct compare
+//    {
+//        bool operator()(const pair<string, int>& p1, const pair<string, int>& p2)
+//        {
+//            return p1.second > p2.second;
+//        }
+//    };
+//
+//    vector<string> topKFrequent(vector<string>& words, int k) {
+//        map<string, int> m;
+//        for (int i = 0; i < words.size(); ++i)
+//        {
+//            auto it = m.insert({ words[i], 1 });
+//            if (it.second == false)
+//            {
+//                ++it.first->second;
+//            }
+//        }
+//
+//        for (auto& e : m)
+//        {
+//            temp.push_back(e);
+//        }
+//
+//        stable_sort(temp.begin(), temp.end(), compare());
+//        vector<string> ret;
+//        for (int i = 0; i < k; ++i)
+//        {
+//            ret.push_back(temp[i].first);
+//        }
+//
+//        return ret;
+//    }
+//
+//    vector<pair<string, int>> temp;
+//};
+//
+//int main()
+//{
+//    vector<string> v{ "i","love","leetcode","i","love","coding" };
+//
+//    Solution s;
+//    vector<string> ret = s.topKFrequent(v, 2);
+//    for (auto& e : ret)
+//    {
+//        cout << e << endl;
+//    }
+//    return 0;
+//}
+
+
+//#include<string>
+//#include<iostream>
+//using namespace std;
+//
+//int main()
+//{
+//	string test;
+//	cin >> test;
+//	test.erase(test.end() - 1);
+//	cout << test << endl;
+//	return 0;
+//}
+
+
+
+
 #include<iostream>
+#include<string>
+#include<map>
+#include<vector>
+#include<algorithm>
 using namespace std;
 
 int main()
 {
-	vector<int> v = { 1,2,3,4,5 };
-	reverse(v.begin(), v.end());
-	for (auto& e : v)
-	{
-		cout << e << " ";
-	}
-	return 0;
+    map<string, int> m;
+    string temp;
+    while (cin >> temp)
+    {
+        for (int i = 0; i < temp.size(); ++i)
+        {
+            if (temp[i] < 'a' && temp[i] != '.')
+                temp[i] += 32;
+        }
+        if (*(temp.end() - 1) == '.')
+        {
+            temp.erase(temp.end() - 1);
+            auto it = m.insert({ temp, 1 });
+            if (it.second == false)
+            {
+                it.first->second++;
+            }
+            break;
+        }
+
+        auto it = m.insert({ temp, 1 });
+        if (it.second == false)
+        {
+            it.first->second++;
+        }
+    }
+
+    vector<pair<string, int>>  ret(m.begin(), m.end());
+    struct compare
+    {
+        bool operator()(const pair<string, int>& p1, const pair<string, int>& p2)
+        {
+            return p1.second > p2.second;
+        }
+    };
+
+    stable_sort(ret.begin(), ret.end(), compare());
+
+    for (auto& e : ret)
+    {
+        cout << e.first << ':' << e.second << endl;
+    }
+
+    return 0;
 }
