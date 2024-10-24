@@ -3657,57 +3657,134 @@
 
 
 
+//#include<iostream>
+//#include<string>
+//#include<map>
+//#include<vector>
+//#include<algorithm>
+//using namespace std;
+//
+//int main()
+//{
+//    map<string, int> m;
+//    string temp;
+//    while (cin >> temp)
+//    {
+//        for (int i = 0; i < temp.size(); ++i)
+//        {
+//            if (temp[i] < 'a' && temp[i] != '.')
+//                temp[i] += 32;
+//        }
+//        if (*(temp.end() - 1) == '.')
+//        {
+//            temp.erase(temp.end() - 1);
+//            auto it = m.insert({ temp, 1 });
+//            if (it.second == false)
+//            {
+//                it.first->second++;
+//            }
+//            break;
+//        }
+//
+//        auto it = m.insert({ temp, 1 });
+//        if (it.second == false)
+//        {
+//            it.first->second++;
+//        }
+//    }
+//
+//    vector<pair<string, int>>  ret(m.begin(), m.end());
+//    struct compare
+//    {
+//        bool operator()(const pair<string, int>& p1, const pair<string, int>& p2)
+//        {
+//            return p1.second > p2.second;
+//        }
+//    };
+//
+//    stable_sort(ret.begin(), ret.end(), compare());
+//
+//    for (auto& e : ret)
+//    {
+//        cout << e.first << ':' << e.second << endl;
+//    }
+//
+//    return 0;
+//}
+
+
 #include<iostream>
-#include<string>
-#include<map>
 #include<vector>
-#include<algorithm>
+#include<queue>
 using namespace std;
 
 int main()
 {
-    map<string, int> m;
-    string temp;
-    while (cin >> temp)
-    {
-        for (int i = 0; i < temp.size(); ++i)
-        {
-            if (temp[i] < 'a' && temp[i] != '.')
-                temp[i] += 32;
-        }
-        if (*(temp.end() - 1) == '.')
-        {
-            temp.erase(temp.end() - 1);
-            auto it = m.insert({ temp, 1 });
-            if (it.second == false)
-            {
-                it.first->second++;
-            }
-            break;
-        }
+	int n, m;
+	cin >> n >> m;
+	queue<int> in;
+	queue<int> q;
+	for (int i = 0; i < n; ++i)
+	{
+		int temp;
+		cin >> temp;
+		in.push(temp);
+	}
+	if (n == 1)
+		return in.front();
 
-        auto it = m.insert({ temp, 1 });
-        if (it.second == false)
-        {
-            it.first->second++;
-        }
-    }
+	int ret = 0;
+	int cur = 0;
+	if (!in.empty())
+	{
+		q.push(in.front());
+		in.pop();
+		ret = q.front();
+		cur = ret;
+	}
+	while (!in.empty())
+	{
+		while (q.size() > 1 && q.front() <= 0)
+		{
+			cur -= q.front();
+			q.pop();
+		}
+		if (cur > ret)	ret = cur;
+		if(q.size() < m)
+		{
+			while (q.size() < m && !in.empty())
+			{
+				q.push(in.front());
+				cur += in.front();
+				if (cur > ret)	ret = cur;
+				in.pop();
+			}
+		}
+		else
+		{
+			cur -= q.front();
+			q.pop();
+			q.push(in.front());
+			cur += in.front();
+			in.pop();
+		}
+		if (cur > ret) ret = cur;
+	}
 
-    vector<pair<string, int>>  ret(m.begin(), m.end());
-    struct compare
-    {
-        bool operator()(const pair<string, int>& p1, const pair<string, int>& p2)
-        {
-            return p1.second > p2.second;
-        }
-    };
-
-    stable_sort(ret.begin(), ret.end(), compare());
-
-    for (auto& e : ret)
-    {
-        cout << e.first << ':' << e.second << endl;
-    }
-
-    return 0;
+	while (q.size() > 1 && q.front() <= 0)
+	{
+		cur -= q.front();
+		q.pop();
+	}
+	if (cur > ret)	ret = cur;
+	cout << ret << endl;
+	return 0;
 }
+
+//10 5
+//1 -1 -2 -3 5 6 -1 -1 6 0
+//15
+
+//5 3
+//-2 -3 -1 -2 -1
+//0
