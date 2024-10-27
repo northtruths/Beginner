@@ -3839,26 +3839,324 @@
 //	return 0;
 //}
 
+//#include<iostream>
+//#include<vector>
+//using namespace std;
+//
+//int f(int i, int n, vector<int>& a)
+//{
+//	if (i > n)
+//		return 0;
+//	return f(i + a[i], n, a) + 1;
+//}
+//
+//int main()
+//{
+//	int n;
+//	cin >> n;
+//	vector<int> a(n + 1);
+//	for (int i = 0; i < n; ++i)
+//	{
+//		cin >> a[i + 1];
+//	}
+//	cout << f(1, n, a) << endl;
+//	return 0;
+//}
+
+
+//235
+//#include<iostream>
+//using namespace std;
+//
+//int arr[15];
+//void output(int i)
+//{
+//	for (int j = 0; j <= i; ++j)
+//	{
+//		j && printf(" ");
+//		cout << arr[j];
+//	}
+//	cout << endl;
+//	return;
+//}
+//
+//void f(int i, int j, int n)
+//{
+//	if (i >= n) return;
+//	for (int k = j; k <= n; k++)
+//	{
+//		arr[i] = k;
+//		output(i);
+//		f(i + 1, k + 1, n);
+//	}
+//	return;
+//}
+//
+//int main()
+//{
+//	int n = 0;
+//	cin >> n;
+//	f(0, 1, n);
+//	return 0;
+//}
+
+
+//236
+//#include<iostream>
+//using namespace std;
+//
+//int arr[15];
+//void output(int i)
+//{
+//	for (int j = 0; j <= i; ++j)
+//	{
+//		i && cout << " ";
+//		cout << arr[i];
+//	}
+//	cout << endl;
+//	return;
+//}
+//
+//void f(int i, int j, int n, int m)
+//{
+//	if (i == m)
+//	{
+//		output(i);
+//		return;
+//	}
+//	for (int k = j; k <= n; k++)
+//	{
+//		arr[i] = k;
+//		f(i + 1, k + 1, n, m);
+//	}
+//	return;
+//}
+//int main()
+//{
+//
+//	return 0;
+//}
+
+
+
+//237
+//#include<iostream>
+//using namespace std;
+//
+//int arr[15] = { 0 };
+//int num[15] = { 0 };
+//
+//void output(int n)
+//{
+//	for (int i = 0; i < n; ++i)
+//	{
+//		i && cout << " ";
+//		cout << arr[i];
+//	}
+//	cout << endl;
+//	return;
+//}
+//
+//void f(int i, int n)
+//{
+//	if (i >= n)
+//	{
+//		output(n);
+//		return;
+//	}
+//
+//	for (int k = 1; k <= n; ++k)
+//	{
+//		if (num[k] == 1) continue;
+//		arr[i] = k;
+//		num[k] = 1;
+//		f(i + 1, n);
+//		num[k] = 0;
+//	}
+//	return;
+//}
+
+
+//#include<iostream>
+//#include<vector>
+//using namespace std;
+//
+//bool IsPrime(int n)
+//{
+//	if (n <= 1) {
+//		return false;
+//	}
+//	for (int i = 2; i < sqrt(n); i++)
+//	{
+//		if ((n % i) == 0) {
+//			return false;
+//		}
+//	}
+//	return true;
+//}
+//
+//
+//void f(int i, int j, int sum, int n, int k, vector<int>& v, int& ret)
+//{
+//	if (i == k)
+//	{
+//		ret += IsPrime(sum) ? 1 : 0;
+//		return;
+//	}
+//	for (int z = j; z < n; ++z)
+//	{
+//		f(i + 1, z + 1, sum + v[z], n, k, v, ret);
+//	}
+//}
+//
+//int main()
+//{
+//	int n = 0, k = 0;
+//	cin >> n >> k;
+//	vector<int> v(n + 5);
+//	for (int i = 0; i < n; ++i)
+//	{
+//		cin >> v[i + 1];
+//	}
+//	int ret = 0;
+//	f(0, 1, 0, n, k,  v, ret);
+//	cout << ret << endl;
+//	return 0;
+//}
+
+
+
+//#include<iostream>
+//#include<vector>
+//#include<limits.h>
+//#include<utility>
+//using namespace std;
+//
+////cur为当前次数，ret为最小次数
+//int solution(vector<pair<int, int>>& K, int cur, int& ret, int a, int b)
+//{
+//
+//	if (cur > ret)
+//		return ret;
+//	if (a == b)
+//	{
+//		if (cur < ret)
+//			ret = cur;
+//		return ret;
+//	}
+//	if (K[a].first == 0)
+//		return ret;
+//	if (a + K[a].first < K.size() && K[a].second == 0)
+//	{
+//		K[a].second = 1;
+//		solution(K, cur + 1, ret, a + K[a].first, b);
+//		K[a].second = 0;
+//	}
+//	if (a - K[a].first > 0 && K[a].second == 0)
+//	{
+//		K[a].second = 1;
+//		solution(K, cur + 1, ret, a - K[a].first, b);
+//		K[a].second = 0;
+//	}
+//	return ret;
+//}
+//
+//int main()
+//{
+//	int n = 0;
+//	int a = 0;
+//	int b = 0;
+//	cin >> n >> a >> b;
+//	vector<pair<int, int>> K;
+//	K.resize(n + 1);
+//	for (int i = 1; i <= n; ++i)
+//	{
+//		cin >> K[i].first;
+//		K[i].second = 0;
+//	}
+//	int ret = INT_MAX;
+//	solution(K, 0, ret, a, b);
+//	if (ret != INT_MAX)
+//		cout << ret << endl;
+//	else
+//		cout << -1 << endl;
+//	return 0;
+//}
+
+//5 1 5
+//1 1 1 3 5
+
+//奇怪的电梯（ac）
+//#include<iostream>
+//#include<vector>
+//#include<limits.h>
+//#include<utility>
+//using namespace std;
+//
+////cur为当前次数，ret为最小次数
+//void solution(vector<int>& K, vector<int>& step, int cur, int a, int b)
+//{
+//	if (cur >= step[a])
+//		return;
+//	else
+//		step[a] = cur;
+//	if (K[a] == 0)
+//		return;
+//	if (a + K[a] < K.size())
+//	{
+//		solution(K, step, cur + 1, a + K[a], b);
+//	}
+//	if (a - K[a] > 0)
+//	{
+//		solution(K, step, cur + 1, a - K[a], b);
+//	}
+//	return;
+//}
+//
+//int main()
+//{
+//	int n = 0;
+//	int a = 0;
+//	int b = 0;
+//	cin >> n >> a >> b;
+//	vector<int> K;
+//	vector<int> step;
+//	K.resize(n + 1);
+//	step.resize(n + 1);
+//	for (int i = 1; i <= n; ++i)
+//	{
+//		cin >> K[i];
+//		step[i] = INT_MAX;
+//	}
+//	solution(K, step, 0, a, b);
+//	int ret = step[b] == INT_MAX ? -1 : step[b];
+//	cout << ret << endl;
+//	return 0;
+//}
+
 #include<iostream>
-#include<vector>
 using namespace std;
 
-int f(int i, int n, vector<int>& a)
+int dis[8][2] =
 {
-	if (i > n)
-		return 0;
-	return f(i + a[i], n, a) + 1;
-}
+	{1, 2}, {2, 1},{-1, 2},{-2, 1},
+	{1, -2},{2, -1},{-1, -2},{-1, -2}
+};
+
+int step[405][405];
 
 int main()
 {
-	int n;
-	cin >> n;
-	vector<int> a(n + 1);
-	for (int i = 0; i < n; ++i)
+	int m, n, x, y;
+	cin >> m >> n >> x >> y;
+	for (int i = 1; i <= m; ++i)
 	{
-		cin >> a[i + 1];
+		for (int j = 1; j <= n; ++j)
+		{
+			step[i][j] = -1;
+		}
 	}
-	cout << f(1, n, a) << endl;
+
+
 	return 0;
 }
