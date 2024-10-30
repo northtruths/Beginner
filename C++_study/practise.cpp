@@ -4221,70 +4221,287 @@
 
 
 
+//#include<iostream>
+//#include<vector>
+//#include<queue>
+//using namespace std;
+//
+//int main()
+//{
+//	int n, m;
+//	cin >> n >> m;
+//	queue<int> in;
+//	queue<int> q;
+//	for (int i = 0; i < n; ++i)
+//	{
+//		int temp;
+//		cin >> temp;
+//		in.push(temp);
+//	}
+//	if (n == 1)
+//		return in.front();
+//
+//	int ret = 0;
+//	int cur = 0;
+//	if (!in.empty())
+//	{
+//		q.push(in.front());
+//		in.pop();
+//		ret = q.front();
+//		cur = ret;
+//	}
+//	while (!in.empty())
+//	{
+//		while (q.size() > 1 && q.front() <= 0)
+//		{
+//			cur -= q.front();
+//			q.pop();
+//		}
+//		if (cur > ret)	ret = cur;
+//		if (q.size() <= m)
+//		{
+//			while (q.size() < m && !in.empty())
+//			{
+//				q.push(in.front());
+//				cur += in.front();
+//				if (cur > ret)	ret = cur;
+//				in.pop();
+//			}
+//		}
+//		else
+//		{
+//			cur -= q.front();
+//			q.pop();
+//			q.push(in.front());
+//			cur += in.front();
+//			in.pop();
+//		}
+//		if (cur > ret) ret = cur;
+//	}
+//
+//	while (q.size() > 1 && q.front() <= 0)
+//	{
+//		cur -= q.front();
+//		q.pop();
+//	}
+//	if (cur > ret)	ret = cur;
+//	cout << ret << endl;
+//	return 0;
+//}
+
+
+
+
+//力扣汉诺塔
+//class Solution {
+//public:
+//    void hanota(vector<int>& A, vector<int>& B, vector<int>& C) {
+//        Func(A.size(), A, B, C);
+//    }
+//    void Func(int n, vector<int>& A, vector<int>& B, vector<int>& C)
+//    {
+//        if (n == 0)
+//            return;
+//        if (n == 1)
+//        {
+//            C.push_back(A.back());
+//            A.pop_back();
+//        }
+//        else if (n == 2)
+//        {
+//            B.push_back(A.back());
+//            A.pop_back();
+//            C.push_back(A.back());
+//            A.pop_back();
+//            C.push_back(B.back());
+//            B.pop_back();
+//        }
+//        else
+//        {
+//            Func(n - 1, A, C, B);
+//            C.push_back(A.back());
+//            A.pop_back();
+//            Func(n - 1, B, A, C);
+//        }
+//
+//    }
+//};
+
+
+
+//力扣：21. 合并两个有序链表
+//class Solution {
+//public:
+//    ListNode* mergeTwoLists(ListNode* list1, ListNode* list2) {
+//        ListNode ret;
+//        Func(&ret, list1, list2);
+//        return ret.next;
+//    }
+//    void Func(ListNode* head, ListNode* list1, ListNode* list2)
+//    {
+//        if (list1 == nullptr)
+//        {
+//            head->next = list2;
+//            return;
+//        }
+//        if (list2 == nullptr)
+//        {
+//            head->next = list1;
+//            return;
+//        }
+//        if (list1->val <= list2->val)
+//        {
+//            head->next = list1;
+//            head = head->next;
+//            list1 = list1->next;
+//            Func(head, list1, list2);
+//        }
+//        else
+//        {
+//            head->next = list2;
+//            head = head->next;
+//            list2 = list2->next;
+//            Func(head, list1, list2);
+//        }
+//    }
+//};
+
+
+//力扣：206：反转链表
+//#include<utility>
+//using namespace std;
+//  struct ListNode {
+//      int val;
+//      ListNode *next;
+//      ListNode() : val(0), next(nullptr) {}
+//      ListNode(int x) : val(x), next(nullptr) {}
+//     ListNode(int x, ListNode *next) : val(x), next(next) {}
+//  };
+//
+//class Solution {
+//public:
+//    ListNode* reverseList(ListNode* head) {
+//        return Func(head).first;
+//    }
+//
+//   pair< ListNode*, ListNode*> Func(ListNode* head)//first是头，sencond是尾
+//    {
+//        if (head == nullptr)
+//            return {nullptr, nullptr};
+//        else if (head->next == nullptr)
+//            return { head , head };
+//        else if (head->next->next == nullptr)
+//        {
+//            head->next->next = head;
+//            ListNode* pre = head->next;
+//            head->next = nullptr;
+//            return { pre, head };
+//        }
+//        else
+//        {
+//            auto temp = Func(head->next);
+//            head->next = temp.first;
+//            ListNode* end = temp.second;
+//            ListNode* ret = head->next;
+//            end->next = head;
+//            head->next = nullptr;
+//            return {ret, head};
+//        }
+//
+//    }
+//};
+//
+//int main()
+//{
+//    ListNode* head = new ListNode(1);
+//    ListNode* cur = head;
+//    int t = 4;
+//    while (t--)
+//    {
+//        ListNode* newnode = new ListNode(5 - t);
+//        cur->next = newnode;
+//        cur = cur->next;
+//    }
+//
+//    Solution s;
+//    s.reverseList(head);
+//    return 0;
+//}
+
+
+
+//力扣：24：两两交换链表中的节点
+//class Solution {
+//public:
+//    ListNode* swapPairs(ListNode* head) {
+//        ListNode* pre = new ListNode;
+//        return Func(head, pre);
+//    }
+//
+//    ListNode* Func(ListNode* head, ListNode* pre)
+//    {
+//        if (head == nullptr)
+//            return nullptr;
+//        else if (head->next == nullptr)
+//            return head;
+//        else
+//        {
+//            ListNode* _next = head->next->next;
+//            head->next->next = head;
+//            pre->next = head->next;
+//            head->next = Func(_next, head);
+//            return pre->next;
+//        }
+//    }
+//};
+
+
+
 #include<iostream>
-#include<vector>
-#include<queue>
 using namespace std;
+
+class Solution {
+public:
+    double myPow(double x, int n) {
+        if (x == 1 || x == 0)
+            return x == 1 ? 1 : 0;
+        long long new_n = n;
+        if (new_n < 0)
+        {
+            x = 1 / x;
+            new_n *= -1;
+        }
+        double ret = Func(x, new_n);
+        return ret;
+    }
+
+    double Func(double x, long long n)
+    {
+        if (n == 0)
+            return 1;
+        else if (n == 1)
+            return x;
+        else if (n == 2)
+            return x * x;
+        else
+        {
+            int flag = 0;
+            if (n % 2 == 1)
+            {
+                flag = 1;
+                --n;
+            }
+            double num = Func(Func(x, n / 2), 2);
+            double ret = flag ? num * x : num;
+           return ret;
+        }
+    }
+};
 
 int main()
 {
-	int n, m;
-	cin >> n >> m;
-	queue<int> in;
-	queue<int> q;
-	for (int i = 0; i < n; ++i)
-	{
-		int temp;
-		cin >> temp;
-		in.push(temp);
-	}
-	if (n == 1)
-		return in.front();
 
-	int ret = 0;
-	int cur = 0;
-	if (!in.empty())
-	{
-		q.push(in.front());
-		in.pop();
-		ret = q.front();
-		cur = ret;
-	}
-	while (!in.empty())
-	{
-		while (q.size() > 1 && q.front() <= 0)
-		{
-			cur -= q.front();
-			q.pop();
-		}
-		if (cur > ret)	ret = cur;
-		if (q.size() <= m)
-		{
-			while (q.size() < m && !in.empty())
-			{
-				q.push(in.front());
-				cur += in.front();
-				if (cur > ret)	ret = cur;
-				in.pop();
-			}
-		}
-		else
-		{
-			cur -= q.front();
-			q.pop();
-			q.push(in.front());
-			cur += in.front();
-			in.pop();
-		}
-		if (cur > ret) ret = cur;
-	}
-
-	while (q.size() > 1 && q.front() <= 0)
-	{
-		cur -= q.front();
-		q.pop();
-	}
-	if (cur > ret)	ret = cur;
-	cout << ret << endl;
-	return 0;
+    Solution s;
+    cout << s.myPow(2, -2147483648);
+    return 0;
 }
