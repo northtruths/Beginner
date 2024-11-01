@@ -560,3 +560,417 @@
 //        return ret;
 //    }
 //};
+
+
+//1863.找出所有子集的异或总和再求和
+//#include<iostream>
+//#include<vector>
+//using namespace std;
+//
+//class Solution {
+//public:
+//    int subsetXORSum(vector<int>& nums) {
+//        vector<int> cur;
+//        int ret = 0;
+//        Func(nums, cur, ret, 0);
+//        return ret;
+//    }
+//
+//    void Func(vector<int>& nums, vector<int>& cur, int& ret, int i)
+//    {
+//        for (i; i < nums.size(); ++i)
+//        {
+//            cur.push_back(nums[i]);
+//            int temp = 0;
+//            for (auto e : cur)
+//            {
+//                temp ^= e;
+//            }
+//            ret += temp;
+//            Func(nums, cur, ret, i + 1);
+//            cur.pop_back();
+//        }
+//    }
+//};
+//
+//int main()
+//{
+//    vector<int> nums = { 5, 1, 6};
+//    Solution s;
+//    cout << s.subsetXORSum(nums);
+//	return 0;
+//}
+
+
+//47.全排列Ⅱ
+//#include<vector>
+//using namespace std;
+//class Solution {
+//public:
+//    vector<vector<int>> permuteUnique(vector<int>& nums) {
+//        vector<int> cur;
+//        vector<vector<int>> ret;
+//        vector<int> state(8 + 5);
+//        Func(nums, cur, ret, state);
+//        return ret;
+//    }
+//
+//    void Func(vector<int>& nums, vector<int>& cur, vector<vector<int>>& ret, vector<int>& state)
+//    {
+//        if (cur.size() == nums.size())
+//            return;
+//        for (int i = 0; i < nums.size(); ++i)
+//        {
+//            if (state[i] == 1)
+//                continue;
+//            cur.push_back(nums[i]);
+//            state[i] = 1;
+//            if (cur.size() == nums.size())
+//            {
+//                int flag1 = 1;
+//                for (auto& e : ret)
+//                {
+//                    int flag2 = 0;
+//                    for (int j = 0; j < e.size(); ++j)
+//                    {
+//                        if (e[j] != cur[j])
+//                        {
+//                            flag2 = 1;
+//                            break;
+//                        }
+//                    }
+//                    if (flag2 == 0)
+//                    {
+//                        flag1 = 0;
+//                        break;
+//                    }
+//                }
+//                if (flag1)
+//                {
+//                    ret.push_back(cur);
+//                }
+//            }
+//            Func(nums, cur, ret, state);
+//            cur.pop_back();
+//            state[i] = 0;
+//        }
+//    }
+//};
+//通过判断是否进行了回溯，来决定是否对当前的元素操作，先排序，
+// 在相同的元素下，若当前元素的前面的元素状态为未使用，或后面的元素已使用，则为已回溯，则跳过操作
+//class Solution {
+//public:
+//    vector<vector<int>> permuteUnique(vector<int>& nums) {
+//        vector<int> cur;
+//        vector<vector<int>> ret;
+//        vector<int> state(8 + 5);
+//        sort(nums.begin(), nums.end());
+//        Func(nums, cur, ret, state);
+//        return ret;
+//    }
+//
+//    void Func(vector<int>& nums, vector<int>& cur, vector<vector<int>>& ret, vector<int>& state)
+//    {
+//        if (cur.size() == nums.size())
+//            return;
+//        for (int i = 0; i < nums.size(); ++i)
+//        {
+//            if (state[i] == 1)
+//                continue;
+//            if (i < nums.size() - 1)
+//            {
+//                if (nums[i] == nums[i + 1] && state[i + 1] == 1)
+//                    continue;
+//            }
+//            cur.push_back(nums[i]);
+//            state[i] = 1;
+//            if (cur.size() == nums.size())
+//                ret.push_back(cur);
+//            Func(nums, cur, ret, state);
+//            cur.pop_back();
+//            state[i] = 0;
+//        }
+//    }
+//};
+//int main()
+//{
+//    vector<int> v({ 1, 2, 3 });
+//    Solution s;
+//    auto ret = s.permuteUnique(v);
+//    return 0;
+//}
+
+
+//17.电话号码的数字组合
+//#include<iostream>
+//#include<vector>
+//#include<string>
+//using namespace std;
+//class Solution {
+//public:
+//    vector<string> letterCombinations(string digits) {
+//        string cur;
+//        vector<string> ret;
+//        vector<string> map{ "0", "1", "abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz" };
+//        Func(digits, cur, ret, map, 0);
+//        return ret;
+//    }
+//
+//    void Func(string& digits, string& cur, vector<string>& ret, vector<string>& map, int i)
+//    {
+//        if (cur.size() == digits.size())
+//            return;
+//        for (i; i < digits.size(); ++i)
+//        {
+//            for (char e : map[digits[i] - 48])
+//            {
+//                cur += e;
+//                if (cur.size() == digits.size())
+//                    ret.push_back(cur);
+//                Func(digits, cur, ret, map, i + 1);
+//                cur.pop_back();
+//            }
+//        }
+//    }
+//};
+//
+//int main()
+//{
+//    string digits("23");
+//    Solution s;
+//    auto ret = s.letterCombinations(digits);
+//    return 0;
+//}
+
+
+
+//22.括号生成
+//#include<string>
+//#include<vector>
+//#include<iostream>
+//using namespace std;
+//class Solution {
+//public:
+//    vector<string> generateParenthesis(int n) {
+//        string cur;
+//        vector<string> ret;
+//        int left = 0, right = 0;
+//        vector<char> map({ '(', ')' });
+//        Func(n, cur, ret, left, right, map);
+//
+//        return ret;
+//    }
+//    //left/right为左右括号数量
+//    void Func(int n, string& cur, vector<string> &ret, int& left, int& right, vector<char>& map)
+//    {
+//        if (left == n && right == n)
+//        {
+//            ret.push_back(cur);
+//            return;
+//        }
+//        for (char e : map)
+//        {
+//            int flag = 0;
+//            if (e == '(')
+//            {
+//                if (left < n)
+//                {
+//                    cur += e;
+//                    ++left;
+//                    flag = 1;
+//                }
+//            }
+//            else
+//            {
+//                if (right < left)
+//                {
+//                    cur += e;
+//                    ++right;
+//                    flag = 1;
+//                }
+//            }
+//            if(flag)
+//                Func(n, cur, ret, left, right, map);
+//            if (flag && !cur.empty() && cur.back() == '(')
+//            {
+//                --left;
+//                cur.pop_back();
+//            }
+//            else if (flag && !cur.empty() && cur.back() == ')')
+//            {
+//                --right;
+//                cur.pop_back();
+//            }
+//        }
+//    }
+//};
+//
+//int main()
+//{
+//    Solution s;
+//    auto ret = s.generateParenthesis(3);
+//    for (auto e : ret)
+//    {
+//        cout << e << endl;
+//    }
+//    return 0;
+//}
+
+
+
+//77.组合
+//class Solution {
+//public:
+//    vector<vector<int>> combine(int n, int k) {
+//        vector<int> cur;
+//        vector<vector<int>> ret;
+//        dfs(n, k, cur, ret, 1);
+//        return ret;
+//    }
+//
+//    void dfs(int n, int k, vector<int>& cur, vector<vector<int>>& ret, int i)
+//    {
+//        if (cur.size() == k)
+//        {
+//            ret.push_back(cur);
+//            return;
+//        }
+//        for (i; i <= n; ++i)
+//        {
+//            cur.push_back(i);
+//            dfs(n, k, cur, ret, i + 1);
+//            cur.pop_back();
+//        }
+//    }
+//};
+
+
+//494.目标和/数组总和（bit）
+// 看样子这道题最优解是动态规划、背包问题啥的，回溯不剪枝的化复杂度有点高
+//class Solution {
+//public:
+//    int findTargetSumWays(vector<int>& nums, int target) {
+//        int ret = 0;
+//
+//        dfs(nums, target, 0, ret, 0);
+//
+//        return ret;
+//    }
+//
+//    void dfs(vector<int>& nums, int target, int cur, int& ret, int i)
+//    {
+//        if (i == nums.size())
+//        {
+//            if (cur == target)
+//                ++ret;
+//            return;
+//        }
+//        //+
+//        cur += nums[i];
+//        dfs(nums, target, cur, ret, i + 1);
+//        cur -= nums[i];
+//
+//        //-
+//        cur -= nums[i];
+//        dfs(nums, target, cur, ret, i + 1);
+//        cur += nums[i];
+//    }
+//};
+
+
+
+//784.字母大小全排列
+//#include<vector>
+//#include<string>
+//using namespace std;
+//class Solution {
+//public:
+//    vector<string> letterCasePermutation(string s) {
+//        for (char& e : s)
+//        {
+//            if (e < 65)  continue;
+//            else if (e < 97)
+//            {
+//                e += 32;
+//            }
+//        }
+//        vector<string> ret;
+//        Func(s, ret, 0);
+//        return ret;
+//    }
+//
+//    void Func(string& cur, vector<string>& ret, int i)
+//    {
+//        if (i == cur.size())
+//        {
+//            ret.push_back(cur);
+//            return;
+//        }
+//        for (i; i < cur.size(); ++i)
+//        {
+//            if (cur[i] < 65)   continue;
+//            cur[i] -= 32;
+//            Func(cur, ret, i + 1);
+//            cur[i] += 32;
+//        }
+//        if (i == cur.size())
+//        {
+//            ret.push_back(cur);
+//            return;
+//        }
+//    }
+//};
+//
+//int main()
+//{
+//    Solution s;
+//    auto ret = s.letterCasePermutation({ "a1b2" });
+//    return 0;
+//}
+
+
+
+
+#include<vector>
+#include<iostream>
+using namespace std;
+
+class Solution {
+public:
+    int countArrangement(int n) {
+        vector<int> cur;
+        cur.push_back(0);
+        vector<int> state(15 + 5, 0);
+        int ret = 0;
+        Func(n, cur, ret, state);
+        return ret;
+    }
+
+    void Func(int n, vector<int>& cur, int& ret, vector<int>& state)
+    {
+        if (cur.size() - 1 == n)
+        {
+            ++ret;
+            return;
+        }
+        for (int i = 1; i <= n; ++i)
+        {
+            if (state[i] == 1)   continue;
+            cur.push_back(i);
+            state[i] = 1;
+            if (i / (cur.size() - 1) == (double)i / (cur.size() - 1)
+                || (cur.size() - 1) / i == (cur.size() - 1) / (double)i)
+            {
+                Func(n, cur, ret, state);
+            }
+            cur.pop_back();
+            state[i] = 0;
+        }
+    }
+};
+int main()
+{
+    Solution s;
+    cout << s.countArrangement(3) << endl;
+    return 0;
+}
