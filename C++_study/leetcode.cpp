@@ -930,47 +930,393 @@
 
 
 
+//526.优美的排列
+//#include<vector>
+//#include<iostream>
+//using namespace std;
+//
+//class Solution {
+//public:
+//    int countArrangement(int n) {
+//        vector<int> cur;
+//        cur.push_back(0);
+//        vector<int> state(15 + 5, 0);
+//        int ret = 0;
+//        Func(n, cur, ret, state);
+//        return ret;
+//    }
+//
+//    void Func(int n, vector<int>& cur, int& ret, vector<int>& state)
+//    {
+//        if (cur.size() - 1 == n)
+//        {
+//            ++ret;
+//            return;
+//        }
+//        for (int i = 1; i <= n; ++i)
+//        {
+//            if (state[i] == 1)   continue;
+//            cur.push_back(i);
+//            state[i] = 1;
+//            if (i / (cur.size() - 1) == (double)i / (cur.size() - 1)
+//                || (cur.size() - 1) / i == (cur.size() - 1) / (double)i)
+//            {
+//                Func(n, cur, ret, state);
+//            }
+//            cur.pop_back();
+//            state[i] = 0;
+//        }
+//    }
+//};
+//int main()
+//{
+//    Solution s;
+//    cout << s.countArrangement(3) << endl;
+//    return 0;
+//}
 
-#include<vector>
-#include<iostream>
-using namespace std;
 
-class Solution {
-public:
-    int countArrangement(int n) {
-        vector<int> cur;
-        cur.push_back(0);
-        vector<int> state(15 + 5, 0);
-        int ret = 0;
-        Func(n, cur, ret, state);
-        return ret;
-    }
+//51.N皇后
+//#include<vector>
+//#include<string>
+//using namespace std;
+//class Solution {
+//public:
+//    vector<vector<string>> solveNQueens(int n) {
+//        vector<string> cur(n, string(n, '.'));
+//        vector<vector<string>> ret;
+//        vector<vector<int>> map(n, vector<int>(n, 0));
+//        Func(n, cur, ret, map, 0, 0);
+//        return ret;
+//    }
+//private:
+//    void Func(int n, vector<string>& cur, vector<vector<string>>& ret, vector<vector<int>>& map, int row, int num)
+//    {
+//        if (num == n)
+//        {
+//            ret.push_back(cur);
+//            return;
+//        }
+//        if (row == n)
+//            return;
+//        for (int i = 0; i < n; ++i)
+//        {
+//            if (map[row][i] == 1)
+//                continue;
+//            cur[row][i] = 'Q';
+//            vector<vector<int>> pre_map = map;
+//            set_map(row, i, map);
+//            ++num;
+//            Func(n, cur, ret, map, row + 1, num);
+//            cur[row][i] = '.';
+//            map = pre_map;
+//            --num;
+//        }
+//    }
+//    void set_map(int row, int col, vector<vector<int>>& map)
+//    {
+//        int n = map.size();
+//        for (int i = 0; i < n; ++i)
+//        {
+//            for (int j = 0; j < n; ++j)
+//            {
+//                if (i == row)
+//                    map[i][j] = 1;
+//                if (j == col)
+//                    map[i][j] = 1;
+//                int t = 0;
+//                while (t < n)
+//                {
+//                    if ((i + t == row && j + t == col) || (i - t == row && j - t == col)
+//                        || (i + t == row && j - t == col) || (i - t == row && j + t == col))
+//                    {
+//                        map[i][j] = 1;
+//                        break;
+//                    }
+//                    ++t;
+//                }
+//            }
+//        }
+//    }
+//};
+//
+//int main()
+//{
+//    Solution s;
+//    auto ret = s.solveNQueens(4);
+//    int a = 0;
+//    return 0;
+//}
 
-    void Func(int n, vector<int>& cur, int& ret, vector<int>& state)
-    {
-        if (cur.size() - 1 == n)
-        {
-            ++ret;
-            return;
-        }
-        for (int i = 1; i <= n; ++i)
-        {
-            if (state[i] == 1)   continue;
-            cur.push_back(i);
-            state[i] = 1;
-            if (i / (cur.size() - 1) == (double)i / (cur.size() - 1)
-                || (cur.size() - 1) / i == (cur.size() - 1) / (double)i)
-            {
-                Func(n, cur, ret, state);
-            }
-            cur.pop_back();
-            state[i] = 0;
-        }
-    }
-};
-int main()
-{
-    Solution s;
-    cout << s.countArrangement(3) << endl;
-    return 0;
-}
+
+
+//36.有效的数独
+//class Solution {
+//public:
+//    bool isValidSudoku(vector<vector<char>>& board) {
+//        vector<vector<int>> row_map(9, vector<int>(9 + 5, 0));
+//        vector<vector<int>> col_map(9, vector<int>(9 + 5, 0));
+//        return Func1(board, row_map, col_map, 0, 9, 0, 9) && Func2(board, 0, 3, 0, 3);
+//    }
+//
+//    bool Func1(vector<vector<char>>& board, vector<vector<int>>& row_map, vector<vector<int>>& col_map, int row_begin, int row_end, int col_begin, int col_end)
+//    {
+//
+//        for (int i = row_begin; i < row_end; ++i)
+//        {
+//            for (int j = col_begin; j < col_end; ++j)
+//            {
+//                if (board[i][j] != '.')
+//                {
+//                    if (++row_map[i][board[i][j] - 48] > 1)
+//                        return false;
+//                    if (++col_map[j][board[i][j] - 48] > 1)
+//                        return false;
+//                }
+//            }
+//        }
+//        return true;
+//    }
+//
+//    bool Func2(vector<vector<char>>& board, int row_begin, int row_end, int col_begin, int col_end)
+//    {
+//        if (row_end > 9 || col_end > 9)
+//            return true;
+//        int arr[10 + 5] = { 0 };
+//        if (row_end > 9 || col_end > 9)
+//            return true;
+//        for (int i = row_begin; i < row_end; ++i)
+//        {
+//            for (int j = col_begin; j < col_end; ++j)
+//            {
+//                if (board[i][j] != '.')
+//                {
+//                    if (++arr[board[i][j] - 48] > 1)
+//                        return false;
+//                }
+//            }
+//        }
+//        return Func2(board, row_begin + 3, row_end + 3, col_begin, col_end)
+//            && Func2(board, row_begin, row_end, col_begin + 3, col_end + 3);
+//    }
+//};
+
+//#include<iostream>
+//using namespace std;
+//int main()
+//{
+//	int i = 0;
+//	while(cin >> i)
+//	{
+//		int row = i >= 6 ? 6 : i < 3 ? 0 : 3;
+//		cout << row << endl;
+//	}
+//	return 0;
+//}
+
+
+//37.解数独
+//#include<vector>
+//#include<string>
+//using namespace std;
+//class Solution {
+//public:
+//    void solveSudoku(vector<vector<char>>& board) {
+//        vector<vector<int>> row_map(9, vector<int>(10, 0));
+//        vector<vector<int>> col_map(9, vector<int>(10, 0));
+//        int num = 0;
+//        for (int i = 0; i < 9; ++i)
+//        {
+//            for (int j = 0; j < 9; ++j)
+//            {
+//                if (board[i][j] != '.')
+//                {
+//                    row_map[i][board[i][j] - 48] = 1;
+//                    col_map[j][board[i][j] - 48] = 1;
+//                    ++num;
+//                }
+//            }
+//        }
+//        int flag = 0;
+//        Func1(board, row_map, col_map, 0, 0, num, flag);
+//    }
+//
+//    void Func1(vector<vector<char>>& board, vector<vector<int>>& row_map, vector<vector<int>>& col_map, int i, int j, int num, int& flag)
+//    {
+//        if (num == 81)
+//        {
+//            flag = 1;
+//            return;
+//        }
+//        while (i < 9 && j < 9 && board[i][j] != '.')
+//        {
+//            if (j == 8)
+//            {
+//                i = i + 1;
+//                j = 0;
+//            }
+//            else
+//            {
+//                i = i;
+//                j = j + 1;
+//            }
+//        }
+//
+//        if (i < 9 && j < 9 && board[i][j] == '.')
+//        {
+//            for (int n = 1; n <= 9; ++n)//n为要填的数字
+//            {
+//                if (row_map[i][n] == 0
+//                    && col_map[j][n] == 0)
+//                {
+//                    board[i][j] = n + 48;
+//                    row_map[i][n] = 1;
+//                    col_map[j][n] = 1;
+//                    ++num;
+//                    int row = i >= 6 ? 6 : i < 3 ? 0 : 3;
+//                    int col = j >= 6 ? 6 : i < 3 ? 0 : 3;
+//                    if (Func2(board, row, row + 3, col, col + 3))//判断九宫格是否合法
+//                    {
+//                        int next_i, next_j;
+//                        if (j == 8)
+//                        {
+//                            next_i = i + 1;
+//                            next_j = 0;
+//                        }
+//                        else
+//                        {
+//                            next_i = i;
+//                            next_j = j + 1;
+//                        }
+//                        Func1(board, row_map, col_map, next_i, next_j, num, flag);
+//                        if (flag)    return;
+//                        board[i][j] = '.';
+//                        row_map[i][n] = 0;
+//                        col_map[j][n] = 0;
+//                        --num;
+//                    }
+//                    else {
+//                        board[i][j] = '.';
+//                        row_map[i][n] = 0;
+//                        col_map[j][n] = 0;
+//                        --num;
+//                    }
+//                }
+//            }
+//        }
+//
+//
+//    }
+//    bool Func2(vector<vector<char>>& board, int row_begin, int row_end, int col_begin, int col_end)
+//    {
+//        int arr[10 + 5] = { 0 };
+//        for (int i = row_begin; i < row_end; ++i)
+//        {
+//            for (int j = col_begin; j < col_end; ++j)
+//            {
+//                if (board[i][j] != '.')
+//                {
+//                    if (++arr[board[i][j] - 48] > 1)
+//                        return false;
+//                }
+//            }
+//        }
+//        return true;
+//    }
+//};
+//
+//int main()
+//{
+//    vector<vector<char>> board(9);
+//    board[0] = vector<char>({'5', '3', '.', '.', '7', '.', '.', '.', '.'});
+//    board[1] = vector<char>({ '6', '.', '.', '1', '9', '5', '.', '.', '.' });
+//    board[2] = vector<char>({ '.', '9', '8', '.', '.', '.', '.', '6', '.' });
+//    board[3] = vector<char>({ '8', '.', '.', '.', '6', '.', '.', '.', '3' });
+//    board[4] = vector<char>({ '4', '.', '.', '8', '.', '3', '.', '.', '1' });
+//    board[5] = vector<char>({ '7', '.', '.', '.', '2', '.', '.', '.', '6' });
+//    board[6] = vector<char>({ '.', '6', '.', '.', '.', '.', '2', '8', '.' });
+//    board[7] = vector<char>({ '.', '.', '.', '4', '1', '9', '.', '.', '5' });
+//    board[8] = vector<char>({ '.', '.', '.', '.', '8', '.', '.', '7', '9' });
+//    Solution s;
+//    s.solveSudoku(board); 
+//    int a = 0;
+//    return 0;
+//}
+
+//[['5', '3', '.', '.', '7', '.', '.', '.', '.'], 
+//['6', '.', '.', '1', '9', '5', '.', '.', '.'], 
+//['.', '9', '8', '.', '.', '.', '.', '6', '.'], 
+//['8', '.', '.', '.', '6', '.', '.', '.', '3'], 
+//['4', '.', '.', '8', '.', '3', '.', '.', '1'], 
+//['7', '.', '.', '.', '2', '.', '.', '.', '6'], 
+//['.', '6', '.', '.', '.', '.', '2', '8', '.'], 
+//['.', '.', '.', '4', '1', '9', '.', '.', '5'], 
+//['.', '.', '.', '.', '8', '.', '.', '7', '9']]
+
+
+
+
+
+
+//79.单词搜索
+//#include<vector>
+//#include<string>
+//#include<iostream>
+//using namespace std;
+//class Solution {
+//public:
+//    bool exist(vector<vector<char>>& board, string word) {
+//        vector<vector<int>> map(board.size(), vector<int>(board[0].size(), 0));
+//        int dir[4][2] = { {-1, 0}, {1, 0}, {0, -1}, {0, 1} };
+//        for (int i = 0; i < board.size(); ++i)
+//        {
+//            for (int j = 0; j < board[0].size(); ++j)
+//            {
+//                if (board[i][j] == word[0])
+//                {
+//                    if(dfs(board, word, 0, map, i, j, dir))
+//                        return true;
+//                }
+//            }
+//        }
+//        return false;
+//    }
+//private:
+//    bool dfs(vector<vector<char>>& board, string& word, int pos, vector<vector<int>>& map, int i, int j, int(&dir)[4][2])
+//    {
+//        if (pos == word.size())
+//        {
+//            return true;
+//        }
+//        if (i < 0 || j < 0 || i >= board.size() || j >= board[0].size())
+//            return false;
+//        if (board[i][j] == word[pos] && map[i][j] == 0)
+//        {
+//            map[i][j] = 1;
+//            for (int k = 0; k < 4; ++k)
+//            {
+//                int x = i + dir[k][0];
+//                int y = j + dir[k][1];
+//                if (dfs(board, word, pos + 1, map, x, y, dir))
+//                    return true;
+//            }
+//            map[i][j] = 0;
+//        }
+//        return false;
+//    }
+//};
+////["A", "B", "C", "E"], 
+////["S", "F", "C", "S"],
+////["A", "D", "E", "E"]
+//int main()
+//{
+//    vector<vector<char>> board(3);
+//    board[0] = { 'A', 'B', 'C', 'E' };
+//    board[1] = { 'S', 'F', 'C', 'S' };
+//    board[2] = { 'A', 'D', 'E', 'E' };
+//    Solution s;
+//    if (s.exist(board, "SEE"))
+//        cout << "yes" << endl;
+//    else cout << "No" << endl;
+//    return 0;
+//}
