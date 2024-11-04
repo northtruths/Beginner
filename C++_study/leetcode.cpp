@@ -1320,3 +1320,123 @@
 //    else cout << "No" << endl;
 //    return 0;
 //}
+
+
+
+//1219.»Æ½ð¿ó¹¤
+//#include<vector>
+//#include<string>
+//#include<iostream>
+//using namespace std;
+//class Solution {
+//public:
+//    int getMaximumGold(vector<vector<int>>& grid) {
+//        int ret = 0;
+//        int dir[4][2] = { {-1, 0}, {1, 0}, {0, -1}, {0, 1} };
+//        vector<vector<int>> map(grid);
+//        for (int i = 0; i < grid.size(); ++i)
+//        {
+//            for (int j = 0; j < grid[0].size(); ++j)
+//            {
+//                if (grid[i][j] == 0) continue;
+//                dfs(grid, map, dir, i, j, 0, ret);
+//            }
+//        }
+//        return ret;
+//    }
+//
+//    int dfs(vector<vector<int>>& grid, vector<vector<int>>& map, int(&dir)[4][2], int x, int y, int cur, int& ret)
+//    {
+//        if (x < 0 || y < 0 || x >= grid.size() || y >= grid[0].size()
+//            || map[x][y] == 0)
+//        {
+//            ret = cur > ret ? cur : ret;
+//            return ret;
+//        }
+//        cur += grid[x][y];
+//        map[x][y] = 0;
+//        for (int k = 0; k < 4; ++k)
+//        {
+//            int nx = x + dir[k][0];
+//            int ny = y + dir[k][1];
+//            dfs(grid, map, dir, nx, ny, cur, ret);
+//        }
+//        cur -= grid[x][y];
+//        map[x][y] = 1;
+//
+//        return ret;
+//    }
+//};
+//
+//int main()
+//{
+//
+//    return 0;
+//}
+
+
+#include<vector>
+#include<string>
+#include<iostream>
+using namespace std;
+class Solution {
+public:
+    int uniquePathsIII(vector<vector<int>>& grid) {
+        int x = 0, y = 0;
+        int ret = 0;
+        int need = grid.size() * grid[0].size();
+        int dir[4][2] = { {-1, 0}, {1, 0}, {0, -1}, {0, 1} };
+        for (int i = 0; i < grid.size(); ++i)
+        {
+            for (int j = 0; j < grid[0].size(); ++j)
+            {
+                if (grid[i][j] == 0) continue;
+                else if (grid[i][j] == 1)
+                {
+                    x = i;
+                    y = j;
+                    grid[i][j] = 0;
+                }
+                else if (grid[i][j] == -1)
+                    --need;
+            }
+        }
+        dfs(grid, x, y, dir, need, ret);
+        return ret;
+    }
+
+    void dfs(vector<vector<int>>& map, int x, int y, int(&dir)[4][2], int need, int& ret)
+    {
+        if (x < 0 || y < 0 || x >= map.size() || y >= map[0].size())
+            return;
+        if (map[x][y] == -1)
+            return;
+        if (map[x][y] == 2)
+        {
+            if (need == 1)
+                ++ret;
+            return;
+        }
+        map[x][y] = -1;
+        for (int k = 0; k < 4; ++k)
+        {
+            int nx = x + dir[k][0];
+            int ny = y + dir[k][1];
+            dfs(map, nx, ny, dir, need - 1, ret);
+        }
+        map[x][y] = 0;
+    }
+};
+//[[1, 0, 0, 0], 
+//[0, 0, 0, 0], 
+//[0, 0, 2, -1]]
+int main()
+{
+    vector<vector<int>> grid(3);
+    grid[0] = { 1, 0, 0, 0 };
+    grid[1] = { 0, 0, 0, 0 };
+    grid[2] = { 0, 0, 2, -1 };
+    Solution s;
+    cout << s.uniquePathsIII(grid) << endl;
+    return 0;
+}
