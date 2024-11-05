@@ -1575,8 +1575,181 @@
 //};
 
 
+
+//63.不同路径Ⅱ
+//class Solution {
+//public:
+//    int uniquePathsWithObstacles(vector<vector<int>>& obstacleGrid) {
+//        vector<vector<int>>& map = obstacleGrid;
+//        int m = obstacleGrid.size();
+//        int n = obstacleGrid[0].size();
+//        if (map[m - 1][n - 1])
+//            return 0;
+//        vector<vector<int>> dp(m + 5, vector<int>(n + 5, 0));
+//        for (int i = 0; i < n; ++i)
+//        {
+//            if (map[0][i] == 1)
+//            {
+//                for (i + 1; i < n; ++i)
+//                {
+//                    map[0][i] = 1;
+//                }
+//            }
+//            else
+//                dp[0][i] = 1;
+//        }
+//        for (int i = 0; i < m; ++i)
+//        {
+//            if (map[i][0] == 1)
+//            {
+//                for (i + 1; i < m; ++i)
+//                {
+//                    map[i][0] = 1;
+//                }
+//            }
+//            else
+//                dp[i][0] = 1;
+//        }
+//
+//        for (int i = 1; i < m; ++i)
+//        {
+//            for (int j = 1; j < n; ++j)
+//            {
+//                dp[i][j] += map[i - 1][j] ? 0 : dp[i - 1][j];
+//                dp[i][j] += map[i][j - 1] ? 0 : dp[i][j - 1];
+//            }
+//        }
+//        return dp[m - 1][n - 1];
+//
+//    }
+//};
+
+
+
+
+//LCR 166.珠宝的最高价值
+//class Solution {
+//public:
+//    int jewelleryValue(vector<vector<int>>& frame) {
+//        vector<vector<int>> dp(frame.size(), vector<int>(frame[0].size(), 0));
+//        dp[0][0] = frame[0][0];
+//        for (int i = 0; i < frame.size(); ++i)
+//        {
+//            for (int j = 0; j < frame[0].size(); ++j)
+//            {
+//                if (i == 0 && j == 0) continue;
+//                else if (i == 0) dp[i][j] = frame[i][j] + dp[i][j - 1];
+//                else if (j == 0) dp[i][j] = frame[i][j] + dp[i - 1][j];
+//                else dp[i][j] = frame[i][j] + (dp[i][j - 1] > dp[i - 1][j] ? dp[i][j - 1] : dp[i - 1][j]);
+//            }
+//        }
+//        return dp[frame.size() - 1][frame[0].size() - 1];
+//    }
+//};
+
+
+//931.下降路径最小和
+//#include<vector>
+//#include<iostream>
+//using namespace std;
+//class Solution {
+//public:
+//    int minFallingPathSum(vector<vector<int>>& matrix) {
+//        int n = matrix.size();
+//        vector<vector<int>> dp(n, vector<int>(n, 0));
+//        for (int i = 0; i < n; ++i)
+//            dp[0][i] = matrix[0][i];
+//        for (int i = 1; i < n; ++i)
+//        {
+//            for (int j = 0; j < n; ++j)
+//            {
+//                int _min = INT_MAX;
+//                if (j == 0)
+//                    _min = min(dp[i - 1][j], dp[i - 1][j + 1]);
+//                else if (j == n - 1)
+//                    _min = min(dp[i - 1][j], dp[i - 1][j - 1]);
+//                else
+//                    _min = min(min(dp[i - 1][j], dp[i - 1][j + 1]), dp[i - 1][j - 1]);
+//                dp[i][j] = matrix[i][j] + _min;
+//            }
+//        }
+//        int ret = INT_MAX;
+//        for (int e : dp[n - 1])
+//        {
+//            ret = e < ret ? e : ret;
+//        }
+//        return ret;
+//    }
+//};
+//
+//int main()
+//{ 
+//    vector<vector<int>> v({ { 2, 1, 3 }, { 6, 5, 4 }, { 7, 8, 9 } });
+//    Solution s;
+//    cout << s.minFallingPathSum(v) << endl;
+//
+//    return 0;
+//}
+
+
+//64.最小路径和
+//class Solution {
+//public:
+//    int minPathSum(vector<vector<int>>& grid) {
+//        int m = grid.size();
+//        int n = grid[0].size();
+//        vector<vector<int>> dp(m, vector<int>(n, 0));
+//        dp[0][0] = grid[0][0];
+//        for (int i = 1; i < n; ++i)
+//            dp[0][i] = grid[0][i] + dp[0][i - 1];
+//        for (int i = 1; i < m; ++i)
+//            dp[i][0] = grid[i][0] + dp[i - 1][0];
+//        for (int i = 1; i < m; ++i)
+//        {
+//            for (int j = 1; j < n; ++j)
+//            {
+//                dp[i][j] = grid[i][j] + (dp[i - 1][j] < dp[i][j - 1] ? dp[i - 1][j] : dp[i][j - 1]);
+//            }
+//        }
+//        return dp[m - 1][n - 1];
+//    }
+//};
+
+
+
+#include<vector>
+using namespace std;
+class Solution {
+public:
+    int calculateMinimumHP(vector<vector<int>>& dungeon) {
+        int m = dungeon.size();
+        int n = dungeon[0].size();
+        vector<vector<int>> dp(m, vector<int>(n, 0));
+        dp[0][0] = dungeon[0][0];
+        for (int i = 0; i < m; ++i)
+        {
+            for (int j = 0; j < n; ++j)
+            {
+                if (i == 0 && j == 0) continue;
+                else if (i == 0)
+                    dp[i][j] = dungeon[i][j] + dp[i][j - 1];
+                else if (j == 0)
+                    dp[i][j] = dungeon[i][j] + dp[i - 1][j];
+                else
+                    dp[i][j] = dungeon[i][j] + (dp[i][j - 1] > dp[i - 1][j] ? dp[i][j - 1] : dp[i - 1][j]);
+            }
+        }
+        if (dp[m - 1][n - 1] > 0)
+            return 1;
+        else
+            return -1 * dp[m - 1][n - 1] + 1;
+    }
+};
+
 int main()
 {
-	int arr[5];	
-	return 0;
+    vector<vector<int>> v({ {-2, -3, 3}, {-5, -10, 1}, {10, 30, -5} });
+    Solution s;
+    printf("%d", s.calculateMinimumHP(v));
+    return 0;
 }
