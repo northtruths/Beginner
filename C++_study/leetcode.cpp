@@ -1375,68 +1375,208 @@
 //}
 
 
-#include<vector>
-#include<string>
-#include<iostream>
-using namespace std;
-class Solution {
-public:
-    int uniquePathsIII(vector<vector<int>>& grid) {
-        int x = 0, y = 0;
-        int ret = 0;
-        int need = grid.size() * grid[0].size();
-        int dir[4][2] = { {-1, 0}, {1, 0}, {0, -1}, {0, 1} };
-        for (int i = 0; i < grid.size(); ++i)
-        {
-            for (int j = 0; j < grid[0].size(); ++j)
-            {
-                if (grid[i][j] == 0) continue;
-                else if (grid[i][j] == 1)
-                {
-                    x = i;
-                    y = j;
-                    grid[i][j] = 0;
-                }
-                else if (grid[i][j] == -1)
-                    --need;
-            }
-        }
-        dfs(grid, x, y, dir, need, ret);
-        return ret;
-    }
 
-    void dfs(vector<vector<int>>& map, int x, int y, int(&dir)[4][2], int need, int& ret)
-    {
-        if (x < 0 || y < 0 || x >= map.size() || y >= map[0].size())
-            return;
-        if (map[x][y] == -1)
-            return;
-        if (map[x][y] == 2)
-        {
-            if (need == 1)
-                ++ret;
-            return;
-        }
-        map[x][y] = -1;
-        for (int k = 0; k < 4; ++k)
-        {
-            int nx = x + dir[k][0];
-            int ny = y + dir[k][1];
-            dfs(map, nx, ny, dir, need - 1, ret);
-        }
-        map[x][y] = 0;
-    }
-};
-//[[1, 0, 0, 0], 
-//[0, 0, 0, 0], 
-//[0, 0, 2, -1]]
+//980.不同路径Ⅲ
+//#include<vector>
+//#include<string>
+//#include<iostream>
+//using namespace std;
+//class Solution {
+//public:
+//    int uniquePathsIII(vector<vector<int>>& grid) {
+//        int x = 0, y = 0;
+//        int ret = 0;
+//        int need = grid.size() * grid[0].size();
+//        int dir[4][2] = { {-1, 0}, {1, 0}, {0, -1}, {0, 1} };
+//        for (int i = 0; i < grid.size(); ++i)
+//        {
+//            for (int j = 0; j < grid[0].size(); ++j)
+//            {
+//                if (grid[i][j] == 0) continue;
+//                else if (grid[i][j] == 1)
+//                {
+//                    x = i;
+//                    y = j;
+//                    grid[i][j] = 0;
+//                }
+//                else if (grid[i][j] == -1)
+//                    --need;
+//            }
+//        }
+//        dfs(grid, x, y, dir, need, ret);
+//        return ret;
+//    }
+//
+//    void dfs(vector<vector<int>>& map, int x, int y, int(&dir)[4][2], int need, int& ret)
+//    {
+//        if (x < 0 || y < 0 || x >= map.size() || y >= map[0].size())
+//            return;
+//        if (map[x][y] == -1)
+//            return;
+//        if (map[x][y] == 2)
+//        {
+//            if (need == 1)
+//                ++ret;
+//            return;
+//        }
+//        map[x][y] = -1;
+//        for (int k = 0; k < 4; ++k)
+//        {
+//            int nx = x + dir[k][0];
+//            int ny = y + dir[k][1];
+//            dfs(map, nx, ny, dir, need - 1, ret);
+//        }
+//        map[x][y] = 0;
+//    }
+//};
+////[[1, 0, 0, 0], 
+////[0, 0, 0, 0], 
+////[0, 0, 2, -1]]
+//int main()
+//{
+//    vector<vector<int>> grid(3);
+//    grid[0] = { 1, 0, 0, 0 };
+//    grid[1] = { 0, 0, 0, 0 };
+//    grid[2] = { 0, 0, 2, -1 };
+//    Solution s;
+//    cout << s.uniquePathsIII(grid) << endl;
+//    return 0;
+//}
+
+
+
+
+
+//动态规划
+
+//1137.第N个泰波那契数
+//class Solution {
+//public:
+//    int tribonacci(int n) {
+//        vector<int> dp(n + 5);
+//        dp[0] = 0;
+//        dp[1] = dp[2] = 1;
+//        for (int i = 3; i <= n; ++i)
+//        {
+//            dp[i] = dp[i - 1] + dp[i - 2] + dp[i - 3];
+//        }
+//        return dp[n];
+//    }
+//};
+
+
+//08.01.三步问题
+//#include<vector>
+//using namespace std;
+//class Solution {
+//public:
+//    int waysToStep(int n) {
+//        long long dp[n + 5];//上第i个台阶的方法
+//        dp[0] = 1;
+//        dp[1] = 1;
+//        dp[2] = 2;
+//        dp[3] = 4;
+//        for (int i = 4; i <= n; ++i)
+//        {
+//            dp[i] = (dp[i - 1] % 1000000007 + dp[i - 2] % 1000000007 + dp[i - 3] % 1000000007) % 1000000007;
+//        }
+//        return dp[n];
+//    }
+//};
+
+
+//746.使用最小花费爬楼梯
+//class Solution {
+//public:
+//    int minCostClimbingStairs(vector<int>& cost) {
+//        cost.push_back(0);
+//        int dp[cost.size() + 5];//到第i层的最小费用
+//        dp[0] = cost[0];
+//        dp[1] = cost[1];
+//        for (int i = 2; i < cost.size(); ++i)
+//        {
+//            dp[i] = dp[i - 1] < dp[i - 2] ? dp[i - 1] + cost[i] : dp[i - 2] + cost[i];
+//        }
+//        return dp[cost.size() - 1];
+//    }
+//};
+
+
+
+//91.解码方法
+//#include<string>
+//#include<vector>
+//using namespace std;
+//class Solution {
+//public:
+//    int numDecodings(string s) {
+//        vector<int> dp(s.size() + 5);
+//        if (s[0] - 48 == 0)   return 0;
+//        dp[0] = 1;
+//        bool _s = solo(s, 1);
+//        bool _d = dble(s, 1);
+//        if (_s == false && _d == false) return 0;
+//        if (_s && _d) dp[1] = 2;
+//        else if (_s) dp[1] = 1;
+//        else dp[1] = 1;
+//        for (int i = 2; i < s.size(); ++i)
+//        {
+//            _s = solo(s, i);
+//            _d = dble(s, i);
+//            if (_s == false && _d == false) return 0;
+//            if (_s && _d) dp[i] = dp[i - 1] + 1;
+//            else if (_s) dp[i] = dp[i - 1];
+//            else dp[i] = dp[i - 2];
+//        }
+//        return dp[s.size() - 1];
+//    }
+//
+//    bool solo(string& s, int i)
+//    {
+//        if (s[i] - 48 == 0) return false;
+//        return true;
+//    }
+//
+//    bool dble(string& s, int i)
+//    {
+//        if (10 <= (s[i - 1] - 48) * 10 + s[i] - 48 && (s[i - 1] - 48) * 10 + s[i] - 48 <= 26)
+//            return true;
+//        return false;
+//    }
+//};
+//
+//int main()
+//{
+//    Solution s;
+//    string str("2101");
+//    s.numDecodings(str);
+//    return 0;
+//}
+
+
+//62.不同路径
+//class Solution {
+//public:
+//    int uniquePaths(int m, int n) {
+//        int dp[m + 5][n + 5];
+//        for (int i = 0; i < n; ++i)
+//            dp[0][i] = 1;
+//        for (int i = 0; i < m; ++i)
+//            dp[i][0] = 1;
+//        for (int i = 1; i < m; ++i)
+//        {
+//            for (int j = 1; j < n; ++j)
+//            {
+//                dp[i][j] = dp[i - 1][j] + dp[i][j - 1];
+//            }
+//        }
+//        return dp[m - 1][n - 1];
+//    }
+//};
+
+
 int main()
 {
-    vector<vector<int>> grid(3);
-    grid[0] = { 1, 0, 0, 0 };
-    grid[1] = { 0, 0, 0, 0 };
-    grid[2] = { 0, 0, 2, -1 };
-    Solution s;
-    cout << s.uniquePathsIII(grid) << endl;
-    return 0;
+	int arr[5];	
+	return 0;
 }
