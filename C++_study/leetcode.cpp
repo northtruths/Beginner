@@ -1717,39 +1717,201 @@
 
 
 
-#include<vector>
-using namespace std;
-class Solution {
-public:
-    int calculateMinimumHP(vector<vector<int>>& dungeon) {
-        int m = dungeon.size();
-        int n = dungeon[0].size();
-        vector<vector<int>> dp(m, vector<int>(n, 0));
-        dp[0][0] = dungeon[0][0];
-        for (int i = 0; i < m; ++i)
-        {
-            for (int j = 0; j < n; ++j)
-            {
-                if (i == 0 && j == 0) continue;
-                else if (i == 0)
-                    dp[i][j] = dungeon[i][j] + dp[i][j - 1];
-                else if (j == 0)
-                    dp[i][j] = dungeon[i][j] + dp[i - 1][j];
-                else
-                    dp[i][j] = dungeon[i][j] + (dp[i][j - 1] > dp[i - 1][j] ? dp[i][j - 1] : dp[i - 1][j]);
-            }
-        }
-        if (dp[m - 1][n - 1] > 0)
-            return 1;
-        else
-            return -1 * dp[m - 1][n - 1] + 1;
-    }
-};
+//#include<vector>
+//using namespace std;
+//class Solution {
+//public:
+//    int calculateMinimumHP(vector<vector<int>>& dungeon) {
+//        int m = dungeon.size();
+//        int n = dungeon[0].size();
+//        vector<vector<int>> dp(m, vector<int>(n, 0));
+//        dp[0][0] = dungeon[0][0];
+//        for (int i = 0; i < m; ++i)
+//        {
+//            for (int j = 0; j < n; ++j)
+//            {
+//                if (i == 0 && j == 0) continue;
+//                else if (i == 0)
+//                    dp[i][j] = dungeon[i][j] + dp[i][j - 1];
+//                else if (j == 0)
+//                    dp[i][j] = dungeon[i][j] + dp[i - 1][j];
+//                else
+//                    dp[i][j] = dungeon[i][j] + (dp[i][j - 1] > dp[i - 1][j] ? dp[i][j - 1] : dp[i - 1][j]);
+//            }
+//        }
+//        if (dp[m - 1][n - 1] > 0)
+//            return 1;
+//        else
+//            return -1 * dp[m - 1][n - 1] + 1;
+//    }
+//};
+//
+//int main()
+//{
+//    vector<vector<int>> v({ {-2, -3, 3}, {-5, -10, 1}, {10, 30, -5} });
+//    Solution s;
+//    printf("%d", s.calculateMinimumHP(v));
+//    return 0;
+//}
 
-int main()
-{
-    vector<vector<int>> v({ {-2, -3, 3}, {-5, -10, 1}, {10, 30, -5} });
-    Solution s;
-    printf("%d", s.calculateMinimumHP(v));
-    return 0;
-}
+
+
+//174.地下城游戏（思路错误，该从后面往起点走，这样才不会被后面影响）
+//#include<vector>
+//using namespace std;
+//class Solution {
+//public:
+//    int calculateMinimumHP(vector<vector<int>>& dungeon) {
+//        int m = dungeon.size();
+//        int n = dungeon[0].size();
+//        vector<vector<int>> dp(m, vector<int>(n, 0));//状态表示为到 i j所要的最低健康值
+//        vector<vector<int>> hp(m, vector<int>(n, 0));//到i j加上初始值所剩的最多健康值
+//        if (dungeon[0][0] <= 0)
+//            dp[0][0] = abs(dungeon[0][0]) + 1;
+//        else
+//            dp[0][0] = 1;
+//        hp[0][0] = 1;
+//        for (int i = 0; i < m; ++i)
+//        {
+//            for (int j = 0; j < n; ++j)
+//            {
+//                if (i == 0 && j == 0) continue;
+//                else if (i == 0)
+//                {
+//                    if (hp[i][j - 1] + dungeon[i][j] <= 0)
+//                    {
+//                        dp[i][j] = dp[i][j - 1] + abs(dungeon[i][j]);
+//                        hp[i][j] = 1;
+//                    }
+//                    else
+//                    {
+//                        dp[i][j] = dp[i][j - 1];
+//                        hp[i][j] = hp[i][j - 1] + dungeon[i][j];
+//                    }
+//
+//                }
+//                else if (j == 0)
+//                {
+//                    if (hp[i - 1][j] + dungeon[i][j] <= 0)
+//                    {
+//                        dp[i][j] = dp[i - 1][j] + abs(dungeon[i][j]);
+//                        hp[i][j] = 1;
+//                    }
+//                    else
+//                    {
+//                        dp[i][j] = dp[i - 1][j];
+//                        hp[i][j] = hp[i - 1][j] + dungeon[i][j];
+//                    }
+//                }
+//                else
+//                {
+//                    if (dp[i][j - 1] < dp[i - 1][j])
+//                    {
+//                        if (hp[i][j] = dungeon[i][j] + hp[i][j - 1] <= 0)
+//                        {
+//                            dp[i][j] = dp[i][j - 1] + abs(dungeon[i][j]);
+//                            hp[i][j] = 1;
+//                        }
+//                        else
+//                            dp[i][j] = dp[i][j - 1];
+//                    }
+//                    else
+//                    {
+//                        if (hp[i][j] = dungeon[i][j] + hp[i - 1][j] <= 0)
+//                        {
+//                            dp[i][j] = dp[i - 1][j] + abs(dungeon[i][j]);
+//                            hp[i][j] = 1;
+//                        }
+//                        else
+//                            dp[i][j] = dp[i - 1][j];
+//                    }
+//                }
+//            }
+//        }
+//        return dp[m - 1][n - 1];
+//    }
+//};
+////174.地下城游戏（√）
+//class Solution {
+//public:
+//    int calculateMinimumHP(vector<vector<int>>& dungeon) {
+//        int m = dungeon.size();
+//        int n = dungeon[0].size();
+//        vector<vector<int>> dp(m, vector<int>(n, 0));//状态表示为 i j 到终点所要的最低健康值
+//        dp[m - 1][n - 1] = dungeon[m - 1][n - 1] > 0 ? 1 : abs(dungeon[m - 1][n - 1]) + 1;
+//        for (int i = m - 1; i >= 0; --i)
+//        {
+//            for (int j = n - 1; j >= 0; --j)
+//            {
+//                if (i == m - 1 && j == n - 1) continue;
+//                if (i == m - 1)
+//                    dp[i][j] = dp[i][j + 1] - dungeon[i][j] <= 0 ? 1 : dp[i][j + 1] - dungeon[i][j];
+//                else if (j == n - 1)
+//                    dp[i][j] = dp[i + 1][j] - dungeon[i][j] <= 0 ? 1 : dp[i + 1][j] - dungeon[i][j];
+//                else
+//                {
+//                    if (dp[i][j + 1] < dp[i + 1][j])
+//                        dp[i][j] = dp[i][j + 1] - dungeon[i][j] <= 0 ? 1 : dp[i][j + 1] - dungeon[i][j];
+//                    else
+//                        dp[i][j] = dp[i + 1][j] - dungeon[i][j] <= 0 ? 1 : dp[i + 1][j] - dungeon[i][j];
+//                }
+//            }
+//        }
+//
+//        return dp[0][0];
+//    }
+//};
+
+
+//面试题 17.16.按摩师
+//class Solution {
+//public:
+//    int massage(vector<int>& nums) {
+//        if (nums.size() == 0) return 0;
+//        if (nums.size() == 1) return nums[0];
+//        if (nums.size() == 2) return max(nums[0], nums[1]);
+//        int dp[nums.size() + 5];//到 i(0) + 1 号及之前的最长时间
+//        dp[0] = nums[0];
+//        dp[1] = max(nums[0], nums[1]);
+//        dp[2] = dp[0] + nums[2] > dp[1] ? dp[0] + nums[2] : dp[1];
+//        for (int i = 3; i < nums.size(); ++i)
+//        {
+//            dp[i] = dp[i - 2] + nums[i] > dp[i - 1] ? dp[i - 2] + nums[i] : dp[i - 1];
+//        }
+//        return dp[nums.size() - 1];
+//    }
+//};
+
+
+
+
+
+//213.打家劫舍Ⅱ
+//当前重点关注思想，不要像这道题，明明早就想到正确做法，却因为感觉要计算两次（偷不偷一号），
+// 想写出一个只需循环一次的代码，搞半天没搞好，最后又回到计算两次
+//class Solution {
+//public:
+//    int rob(vector<int>& nums) {
+//        if (nums.size() == 0) return 0;
+//        if (nums.size() == 1) return nums[0];
+//        if (nums.size() == 2) return max(nums[0], nums[1]);
+//        if (nums.size() == 3) return max(max(nums[0], nums[1]), nums[2]);
+//        vector<int> dp1(3);//到 i(0) + 1 号及之前的最长时间,偷一号
+//        vector<int> dp2(4);//不偷一号
+//        dp1[0] = nums[0];
+//        dp1[1] = max(nums[0], nums[1]);
+//        dp1[2] = dp1[0] + nums[2] > dp1[1] ? dp1[0] + nums[2] : dp1[1];
+//        for (int i = 3; i < nums.size() - 1; ++i)
+//        {
+//            dp1.push_back(dp1[i - 2] + nums[i] > dp1[i - 1] ? dp1[i - 2] + nums[i] : dp1[i - 1]);
+//        }
+//        dp2[1] = nums[1];
+//        dp2[2] = max(nums[1], nums[2]);
+//        dp2[3] = dp2[1] + nums[3] > dp2[2] ? dp2[1] + nums[3] : dp2[2];
+//        for (int i = 4; i < nums.size(); ++i)
+//        {
+//            dp2.push_back(dp2[i - 2] + nums[i] > dp2[i - 1] ? dp2[i - 2] + nums[i] : dp2[i - 1]);
+//        }
+//        return max(dp1.back(), dp2.back());
+//    }
+//};
