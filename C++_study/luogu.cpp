@@ -111,46 +111,108 @@
 
 
 
-#include<iostream>
-#include<vector>
-#include<string>
-using namespace std;
-int main()
-{
-	//10
-	//BBBAAABBAA
-	int n = 0;
-	cin >> n;
-	vector<char> v(n);
-	vector<int> prefi(n);//记录到这的投票情况，不管第一人,正为a负为b
-	for (int i = 0; i < n; ++i)
-		cin >> v[i];
-	prefi[0] = v[0] == 'A' ? 1 : -1;
-	for (int i = 1; i < n; ++i)
-	{
-		prefi[i] = prefi[i - 1] + (v[i] == 'A' ? 1 : -1);
-	}
-	int ret = 1;
-	for (int i = 0; i < n - 1; ++i)
-	{
-		int temp1 = prefi[i];
-		int temp2 = prefi[i + 1];
-		swap(prefi[i], prefi[i + 1]);
-		prefi[i] = (temp1 += v[i + 1] == 'A' ? 1 : -1);
-		prefi[i + 1] = (temp2 -= v[0] == 'A' ? 1 : -1);
-		if (temp1 < 0 && temp2 < 0)
-		{
-			if (prefi[i] > 0 || prefi[i + 1] > 0)
-				++ret;
-		}
-		else if (temp1 > 0 && temp2 > 0)
-		{
-			if (prefi[i] < 0 || prefi[i + 1] < 0)
-				++ret;
-		}
-		else
-			++ret;
-	}
-	cout << ret << endl;
-	return 0;
-}
+//[ARC172C] Election
+//#include<iostream>
+//#include<vector>
+//#include<string>
+//using namespace std;
+//int main()
+//{
+//	//10
+//	//BBBAAABBAA
+//	int n = 0;
+//	cin >> n;
+//	vector<char> v(n);
+//	vector<int> prefi(n);//记录到这的投票情况，正为a负为b
+//	for (int i = 0; i < n; ++i)
+//		cin >> v[i];
+//	prefi[0] = v[0] == 'A' ? 1 : -1;
+//	for (int i = 1; i < n; ++i)
+//	{
+//		prefi[i] = prefi[i - 1] + (v[i] == 'A' ? 1 : -1);
+//	}
+//	int ret = 1;
+//	for (int i = 1; i < n; ++i)
+//	{
+//		int temp1 = prefi[i];
+//		int temp2 = prefi[i - 1];
+//		char pre1 = prefi[i] == 0 ? 'C' : prefi[i] > 0 ? 'A' : 'B';
+//		char pre2 = prefi[i - 1] == 0 ? 'C' : prefi[i - 1] > 0 ? 'A' : 'B';
+//		swap(prefi[i], prefi[i - 1]);
+//		prefi[i] += (v[i] == 'A' ? 1 : -1);
+//		prefi[i - 1] -= (v[0] == 'A' ? 1 : -1);
+//		char now1 = prefi[i] == 0 ? 'C' : prefi[i] > 0 ? 'A' : 'B';
+//		char now2 = prefi[i - 1] == 0 ? 'C' : prefi[i - 1] > 0 ? 'A' : 'B';
+//		if (pre1 == now1 && pre2 == now2)
+//			;
+//		else
+//			++ret;
+//	}
+//	cout << ret << endl;
+//	return 0;
+//}
+
+//#include<algorithm>
+//#include<unordered_map>
+//#include<vector>
+//#include<iostream>
+//using namespace std;
+//class Solution {
+//public:
+//    int deleteAndEarn(vector<int>& nums) {
+//        unordered_map<int, int> map;//计数
+//        vector<pair<int, int>> count;//按升序记录删除这个位置能获得的点数
+//        for (int i = 0; i < nums.size(); ++i)
+//        {
+//            ++map[nums[i]];
+//        }
+//        for (auto& e : map)
+//        {
+//            count.push_back(pair<int, int>(e.first, e.first * e.second));
+//        }
+//        sort(count.begin(), count.end(), compare());
+//        if (count.size() == 0) return 0;
+//        if (count.size() == 1) return count[0].second;
+//        vector<int> dp(count.size());//到 i 位置所能获得的最大点数
+//        dp[0] = count[0].second;
+//        if (count[1].first == count[0].first + 1)
+//            dp[1] = count[1].second > count[0].second ? count[1].second : count[0].second;
+//        else
+//            dp[1] = dp[0] + count[1].second;
+//        for (int i = 2; i < count.size(); ++i)
+//        {
+//            if (count[i].first == count[i - 1].first + 1)
+//            {
+//                if (dp[i - 2] + count[i].second > dp[i - 1])
+//                {
+//                    dp[i] = dp[i - 2] + count[i].second;
+//                }
+//                else
+//                {
+//                    dp[i] = dp[i - 1];
+//                }
+//            }
+//            else
+//            {
+//                dp[i] = dp[i - 1] + count[i].second;
+//            }
+//        }
+//        return dp[count.size() - 1];
+//    }
+//private:
+//    struct compare
+//    {
+//        bool operator()(pair<int, int>& p1, pair<int, int>& p2)
+//        {
+//            return p1.first < p2.first;
+//        }
+//    };
+//};
+//
+//int main()
+//{
+//    vector<int> v({ 3,4,2 });
+//    Solution s;
+//    cout << s.deleteAndEarn(v) << endl;
+//    return 0;
+//}

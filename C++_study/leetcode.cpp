@@ -1915,3 +1915,163 @@
 //        return max(dp1.back(), dp2.back());
 //    }
 //};
+
+
+
+//LCR 091. 粉刷房子(失败)
+//#include<vector>
+//#include<iostream>
+//using namespace std;
+//class Solution {
+//public:
+//    int minCost(vector<vector<int>>& costs) {
+//        if (costs.size() == 1)
+//            return min(min(costs[0][0], costs[0][1]), costs[0][2]);
+//        vector<int> dp(costs.size());//到第i号房子所花最低成本
+//        vector<int> map(costs.size());//i号房涂的颜色，0红1蓝2绿
+//        int arr[6];//红-》蓝绿，蓝-》红绿，绿-》红蓝，计算前两个房子的最低费用
+//        arr[0] = costs[0][0] + costs[1][1];
+//        arr[1] = costs[0][0] + costs[1][2];
+//        arr[2] = costs[0][1] + costs[1][0];
+//        arr[3] = costs[0][1] + costs[1][2];
+//        arr[4] = costs[0][2] + costs[1][0];
+//        arr[5] = costs[0][2] + costs[1][1];
+//        int cur = 0;
+//        for (int i = 1; i < 6; ++i)
+//        {
+//            if (arr[i] < arr[cur])
+//                cur = i;
+//        }
+//        map[0] = cur / 2;
+//        if (map[0] == 0) map[1] = costs[1][1] < costs[1][2] ? 1 : 2;
+//        else if (map[0] == 1) map[1] = costs[1][0] < costs[1][2] ? 0 : 2;
+//        else map[1] = costs[1][0] < costs[1][1] ? 0 : 1;
+//        //前面0号房子的颜色和费用都是为了保证到1号房子费用最少，但并不是说之前的0号房单独费用最少
+//        map[0] = (costs[0][0] < costs[0][1] && costs[0][0] < costs[0][2]) ? (0) : (costs[0][1] < costs[0][2]) ? 1 : 2;
+//        dp[0] = costs[0][map[0]];
+//        dp[1] = arr[cur];
+//        //[13, 8, 17], 
+//        // [6, 8, 19], 
+//        // [5, 1, 7], 
+//        // [5, 18, 2], 
+//        // [12, 3, 4], 
+//        // [12, 7, 10], 
+//        // [14, 16, 7], 
+//        // [19, 17, 19]]
+//        for (int i = 2; i < costs.size(); ++i)
+//        {
+//            if (map[i - 1] == 0)
+//            {
+//                if (costs[i][1] < costs[i][2])
+//                {
+//                    dp[i] = dp[i - 1] + costs[i][1];
+//                    map[i] = 1;
+//                }
+//                else
+//                {
+//                    dp[i] = dp[i - 1] + costs[i][2];
+//                    map[i] = 2;
+//                }
+//                //考虑这里涂与上个房子相同颜色的情况
+//                int pre_change_map = map[i - 2] == 1 ? 2 : 1;
+//                int pre_change_cost = costs[i - 1][pre_change_map];
+//                if (dp[i - 2] + pre_change_cost + costs[i][0] < dp[i])
+//                {
+//                    dp[i] = dp[i - 2] + pre_change_cost + costs[i][0];
+//                    map[i] = 0;
+//                }
+//            }
+//            else if (map[i - 1] == 1)
+//            {
+//                if (costs[i][0] < costs[i][2])
+//                {
+//                    dp[i] = dp[i - 1] + costs[i][0];
+//                    map[i] = 0;
+//                }
+//                else
+//                {
+//                    dp[i] = dp[i - 1] + costs[i][2];
+//                    map[i] = 2;
+//                }
+//
+//                int pre_change_map = map[i - 2] == 0 ? 2 : 0;
+//                int pre_change_cost = costs[i - 1][pre_change_map];
+//                if (dp[i - 2] + pre_change_cost + costs[i][1] < dp[i])
+//                {
+//                    dp[i] = dp[i - 2] + pre_change_cost + costs[i][1];
+//                    map[i] = 1;
+//                }
+//            }
+//            else
+//            {
+//                if (costs[i][0] < costs[i][1])
+//                {
+//                    dp[i] = dp[i - 1] + costs[i][0];
+//                    map[i] = 0;
+//                }
+//                else
+//                {
+//                    dp[i] = dp[i - 1] + costs[i][1];
+//                    map[i] = 1;
+//                }
+//
+//                int pre_change_map = map[i - 2] == 0 ? 1 : 0;
+//                int pre_change_cost = costs[i - 1][pre_change_map];
+//                if (dp[i - 2] + pre_change_cost + costs[i][2] < dp[i])
+//                {
+//                    dp[i] = dp[i - 2] + pre_change_cost + costs[i][2];
+//                    map[i] = 2;
+//                }
+//            }
+//        }
+//
+//        return dp[costs.size() - 1];
+//    }
+//};
+////[13, 8, 17], 
+//// [6, 8, 19], 
+//// [5, 1, 7], 
+//// [5, 18, 2], 
+//// [12, 3, 4], 
+//// [12, 7, 10], 
+//// [14, 16, 7], 
+//// [19, 17, 19]]
+//int main()
+//{
+//    vector<vector<int>> v(8);
+//    v[0] = { 13, 8, 17 };
+//    v[1] = { 6, 8, 19 };
+//    v[2] = { 5, 1, 7 };
+//    v[3] = { 5, 18, 2 };
+//    v[4] = { 12, 3, 4 };
+//    v[5] = { 12, 7, 10 };
+//    v[6] = { 14, 16, 7 };
+//    v[7] = { 19, 17, 19 };
+//
+//    Solution s;
+//    cout << s.minCost(v);
+//    int a = 0;
+//    return 0;
+//}
+
+//LCR 091. 粉刷房子(√)
+// 正着不行反着来，合着不行分开来
+//class Solution {
+//public:
+//    int minCost(vector<vector<int>>& costs) {
+//        //三个dp分别为到i位置且最后涂红/蓝/绿的最小费用，dp[i]等于对应颜色加上上一个其他颜色的最小
+//        int dp0[costs.size()];
+//        int dp1[costs.size()];
+//        int dp2[costs.size()];
+//        dp0[0] = costs[0][0];
+//        dp1[0] = costs[0][1];
+//        dp2[0] = costs[0][2];
+//        for (int i = 1; i < costs.size(); ++i)
+//        {
+//            dp0[i] = costs[i][0] + min(dp1[i - 1], dp2[i - 1]);
+//            dp1[i] = costs[i][1] + min(dp0[i - 1], dp2[i - 1]);
+//            dp2[i] = costs[i][2] + min(dp1[i - 1], dp0[i - 1]);
+//        }
+//        return min(min(dp0[costs.size() - 1], dp1[costs.size() - 1]), dp2[costs.size() - 1]);
+//    }
+//};
