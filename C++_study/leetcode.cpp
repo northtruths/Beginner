@@ -2075,3 +2075,101 @@
 //        return min(min(dp0[costs.size() - 1], dp1[costs.size() - 1]), dp2[costs.size() - 1]);
 //    }
 //};
+
+
+
+//309. 买卖股票的最佳时机含冷冻期
+// 搞了很久，感觉还是没理解透
+//#include<iostream>
+//#include<vector>
+//using namespace std;
+//class Solution {
+//public:
+//    int maxProfit(vector<int>& prices) {
+//        int n = prices.size();
+//        if (n == 1)   return 0;
+//        vector<vector<int>> dp(n, vector<int>(3));
+//        dp[0][0] = -prices[0];//持有股票
+//        dp[0][1] = 0;//未持有股票,且不为冷冻
+//        dp[0][2] = 0;//冷冻期
+//        for (int i = 1; i < n; ++i)
+//        {
+//            dp[i][0] = max(dp[i - 1][0], dp[i - 1][1] - prices[i]);
+//            dp[i][1] = max(dp[i - 1][1], dp[i - 1][2]);
+//            dp[i][2] = dp[i - 1][0] + prices[i];
+//        }
+//        return max(max(dp[n - 1][0], dp[n - 1][1]), dp[n - 1][2]);
+//    }
+//};
+//
+//int main()
+//{
+//    vector<int> v({ 1,2,4 });
+//    Solution s;
+//    s.maxProfit(v);
+//    return 0;
+//}
+
+
+//714.买卖股票的最佳时机包含手续费
+//#include<iostream>
+//#include<vector>
+//using namespace std;
+//class Solution {
+//public:
+//    int maxProfit(vector<int>& prices, int fee) {
+//        int n = prices.size();
+//        vector<vector<int>> dp(n, vector<int>(2));
+//        dp[0][0] = 0 - prices[0];//持有的最大利润
+//        dp[0][1] = 0;//第i天后是售出状态(未持有)的最大利润
+//        for (int i = 1; i < n; ++i)
+//        {
+//            dp[i][0] = max(dp[i - 1][0], dp[i - 1][1] - prices[i]);
+//            dp[i][1] = max(dp[i - 1][1], dp[i - 1][0] + prices[i] - fee);
+//        }
+//        return max(dp[n - 1][0], dp[n - 1][1]);
+//    }
+//};
+//int main()
+//{
+//    vector<int> v({ 1,3,2,8,4,9 });
+//    Solution s;
+//    cout << s.maxProfit(v, 2);
+//    return 0;
+//}
+
+
+//123.买卖股票的最佳时机Ⅲ（未掌握透彻）
+//#include<iostream>
+//#include<vector>
+//using namespace std;
+//class Solution {
+//public:
+//    int maxProfit(vector<int>& prices) {
+//        int n = prices.size();
+//        vector<vector<int>> g(n, vector<int>(3, -9999));//第i天后为购入,012,分别为完成了几次交易(卖出), 的最大利润
+//        vector<vector<int>> m(n, vector<int>(3, -9999));//第i天后为未持有
+//        g[0][0] = 0 - prices[0];
+//        m[0][0] = 0;
+//        //3,3,5,0,0,3,1,4 
+//        for (int i = 1; i < n; ++i)
+//        {
+//            for (int j = 0; j <= 2; ++j)
+//            {
+//                g[i][j] = max(g[i - 1][j], m[i - 1][j] - prices[i]);
+//                m[i][j] = m[i - 1][j];
+//                if (j >= 1)
+//                    m[i][j] = max(m[i - 1][j], g[i - 1][j - 1] + prices[i]);
+//            }
+//        }
+//        int a = 1;
+//        return max(m[n - 1][2], max(m[n - 1][0], m[n - 1][1]));
+//    }
+//};
+//int main()
+//{
+//    vector<int> v({ 3,3,5,0,0,3,1,4 });
+//    Solution s;
+//    cout << s.maxProfit(v);
+//    return 0;
+//}
