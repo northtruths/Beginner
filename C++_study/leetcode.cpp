@@ -2173,3 +2173,336 @@
 //    cout << s.maxProfit(v);
 //    return 0;
 //}
+
+
+//123.买卖股票的最佳时机Ⅳ
+//#include<iostream>
+//#include<vector>
+//using namespace std;
+//class Solution {
+//public:
+//    int maxProfit(int k, vector<int>& prices) {
+//        int n = prices.size();
+//        k = min(k, n / 2);
+//        vector<vector<int>> g(n, vector<int>(k + 1, -99999));//第i天第几次交易(未卖出)的最大利润
+//        vector<vector<int>> m(n, vector<int>(k + 1, -99999));//第i天第几次交易(未持有、已卖出)的最大利润
+//        g[0][0] = 0 - prices[0];
+//        m[0][0] = 0;
+//        for (int i = 1; i < n; ++i)
+//        {
+//            for (int j = 0; j <= k; ++j)
+//            {
+//                g[i][j] = max(g[i - 1][j], m[i - 1][j] - prices[i]);
+//                m[i][j] = m[i - 1][j];
+//                if (j >= 1)
+//                {
+//                    m[i][j] = max(m[i - 1][j], g[i - 1][j - 1] + prices[i]);
+//                }
+//            }
+//        }
+//
+//        int ret = INT_MIN;
+//        for (int i = 0; i <= k; ++i)
+//            ret = max(ret, m[n - 1][i]);
+//        return ret;
+//    }
+//};
+//int main()
+//{
+//    vector<int> v({ 2,4,1 });
+//    Solution s;
+//    cout << s.maxProfit(2, v);
+//    return 0;
+//}
+
+
+//53. 最大子数组和
+//class Solution {
+//public:
+//    int maxSubArray(vector<int>& nums) {
+//
+//        int n = nums.size();
+//        int dp[n];//以i为结尾的子数组的最大和
+//        dp[0] = nums[0];
+//        int ret = nums[0];
+//        for (int i = 1; i < n; ++i)
+//        {
+//            dp[i] = max(dp[i - 1] + nums[i], nums[i]);
+//            ret = max(ret, dp[i]);
+//        }
+//        return ret;
+//    }
+//};
+
+
+
+//918. 环形子数组的最大和
+//#include<iostream>
+//#include<vector>
+//#include<algorithm>
+//using namespace std;
+//class Solution {
+//public:
+//    int maxSubarraySumCircular(vector<int>& nums) {
+//        int n = nums.size();
+//        if (n == 1) return nums[0];
+//        int dp[n];//以i为结尾的子数组的最大和
+//        dp[0] = nums[0];
+//        int ret = nums[0];
+//        for (int i = 1; i < n; ++i)
+//        {
+//            dp[i] = max(dp[i - 1] + nums[i], nums[i]);
+//            ret = max(ret, dp[i]);
+//        }
+//
+//        int left[n];
+//        left[0] = nums[0];
+//        int left_dp[n];//0到i的最大
+//        left_dp[0] = nums[0];
+//        for (int i = 1; i < n; ++i)
+//        {
+//            left[i] = left[i - 1] + nums[i];
+//            if (left[i] > left_dp[i - 1])
+//                left_dp[i] = left[i];
+//            else
+//                left_dp[i] = left_dp[i - 1];
+//        }
+//
+//        int right_dp[n];//i到 n - 1 的序列和
+//        right_dp[n - 1] = nums[n - 1];
+//        int ret2 = right_dp[n - 1] + left_dp[n - 2];
+//        for (int i = n - 2; i > 0; --i)
+//        {
+//            right_dp[i] = right_dp[i + 1] + nums[i];
+//            int cur = right_dp[i] + left_dp[i - 1];
+//            ret2 = max(cur, ret2);
+//        }
+//
+//        return max(ret, ret2);
+//    }
+//};
+//int main()
+//{
+//    vector<int> v({ -2,4,-5,4,-5,9,4 });
+//    Solution s;
+//    cout << s.maxSubarraySumCircular(v);
+//    return 0;
+//}
+
+
+
+//152. 乘积最大子数组（真的感觉好难，自己完全搞不明白状态表示，想用自己的方法，写了很多，但是错的，累）
+//#include<vector>
+//#include<iostream>
+//using namespace std;
+//class Solution {
+//public:
+//    int maxProduct(vector<int>& nums) {
+//        int n = nums.size();
+//        int dp_max[n];//以i为结尾的子数组的最大
+//        int dp_min[n];//以i为结尾的子数组的最小
+//        dp_max[0] = dp_min[0] = nums[0];
+//        int ret = nums[0];
+//        for (int i = 1; i < n; ++i)
+//        {
+//            dp_max[i] = max(max(dp_max[i - 1] * nums[i], dp_min[i - 1] * nums[i]), nums[i]);
+//            dp_min[i] = min(min(dp_max[i - 1] * nums[i], dp_min[i - 1] * nums[i]), nums[i]);
+//            ret = max(ret, dp_max[i]);
+//        }
+//        return ret;
+//    }
+//};
+//
+//int main()
+//{
+//    vector<int> v({ -3,0,1,-2 });
+//    Solution s;
+//    cout << s.maxProduct(v);
+//    return 0;
+//}
+
+
+//#include<iostream>
+//#include<vector>
+//using namespace std;
+//class Solution {
+//public:
+//    int getMaxLen(vector<int>& nums) {
+//        long long n = nums.size();
+//        vector<long long> dp(n);
+//        dp[0] = nums[0];//当前子数组乘积，碰见0清除
+//        long long cur = nums[0] == 0 ? 0 : 1;//当前长度
+//        long long ret = 0;//最长正乘积长度
+//        if (dp[0] > 0)
+//            ret = cur;
+//        for (long long i = 0; i < n; ++i)
+//        {
+//            while (i < n - 1 && dp[i] == 0)
+//            {
+//                ++i;
+//                dp[i] = nums[i];
+//                cur = 1;
+//                if (dp[i] > 0)
+//                    ret = max(ret, cur);
+//                if (nums[i] > 0)
+//                    ret = max((long long)1, ret);
+//                ++i;
+//            }
+//            if (0 < i && i < n)
+//            {
+//                dp[i] = dp[i - 1] * nums[i];
+//                if (dp[i] != 0)
+//                {
+//                    ++cur;
+//                    if (dp[i] > 0)
+//                        ret = max(ret, cur);
+//                }
+//                if (nums[i] > 0)
+//                    ret = max((long long)1, ret);
+//            }
+//            while (i < n - 1 && dp[i] == 0)
+//            {
+//                ++i;
+//                dp[i] = nums[i];
+//                cur = 1;
+//                if (dp[i] > 0)
+//                    ret = max(ret, cur);
+//                if (nums[i] > 0)
+//                    ret = max((long long)1, ret);
+//            }
+//        }
+//
+//        return ret;
+//    }
+//};
+
+
+
+//1567. 乘积为正数的最长子数组长度
+//#include<vector>
+//using namespace std;
+//class Solution {
+//public:
+//    int getMaxLen(vector<int>& nums) {
+//        int n = nums.size();
+//        vector<int> dp1(n);//以i结尾的数组的乘积为正最长子数组长度
+//        vector<int> dp2(n);//以i结尾的数组的乘积为负最长子数组长度
+//        int ret = 0;
+//        int i = 0;
+//        while (nums[i] == 0)
+//        {
+//            ++i;
+//        }
+//        if (i < n)
+//        {
+//            dp1[i] = nums[i] > 0 ? 1 : 0;
+//            dp2[i] = nums[i] < 0 ? 1 : 0;
+//            ret = max(dp1[i], ret);
+//        }
+//        for (i = i + 1; i < n; ++i)
+//        {
+//            if (nums[i] == 0)
+//            {
+//                while (i < n && nums[i] == 0)
+//                {
+//                    ++i;
+//                }
+//                if (i < n)
+//                {
+//                    dp1[i] = nums[i] > 0 ? 1 : 0;
+//                    dp2[i] = nums[i] < 0 ? 1 : 0;
+//                    ret = max(dp1[i], ret);
+//                }
+//            }
+//            else
+//            {
+//                if (nums[i] > 0)
+//                {
+//                    dp1[i] = max(dp1[i - 1] + 1, 1);
+//                    dp2[i] = dp2[i - 1] == 0 ? 0 : dp2[i - 1] + 1;
+//                    ret = max(ret, dp1[i]);
+//                }
+//                else
+//                {
+//                    if (dp2[i - 1] == 0)
+//                    {
+//                        dp1[i] = 0;
+//                        dp2[i] = dp1[i - 1] + 1;
+//                    }
+//                    else
+//                    {
+//                        dp1[i] = dp2[i - 1] + 1;
+//                        dp2[i] = dp1[i - 1] + 1;
+//                    }
+//                    ret = max(ret, dp1[i]);
+//                }
+//            }
+//        }
+//
+//        return ret;
+//    }
+//};
+
+
+#include<iostream>
+#include<vector>
+using namespace std;
+class Solution {
+public:
+    int numberOfArithmeticSlices(vector<int>& nums) {
+        int n = nums.size();
+        if (n < 3)   return 0;
+        vector<int> dp(n);//以i为结尾的子序列的等差个数
+        dp[0] = dp[1] = 0;
+        int ret = 0;
+        //初始化第一个等差数列
+        int i = 1;
+        int dif = nums[i] - nums[i - 1];
+        ++i;
+        int num = 2;//当前等差数列长度
+        while (i < n && num < 3)
+        {
+            if (i < n && nums[i] - nums[i - 1] == dif)
+            {
+                ++num;
+                dp[i] = num == 3 ? 1 : 0;
+                ++i;
+            }
+            else if (i < n)
+            {
+                dif = nums[i] - nums[i - 1];
+                num = 2;
+                dp[i] = 0;
+                ++i;
+            }
+        }
+        for (i; i < n; ++i)
+        {
+            if (nums[i] - nums[i - 1] == dif)
+            {
+                ++num;
+                dp[i] = dp[i - 1] + num - 2;
+            }
+            else
+            {
+                dif = nums[i] - nums[i - 1];
+                num = 2;
+                ret += dp[i - 1];
+                dp[i] = 0;
+            }
+        }
+
+        if (nums[n - 1] - nums[n - 2] == dif)
+            ret += dp[n - 1];
+        return ret;
+
+
+    }
+};
+int main()
+{
+    vector<int> v({ 1, 2, 3, 8, 9, 10 });
+    Solution s;
+    cout << s.numberOfArithmeticSlices(v) << endl;
+    return 0;
+}
