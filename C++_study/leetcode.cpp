@@ -2444,65 +2444,284 @@
 //};
 
 
-#include<iostream>
-#include<vector>
+
+//413. 等差数列划分
+//#include<iostream>
+//#include<vector>
+//using namespace std;
+//class Solution {
+//public:
+//    int numberOfArithmeticSlices(vector<int>& nums) {
+//        int n = nums.size();
+//        if (n < 3)   return 0;
+//        vector<int> dp(n);//以i为结尾的子序列的等差个数
+//        dp[0] = dp[1] = 0;
+//        int ret = 0;
+//        //初始化第一个等差数列
+//        int i = 1;
+//        int dif = nums[i] - nums[i - 1];
+//        ++i;
+//        int num = 2;//当前等差数列长度
+//        while (i < n && num < 3)
+//        {
+//            if (i < n && nums[i] - nums[i - 1] == dif)
+//            {
+//                ++num;
+//                dp[i] = num == 3 ? 1 : 0;
+//                ++i;
+//            }
+//            else if (i < n)
+//            {
+//                dif = nums[i] - nums[i - 1];
+//                num = 2;
+//                dp[i] = 0;
+//                ++i;
+//            }
+//        }
+//        for (i; i < n; ++i)
+//        {
+//            if (nums[i] - nums[i - 1] == dif)
+//            {
+//                ++num;
+//                dp[i] = dp[i - 1] + num - 2;
+//            }
+//            else
+//            {
+//                dif = nums[i] - nums[i - 1];
+//                num = 2;
+//                ret += dp[i - 1];
+//                dp[i] = 0;
+//            }
+//        }
+//
+//        if (nums[n - 1] - nums[n - 2] == dif)
+//            ret += dp[n - 1];
+//        return ret;
+//
+//
+//    }
+//};
+//int main()
+//{
+//    vector<int> v({ 1, 2, 3, 8, 9, 10 });
+//    Solution s;
+//    cout << s.numberOfArithmeticSlices(v) << endl;
+//    return 0;
+//}
+
+
+
+//978. 最长湍流子数组
+//class Solution {
+//public:
+//    int maxTurbulenceSize(vector<int>& arr) {
+//        int n = arr.size();
+//        if (n == 1) return 1;
+//        vector<int> dp(n);//当前以i结尾的子数组的最长
+//        dp[0] = 1;
+//        vector<int> map(n);//当前位置与前一个位置的大小关系，-1小于，0等于，1大于
+//        if (arr[1] > arr[0])
+//            map[1] = 1;
+//        else if (arr[1] < arr[0])
+//            map[1] = -1;
+//        else
+//            map[1] = 0;
+//        dp[1] = map[1] == 0 ? 1 : 2;
+//        int ret = dp[1];
+//        for (int i = 2; i < n; ++i)
+//        {
+//            if (arr[i] == arr[i - 1])
+//            {
+//                map[i] = 0;
+//                dp[i] = 1;
+//            }
+//            else if (arr[i] > arr[i - 1])
+//            {
+//                map[i] = 1;
+//                if (map[i - 1] == -1)
+//                    dp[i] = dp[i - 1] + 1;
+//                else
+//                    dp[i] = 2;
+//                ret = max(dp[i], ret);
+//            }
+//            else
+//            {
+//                map[i] = -1;
+//                if (map[i - 1] == 1)
+//                    dp[i] = dp[i - 1] + 1;
+//                else
+//                    dp[i] = 2;
+//                ret = max(dp[i], ret);
+//            }
+//        }
+//
+//        return ret;
+//    }
+//};
+
+//#include<iostream>
+//#include<vector>
+//#include<string>
+//#include<algorithm>
+//using namespace std;
+
+
+//int main()
+//{
+//	int n;
+//	cin >> n;
+//	cout << pow(3, n) << endl;
+//	return 0;
+//}
+//int main()
+//{
+//	int n = 0;
+//	string s1;
+//	string s2;
+//	//cin >> n >> s1 >> s2;
+//	int n1 = 0;
+//	//for (int i = s1.size() - 1; i >= 0; --i)
+//	//	n1 += (s1[i] - 48) * pow(3, s1.size() - 1 - i);
+//	int n2 = 0;
+//	//for (int i = s2.size() - 1; i >= 0; --i)
+//	//	n2 += (s2[i] - 48) * pow(3, s2.size() - 1 - i);
+//	cin >> n >> n1 >> n2;
+//	int map[3][3] = { {0,1,0}, {1, 1, 1}, {0, 1, 0} };
+//	int ret = 0;
+//				double cur_n = n;
+//				double cur_i = n1;
+//				double cur_j = n2;
+//				while (cur_n > 1 &&
+//					((pow(3, cur_n - 1) <= cur_i && cur_i < 2 * pow(3, cur_n - 1))
+//						|| (pow(3, cur_n - 1) <= cur_j && cur_j < 2 * pow(3, cur_n - 1))))
+//				{
+//					cur_i %= pow(3, cur_n - 1);
+//					cur_j %= pow(3, cur_n - 1);
+//					--cur_n;
+//				}
+//				if (cur_n == 1)
+//				{
+//					ret = map[cur_i][cur_j];
+//				}
+//				else
+//				{
+//					ret = 0;
+//				}
+//		
+//	
+//	cout << ret << endl;
+//	return 0;
+//}
+
+//139. 单词拆分
+//#include<string>
+//#include<vector>
+//#include<unordered_set>
+//#include<iostream>
+//using namespace std;
+//class Solution {
+//public:
+//    bool wordBreak(string s, vector<string>& wordDict) {
+//        //建个哈希表，查询时更高效
+//        unordered_set<string> hash;
+//        for (string& e : wordDict)
+//        {
+//            hash.insert(e);
+//        }
+//        int n = s.size();
+//        s = ' ' + s;//给s前加个空格，所有字符下标加一方便理清思路
+//        vector<bool> dp(n + 1, false);
+//        dp[0] = true;
+//        for (int i = 1; i < n + 1; ++i)//填dp
+//        {
+//            for (int j = i; j >= 1; --j)
+//            {
+//                if (dp[j - 1] && hash.count(s.substr(j, i - j + 1)))
+//                {
+//                    dp[i] = true;
+//                    break;
+//                }
+//            }
+//        }
+//
+//        return dp[n];
+//    }
+//};
+//
+//int main()
+//{
+//
+//    string s = "applepenapple";
+//    vector<string> v({ "apple","pen" });
+//    Solution ret;
+//    cout << ret.wordBreak(s, v) << endl;
+//    return 0;
+//}
+
+
+//70. 爬楼梯
+//class Solution {
+//public:
+//    int climbStairs(int n) {
+//        if (n == 1) return 1;
+//        int dp[n + 1];
+//        dp[0] = 0;
+//        dp[1] = 1;
+//        dp[2] = 2;
+//        for (int i = 3; i <= n; ++i)
+//        {
+//            dp[i] = dp[i - 2] + dp[i - 1];
+//        }
+//        return dp[n];
+//    }
+//};
+
+
+
+#include<unordered_set>
+#include<string>
 using namespace std;
 class Solution {
 public:
-    int numberOfArithmeticSlices(vector<int>& nums) {
-        int n = nums.size();
-        if (n < 3)   return 0;
-        vector<int> dp(n);//以i为结尾的子序列的等差个数
-        dp[0] = dp[1] = 0;
-        int ret = 0;
-        //初始化第一个等差数列
-        int i = 1;
-        int dif = nums[i] - nums[i - 1];
-        ++i;
-        int num = 2;//当前等差数列长度
-        while (i < n && num < 3)
+    int findSubstringInWraproundString(string s) {
+        //以i的位置为结尾，有多少个不同非空字串,dp[i] = dp[i - 1] + 新增的
+        //思路：增加不同非空字串有两种，一是当前i位置字母本身第一次出现，dp[i]得加一，二是当前i字母与前面是连起来的
+        //此时dp[i]得加之前连的长度
+        unordered_set<string> hash;//判断子串是否存在
+        int n = s.size();
+        vector<int> dp(n);
+        dp[0] = 1;
+        hash.insert(string(1, s[0]));
+        int l = 1;//当前连续长度
+        for (int i = 1; i < n; ++i)
         {
-            if (i < n && nums[i] - nums[i - 1] == dif)
+            if (hash.count(string(1, s[i])) == 0)//单字符字串是否已存在
             {
-                ++num;
-                dp[i] = num == 3 ? 1 : 0;
-                ++i;
+                hash.insert(string(1, s[i]));
+                ++dp[i];
             }
-            else if (i < n)
+            int add = 0;
+            if (s[i] - s[i - 1] == 1 || (s[i] == 'a' && s[i - 1] == 'z'))
             {
-                dif = nums[i] - nums[i - 1];
-                num = 2;
-                dp[i] = 0;
-                ++i;
-            }
-        }
-        for (i; i < n; ++i)
-        {
-            if (nums[i] - nums[i - 1] == dif)
-            {
-                ++num;
-                dp[i] = dp[i - 1] + num - 2;
+                ++l;
+                if (hash.count(s.substr(i - l + 1, l - 1)) == 0)
+                {
+                    hash.insert(s.substr(i - l + 1, l - 1));
+                    add = l - 1;
+                }
             }
             else
             {
-                dif = nums[i] - nums[i - 1];
-                num = 2;
-                ret += dp[i - 1];
-                dp[i] = 0;
+                l = 1;
             }
+            dp[i] += dp[i - 1] + add;
         }
 
-        if (nums[n - 1] - nums[n - 2] == dif)
-            ret += dp[n - 1];
-        return ret;
-
-
+        return dp[n - 1];
     }
 };
+
 int main()
 {
-    vector<int> v({ 1, 2, 3, 8, 9, 10 });
-    Solution s;
-    cout << s.numberOfArithmeticSlices(v) << endl;
     return 0;
 }

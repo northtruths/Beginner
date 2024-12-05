@@ -4332,3 +4332,93 @@
 
 
 
+//#include <iostream>
+//#include <vector>
+//#include <unordered_map>
+//#include <unordered_set>
+//#include <tuple>
+//#include <algorithm>
+//
+//using namespace std;
+//
+//struct Node {
+//    int weight;
+//    unordered_set<int> neighbors;
+//};
+//
+//int max_weight_after_merge(int n, vector<int>& weights, vector<pair<int, int>>& edges) {
+//    unordered_map<int, Node> graph;
+//
+//    for (int i = 1; i <= n; ++i) {
+//        graph[i] = { weights[i - 1], {} };
+//    }
+//
+//    for (const auto& edge : edges) {
+//        graph[edge.first].neighbors.insert(edge.second);
+//        graph[edge.second].neighbors.insert(edge.first);
+//    }
+//
+//    while (graph.size() > 1) {
+//        int max_weight = -1;
+//        tuple<int, int, int> to_merge;
+//
+//        for (const auto& pair : graph) {
+//            int y = pair.first;
+//            const Node& node = pair.second;
+//            for (int x : node.neighbors) {
+//                for (int z : node.neighbors) {
+//                    if (x != z && graph[x].neighbors.count(y) && graph[y].neighbors.count(z)) {
+//                        int combined_weight = graph[x].weight + graph[y].weight + graph[z].weight;
+//                        if (combined_weight > max_weight) {
+//                            max_weight = combined_weight;
+//                            to_merge = make_tuple(x, y, z);
+//                        }
+//                    }
+//                }
+//            }
+//        }
+//
+//        if (max_weight == -1) break; // 找不到合适的合并候选
+//
+//        int x, y, z;
+//        tie(x, y, z) = to_merge;
+//        int new_node = weights.size() + 1;
+//        int new_weight = graph[x].weight + graph[y].weight + graph[z].weight;
+//        weights.push_back(new_weight);
+//
+//        unordered_set<int> new_neighbors;
+//        for (int neighbor : graph[x].neighbors) {
+//            if (neighbor != y && neighbor != z) new_neighbors.insert(neighbor);
+//        }
+//        for (int neighbor : graph[y].neighbors) {
+//            if (neighbor != x && neighbor != z) new_neighbors.insert(neighbor);
+//        }
+//        for (int neighbor : graph[z].neighbors) {
+//            if (neighbor != x && neighbor != y) new_neighbors.insert(neighbor);
+//        }
+//
+//        graph[new_node] = { new_weight, new_neighbors };
+//        for (int neighbor : new_neighbors) {
+//            graph[neighbor].neighbors.erase(x);
+//            graph[neighbor].neighbors.erase(y);
+//            graph[neighbor].neighbors.erase(z);
+//            graph[neighbor].neighbors.insert(new_node);
+//        }
+//
+//        graph.erase(x);
+//        graph.erase(y);
+//        graph.erase(z);
+//    }
+//
+//    return graph.begin()->second.weight;
+//}
+//
+//int main() {
+//    int n = 7;
+//    int m = 7;
+//    vector<int> weights = { 1, 2, 3, 1, 2, 3, 1 };
+//    vector<pair<int, int>> edges = { {1, 2}, {2, 3}, {3, 4}, {4, 5}, {5, 6}, {6, 7}, {7, 1} };
+//
+//    cout << max_weight_after_merge(n, weights, edges) << endl;
+//    return 0;
+//} 
