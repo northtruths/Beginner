@@ -2678,50 +2678,36 @@
 
 
 
-#include<unordered_set>
-#include<string>
-using namespace std;
-class Solution {
-public:
-    int findSubstringInWraproundString(string s) {
-        //以i的位置为结尾，有多少个不同非空字串,dp[i] = dp[i - 1] + 新增的
-        //思路：增加不同非空字串有两种，一是当前i位置字母本身第一次出现，dp[i]得加一，二是当前i字母与前面是连起来的
-        //此时dp[i]得加之前连的长度
-        unordered_set<string> hash;//判断子串是否存在
-        int n = s.size();
-        vector<int> dp(n);
-        dp[0] = 1;
-        hash.insert(string(1, s[0]));
-        int l = 1;//当前连续长度
-        for (int i = 1; i < n; ++i)
-        {
-            if (hash.count(string(1, s[i])) == 0)//单字符字串是否已存在
-            {
-                hash.insert(string(1, s[i]));
-                ++dp[i];
-            }
-            int add = 0;
-            if (s[i] - s[i - 1] == 1 || (s[i] == 'a' && s[i - 1] == 'z'))
-            {
-                ++l;
-                if (hash.count(s.substr(i - l + 1, l - 1)) == 0)
-                {
-                    hash.insert(s.substr(i - l + 1, l - 1));
-                    add = l - 1;
-                }
-            }
-            else
-            {
-                l = 1;
-            }
-            dp[i] += dp[i - 1] + add;
-        }
-
-        return dp[n - 1];
-    }
-};
-
-int main()
-{
-    return 0;
-}
+//class Solution {
+//public:
+//    int findSubstringInWraproundString(string s) {
+//        //以i的位置为结尾，有多少个不同非空字串
+////思路：记录每个以某个字母结尾的字串的最长长度，这样相当于用这个字母往前计数字串（不会重复的原因），
+////每个都是最长以这个字母为结尾，所以它就是最多以这个字母为结尾的最大字符串，再26个字母的加起来
+//        int n = s.size();
+//        vector<int> dp(26, 0);
+//        dp[s[0] - 97] = 1;
+//        int l = 1;//当前字串长度
+//        for (int i = 1; i < n; ++i)
+//        {
+//            if (s[i] - 1 == s[i - 1] || (s[i] == 'a' && s[i - 1] == 'z'))
+//            {
+//                ++l;
+//                dp[s[i] - 97] = max(l, dp[s[i] - 97]);
+//            }
+//            else
+//            {
+//                l = 1;
+//                dp[s[i] - 97] = max(l, dp[s[i] - 97]);
+//            }
+//        }
+//
+//        int ret = 0;
+//        for (int i = 0; i < 26; ++i)
+//        {
+//            ret += dp[i];
+//        }
+//
+//        return ret;
+//    }
+//};
