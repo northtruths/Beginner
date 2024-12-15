@@ -216,3 +216,99 @@
 //    cout << s.deleteAndEarn(v) << endl;
 //    return 0;
 //}
+
+
+//P8772 [À¶ÇÅ±­ 2022 Ê¡ A] ÇóºÍ
+//#include<iostream>
+//#include<vector>
+//using namespace std;
+//int main()
+//{
+//    int n;
+//    long long s = 0;
+//    cin >> n;
+//    long long cur = 0;
+//    cin >> cur;
+//    for (int i = 1; i < n; ++i)
+//    {
+//        int num = 0;
+//        cin >> num;
+//        s += cur * num;
+//        cur += num;
+//    }
+//    cout << s << endl;
+//    return 0;
+//}
+
+
+#include<iostream>
+#include<string>
+using namespace std;
+
+bool is_ret1(string& s)
+{
+    int i1 = 0, i2 = 7;
+    while (i1 < i2)
+    {
+        if (s[i1] != s[i2])
+            return false;
+        ++i1;
+        --i2;
+    }
+    return true;
+}
+
+bool is_ret2(string& s)
+{
+    int i1 = 0, i2 = 7;
+    char a = s[0];
+    char b = s[1];
+    while (i1 < i2)
+    {
+        if (s[i1] != s[i2])
+            return false;
+        if (i1 == 0 || i1 == 2)
+        {
+            if (s[i1] != a)
+                return false;
+        }
+        else
+        {
+            if (s[i1] != b)
+                return false;
+        }
+        ++i1;
+        --i2;
+    }
+    return true;
+}
+
+int main()
+{
+    int n;
+    cin >> n;
+    int flag1 = 0;
+    int ret1 = 0;
+    int ret2 = 0;
+    while (1)
+    {
+        string s = to_string(n);
+        if (flag1 == 0)
+        {
+            if (is_ret1(s))
+            {
+                ret1 = atoi(s);
+                flag1 = 1;
+            }
+        }
+
+        if (is_ret2(s))
+        {
+            ret2 = atoi(s);
+            break;
+        }
+        ++n;
+    }
+    cout << ret1 << endl << ret2 << endl;
+    return 0;
+}
