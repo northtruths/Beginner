@@ -241,74 +241,324 @@
 //}
 
 
+//#include<iostream>
+//#include<string>
+//using namespace std;
+//
+//bool is_ret1(string& s)
+//{
+//    int i1 = 0, i2 = 7;
+//    while (i1 < i2)
+//    {
+//        if (s[i1] != s[i2])
+//            return false;
+//        ++i1;
+//        --i2;
+//    }
+//    return true;
+//}
+//
+//bool is_ret2(string& s)
+//{
+//    int i1 = 0, i2 = 7;
+//    char a = s[0];
+//    char b = s[1];
+//    while (i1 < i2)
+//    {
+//        if (s[i1] != s[i2])
+//            return false;
+//        if (i1 == 0 || i1 == 2)
+//        {
+//            if (s[i1] != a)
+//                return false;
+//        }
+//        else
+//        {
+//            if (s[i1] != b)
+//                return false;
+//        }
+//        ++i1;
+//        --i2;
+//    }
+//    return true;
+//}
+//
+//int main()
+//{
+//    int n;
+//    cin >> n;
+//    ++n;
+//    int flag1 = 0;
+//    int ret1 = 0;
+//    int ret2 = 0;
+//    while (1)
+//    {
+//        string s = to_string(n);
+//        if (flag1 == 0)
+//        {
+//            if (is_ret1(s))
+//            {
+//                ret1 = atoi(s.c_str());
+//                flag1 = 1;
+//            }
+//        }
+//
+//        if (is_ret2(s))
+//        {
+//            ret2 = atoi(s.c_str());
+//            break;
+//        }
+//        ++n;
+//    }
+//    cout << ret1 << endl << ret2 << endl;
+//    return 0;
+//}
+
+
+//#include<string>
+//#include<iostream>
+//using namespace std;
+//
+//int main()
+//{
+//	string s("123");
+//	string sadd("456");
+//
+//	s += sadd;
+//	cout << s << endl;
+//	return 0;
+//}
+
+//P8716 [蓝桥杯 2020 省 AB2] 回文日期
+//#include<iostream>
+//#include<string>
+//using namespace std;
+//
+//bool is_ret1(string& s)
+//{
+//    int i1 = 0, i2 = 7;
+//    while (i1 < i2)
+//    {
+//        if (s[i1] != s[i2])
+//            return false;
+//        ++i1;
+//        --i2;
+//    }
+//    return true;
+//}
+//
+//bool is_ret2(string& s)
+//{
+//    int i1 = 0, i2 = 7;
+//    char a = s[0];
+//    char b = s[1];
+//    while (i1 < i2)
+//    {
+//        if (s[i1] != s[i2])
+//            return false;
+//        if (i1 == 0 || i1 == 2)
+//        {
+//            if (s[i1] != a)
+//                return false;
+//        }
+//        else
+//        {
+//            if (s[i1] != b)
+//                return false;
+//        }
+//        ++i1;
+//        --i2;
+//    }
+//    return true;
+//}
+//
+//bool is_s_year(int year)
+//{
+//    if (year % 400 == 0 || (year % 4 == 0 && year % 100 != 0))
+//        return true;
+//    else
+//        return false;
+//}
+//
+//
+//void right_year(string& s)
+//{
+//    int year = (s[0] - 48) * 1000 + (s[1] - 48) * 100
+//        + (s[2] - 48) * 10 + (s[3] - 48);
+//    int m = (s[4] - 48) * 10 + (s[5] - 48);
+//    int day = (s[6] - 48) * 10 + (s[7] - 48);
+//    ++day;
+//    if (day <= 28)
+//    {
+//        ++s[7];
+//        if (s[7] > '9')
+//        {
+//            ++s[6];
+//            s[7] = '0';
+//        }
+//        return;
+//    }
+//    if (day == 32)
+//    {
+//        if (m == 12)
+//        {
+//            ++year;
+//            m = 1;
+//            day = 1;
+//        }
+//        else
+//        {
+//            ++m;
+//            day = 1;
+//        }
+//
+//    }
+//    else if (day == 31)
+//    {
+//        if (!(m == 1 || m == 3 || m == 5 || m == 7 || m == 8
+//            || m == 10 || m == 12))
+//        {
+//            ++m;
+//            day = 1;
+//        }
+//    }
+//    else if (day == 30)
+//    {
+//        if (m == 2 && is_s_year(year))
+//        {
+//            ++m;
+//            day = 1;
+//        }
+//    }
+//    else if (day == 29)
+//    {
+//        if (m == 2 && !is_s_year(year))
+//        {
+//            ++m;
+//            day = 1;
+//        }
+//    }
+//    s = to_string(year);
+//    if (m < 10)
+//    {
+//        s += '0';
+//        s += m + 48;
+//    }
+//    else
+//        s += to_string(m);
+//    if (day < 10)
+//    {
+//        s += '0';
+//        s += day + 48;
+//    }
+//    else
+//        s += to_string(day);
+//}
+//
+//int main()
+//{
+//    int n;
+//    cin >> n;
+//    string s = to_string(n + 1);
+//    int flag1 = 0;
+//    string ret1;
+//    string ret2;
+//    while (1)
+//    {
+//        if (flag1 == 0)
+//        {
+//            if (is_ret1(s))
+//            {
+//                ret1 = s;
+//                flag1 = 1;
+//            }
+//        }
+//
+//        if (is_ret2(s))
+//        {
+//            ret2 = s;
+//            break;
+//        }
+//        right_year(s);
+//    }
+//    cout << ret1 << endl << ret2 << endl;
+//    return 0;
+//}
+
+//#include<iostream>
+//#include<algorithm>
+//#include<string>
+//#include<cmath>
+//using namespace std;
+//
+////把数字转换为字符串，遍历所有字符串分为两部分的情况，
+////看是否有两部分都是平方数的可能 
+//bool Func(string&& s)
+//{
+//	int curi = 1;//分割位置，这个位置归属右部分 
+//	int endi = s.size() - 1;//末尾 
+//	int ll = 1;//左部分长度 
+//	while (curi <= endi)
+//	{
+//			string left(s.substr(0, ll));
+//			string right(s.substr(curi, s.size() - ll));
+//			double l = sqrt(atoi(left.c_str()));
+//			double r = sqrt(atoi(right.c_str()));
+//			if ((l != 0 && r != 0) && (l == (int)l && r == (int)r))
+//				return true;
+//		++curi;
+//		++ll;
+//	}
+//	return false;
+//}
+//
+//int main()
+//{
+//	int a, b;
+//	cin >> a >> b;
+//	for (int i = a; i <= b; ++i)
+//	{
+//		double sqrt_i = sqrt(i);
+//		if (sqrt_i == (int)sqrt_i && Func(to_string(i)))
+//			cout << i << endl;
+//	}
+//	return 0;
+//}
+
+
+
 #include<iostream>
-#include<string>
 using namespace std;
-
-bool is_ret1(string& s)
-{
-    int i1 = 0, i2 = 7;
-    while (i1 < i2)
-    {
-        if (s[i1] != s[i2])
-            return false;
-        ++i1;
-        --i2;
-    }
-    return true;
-}
-
-bool is_ret2(string& s)
-{
-    int i1 = 0, i2 = 7;
-    char a = s[0];
-    char b = s[1];
-    while (i1 < i2)
-    {
-        if (s[i1] != s[i2])
-            return false;
-        if (i1 == 0 || i1 == 2)
-        {
-            if (s[i1] != a)
-                return false;
-        }
-        else
-        {
-            if (s[i1] != b)
-                return false;
-        }
-        ++i1;
-        --i2;
-    }
-    return true;
-}
 
 int main()
 {
-    int n;
-    cin >> n;
-    int flag1 = 0;
-    int ret1 = 0;
-    int ret2 = 0;
-    while (1)
+    int k, n;
+    cin >> n >> k;
+    if (n == k)
     {
-        string s = to_string(n);
-        if (flag1 == 0)
-        {
-            if (is_ret1(s))
-            {
-                ret1 = atoi(s);
-                flag1 = 1;
-            }
-        }
-
-        if (is_ret2(s))
-        {
-            ret2 = atoi(s);
-            break;
-        }
-        ++n;
+        cout << 0 << endl;
+        return 0;
     }
-    cout << ret1 << endl << ret2 << endl;
+    if (k == 1)
+    {
+        cout << 2 << endl;
+        return 0;
+    }
+    long long dp = 1;//1到i的k单调排列数量,初始i为k + 1,因为i <= k的情况排列数量都为0
+    int tempi = k / 2 + 1;
+    for (int i = 2; i <= tempi; ++i)
+    {
+        dp *= i * i;
+    }
+    dp *= 2;;
+    if (k % 2 == 0)
+        dp /= tempi;
+    long long ret = 0;
+    for (int i = k + 1; i <= n; ++i)
+    {
+        ret = dp % 123456;
+        dp = dp + dp * k;
+    }
+    cout << ret << endl;
     return 0;
 }
