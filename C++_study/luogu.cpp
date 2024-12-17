@@ -527,38 +527,123 @@
 
 
 
+//#include<iostream>
+//using namespace std;
+
+//int main()
+//{
+//    int k, n;
+//    cin >> n >> k;
+//    if (n == k)
+//    {
+//        cout << 0 << endl;
+//        return 0;
+//    }
+//    if (k == 1)
+//    {
+//        cout << 2 << endl;
+//        return 0;
+//    }
+//    long long dp = 1;//1到i的k单调排列数量,初始i为k + 1,因为i <= k的情况排列数量都为0
+//    int tempi = k / 2 + 1;
+//    for (int i = 2; i <= tempi; ++i)
+//    {
+//        dp *= i * i;
+//    }
+//    dp *= 2;;
+//    if (k % 2 == 0)
+//        dp /= tempi;
+//    long long dp_next = dp;//没 % 的dp
+//    dp %= 123456;
+//    long long ret = dp;
+//    for (int i = k + 1; i <= n; ++i)
+//    {
+//        ret = dp;
+//        dp_next = dp + (dp_next * k) % 123456;
+//        dp = (dp_next) % 123456;
+//    }
+//    //37296
+//    cout << ret << endl;
+//    return 0;
+//}
+
+//#define mod 123456 // 模数
+//using namespace std;
+//int n, m, dp[505][505]; // dp 数组
+//int main()
+//{
+//    scanf("%d%d", &n, &m); // 输入
+//    if (n == 1) // 因为 dp 是从 2 开始的，所以 n=1 的情况特判一下
+//    {
+//        if (m == 1) puts("1");
+//        else puts("0");
+//        return 0;
+//    }
+//    dp[2][1] = 2; // 初始值，n=2 时不管是 1,2 还是 2,1 都是 1 单调排列
+//    for (int i = 2; i < n; i++)
+//        for (int j = 1; j <= m; j++)
+//        {
+//            //            printf ("dp[%d][%d]=%d\n",i,j,dp[i][j]); // 调试用
+//            dp[i + 1][j] = (dp[i + 1][j] + dp[i][j] * j) % mod; // 转移
+//            dp[i + 1][j + 1] = (dp[i + 1][j + 1] + dp[i][j] * 2) % mod;
+//            dp[i + 1][j + 2] = (dp[i + 1][j + 2] + dp[i][j] * (i - j - 1)) % mod;
+//        }
+//    printf("%d\n", dp[n][m] % mod); // 输出
+//    return 0;
+//}
+
+
+
+
 #include<iostream>
+#include<string>
+#include<algorithm>
+#include<unordered_map>
 using namespace std;
+
+string Func(int x, int p, unordered_map<int, int>& m, unordered_map<int, int>& n)
+{
+	//x为进位个数 
+	string s;
+	int index = 0;//权
+	while (x != 0)
+	{
+		s += n[x % (int)(pow(p, index) * p)];
+		x = x / (pow(p, index) * p);
+		++index;
+	}
+	reverse(s.begin(), s.end());
+	return s;
+}
 
 int main()
 {
-    int k, n;
-    cin >> n >> k;
-    if (n == k)
-    {
-        cout << 0 << endl;
-        return 0;
-    }
-    if (k == 1)
-    {
-        cout << 2 << endl;
-        return 0;
-    }
-    long long dp = 1;//1到i的k单调排列数量,初始i为k + 1,因为i <= k的情况排列数量都为0
-    int tempi = k / 2 + 1;
-    for (int i = 2; i <= tempi; ++i)
-    {
-        dp *= i * i;
-    }
-    dp *= 2;;
-    if (k % 2 == 0)
-        dp /= tempi;
-    long long ret = 0;
-    for (int i = k + 1; i <= n; ++i)
-    {
-        ret = dp % 123456;
-        dp = dp + dp * k;
-    }
-    cout << ret << endl;
-    return 0;
+	int p;
+	cin >> p;
+	unordered_map<int, int> m;//ASCII码映射数字 A(65)->10
+	unordered_map<int, int> n;//数字映射ASCII码 10->A(65)
+	int ch = 65;
+	for (int i = 0; i <= 36; ++i)
+	{
+		if (i < 10)
+		{
+			m.insert({ i + 48, i});
+			n.insert({ i, i + 48});
+		}
+		else
+		{
+			m.insert({ ch, i });
+			n.insert({ i, ch });
+			++ch;
+		}
+	}
+	for (int i = 1; i < p; ++i)
+	{
+		for (int j = 1; j <= i; ++j)
+		{
+			cout << char(n[i]) << '*' << char(n[j]) << '=' << Func(i * j, p, m, n) << ' ';
+		}
+		cout << endl;
+	}
+	return 0;
 }
