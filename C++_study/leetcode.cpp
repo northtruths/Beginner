@@ -2677,7 +2677,7 @@
 //};
 
 
-
+//467. 环绕字符串中唯一的子字符串
 //class Solution {
 //public:
 //    int findSubstringInWraproundString(string s) {
@@ -2711,3 +2711,53 @@
 //        return ret;
 //    }
 //};
+
+
+//300. 最长递增子序列(逻辑与思维还是不够强啊，这道题花了1.5h，得练)
+//#include<iostream>
+//#include<vector>
+//using namespace std;
+//
+//class Solution {
+//public:
+//    int lengthOfLIS(vector<int>& nums) {
+//        //dp[i]是指 以nums[i] 结尾的最长严格递增子序列的末尾的长度
+//        //找出前面nums[k]比nums[i]小且dp[k]最大的k
+//        //dp[i] = dp[k] + 1;
+//        int n = nums.size();
+//        vector<int> dp(n);
+//        dp[0] = 1;
+//        for (int i = 1; i < n; ++i)
+//        {
+//            int k = -1;
+//            int kl = -1;
+//            for (int j = i - 1; j >= 0; --j)
+//            {
+//                if (nums[i] > nums[j] && dp[j] > kl)
+//                {
+//                    k = j;
+//                    kl = dp[j];
+//                }
+//
+//            }
+//            if (k == -1)
+//                dp[i] = 1;
+//            else
+//                dp[i] = dp[k] + 1;
+//        }
+//
+//        int ret = INT_MIN;
+//        for (int e : dp)
+//            ret = e > ret ? e : ret;
+//        return ret;
+//    }
+//
+//};
+//
+//int main()
+//{
+//    Solution s;
+//    vector<int> nums({ 0,1,0,3,2,3 });// 1 2 1
+//    cout << s.lengthOfLIS(nums) << endl;
+//    return 0;
+//}

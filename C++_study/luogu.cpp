@@ -595,55 +595,87 @@
 
 
 
+//#include<iostream>
+//#include<string>
+//#include<algorithm>
+//#include<unordered_map>
+//#include<cmath>
+//using namespace std;
+//
+//string Func(int x, int p, unordered_map<int, int>& m, unordered_map<int, int>& n)
+//{
+//	//x为进位个数 
+//	string s;
+//	int index = 0;//权
+//	while (x != 0)
+//	{
+//		s += n[x % (int)(pow(p, index) * p)];
+//		x = x / (pow(p, index) * p);
+//		++index;
+//	}
+//	reverse(s.begin(), s.end());
+//	return s;
+//}
+//
+//int main()
+//{
+//	int p;
+//	cin >> p;
+//	unordered_map<int, int> m;//ASCII码映射数字 A(65)->10
+//	unordered_map<int, int> n;//数字映射ASCII码 10->A(65)
+//	int ch = 65;
+//	for (int i = 0; i <= 36; ++i)
+//	{
+//		if (i < 10)
+//		{
+//			m.insert({ i + 48, i});
+//			n.insert({ i, i + 48});
+//		}
+//		else
+//		{
+//			m.insert({ ch, i });
+//			n.insert({ i, ch });
+//			++ch;
+//		}
+//	}
+//	for (int i = 1; i < p; ++i)
+//	{
+//		for (int j = 1; j <= i; ++j)
+//		{
+//			cout << char(n[i]) << '*' << char(n[j]) << '=' << Func(i * j, p, m, n) << ' ';
+//		}
+//		cout << endl;
+//	}
+//	return 0;
+//}
+
+
 #include<iostream>
 #include<string>
-#include<algorithm>
-#include<unordered_map>
 using namespace std;
-
-string Func(int x, int p, unordered_map<int, int>& m, unordered_map<int, int>& n)
-{
-	//x为进位个数 
-	string s;
-	int index = 0;//权
-	while (x != 0)
-	{
-		s += n[x % (int)(pow(p, index) * p)];
-		x = x / (pow(p, index) * p);
-		++index;
-	}
-	reverse(s.begin(), s.end());
-	return s;
-}
 
 int main()
 {
-	int p;
-	cin >> p;
-	unordered_map<int, int> m;//ASCII码映射数字 A(65)->10
-	unordered_map<int, int> n;//数字映射ASCII码 10->A(65)
-	int ch = 65;
-	for (int i = 0; i <= 36; ++i)
-	{
-		if (i < 10)
-		{
-			m.insert({ i + 48, i});
-			n.insert({ i, i + 48});
-		}
-		else
-		{
-			m.insert({ ch, i });
-			n.insert({ i, ch });
-			++ch;
-		}
-	}
-	for (int i = 1; i < p; ++i)
-	{
-		for (int j = 1; j <= i; ++j)
-		{
-			cout << char(n[i]) << '*' << char(n[j]) << '=' << Func(i * j, p, m, n) << ' ';
-		}
-		cout << endl;
-	}
-	return 0;
+    long long a, b, n;
+    cin >> a >> b >> n;
+    long long day = 0;
+    long long week = n / (5 * a + 2 * b);
+    n %= (5 * a + 2 * b);
+    int s = 5;
+    while (s && n > 0)
+    {
+        n -= a;
+        --s;
+        ++day;
+    }
+    if (n > 0)
+    {
+        n -= b;
+        ++day;
+    }
+    if (n > 0)
+        ++day;
+    day += week * 7;
+    cout << day << endl;
+    return 0;
 }
