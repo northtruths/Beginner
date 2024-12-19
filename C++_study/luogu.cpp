@@ -649,33 +649,249 @@
 //	return 0;
 //}
 
+//P8780 [蓝桥杯 2022 省 B] 刷题统计
+//#include<iostream>
+//#include<string>
+//using namespace std;
+//
+//int main()
+//{
+//    long long a, b, n;
+//    cin >> a >> b >> n;
+//    long long day = 0;
+//    long long week = n / (5 * a + 2 * b);
+//    n %= (5 * a + 2 * b);
+//    int s = 5;
+//    while (s && n > 0)
+//    {
+//        n -= a;
+//        --s;
+//        ++day;
+//    }
+//    if (n > 0)
+//    {
+//        n -= b;
+//        ++day;
+//    }
+//    if (n > 0)
+//        ++day;
+//    day += week * 7;
+//    cout << day << endl;
+//    return 0;
+//}
+
+//P8795[蓝桥杯 2022 国 A] 选素数（什么数论题，搞半天弱化了题意，还不是现在的我能做的）
+//#include<iostream>
+//#include<algorithm>
+//#include<cmath>
+//using namespace std;
+//
+//bool is_prime(int x)
+//{
+//    if (x == 2)  return true;
+//    if (x % 2 == 0)  return false;
+//    for (int i = 3; i <= sqrt(x); i += 2)
+//    {
+//        if (x % i == 0)
+//            return false;
+//    }
+//    return true;
+//}
+//
+//int main()
+//{
+//    //n/2 ~ n的 二分之一若有素数，则这个素数+1满足条件,
+//    //若没有，n/2 ~ n间有素数，则加一也满足
+//    int n = 0;
+//        cin >> n;
+//        if (n % 2 == 1)
+//        {
+//            cout << -1 << endl;
+//            return 0;
+//        }
+//        int flag1 = 0, flag2 = 0;//判断情况一和二，二优于一
+//        int ret = -2;
+//        for (int i = n / 2 + 1; i < n; ++i)
+//        {
+//            if (flag1 == 0)
+//            {
+//                if (is_prime(i))
+//                {
+//                    flag1 = 1;
+//                    ret = i;
+//                }
+//            }
+//            if (i % 2 == 0)
+//            {
+//                if (is_prime(i / 2))
+//                {
+//                    ret = i / 2;
+//                    break;
+//                }
+//            }
+//        }
+//        if (is_prime(n / 2))
+//            ret = min(ret, n / 2);
+//        cout << ret + 1 << endl;
+//    return 0;
+//}
+// 97:-1
+// 98:48
+// 99:48
+// 100:54
+
+//#include<iostream>
+//
+//#define ll long long
+//using namespace std;
+//ll x, ans = 1e13;
+//bool jug(ll x)
+//{
+//    if (x == 1 || x == 0)	return 0;
+//    for (int i = 2; i * i <= x; i++)
+//        if (x % i == 0)	return 0;
+//    return 1;
+//}
+//void subdosth(ll p)
+//{
+//    for (ll i = (p + 1) / 2; i < p; i++)
+//        if (jug(i)) { ans = min(ans, i + 1);	break; }
+//}
+//void dosth(ll pr)
+//{
+//    if (jug(pr))	subdosth((x / pr - 1) * pr + 1);
+//    if (jug(x / pr))	subdosth((pr - 1) * x / pr + 1);
+//}
+//int main()
+//{
+//    //for (int k = 1; k <= 100; ++k) {
+//        cin >> x;
+//        //x = k;
+//        for (int i = 2; i * i <= x; i++)	if (x % i == 0)	dosth(i), dosth(x / i);
+//        if (ans != (ll)1e13)	cout << ans << endl;
+//        else	cout << -1 << endl;
+//    //}
+//    return 0;
+//}
+
+
+//P9241 [蓝桥杯 2023 省 B] 飞机降落
+//#include<iostream>
+//#include<vector>
+//#include<algorithm>
+//using namespace std;
+//
+//struct fly
+//{
+//	int t;//到达时间
+//	int d;//盘旋时间
+//	int l;//降落时间
+//};
+//
+//bool compare(fly& a, fly& b)
+//{
+//	return a.t < b.t;
+//}
+//
+//void judge(vector<fly>& v, vector<bool>& map, bool& ret, int cur = -1, int num = 0, int cost = 0)
+//{
+//	//cost为到目前为止消耗的时间，若消耗的时间大于到达时间+盘旋时间则无法安全降落
+//	//cur为当前要降落的飞机的下标
+//	//num为当前安全降落数量
+//	if (cur != -1 && v[cur].t + v[cur].d < cost)
+//		return;
+//	else if(cur != -1)
+//	{
+//		map[cur] = true;
+//		cost += v[cur].l;
+//		++num;
+//	}
+//	if (num == v.size() || ret == true)
+//	{
+//		ret = true;
+//		return;
+//	}
+//	for (int i = 0; i < v.size(); ++i)
+//	{
+//		if (map[i] == true)
+//			continue;
+//		int pre_cost = cost;
+//		if (cost < v[i].t)
+//			cost = v[i].t;
+//		judge(v, map, ret, i, num, cost);
+//		cost = pre_cost;
+//		map[i] = false;
+//		if (ret == true)
+//			return;
+//	}
+//
+//}
+//
+//int main()
+//{
+//	int T;
+//	cin >> T;
+//	while (T--)
+//	{
+//		int n = 0;
+//		cin >> n;
+//		vector<fly> v(n);
+//		for (int i = 0; i < n; ++i)
+//			cin >> v[i].t >> v[i].d >> v[i].l;
+//		sort(v.begin(), v.end(), compare);
+//		vector<bool> map(n, false);//记录飞机是否降落
+//		bool ret = 0;
+//		judge(v, map, ret);
+//		if (ret)
+//			cout << "YES" << endl;
+//		else
+//			cout << "NO" << endl;
+//	}
+//	return 0;
+//}
+//1
+//3
+//10 20 10
+//10 30 20
+//10 50 99999
+
+
+//P8796 [蓝桥杯 2022 国 AC] 替换字符（未ac）
+//#include<iostream>
+//#include<string>
+//#include<vector>
+//using namespace std;
+//
+//int main()
+//{
+//    string s;
+//    cin >> s;
+//    int m = 0;
+//    cin >> m;
+//    while (m--)
+//    {
+//        int l, r;
+//        char x, y;
+//        cin >> l >> r >> x >> y;
+//        for (int i = l - 1; i < r; ++i)
+//        {
+//            if (s[i] == x)
+//                s[i] = y;
+//        }
+//    }
+//    cout << s << endl;
+//    return 0;
+//}
+
 
 #include<iostream>
-#include<string>
-using namespace std;
-
 int main()
 {
-    long long a, b, n;
-    cin >> a >> b >> n;
-    long long day = 0;
-    long long week = n / (5 * a + 2 * b);
-    n %= (5 * a + 2 * b);
-    int s = 5;
-    while (s && n > 0)
-    {
-        n -= a;
-        --s;
-        ++day;
-    }
-    if (n > 0)
-    {
-        n -= b;
-        ++day;
-    }
-    if (n > 0)
-        ++day;
-    day += week * 7;
-    cout << day << endl;
-    return 0;
+	auto test = []
+		{
+			std::cout << "hello" << std::endl;
+			return;
+		};
+	test();
+	return 0;
 }
