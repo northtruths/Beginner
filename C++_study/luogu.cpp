@@ -885,13 +885,119 @@
 
 
 #include<iostream>
+#include<algorithm>
+#include<vector>
+#include<cmath>
+using namespace std;
+
+void Find_index(int& index, int n)
+{
+    while (1)
+    {
+        if (pow(10, index) <= n && n < pow(10, index + 1))
+            return;
+        else
+            ++index;
+    }
+}
+
+bool Func(int x)
+{
+    int flag1 = 1;//奇数
+    int flag2 = 0;//偶数
+    while (x)
+    {
+        if (flag1 && x % 10 % 2 == 0)
+            return false;
+        if (flag2 && x % 10 % 2 == 1)
+            return false;
+        x /= 10;
+        if (flag1)
+        {
+            flag1 = 0;
+            flag2 = 1;
+        }
+        else
+        {
+            flag1 = 1;
+            flag2 = 0;
+        }
+    }
+    return true;
+}
+
 int main()
 {
-	auto test = []
-		{
-			std::cout << "hello" << std::endl;
-			return;
-		};
-	test();
-	return 0;
+    int n;
+    cin >> n;
+    int ret = 0;
+    if (n < 10)
+    {
+        for (int i = 1; i <= n; ++i)
+            if (i % 2 == 1)
+                ++ret;
+        cout << ret << endl;
+        return 0;
+    }
+    int index = 0;
+    Find_index(index, n);
+    vector<int> dp(index);
+    dp[0] = 5;
+    for (int i = 1; i < index; ++i)
+    {
+        if (i % 2 == 1)
+            dp[i] = 4 * dp[i - 1];
+        else
+            dp[i] = 5 * (dp[i - 1] + dp[i - 2]);
+    }
+
+    for (int i = 0; i < index; ++i)
+        ret += dp[i];
+
+    for (int i = pow(10, index) + 1; i <= n; ++i)
+    {
+        if (Func(i))
+            ++ret;
+    }
+    cout << ret << endl;
+    return 0;
 }
+
+
+
+//#include <iostream>
+//using namespace std;
+//bool good(int x)
+//{
+//    int i = 1;
+//    while (x > 0)
+//    {
+//        if (i % 2 == 1)
+//        {
+//            if ((x % 10) % 2 == 0)return 0;
+//        }
+//        else
+//        {
+//            if ((x % 10) % 2 == 1)return 0;
+//        }
+//        x /= 10, i++;
+//    }
+//    return 1;
+//}
+//int main()
+//{
+//            int N , ans = 0;//ans存储答案（“好数”个数）
+//            cin >> N;
+//            for (int i = 1; i <= N; i++)
+//            {
+//                if (good(i) == 1)
+//                {
+//                    ans++;
+//                    cout << i << endl;
+//
+//                }
+//                //满足“好数”，答案加1
+//            }
+//            //cout << ans << endl;
+//    return 0;
+//}
