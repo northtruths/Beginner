@@ -1003,143 +1003,168 @@
 //}
 
 
+//P10425 [蓝桥杯 2024 省 B] R 格式 题解(未ac)
+//#include<iostream>
+//#include<cmath>
+//#include<string>
+//using namespace std;
+//
+//
+//void r_add(string& s1, string& s2)
+//{
+//    int l = 0, r = 0;//第一个数和第二个数的位置
+//    int add = 0;
+//    int s1_len = s1.size();
+//    int s2_len = s2.size();
+//
+//    while (l < s1_len && r < s2_len)
+//    {
+//        int temp = s1[l] - 48 + s2[r] - 48;
+//        s1[l] = (temp + add) % 10 + 48;
+//        add = (temp + add) / 10;
+//        ++l; ++r;
+//    }
+//    while (l < s1_len)
+//    {
+//        int temp = s1[l] - 48;
+//        s1[l] = (temp + add) % 10 + 48;
+//        add = (temp + add) / 10;
+//        ++l;
+//    }
+//    while (r < s2_len)
+//    {
+//        int temp = s2[r] - 48;
+//        s1 += (temp + add) % 10 + 48;
+//        add = (temp + add) / 10;
+//        ++r;
+//    }
+//    if (add != 0)
+//        s1 += add + 48;
+//}
+//
+//void r_mul(string& s1, string& s2)
+//{
+//    int index = 0;
+//    string new_s = "0";
+//    for (index; index < s2.size(); ++index)
+//    {
+//        //单次乘法
+//        int add = 0;
+//        string temp;
+//        for (int i = 0; i < index; ++i)
+//            temp += '0';
+//        int x_temp = s2[index] - 48;
+//        for (int i = 0; i < s1.size(); ++i)
+//        {
+//            int cur = s1[i] - 48;
+//            cur = cur * x_temp + add;
+//            temp += cur % 10 + 48;
+//            add = cur / 10;
+//        }
+//        if (add != 0)
+//            temp += add + 48;
+//        r_add(new_s, temp);
+//    }
+//    s1 = new_s;
+//}
+//
+//int main()
+//{
+//    int n = 0;
+//    long double d = 0;
+//    cin >> n >> d;
+//    if (n == 0)
+//    {
+//        cout << (int)(d + 0.5) << endl;
+//    }
+//    int len = 0;
+//    while (d * pow(10, len) != (long long)(d * pow(10, len)))
+//    {
+//        ++len;
+//    }
+//    string s1("2");
+//    string temp("2");
+//    string s2(to_string((long long)(d * pow(10, len))));
+//    for (int i = 2; i <= n; ++i)
+//    {
+//        r_mul(s1, temp);
+//    }
+//    reverse(s2.begin(), s2.end());
+//    int flag = 1;
+//    if (s1.size() > s2.size())
+//    {
+//        r_mul(s1, s2);
+//    }
+//    else
+//    {
+//        r_mul(s2, s1);
+//        flag = 2;
+//    }
+//
+//    if (flag == 1)
+//    {
+//        reverse(s1.begin(), s1.end());
+//        for (int i = 1; i <= len - 1; ++i)
+//            s1.pop_back();
+//        if (s1.back() >= 5 + 48)
+//        {
+//            s1.pop_back();
+//            reverse(s1.begin(), s1.end());
+//            string a("1");
+//            r_add(s1, a);
+//            reverse(s1.begin(), s1.end());
+//            cout << s1 << endl;
+//        }
+//        else
+//        {
+//            s1.pop_back();
+//            cout << s1 << endl;
+//        }
+//    }
+//    else
+//    {
+//        reverse(s2.begin(), s2.end());
+//        for (int i = 1; i <= len - 1; ++i)
+//            s2.pop_back();
+//        if (s2.back() >= 5 + 48)
+//        {
+//            s2.pop_back();
+//            reverse(s2.begin(), s2.end());
+//            string a("1");
+//            r_add(s2, a);
+//            reverse(s2.begin(), s2.end());
+//            cout << s2 << endl;
+//        }
+//        else
+//        {
+//            s2.pop_back();
+//            cout << s2 << endl;
+//        }
+//    }
+//    return 0;
+//}
+
+
 
 #include<iostream>
-#include<cmath>
-#include<string>
 using namespace std;
-
-
-void r_add(string& s1, string& s2)
-{
-    int l = 0, r = 0;//第一个数和第二个数的位置
-    int add = 0;
-    int s1_len = s1.size();
-    int s2_len = s2.size();
-
-    while (l < s1_len && r < s2_len)
-    {
-        int temp = s1[l] - 48 + s2[r] - 48;
-        s1[l] = (temp + add) % 10 + 48;
-        add = (temp + add) / 10;
-        ++l; ++r;
-    }
-    while (l < s1_len)
-    {
-        int temp = s1[l] - 48;
-        s1[l] = (temp + add) % 10 + 48;
-        add = (temp + add) / 10;
-        ++l;
-    }
-    while (r < s2_len)
-    {
-        int temp = s2[r] - 48;
-        s1 += (temp + add) % 10 + 48;
-        add = (temp + add) / 10;
-        ++r;
-    }
-    if (add != 0)
-        s1 += add + 48;
-}
-
-void r_mul(string& s1, string& s2)
-{
-    int index = 0;
-    string new_s = "0";
-    for (index; index < s2.size(); ++index)
-    {
-        //单次乘法
-        int add = 0;
-        string temp;
-        for (int i = 0; i < index; ++i)
-            temp += '0';
-        int x_temp = s2[index] - 48;
-        for (int i = 0; i < s1.size(); ++i)
-        {
-            int cur = s1[i] - 48;
-            cur = cur * x_temp + add;
-            temp += cur % 10 + 48;
-            add = cur / 10;
-        }
-        if (add != 0)
-            temp += add + 48;
-        r_add(new_s, temp);
-    }
-    s1 = new_s;
-}
 
 int main()
 {
-    int n = 0;
-    long double d = 0;
-    cin >> n >> d;
-    if (n == 0)
+    int ret = 0;
+    for (int i = 0; i <= 4; ++i)
     {
-        cout << (int)(d + 0.5) << endl;
-    }
-    int len = 0;
-    while (d * pow(10, len) != (long long)(d * pow(10, len)))
-    {
-        ++len;
-    }
-    string s1("2");
-    string temp("2");
-    string s2(to_string((long long)(d * pow(10, len))));
-    for (int i = 2; i <= n; ++i)
-    {
-        r_mul(s1, temp);
-    }
-    reverse(s2.begin(), s2.end());
-    int flag = 1;
-    if (s1.size() > s2.size())
-    {
-        r_mul(s1, s2);
-    }
-    else
-    {
-        r_mul(s2, s1);
-        flag = 2;
-    }
-
-    if (flag == 1)
-    {
-        reverse(s1.begin(), s1.end());
-        for (int i = 1; i <= len - 1; ++i)
-            s1.pop_back();
-        if (s1.back() >= 5 + 48)
+        int year = 0;
+        cin >> year;
+        int arr[4];
+        for (int j = 0; j < 4; ++j)
         {
-            s1.pop_back();
-            reverse(s1.begin(), s1.end());
-            string a("1");
-            r_add(s1, a);
-            reverse(s1.begin(), s1.end());
-            cout << s1 << endl;
+            arr[j] = year % 10;
+            year /= 10;
         }
-        else
-        {
-            s1.pop_back();
-            cout << s1 << endl;
-        }
+        if (arr[0] - arr[2] == 1 && arr[1] == arr[3])
+            ++ret;
     }
-    else
-    {
-        reverse(s2.begin(), s2.end());
-        for (int i = 1; i <= len - 1; ++i)
-            s2.pop_back();
-        if (s2.back() >= 5 + 48)
-        {
-            s2.pop_back();
-            reverse(s2.begin(), s2.end());
-            string a("1");
-            r_add(s2, a);
-            reverse(s2.begin(), s2.end());
-            cout << s2 << endl;
-        }
-        else
-        {
-            s2.pop_back();
-            cout << s2 << endl;
-        }
-    }
+    cout << ret << endl;
     return 0;
 }
