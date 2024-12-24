@@ -2761,3 +2761,56 @@
 //    cout << s.lengthOfLIS(nums) << endl;
 //    return 0;
 //}
+
+//376. 摆动序列
+//class Solution {
+//public:
+//    int wiggleMaxLength(vector<int>& nums) {
+//        int n = nums.size();
+//
+//        if (n <= 2)
+//        {
+//            if (n == 1)
+//                return 1;
+//            else if (nums[0] == nums[1])
+//                return 1;
+//            else
+//                return n;
+//        }
+//        //dp[i][j]表示，以i为末尾位置的最长子序列长度，j为0则nums下标j-(j-1)为正，j为1则负
+//        //dp[i][0]为dp[i - 1][1]与 计算所有i以前nums[i]大于nums[k]的拼装到后面，的较大值，dp[i][1]同理
+//        vector<vector<int>> dp(n, vector<int>(2, 1));
+//        dp[0][0] = 1;
+//        dp[0][1] = 1;
+//        dp[1][0] = nums[1] - nums[0] > 0 ? 2 : 1;
+//        dp[1][1] = nums[1] - nums[0] < 0 ? 2 : 1;
+//        for (int i = 2; i < n; ++i)
+//        {
+//            for (int k = i - 1; k >= 0; --k)
+//            {
+//                if (nums[i] == nums[k])
+//                {
+//                    dp[i][0] = max(dp[i][0], dp[k][0]);
+//                    dp[i][1] = max(dp[i][1], dp[k][1]);
+//                }
+//                else if (nums[i] > nums[k])
+//                {
+//                    dp[i][0] = max(dp[i][0], dp[k][1] + 1);
+//                    dp[i][1] = max(dp[i][1], dp[k][1]);
+//                }
+//                else
+//                {
+//                    dp[i][1] = max(dp[i][1], dp[k][0] + 1);
+//                    dp[i][0] = max(dp[i][0], dp[k][0]);
+//                }
+//            }
+//        }
+//
+//        int ret = 0;
+//        for (auto e : dp)
+//        {
+//            ret = max(ret, max(e[0], e[1]));
+//        }
+//        return ret;
+//    }
+//};

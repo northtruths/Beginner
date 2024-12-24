@@ -1145,26 +1145,79 @@
 //}
 
 
+//P8752 [蓝桥杯 2021 省 B2] 特殊年份
+//#include<iostream>
+//using namespace std;
+//
+//int main()
+//{
+//    int ret = 0;
+//    for (int i = 0; i <= 4; ++i)
+//    {
+//        int year = 0;
+//        cin >> year;
+//        int arr[4];
+//        for (int j = 0; j < 4; ++j)
+//        {
+//            arr[j] = year % 10;
+//            year /= 10;
+//        }
+//        if (arr[0] - arr[2] == 1 && arr[1] == arr[3])
+//            ++ret;
+//    }
+//    cout << ret << endl;
+//    return 0;
+//}
 
+
+//P8703 [蓝桥杯 2019 国 B] 最优包含
 #include<iostream>
+#include<algorithm>
+#include<string>
 using namespace std;
+//
+//void Func(string& s1, string& s2, int begin1, int begin2, int cur, int& ret, int& num)
+//{
+//	//cur为当前不用修改字符，cur最大时ret最小
+//	if (num - cur < ret)
+//		ret = num - cur;
+//	if (ret == 0)
+//		return;
+//	for (int i = begin2; i < s2.size(); ++i)
+//	{
+//		for (int j = begin1; j < s1.size() - s2.size() + 1 + i; ++j)
+//		{
+//			if (s2[i] == s1[j])
+//			{
+//				Func(s1, s2, j + 1, i + 1, cur + 1, ret, num);
+//			}
+//		}
+//	}
+//}
+//
+//int main()
+//{
+//	string s1, s2;
+//	cin >> s1 >> s2;
+//	int ret = s2.size();//最小修改字符，初始假设全都要修改
+//	int begin1 = 0, begin2 = 0;
+//	int num = s2.size();//num为判断是否修改的字符的总数，就是s2的size减去最开始相同的数
+//	for (int i = 0; i < s2.size(); ++i)
+//	{
+//		if (s1[i] == s2[i])
+//		{
+//			begin1 = ++begin2;
+//			--ret;
+//		}
+//		else
+//			break;
+//	}
+//	num = ret;
+//	Func(s1, s2, begin1 + 1, begin2, 0, ret, num);
+//	cout << ret << endl;
+//	return 0;
+//}
+//CCCACABCCC
+//XAABZ
 
-int main()
-{
-    int ret = 0;
-    for (int i = 0; i <= 4; ++i)
-    {
-        int year = 0;
-        cin >> year;
-        int arr[4];
-        for (int j = 0; j < 4; ++j)
-        {
-            arr[j] = year % 10;
-            year /= 10;
-        }
-        if (arr[0] - arr[2] == 1 && arr[1] == arr[3])
-            ++ret;
-    }
-    cout << ret << endl;
-    return 0;
-}
+//P8745 [蓝桥杯 2021 省 AB] 括号序列(未ac，是真不会，题解看了都不会)
