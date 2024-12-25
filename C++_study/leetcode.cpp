@@ -2814,3 +2814,115 @@
 //        return ret;
 //    }
 //};
+
+
+#include<iostream>
+#include<vector>
+#include<unordered_map>
+using namespace std;
+//class Solution {
+//public:
+//    int findNumberOfLIS(vector<int>& nums) {
+//        int n = nums.size();
+//        if (n == 1)
+//            return 1;
+//        vector<int> dp(n, 1);//以i结尾的最长
+//        dp[0] = 1;
+//        dp[1] = nums[1] > nums[0] ? 2 : 1;
+//        pair<int, int> ret;//first为当前最长长度，second为最长长度个数
+//
+//        if (dp[1] == 2)  ret = { 2, 1 };
+//        else if (nums[0] == nums[1]) ret = { 1, 2 };
+//        else ret = { 1, 1 };
+//
+//        for (int i = 2; i < n; ++i)
+//        {
+//            for (int j = i - 1; j >= 0; --j)
+//            {
+//                if (nums[i] > nums[j])
+//                {
+//                    if (dp[j] + 1 >= dp[i])
+//                    {
+//                        dp[i] = dp[j] + 1;
+//                        if (dp[i] > ret.first)
+//                        {
+//                            ret.first = dp[i];
+//                            ret.second = 1;
+//                        }
+//                        else if (dp[i] == ret.first)
+//                            ++ret.second;
+//                    }
+//
+//                }
+//                else if (nums[i] == nums[j])
+//                {
+//                    dp[i] = dp[j];
+//                    if (ret.first == dp[i] && ret.second == i)
+//                    {
+//                        ++ret.second;
+//                        break;
+//                    }
+//                }
+//            }
+//        }
+//
+//        return ret.second;
+//
+//    }
+//};
+class Solution {
+public:
+    int findNumberOfLIS(vector<int>& nums) {
+        int n = nums.size();
+        if (n == 1) return 1;
+        vector<int> dp(n, 1);//以i为结尾的最长子序列长度
+        vector<int> ret(n, 0);//以i为结尾的最长子序列长度的个数
+        dp[0] = 1;
+        dp[1] = nums[1] > nums[0] ? 2 : 1;
+        for (int i = 2; i < n; ++i)
+        {
+            for (int j = i - 1; j >= 0; --j)
+            {
+                if (nums[i] > nums[j])
+                    dp[i] = max(dp[i], dp[j] + 1);
+            }
+        }
+        ret[0] = 1;
+        ret[1] = 1;
+        for (int i = 2; i < n; ++i)
+        {
+            if (dp[i] == 1)
+            {
+                ret[i] = 1;
+                continue;
+            }
+            for (int j = i - 1; j >= 0; --j)
+            {
+                if (nums[i] > nums[j] && dp[j] + 1 == dp[i])
+                    ret[i] += ret[j];
+            }
+        }
+
+        int _len = 0, _max = 0;
+        for (int i = 0; i < n; ++i)
+        {
+            if (dp[i] > _len)
+            {
+                _len = dp[i];
+                _max = ret[i];
+            }
+            else if (dp[i] == _len)
+            {
+                _max += ret[i];
+            }
+        }
+        return _max;
+    }
+};
+int main()
+{
+    Solution s;
+    vector<int> nums = {2,2,2,2,2};
+    cout << s.findNumberOfLIS(nums);
+    return 0;
+}
