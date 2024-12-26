@@ -2815,114 +2815,209 @@
 //    }
 //};
 
-
-#include<iostream>
-#include<vector>
-#include<unordered_map>
-using namespace std;
+//673. 最长递增子序列的个数 
+//#include<iostream>
+//#include<vector>
+//#include<unordered_map>
+//using namespace std;
 //class Solution {
 //public:
 //    int findNumberOfLIS(vector<int>& nums) {
 //        int n = nums.size();
-//        if (n == 1)
-//            return 1;
-//        vector<int> dp(n, 1);//以i结尾的最长
+//        if (n == 1) return 1;
+//        vector<int> dp(n, 1);//以i为结尾的最长子序列长度
+//        vector<int> ret(n, 0);//以i为结尾的最长子序列长度的个数
 //        dp[0] = 1;
 //        dp[1] = nums[1] > nums[0] ? 2 : 1;
-//        pair<int, int> ret;//first为当前最长长度，second为最长长度个数
-//
-//        if (dp[1] == 2)  ret = { 2, 1 };
-//        else if (nums[0] == nums[1]) ret = { 1, 2 };
-//        else ret = { 1, 1 };
-//
 //        for (int i = 2; i < n; ++i)
 //        {
 //            for (int j = i - 1; j >= 0; --j)
 //            {
 //                if (nums[i] > nums[j])
-//                {
-//                    if (dp[j] + 1 >= dp[i])
-//                    {
-//                        dp[i] = dp[j] + 1;
-//                        if (dp[i] > ret.first)
-//                        {
-//                            ret.first = dp[i];
-//                            ret.second = 1;
-//                        }
-//                        else if (dp[i] == ret.first)
-//                            ++ret.second;
-//                    }
-//
-//                }
-//                else if (nums[i] == nums[j])
-//                {
-//                    dp[i] = dp[j];
-//                    if (ret.first == dp[i] && ret.second == i)
-//                    {
-//                        ++ret.second;
-//                        break;
-//                    }
-//                }
+//                    dp[i] = max(dp[i], dp[j] + 1);
+//            }
+//        }
+//        ret[0] = 1;
+//        ret[1] = 1;
+//        for (int i = 2; i < n; ++i)
+//        {
+//            if (dp[i] == 1)
+//            {
+//                ret[i] = 1;
+//                continue;
+//            }
+//            for (int j = i - 1; j >= 0; --j)
+//            {
+//                if (nums[i] > nums[j] && dp[j] + 1 == dp[i])
+//                    ret[i] += ret[j];
 //            }
 //        }
 //
-//        return ret.second;
-//
+//        int _len = 0, _max = 0;
+//        for (int i = 0; i < n; ++i)
+//        {
+//            if (dp[i] > _len)
+//            {
+//                _len = dp[i];
+//                _max = ret[i];
+//            }
+//            else if (dp[i] == _len)
+//            {
+//                _max += ret[i];
+//            }
+//        }
+//        return _max;
 //    }
 //};
+//int main()
+//{
+//    Solution s;
+//    vector<int> nums = {2,2,2,2,2};
+//    cout << s.findNumberOfLIS(nums);
+//    return 0;
+//}
+
+
+
+//646. 最长数对链（dfs超时，但是还是没明白数组长度最多1000，为什么n方会超时）
+//class Solution {
+//public:
+//
+//    void dfs(vector<vector<int>>& pairs, vector<bool>& map, int pre, int cur, int& ret)
+//    {
+//        ret = max(ret, cur);
+//        for (int i = 0; i < pairs.size(); ++i)
+//        {
+//            if (map[i] == false)
+//            {
+//                if (pre < pairs[i][0])
+//                {
+//                    map[i] = true;
+//                    dfs(pairs, map, pairs[i][1], cur + 1, ret);
+//                    map[i] = false;
+//                }
+//            }
+//        }
+//    }
+//    int findLongestChain(vector<vector<int>>& pairs) {
+//        int ret = 0;
+//        vector<bool> map(pairs.size(), false);
+//        dfs(pairs, map, -1001, 0, ret);
+//        return ret;
+//    }
+//
+//};
+// 
+//646. 最长数对链（dp）
+//class Solution {
+//public:
+//    struct compare
+//    {
+//        bool operator()(vector<int>& a, vector<int>& b)
+//        {
+//            return a[0] < b[0];
+//        }
+//    };
+//    int findLongestChain(vector<vector<int>>& pairs) {
+//        auto& v = pairs;
+//        sort(pairs.begin(), pairs.end(), compare());
+//        int n = pairs.size();
+//        if (n == 1) return 1;
+//        vector<int> dp(n, 1);//以i为结尾的最长
+//        dp[0] = 1;
+//        dp[1] = v[0][1] < v[1][0] ? 2 : 1;
+//        for (int i = 2; i < n; ++i)
+//        {
+//            for (int j = 0; j <= i - 1; ++j)
+//            {
+//                if (v[j][1] < v[i][0])
+//                    dp[i] = max(dp[i], dp[j] + 1);
+//            }
+//        }
+//        int ret = 0;
+//        for (int e : dp)
+//            ret = max(ret, e);
+//        return ret;
+//    }
+//
+//};
+
+
+//1218. 最长定差子序列
+//class Solution {
+//public:
+//    int longestSubsequence(vector<int>& arr, int difference) {
+//        int& dif = difference;
+//        int n = arr.size();
+//        if (n == 1) return 1;
+//        int ret = 1;
+//        unordered_map<int, int> dp;//用哈希表作dp，dp为以i为结尾的最长等差子序列
+//        //因为dif确定，所有第i个位置的上个等差数已知，所以将dp放进哈希表，能快速找到目标dp[k]
+//        //first为元素，second为长度
+//        dp.insert({ arr[0], 1 });
+//        for (int i = 1; i < n; ++i)
+//        {
+//            int temp = arr[i] - dif;
+//            if (dp.count(temp))
+//            {
+//                dp[arr[i]] = max(dp[arr[i]], dp[temp] + 1);
+//                ret = max(ret, dp[arr[i]]);
+//            }
+//            else
+//                dp[arr[i]] = 1;
+//        }
+//
+//        return ret;
+//    }
+//};
+
+
+#include<iostream>
+#include<unordered_map>
+#include<vector>
+using namespace std;
+
 class Solution {
 public:
-    int findNumberOfLIS(vector<int>& nums) {
-        int n = nums.size();
-        if (n == 1) return 1;
-        vector<int> dp(n, 1);//以i为结尾的最长子序列长度
-        vector<int> ret(n, 0);//以i为结尾的最长子序列长度的个数
-        dp[0] = 1;
-        dp[1] = nums[1] > nums[0] ? 2 : 1;
+    int lenLongestFibSubseq(vector<int>& arr) {
+        int n = arr.size();
+        vector<vector<int>> dp(n, vector<int>(n, 2));//dp[i][j]是以i和j为结尾的最长，j < i
+        unordered_map<int, int> map;//first为元素，second为对应下标
+        map[arr[0]] = 0;
+        map[arr[1]] = 1;
+        int ret = 0;
+        //1,2,3,4,5,6,7,8
         for (int i = 2; i < n; ++i)
         {
-            for (int j = i - 1; j >= 0; --j)
+            map[arr[i]] = i;
+            for (int j = i - 1; j >= 1; --j)
             {
-                if (nums[i] > nums[j])
-                    dp[i] = max(dp[i], dp[j] + 1);
-            }
-        }
-        ret[0] = 1;
-        ret[1] = 1;
-        for (int i = 2; i < n; ++i)
-        {
-            if (dp[i] == 1)
-            {
-                ret[i] = 1;
-                continue;
-            }
-            for (int j = i - 1; j >= 0; --j)
-            {
-                if (nums[i] > nums[j] && dp[j] + 1 == dp[i])
-                    ret[i] += ret[j];
+                if (arr[j] < arr[i] / 2 + 1) break;
+                int temp1 = arr[i] - arr[j];
+                if (map.count(temp1))
+                {
+                    int temp2 = arr[j] - arr[map[temp1]];
+                    if (map.count(temp2))
+                    {
+                        dp[i][j] = max(dp[i][j], dp[j][map[temp1]] + 1);
+                        ret = max(dp[i][j], ret);
+                    }
+                    else
+                    {
+                        dp[i][j] = max(dp[i][j], 3);
+                        ret = max(dp[i][j], ret);
+                    }
+                }
             }
         }
 
-        int _len = 0, _max = 0;
-        for (int i = 0; i < n; ++i)
-        {
-            if (dp[i] > _len)
-            {
-                _len = dp[i];
-                _max = ret[i];
-            }
-            else if (dp[i] == _len)
-            {
-                _max += ret[i];
-            }
-        }
-        return _max;
+        return ret;
     }
 };
 int main()
 {
     Solution s;
-    vector<int> nums = {2,2,2,2,2};
-    cout << s.findNumberOfLIS(nums);
-    return 0;
+    vector<int> arr = { 1,2,3,4,5,6,7,8 };
+    cout << s.lenLongestFibSubseq(arr);
+	return 0;
 }
