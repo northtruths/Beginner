@@ -2971,53 +2971,194 @@
 //    }
 //};
 
+//873. 最长的斐波那契子序列的长度
+//#include<iostream>
+//#include<unordered_map>
+//#include<vector>
+//using namespace std;
+//
+//class Solution {
+//public:
+//    int lenLongestFibSubseq(vector<int>& arr) {
+//        int n = arr.size();
+//        vector<vector<int>> dp(n, vector<int>(n, 2));//dp[i][j]是以i和j为结尾的最长，j < i
+//        unordered_map<int, int> map;//first为元素，second为对应下标
+//        map[arr[0]] = 0;
+//        map[arr[1]] = 1;
+//        int ret = 0;
+//        //1,2,3,4,5,6,7,8
+//        for (int i = 2; i < n; ++i)
+//        {
+//            map[arr[i]] = i;
+//            for (int j = i - 1; j >= 1; --j)
+//            {
+//                if (arr[j] < arr[i] / 2 + 1) break;
+//                int temp1 = arr[i] - arr[j];
+//                if (map.count(temp1))
+//                {
+//                    int temp2 = arr[j] - arr[map[temp1]];
+//                    if (map.count(temp2))
+//                    {
+//                        dp[i][j] = max(dp[i][j], dp[j][map[temp1]] + 1);
+//                        ret = max(dp[i][j], ret);
+//                    }
+//                    else
+//                    {
+//                        dp[i][j] = max(dp[i][j], 3);
+//                        ret = max(dp[i][j], ret);
+//                    }
+//                }
+//            }
+//        }
+//
+//        return ret;
+//    }
+//};
+//int main()
+//{
+//    Solution s;
+//    vector<int> arr = { 1,2,3,4,5,6,7,8 };
+//    cout << s.lenLongestFibSubseq(arr);
+//	return 0;
+//}
+
+
 
 #include<iostream>
-#include<unordered_map>
 #include<vector>
+#include<unordered_map>
+#include<algorithm>
 using namespace std;
+
+//超时
+//class Solution {
+//public:
+//    int longestArithSeqLength(vector<int>& nums) {
+//        //是中间会有删除的子序列，所以dp为以i为结尾的最长
+//        //因为是等差，所以只需两个元素即可确定 
+//        //dp[i][j]为以i和j为结尾，j < i
+//        int n = nums.size();
+//        vector<vector<int>> dp(n, vector<int>(n, 1));
+//        unordered_multimap<int, int> map;//first为元素，second为对应下标，方便快速找到目标元素
+//        dp[0][0] = 1;
+//        map.insert({ nums[0], 0 });
+//        int ret = 2;
+//        for (int i = 1; i < n; ++i)
+//        {
+//            for (int j = i - 1; j >= 0; --j)
+//            {
+//                int seq = nums[i] - nums[j];
+//                if (map.count(nums[j] - seq))
+//                {
+//                    auto range1 = map.equal_range(nums[j] - seq);
+//                    for(auto it1 = range1.first; it1 != range1.second; ++it1)
+//                    {
+//                        if (it1->second < j && map.count(nums[j] - seq - seq))
+//                        {
+//                            auto range2 = map.equal_range(nums[j] - seq - seq);
+//                            for(auto it2 = range2.first; it2 != range2.second; ++it2)
+//                            {
+//                                if(it2->second < it1->second)
+//                                {
+//                                    dp[i][j] = max(dp[i][j], dp[j][it1->second] + 1);
+//                                    ret = max(ret, dp[i][j]);
+//                                }
+//                                else if(it2->second > it1->second)
+//                                {
+//                                    dp[i][j] = max(dp[i][j], 3);
+//                                    ret = max(ret, dp[i][j]);
+//                                }
+//                            }
+//                        }
+//                        else if(it1->second < j)
+//                        {
+//                            dp[i][j] = max(dp[i][j], 3);
+//                            ret = max(ret, dp[i][j]);
+//                        }
+//                        else if (it1->second > j)
+//                        {
+//                            dp[i][j] = max(dp[i][j], 2);
+//                        }
+//                    }
+//                }
+//                else
+//                {
+//                    dp[i][j] = max(dp[i][j], 2);
+//                }
+//            }
+//            map.insert({ nums[i], i });
+//        }
+//
+//        return ret;
+//    }
+//};
 
 class Solution {
 public:
-    int lenLongestFibSubseq(vector<int>& arr) {
-        int n = arr.size();
-        vector<vector<int>> dp(n, vector<int>(n, 2));//dp[i][j]是以i和j为结尾的最长，j < i
-        unordered_map<int, int> map;//first为元素，second为对应下标
-        map[arr[0]] = 0;
-        map[arr[1]] = 1;
-        int ret = 0;
-        //1,2,3,4,5,6,7,8
+    int longestArithSeqLength(vector<int>& nums) {
+        //是中间会有删除的子序列，所以dp为以i为结尾的最长
+        //因为是等差，所以只需两个元素即可确定 
+        //dp[i][j]为以i和j为结尾，j < i
+        int n = nums.size();
+        vector<vector<int>> dp(n, vector<int>(n, 1));
+        unordered_map<int, int> map;//first为元素，second为对应下标，方便快速找到目标元素
+        dp[0][0] = 1;
+        dp[1][0] = 2;
+        dp[1][1] = 2;
+        map.insert({ nums[0], 0 });
+        map.insert({ nums[1], 1 });
+        int ret = 2;
         for (int i = 2; i < n; ++i)
         {
-            map[arr[i]] = i;
-            for (int j = i - 1; j >= 1; --j)
+            for (int j = i - 1; j >= 0; --j)
             {
-                if (arr[j] < arr[i] / 2 + 1) break;
-                int temp1 = arr[i] - arr[j];
-                if (map.count(temp1))
+                int seq = nums[i] - nums[j];
+                if (map.count(nums[j] - seq) && map[nums[j] - seq] <= j)
                 {
-                    int temp2 = arr[j] - arr[map[temp1]];
-                    if (map.count(temp2))
+                    if (map.count(nums[j] - seq - seq))
                     {
-                        dp[i][j] = max(dp[i][j], dp[j][map[temp1]] + 1);
-                        ret = max(dp[i][j], ret);
+                        if (map[nums[j] - seq - seq] <= map[nums[j] - seq])
+                        {
+                            dp[i][j] = max(dp[i][j], dp[j][map[nums[j] - seq]] + 1);
+                            if (seq == 0)
+                                dp[i][i] = max(dp[i][i], dp[i][j]);
+                            else
+                                dp[i][i] = max(dp[i][i], 2);
+                            ret = max(ret, dp[i][j]);
+                        }
+                        else
+                        {
+                            dp[i][j] = max(dp[i][j], 3);
+                            if (seq == 0)
+                                dp[i][i] = max(dp[i][i], dp[i][j]);
+                            else
+                                dp[i][i] = max(dp[i][i], 2);
+                            ret = max(ret, dp[i][j]);
+                        }
                     }
                     else
                     {
                         dp[i][j] = max(dp[i][j], 3);
-                        ret = max(dp[i][j], ret);
+                        if (seq == 0)
+                            dp[i][i] = max(dp[i][i], dp[i][j]);
+                        else
+                            dp[i][i] = max(dp[i][i], 2);
+                        ret = max(ret, dp[i][j]);
                     }
                 }
             }
+
+            map[nums[i]] = i;
         }
 
         return ret;
     }
 };
+
 int main()
 {
     Solution s;
-    vector<int> arr = { 1,2,3,4,5,6,7,8 };
-    cout << s.lenLongestFibSubseq(arr);
+    vector<int> nums = { 1,1,1,1,1};
+    cout << s.longestArithSeqLength(nums);
 	return 0;
 }
