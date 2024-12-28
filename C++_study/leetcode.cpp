@@ -3023,12 +3023,12 @@
 //}
 
 
-
-#include<iostream>
-#include<vector>
-#include<unordered_map>
-#include<algorithm>
-using namespace std;
+//1027. 最长等差数列（未ac）
+//#include<iostream>
+//#include<vector>
+//#include<unordered_map>
+//#include<algorithm>
+//using namespace std;
 
 //超时
 //class Solution {
@@ -3093,72 +3093,138 @@ using namespace std;
 //    }
 //};
 
+//class Solution {
+//public:
+//    int longestArithSeqLength(vector<int>& nums) {
+//        //是中间会有删除的子序列，所以dp为以i为结尾的最长
+//        //因为是等差，所以只需两个元素即可确定 
+//        //dp[i][j]为以i和j为结尾，j < i
+//        int n = nums.size();
+//        vector<vector<int>> dp(n, vector<int>(n, 1));
+//        unordered_map<int, int> map;//first为元素，second为对应下标，方便快速找到目标元素
+//        dp[0][0] = 1;
+//        dp[1][0] = 2;
+//        dp[1][1] = 2;
+//        map.insert({ nums[0], 0 });
+//        map.insert({ nums[1], 1 });
+//        int ret = 2;
+//        for (int i = 2; i < n; ++i)
+//        {
+//            for (int j = i - 1; j >= 0; --j)
+//            {
+//                int seq = nums[i] - nums[j];
+//                if (map.count(nums[j] - seq) && map[nums[j] - seq] <= j)
+//                {
+//                    if (map.count(nums[j] - seq - seq))
+//                    {
+//                        if (map[nums[j] - seq - seq] <= map[nums[j] - seq])
+//                        {
+//                            dp[i][j] = max(dp[i][j], dp[j][map[nums[j] - seq]] + 1);
+//                            if (seq == 0)
+//                                dp[i][i] = max(dp[i][i], dp[i][j]);
+//                            else
+//                                dp[i][i] = max(dp[i][i], 2);
+//                            ret = max(ret, dp[i][j]);
+//                        }
+//                        else
+//                        {
+//                            dp[i][j] = max(dp[i][j], 3);
+//                            if (seq == 0)
+//                                dp[i][i] = max(dp[i][i], dp[i][j]);
+//                            else
+//                                dp[i][i] = max(dp[i][i], 2);
+//                            ret = max(ret, dp[i][j]);
+//                        }
+//                    }
+//                    else
+//                    {
+//                        dp[i][j] = max(dp[i][j], 3);
+//                        if (seq == 0)
+//                            dp[i][i] = max(dp[i][i], dp[i][j]);
+//                        else
+//                            dp[i][i] = max(dp[i][i], 2);
+//                        ret = max(ret, dp[i][j]);
+//                    }
+//                }
+//            }
+//
+//            map[nums[i]] = i;
+//        }
+//
+//        return ret;
+//    }
+//};
+//
+// 
+// //转变题解思路，过
+// class Solution {
+//public:
+//    int longestArithSeqLength(vector<int>& nums) {
+//        int n = nums.size();
+//        vector<vector<int>> dp(n, vector<int>(n, 2));//dp[i][j]为以ij为末尾的最长目标，i < j
+//        unordered_map<int, int> hash;//first为元素，second为下标
+//        hash.insert({ nums[0], 0 });
+//        int ret = 2;
+//        for (int i = 1; i < n; ++i)
+//        {
+//            for (int j = i + 1; j < n; ++j)
+//            {
+//                int seq = nums[j] - nums[i];
+//                if (hash.count(nums[i] - seq))
+//                {
+//                    dp[i][j] = max(dp[i][j], dp[hash[nums[i] - seq]][i] + 1);
+//                    ret = max(ret, dp[i][j]);
+//                }
+//            }
+//            hash[nums[i]] = i;
+//        }
+//        return ret;
+//    }
+//};
+//int main()
+//{
+//    Solution s;
+//    vector<int> nums = { 1,1,1,1,1};
+//    cout << s.longestArithSeqLength(nums);
+//	return 0;
+//}
+
+#include<iostream>
+#include<vector>
+#include<unordered_map>
+using namespace std;
+
 class Solution {
 public:
-    int longestArithSeqLength(vector<int>& nums) {
-        //是中间会有删除的子序列，所以dp为以i为结尾的最长
-        //因为是等差，所以只需两个元素即可确定 
-        //dp[i][j]为以i和j为结尾，j < i
-        int n = nums.size();
-        vector<vector<int>> dp(n, vector<int>(n, 1));
-        unordered_map<int, int> map;//first为元素，second为对应下标，方便快速找到目标元素
-        dp[0][0] = 1;
-        dp[1][0] = 2;
-        dp[1][1] = 2;
-        map.insert({ nums[0], 0 });
-        map.insert({ nums[1], 1 });
-        int ret = 2;
-        for (int i = 2; i < n; ++i)
+    int numberOfArithmeticSlices(vector<int>& nums) {
+        long long n = nums.size();
+        vector<vector<long long>> dp(n, vector<long long>(n, 0));//以ij结尾的最长等差子序列，因为ij一直往后走，所以每更新一次，对应dp就要增加
+        unordered_map<long long, vector<long long>> hash;//first为元素，second为对应下标，新的元素下标会覆盖旧的
+        hash[nums[0]].push_back(0);
+        long long ret = 0;
+        for (long long i = 1; i < n; ++i)
         {
-            for (int j = i - 1; j >= 0; --j)
+            for (long long j = i + 1; j < n; ++j)
             {
-                int seq = nums[i] - nums[j];
-                if (map.count(nums[j] - seq) && map[nums[j] - seq] <= j)
+                long long seq = nums[j] - nums[i];
+                if (hash.count(nums[i] - seq))
                 {
-                    if (map.count(nums[j] - seq - seq))
+                    for (long long k : hash[nums[i] - seq])
                     {
-                        if (map[nums[j] - seq - seq] <= map[nums[j] - seq])
-                        {
-                            dp[i][j] = max(dp[i][j], dp[j][map[nums[j] - seq]] + 1);
-                            if (seq == 0)
-                                dp[i][i] = max(dp[i][i], dp[i][j]);
-                            else
-                                dp[i][i] = max(dp[i][i], 2);
-                            ret = max(ret, dp[i][j]);
-                        }
-                        else
-                        {
-                            dp[i][j] = max(dp[i][j], 3);
-                            if (seq == 0)
-                                dp[i][i] = max(dp[i][i], dp[i][j]);
-                            else
-                                dp[i][i] = max(dp[i][i], 2);
-                            ret = max(ret, dp[i][j]);
-                        }
+                        dp[i][j] += dp[k][i] + 1;
                     }
-                    else
-                    {
-                        dp[i][j] = max(dp[i][j], 3);
-                        if (seq == 0)
-                            dp[i][i] = max(dp[i][i], dp[i][j]);
-                        else
-                            dp[i][i] = max(dp[i][i], 2);
-                        ret = max(ret, dp[i][j]);
-                    }
+                    ret += dp[i][j];
                 }
             }
-
-            map[nums[i]] = i;
+            hash[nums[i]].push_back(i);
         }
-
         return ret;
     }
 };
-
 int main()
 {
     Solution s;
-    vector<int> nums = { 1,1,1,1,1};
-    cout << s.longestArithSeqLength(nums);
+    vector<int> v = { 7,7,7,7,7 };
+    cout << s.numberOfArithmeticSlices(v);
 	return 0;
 }
