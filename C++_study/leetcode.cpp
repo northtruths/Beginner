@@ -3189,6 +3189,92 @@
 //	return 0;
 //}
 
+
+//446. 等差数列划分 II - 子序列
+//#include<iostream>
+//#include<vector>
+//#include<unordered_map>
+//using namespace std;
+//
+//class Solution {
+//public:
+//    int numberOfArithmeticSlices(vector<int>& nums) {
+//        long long n = nums.size();
+//        vector<vector<long long>> dp(n, vector<long long>(n, 0));//以ij结尾的最长等差子序列，因为ij一直往后走，所以每更新一次，对应dp就要增加
+//        unordered_map<long long, vector<long long>> hash;//first为元素，second为对应下标，新的元素下标会覆盖旧的
+//        hash[nums[0]].push_back(0);
+//        long long ret = 0;
+//        for (long long i = 1; i < n; ++i)
+//        {
+//            for (long long j = i + 1; j < n; ++j)
+//            {
+//                long long seq = (long long)nums[j] - nums[i];
+//                if (hash.count(nums[i] - seq))
+//                {
+//                    for (long long k : hash[nums[i] - seq])
+//                    {
+//                        dp[i][j] += dp[k][i] + 1;
+//                    }
+//                    ret += dp[i][j];
+//                }
+//            }
+//            hash[nums[i]].push_back(i);
+//        }
+//        return ret;
+//    }
+//};
+//int main()
+//{
+//    Solution s;
+//    vector<int> v = { 7,7,7,7,7 };
+//    cout << s.numberOfArithmeticSlices(v);
+//	return 0;
+//}
+
+
+//647. 回文子串
+//#include<iostream>
+//#include<string>
+//#include<vector>
+//#include<unordered_map>
+//using namespace std;
+//
+//class Solution {
+//public:
+//    int countSubstrings(string s) {
+//        //dp[i][j]判断以i、j为头尾的字符串是否为回文，i <= j
+//        //用一个哈希将所有元素与对应下标存起来
+//        //若s[i] == s[j] 并且dp[i + 1][j - 1]是回文，则dp[i][j]是回文
+//        int n = s.size();
+//        vector<vector<bool>> dp(n, vector<bool>(n, false));
+//        unordered_map<char, vector<int>> hash;//first为元素，second为下标
+//        int ret = 0;
+//        for (int j = 0; j < n; ++j)
+//        {
+//            hash[s[j]].push_back(j);
+//            dp[j][j] = true;
+//            for (int i : hash[s[j]])
+//            {
+//                //如果i==j,i + 1 == j,i + 1 == j - 1则直接为回文
+//                if (i == j || i + 1 == j || i + 1 == j - 1)
+//                {
+//                    dp[i][j] = true;
+//                    ++ret;
+//                }
+//                else if (dp[i + 1][j - 1])
+//                {
+//                    dp[i][j] = true;
+//                    ++ret;
+//                }
+//            }
+//        }
+//
+//        return ret;
+//    }
+//};
+
+
+#include<string>
 #include<iostream>
 #include<vector>
 #include<unordered_map>
@@ -3196,35 +3282,63 @@ using namespace std;
 
 class Solution {
 public:
-    int numberOfArithmeticSlices(vector<int>& nums) {
-        long long n = nums.size();
-        vector<vector<long long>> dp(n, vector<long long>(n, 0));//以ij结尾的最长等差子序列，因为ij一直往后走，所以每更新一次，对应dp就要增加
-        unordered_map<long long, vector<long long>> hash;//first为元素，second为对应下标，新的元素下标会覆盖旧的
-        hash[nums[0]].push_back(0);
-        long long ret = 0;
-        for (long long i = 1; i < n; ++i)
+    string longestPalindrome(string s) {
+        //dp[i][j]判断以i、j为头尾的字符串是否为回文，i <= j
+       //用一个哈希将所有元素与对应下标存起来
+       //若s[i] == s[j] 并且dp[i + 1][j - 1]是回文，则dp[i][j]是回文
+        int n = s.size();
+        vector<vector<bool>> dp(n, vector<bool>(n, false));
+        vector<vector<int>> l_dp(n, vector<int>(n, 1));//以i、j为首尾的最长
+        unordered_map<char, vector<int>> hash;//first为元素，second为下标
+        pair<int, int> ret{ 0, 0 };//最长回文头尾下标
+        for (int j = 0; j < n; ++j)
         {
-            for (long long j = i + 1; j < n; ++j)
+            hash[s[j]].push_back(j);
+            dp[j][j] = true;
+            for (int i : hash[s[j]])
             {
-                long long seq = nums[j] - nums[i];
-                if (hash.count(nums[i] - seq))
+                //如果i==j,i + 1 == j,i + 1 == j - 1则直接为回文
+                if (i == j || i + 1 == j)
                 {
-                    for (long long k : hash[nums[i] - seq])
+                    dp[i][j] = true;
+                    if (i != j)
                     {
-                        dp[i][j] += dp[k][i] + 1;
+                        if (l_dp[i][j] < 2)
+                        {
+                            l_dp[i][j] = 2;
+                            if(j - i > ret.second - ret.first)
+                            {
+                                ret.first = i;
+                                ret.second = j;
+                            }
+                        }
                     }
-                    ret += dp[i][j];
+                }
+                else if (dp[i + 1][j - 1])
+                {
+                    dp[i][j] = true;
+                    if (l_dp[i][j] <= l_dp[i + 1][j - 1] + 2)
+                    {
+                        l_dp[i][j] = l_dp[i + 1][j - 1] + 2;
+                        if (j - i > ret.second - ret.first)
+                        {
+                            ret.first = i;
+                            ret.second = j;
+                        }
+                    }
                 }
             }
-            hash[nums[i]].push_back(i);
         }
-        return ret;
+
+        return s.substr(ret.first, ret.second - ret.first + 1);
     }
+
 };
+
 int main()
 {
-    Solution s;
-    vector<int> v = { 7,7,7,7,7 };
-    cout << s.numberOfArithmeticSlices(v);
+	string s = "ccc";
+    Solution t;
+    cout << t.longestPalindrome(s);
 	return 0;
 }
