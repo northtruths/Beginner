@@ -3274,71 +3274,242 @@
 //};
 
 
-#include<string>
+
+//5. 最长回文子串
+//#include<string>
+//#include<iostream>
+//#include<vector>
+//#include<unordered_map>
+//using namespace std;
+//
+//class Solution {
+//public:
+//    string longestPalindrome(string s) {
+//        //dp[i][j]判断以i、j为头尾的字符串是否为回文，i <= j
+//       //用一个哈希将所有元素与对应下标存起来
+//       //若s[i] == s[j] 并且dp[i + 1][j - 1]是回文，则dp[i][j]是回文
+//        int n = s.size();
+//        vector<vector<bool>> dp(n, vector<bool>(n, false));
+//        vector<vector<int>> l_dp(n, vector<int>(n, 1));//以i、j为首尾的最长
+//        unordered_map<char, vector<int>> hash;//first为元素，second为下标
+//        pair<int, int> ret{ 0, 0 };//最长回文头尾下标
+//        for (int j = 0; j < n; ++j)
+//        {
+//            hash[s[j]].push_back(j);
+//            dp[j][j] = true;
+//            for (int i : hash[s[j]])
+//            {
+//                //如果i==j,i + 1 == j,i + 1 == j - 1则直接为回文
+//                if (i == j || i + 1 == j)
+//                {
+//                    dp[i][j] = true;
+//                    if (i != j)
+//                    {
+//                        if (l_dp[i][j] < 2)
+//                        {
+//                            l_dp[i][j] = 2;
+//                            if(j - i > ret.second - ret.first)
+//                            {
+//                                ret.first = i;
+//                                ret.second = j;
+//                            }
+//                        }
+//                    }
+//                }
+//                else if (dp[i + 1][j - 1])
+//                {
+//                    dp[i][j] = true;
+//                    if (l_dp[i][j] <= l_dp[i + 1][j - 1] + 2)
+//                    {
+//                        l_dp[i][j] = l_dp[i + 1][j - 1] + 2;
+//                        if (j - i > ret.second - ret.first)
+//                        {
+//                            ret.first = i;
+//                            ret.second = j;
+//                        }
+//                    }
+//                }
+//            }
+//        }
+//
+//        return s.substr(ret.first, ret.second - ret.first + 1);
+//    }
+//
+//};
+//
+//int main()
+//{
+//	string s = "ccc";
+//    Solution t;
+//    cout << t.longestPalindrome(s);
+//	return 0;
+//}
+
+
+//1745. 分割回文串 IV
+//#include<iostream>
+//#include<vector>
+//#include<string>
+//#include<unordered_map>
+//using namespace std;
+//
+//class Solution {
+//public:
+//    bool checkPartitioning(string s) {
+//        //dp[i][j]为首尾为ij的字符串是否为回文，i < j
+//        //hash存储元素与对应下标，优化时间
+//        //最后将元素分为三部分，判断
+//        int n = s.size();
+//        vector<vector<bool>> dp(n, vector<bool>(n, false));
+//        unordered_map<char, vector<int>> hash;//first为元素，second为下标
+//        for (int j = 0; j < n; ++j)
+//        {
+//            hash[s[j]].push_back(j);
+//            for (int i : hash[s[j]])
+//            {
+//                if (i == j || i + 1 == j)
+//                    dp[i][j] = true;
+//                else
+//                    dp[i][j] = dp[i + 1][j - 1];
+//            }
+//        }
+//        //三回文串下标为：[0][i] - [i + 1][j] - [j + 1][n - 1]
+//        for (int i : hash[s[0]])
+//        {
+//            if (dp[0][i])//第一段是回文
+//            {
+//                for (int j : hash[s[i + 1]])
+//                {
+//                    if (j < i + 1 || j + 1 > n - 1)
+//                        continue;
+//                    if (dp[i + 1][j])//第二段是回文
+//                    {
+//                        if (dp[j + 1][n - 1])//最后一段是回文
+//                            return true;
+//                    }
+//                }
+//            }
+//        }
+//        return false;
+//    }
+//};
+
+
+
 #include<iostream>
 #include<vector>
+#include<string>
 #include<unordered_map>
+#include<algorithm>
 using namespace std;
+
+//超时，但思路基本和题解一样，不过我最初用的递归，dp就能过
+//class Solution {
+//public:
+//
+//    void Func(string& s, vector<vector<bool>>& dp, unordered_map<char, vector<int>>& hash, int& ret, int cur = 0, int begin = 0)
+//    {
+//        if (begin >= s.size())
+//            return;
+//        vector<int>& v = hash[s[begin]];
+//        for (int& k : v)
+//        {
+//            if (k < begin)
+//                break;
+//            if (dp[begin][k])
+//            {
+//                if (k == s.size() - 1)
+//                {
+//                    ret = min(ret, cur);
+//                    return;
+//                }
+//                if (begin <= 200)
+//                    int a = 0;
+//                Func(s, dp, hash, ret, cur + 1, k + 1);
+//            }
+//        }
+//    }
+//    int minCut(string s) {
+//        //dp[i][j]为首尾为ij的字符串是否为回文，i < j
+//        //hash存储元素与对应下标，优化时间
+//        //判断0~n-1（i）是否为回文（i为从大到小下标），是则递归i+1 ~ n-1，不是则--i
+//        //递归函数可以用hash和dp直接判断去找回文，不用再所有遍历
+//        int n = s.size();
+//        vector<vector<bool>> dp(n, vector<bool>(n, false));
+//        unordered_map<char, vector<int>> hash;//first为元素，second为下标
+//        for (int j = 0; j < n; ++j)
+//        {
+//            hash[s[j]].push_back(j);
+//            for (int i : hash[s[j]])
+//            {
+//                if (i == j || i + 1 == j)
+//                    dp[i][j] = true;
+//                else
+//                    dp[i][j] = dp[i + 1][j - 1];
+//            }
+//        }
+//        for (auto& e : hash)
+//            sort(e.second.rbegin(), e.second.rend());
+//        int ret = INT_MAX;
+//        Func(s, dp, hash, ret);
+//        return ret;
+//    }
+//};
 
 class Solution {
 public:
-    string longestPalindrome(string s) {
-        //dp[i][j]判断以i、j为头尾的字符串是否为回文，i <= j
-       //用一个哈希将所有元素与对应下标存起来
-       //若s[i] == s[j] 并且dp[i + 1][j - 1]是回文，则dp[i][j]是回文
+
+    int minCut(string s) {
+        //dp[i][j]为首尾为ij的字符串是否为回文，i < j
+        //hash存储元素与对应下标，优化时间
+        //判断0~n-1（i）是否为回文（i为从大到小下标），是则递归i+1 ~ n-1，不是则--i
+        //递归函数可以用hash和dp直接判断去找回文，不用再所有遍历
         int n = s.size();
         vector<vector<bool>> dp(n, vector<bool>(n, false));
-        vector<vector<int>> l_dp(n, vector<int>(n, 1));//以i、j为首尾的最长
         unordered_map<char, vector<int>> hash;//first为元素，second为下标
-        pair<int, int> ret{ 0, 0 };//最长回文头尾下标
         for (int j = 0; j < n; ++j)
         {
             hash[s[j]].push_back(j);
-            dp[j][j] = true;
             for (int i : hash[s[j]])
             {
-                //如果i==j,i + 1 == j,i + 1 == j - 1则直接为回文
                 if (i == j || i + 1 == j)
-                {
                     dp[i][j] = true;
-                    if (i != j)
-                    {
-                        if (l_dp[i][j] < 2)
-                        {
-                            l_dp[i][j] = 2;
-                            if(j - i > ret.second - ret.first)
-                            {
-                                ret.first = i;
-                                ret.second = j;
-                            }
-                        }
-                    }
+                else
+                    dp[i][j] = dp[i + 1][j - 1];
+            }
+        }
+        for (auto& e : hash)
+            sort(e.second.begin(), e.second.end());
+        vector<int> ret(n);//dp_ret，以0~i的最少次数
+        for (int i = 0; i < n; ++i)
+            ret[i] = i;
+        ret[0] = 0;
+        //把0~i的ret分为0 - j - i，若遍历dp[j][i],若为回文，ret[i] = ret[j - 1] + 1;
+        for (int i = 1; i < n; ++i)
+        {
+            for (int j : hash[s[i]])
+            {
+                if (j == 0 && dp[j][i])
+                {
+                    dp[j][i] = 0;
+                    break;
                 }
-                else if (dp[i + 1][j - 1])
+                if (j > i)
+                    break;
+                if (dp[j][i])
                 {
-                    dp[i][j] = true;
-                    if (l_dp[i][j] <= l_dp[i + 1][j - 1] + 2)
-                    {
-                        l_dp[i][j] = l_dp[i + 1][j - 1] + 2;
-                        if (j - i > ret.second - ret.first)
-                        {
-                            ret.first = i;
-                            ret.second = j;
-                        }
-                    }
+                    ret[i] = min(ret[i], ret[j - 1] + 1);
                 }
             }
         }
-
-        return s.substr(ret.first, ret.second - ret.first + 1);
+        return ret[n - 1];
     }
-
 };
-
 int main()
 {
-	string s = "ccc";
+    string s = "aab";
+    cout << "size:" << s.size() << endl;
     Solution t;
-    cout << t.longestPalindrome(s);
-	return 0;
+    cout << t.minCut(s);
+    return 0;
 }
