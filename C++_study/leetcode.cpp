@@ -3396,13 +3396,14 @@
 
 
 
-#include<iostream>
-#include<vector>
-#include<string>
-#include<unordered_map>
-#include<algorithm>
-using namespace std;
-
+//132. 分割回文串 II
+//#include<iostream>
+//#include<vector>
+//#include<string>
+//#include<unordered_map>
+//#include<algorithm>
+//using namespace std;
+//
 //超时，但思路基本和题解一样，不过我最初用的递归，dp就能过
 //class Solution {
 //public:
@@ -3455,61 +3456,182 @@ using namespace std;
 //        return ret;
 //    }
 //};
+//
+//class Solution {
+//public:
+//
+//    int minCut(string s) {
+//        //dp[i][j]为首尾为ij的字符串是否为回文，i < j
+//        //hash存储元素与对应下标，优化时间
+//        //判断0~n-1（i）是否为回文（i为从大到小下标），是则递归i+1 ~ n-1，不是则--i
+//        //递归函数可以用hash和dp直接判断去找回文，不用再所有遍历
+//        int n = s.size();
+//        vector<vector<bool>> dp(n, vector<bool>(n, false));
+//        unordered_map<char, vector<int>> hash;//first为元素，second为下标
+//        for (int j = 0; j < n; ++j)
+//        {
+//            hash[s[j]].push_back(j);
+//            for (int i : hash[s[j]])
+//            {
+//                if (i == j || i + 1 == j)
+//                    dp[i][j] = true;
+//                else
+//                    dp[i][j] = dp[i + 1][j - 1];
+//            }
+//        }
+//        for (auto& e : hash)
+//            sort(e.second.begin(), e.second.end());
+//        vector<int> ret(n);//dp_ret，以0~i的最少次数
+//        for (int i = 0; i < n; ++i)
+//            ret[i] = i;
+//        ret[0] = 0;
+//        //把0~i的ret分为0 - j - i，若遍历dp[j][i],若为回文，ret[i] = ret[j - 1] + 1;
+//        for (int i = 1; i < n; ++i)
+//        {
+//            for (int j : hash[s[i]])
+//            {
+//                if (j == 0 && dp[j][i])
+//                {
+//                    ret[i] = 0;
+//                    break;
+//                }
+//                if (j > i)
+//                    break;
+//                if (dp[j][i])
+//                {
+//                    ret[i] = min(ret[i], ret[j - 1] + 1);
+//                }
+//            }
+//        }
+//        return ret[n - 1];
+//    }
+//};
+//int main()
+//{
+//    string s = "aab";
+//    cout << "size:" << s.size() << endl;
+//    Solution t;
+//    cout << t.minCut(s);
+//    return 0;
+//}
+
+
+//516. 最长回文子序列
+//#include<iostream>
+//#include<string>
+//#include<vector>
+//using namespace std;
+//
+//class Solution {
+//public:
+//    int longestPalindromeSubseq(string s) {
+//        //dp[i][j]为以i到j的字符串的最长回文子序列的长度
+//        //如果i == j，dp[i][j] = dp[i + 1][j - 1] + 2,否则d[i][j] = dp[i + 1][j - 1]
+//        int n = s.size();
+//        if (n == 1)  return 1;
+//        vector<vector<int>> dp(n, vector<int>(n));
+//        dp[0][0] = 1;
+//        dp[1][1] = 1;
+//        dp[0][1] = s[0] == s[1] ? 2 : 1;
+//        int ret = max(dp[0][0], dp[0][1]);
+//        for (int j = 2; j < n; ++j)
+//        {
+//            for (int i = j; i >= 0; --i)
+//            {
+//                if (i == j)
+//                    dp[i][j] = 1;
+//                else if (i + 1 == j)
+//                {
+//                    dp[i][j] = s[i] == s[j] ? 2 : 1;
+//                    ret = max(ret, dp[i][j]);
+//                }
+//                else if (s[i] == s[j])
+//                {
+//                    dp[i][j] = dp[i + 1][j - 1] + 2;
+//                    ret = max(ret, dp[i][j]);
+//                }
+//                else
+//                {
+//
+//                    dp[i][j] = max(dp[i][j - 1], dp[i + 1][j]);
+//                    ret = max(ret, dp[i][j]);
+//                }
+//            }
+//        }
+//
+//        return ret;
+//
+//    }
+//};
+//
+//int main()
+//{
+//    Solution t;
+//    string s = "bbbab";
+//    cout << t.longestPalindromeSubseq(s);
+//    return 0;
+//}
+
+
+
+#include<iostream>
+#include<vector>
+#include<string>
+#include<algorithm>
+using namespace std;
 
 class Solution {
 public:
-
-    int minCut(string s) {
-        //dp[i][j]为首尾为ij的字符串是否为回文，i < j
-        //hash存储元素与对应下标，优化时间
-        //判断0~n-1（i）是否为回文（i为从大到小下标），是则递归i+1 ~ n-1，不是则--i
-        //递归函数可以用hash和dp直接判断去找回文，不用再所有遍历
+    string& process(string& s)
+    {
+        vector<int> v;
         int n = s.size();
-        vector<vector<bool>> dp(n, vector<bool>(n, false));
-        unordered_map<char, vector<int>> hash;//first为元素，second为下标
-        for (int j = 0; j < n; ++j)
+        int left = 0, right = n - 1;
+        //v里面存要删除的下标
+        while (left < right)
         {
-            hash[s[j]].push_back(j);
-            for (int i : hash[s[j]])
+            if (s[left] == s[right])
             {
-                if (i == j || i + 1 == j)
-                    dp[i][j] = true;
-                else
-                    dp[i][j] = dp[i + 1][j - 1];
+                v.push_back(left);
+                v.push_back(right);
             }
+            ++left;
+            --right;
         }
-        for (auto& e : hash)
-            sort(e.second.begin(), e.second.end());
-        vector<int> ret(n);//dp_ret，以0~i的最少次数
+        if (v.empty())
+            return s;
+        string temp;
+        sort(v.begin(), v.end());
+        int j = 0;//v的下标,按顺序存下删除的下标
         for (int i = 0; i < n; ++i)
-            ret[i] = i;
-        ret[0] = 0;
-        //把0~i的ret分为0 - j - i，若遍历dp[j][i],若为回文，ret[i] = ret[j - 1] + 1;
-        for (int i = 1; i < n; ++i)
         {
-            for (int j : hash[s[i]])
-            {
-                if (j == 0 && dp[j][i])
-                {
-                    dp[j][i] = 0;
-                    break;
-                }
-                if (j > i)
-                    break;
-                if (dp[j][i])
-                {
-                    ret[i] = min(ret[i], ret[j - 1] + 1);
-                }
-            }
+            if (j < v.size() && i == v[j])
+                ++j;
+            else
+                temp += s[i];
         }
-        return ret[n - 1];
+        swap(temp, s);
+        return s;
+    }
+
+    int minInsertions(string s) {
+        int ret = 0;
+        if (s.size() % 2 == 1)
+            --ret;
+
+        while (!process(s).empty())
+        {
+            ++ret;
+            s.erase(0, 1);
+        }
+        return ret;
     }
 };
+
 int main()
 {
-    string s = "aab";
-    cout << "size:" << s.size() << endl;
     Solution t;
-    cout << t.minCut(s);
+    string s = "leetcode";
+    cout << t.minInsertions(s);
     return 0;
 }
