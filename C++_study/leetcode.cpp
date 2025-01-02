@@ -3573,65 +3573,168 @@
 //}
 
 
+//1312. 让字符串成为回文串的最少插入次数
+//#include<iostream>
+//#include<vector>
+//#include<string>
+//#include<algorithm>
+//using namespace std;
+//
+//class Solution {
+//public:
+//    int minInsertions(string s) {
+//        //dp[i][j]为以i、j为范围的字符串的最少插入次数，i < j
+//        //
+//        int n = s.size();
+//        vector<vector<int>> dp(n, vector<int>(n));
+//        // dp[0][0] = 0;
+//        // dp[0][1] = s[0] == s[1] ? 0 : 1:
+//        for (int j = 0; j < n; ++j)
+//        {
+//            for (int i = j; i >= 0; --i)
+//            {
+//                if (i == j)
+//                    dp[i][j] = 0;
+//                else if (i + 1 == j)
+//                    dp[i][j] = s[i] == s[j] ? 0 : 1;
+//                else if (s[i] == s[j])
+//                    dp[i][j] = dp[i + 1][j - 1];
+//                else
+//                    dp[i][j] = min(dp[i + 1][j] + 1, dp[i][j - 1] + 1);
+//            }
+//        }
+//        return dp[0][n - 1];
+//    }
+//};
+//
+//int main()
+//{
+//    Solution t;
+//    string s = "leetcode";
+//    cout << t.minInsertions(s);
+//    return 0;
+//}
+
+
+//1143. 最长公共子序列
+//#include<iostream>
+//#include<vector>
+//#include<string>
+//using namespace std;
+//
+//class Solution {
+//public:
+//    int longestCommonSubsequence(string text1, string text2) {
+//        //dp[i][j]是t1以i结尾，t2以j结尾的最长公共子序列长度
+//        //如果 t1[i] == t2[j]，dp[i][j]为dp[m][n] + 1, m <= i && n < j 或者m < i && n <= j，dp[m][m]为之前所有的最大
+//        //否则，dp[i][j] = 0
+//        string& t1 = text1;
+//        string& t2 = text2;
+//        int m = text1.size();
+//        int n = text2.size();
+//        vector<vector<int>> dp(m, vector<int>(n, 0));
+//        //record记录dp[i][j]及之前的最大
+//        vector<vector<int>> record(m + 1, vector<int>(n + 1, 0));
+//        int ret = 0;
+//        for (int i = 0; i < m; ++i)
+//        {
+//            for (int j = 0; j < n; ++j)
+//            {
+//                if (i == 0 || j == 0)
+//                {
+//                    dp[i][j] = t1[i] == t2[j] ? 1 : 0;
+//                    if (i == 0 && j == 0)
+//                        record[i][j] = dp[i][j];
+//                    else if (i == 0)
+//                        record[i][j] = max(dp[i][j], record[i][j - 1]);
+//                    else
+//                        record[i][j] = max(dp[i][j], record[i - 1][j]);
+//
+//                    ret = max(ret, dp[i][j]);
+//                }
+//                else
+//                {
+//                    if (t1[i] == t2[j])
+//                    {
+//                        dp[i][j] = record[i - 1][j - 1] + 1;
+//                        ret = max(ret, dp[i][j]);
+//                    }
+//                    else
+//                        dp[i][j] = 0;
+//                    record[i - 1][j] = max(record[i - 1][j], max(dp[i - 1][j], record[i - 1][j - 1]));
+//                    record[i][j - 1] = max(record[i][j - 1], max(dp[i][j - 1], record[i - 1][j - 1]));
+//                    record[i][j] = max(dp[i][j], max(record[i - 1][j], record[i][j - 1]));
+//                }
+//            }
+//        }
+//
+//        return ret;
+//    }
+//};
+//
+//int main()
+//{
+//    Solution t;
+//    string s1 = "abcde";
+//    string s2 = "ace";
+//    cout << t.longestCommonSubsequence(s1, s2);
+//    return 0;
+//}
+
+
+
 
 #include<iostream>
 #include<vector>
-#include<string>
-#include<algorithm>
-using namespace std;
+using  namespace std;
 
 class Solution {
 public:
-    string& process(string& s)
-    {
-        vector<int> v;
-        int n = s.size();
-        int left = 0, right = n - 1;
-        //v里面存要删除的下标
-        while (left < right)
-        {
-            if (s[left] == s[right])
-            {
-                v.push_back(left);
-                v.push_back(right);
-            }
-            ++left;
-            --right;
-        }
-        if (v.empty())
-            return s;
-        string temp;
-        sort(v.begin(), v.end());
-        int j = 0;//v的下标,按顺序存下删除的下标
-        for (int i = 0; i < n; ++i)
-        {
-            if (j < v.size() && i == v[j])
-                ++j;
-            else
-                temp += s[i];
-        }
-        swap(temp, s);
-        return s;
-    }
-
-    int minInsertions(string s) {
+    int maxUncrossedLines(vector<int>& nums1, vector<int>& nums2) {
+        //dp[i][j]是以0~i、j的最大
+        //nums1[i] == nums2[j]则，dp[i][j] = dp[i - 1][j - 1] + 1;
+        //否则，取前面或当前与前面交叉的最大
+        int n1 = nums1.size();
+        int n2 = nums2.size();
+        vector<vector<int>> dp(n1, vector<int>(n2, 0));
         int ret = 0;
-        if (s.size() % 2 == 1)
-            --ret;
-
-        while (!process(s).empty())
+        for (int i = 0; i < n1; ++i)
         {
-            ++ret;
-            s.erase(0, 1);
+            for (int j = 0; j < n2; ++j)
+            {
+                if (i == 0 || j == 0)
+                {
+                    int temp = nums1[i] == nums2[j] ? 1 : 0;
+                    if (i == 0 && j == 0)
+                        dp[i][j] = temp;
+                    else if (i == 0)
+                        dp[i][j] = max(temp, dp[i][j - 1]);
+                    else
+                        dp[i][j] = max(temp, dp[i - 1][j]);
+                    ret = max(ret, dp[i][j]);
+                }
+                else if (nums1[i] == nums2[j])
+                {
+                    dp[i][j] = dp[i - 1][j - 1] + 1;
+                    ret = max(ret, dp[i][j]);
+                }
+                else
+                {
+                    dp[i][j] = max(dp[i - 1][j - 1], max(dp[i - 1][j], dp[i][j - 1]));
+                    ret = max(ret, dp[i][j]);
+                }
+            }
         }
+
         return ret;
     }
 };
 
 int main()
 {
-    Solution t;
-    string s = "leetcode";
-    cout << t.minInsertions(s);
+    Solution s;
+    vector<int> n1 = {1, 4, 2};
+    vector<int> n2 = {1, 2, 4};
+    cout << s.maxUncrossedLines(n1, n2);
     return 0;
 }
