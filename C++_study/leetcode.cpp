@@ -3683,58 +3683,118 @@
 
 
 
+//1035. 不相交的线
+//#include<iostream>
+//#include<vector>
+//using  namespace std;
+//
+//class Solution {
+//public:
+//    int maxUncrossedLines(vector<int>& nums1, vector<int>& nums2) {
+//        //dp[i][j]是以0~i、j的最大
+//        //nums1[i] == nums2[j]则，dp[i][j] = dp[i - 1][j - 1] + 1;
+//        //否则，取前面或当前与前面交叉的最大
+//        int n1 = nums1.size();
+//        int n2 = nums2.size();
+//        vector<vector<int>> dp(n1, vector<int>(n2, 0));
+//        int ret = 0;
+//        for (int i = 0; i < n1; ++i)
+//        {
+//            for (int j = 0; j < n2; ++j)
+//            {
+//                if (i == 0 || j == 0)
+//                {
+//                    int temp = nums1[i] == nums2[j] ? 1 : 0;
+//                    if (i == 0 && j == 0)
+//                        dp[i][j] = temp;
+//                    else if (i == 0)
+//                        dp[i][j] = max(temp, dp[i][j - 1]);
+//                    else
+//                        dp[i][j] = max(temp, dp[i - 1][j]);
+//                    ret = max(ret, dp[i][j]);
+//                }
+//                else if (nums1[i] == nums2[j])
+//                {
+//                    dp[i][j] = dp[i - 1][j - 1] + 1;
+//                    ret = max(ret, dp[i][j]);
+//                }
+//                else
+//                {
+//                    dp[i][j] = max(dp[i - 1][j - 1], max(dp[i - 1][j], dp[i][j - 1]));
+//                    ret = max(ret, dp[i][j]);
+//                }
+//            }
+//        }
+//
+//        return ret;
+//    }
+//};
+//
+//int main()
+//{
+//    Solution s;
+//    vector<int> n1 = {1, 4, 2};
+//    vector<int> n2 = {1, 2, 4};
+//    cout << s.maxUncrossedLines(n1, n2);
+//    return 0;
+//}
+
+
 
 #include<iostream>
 #include<vector>
-using  namespace std;
+#include<string>
+using namespace std;
 
 class Solution {
 public:
-    int maxUncrossedLines(vector<int>& nums1, vector<int>& nums2) {
-        //dp[i][j]是以0~i、j的最大
-        //nums1[i] == nums2[j]则，dp[i][j] = dp[i - 1][j - 1] + 1;
-        //否则，取前面或当前与前面交叉的最大
-        int n1 = nums1.size();
-        int n2 = nums2.size();
-        vector<vector<int>> dp(n1, vector<int>(n2, 0));
-        int ret = 0;
-        for (int i = 0; i < n1; ++i)
+    int numDistinct(string s, string t) {
+        //dp[i][j]为s的0~j范围的子序列出现t的0~i的字串的最大个数
+        //遍历0~i，如果s[i] == t[j]的话，dp[i][j]等于dp[i][j - 1] 加上 dp[i - 1][j - 1]
+        //也就是，用t[i]这个字母，插入到之前所有记录的0~i-1的字符串后面，就组成所需要的0~i的字符串了
+        //否则不等于的话，dp[i][j]和dp[i][j - 1]一样
+        int n = s.size();
+        int m = t.size();
+        vector<vector<int>> dp(m, vector<int>(n));
+        dp[0][0] = s[0] == t[0] ? 1 : 0;
+        for (int j = 1; j < n; ++j)//初始化，记录t的第一个字符的情况
         {
-            for (int j = 0; j < n2; ++j)
+            if (s[j] == t[0])
+                dp[0][j] = dp[0][j - 1] + 1;
+            else
+                dp[0][j] = dp[0][j - 1];
+        }
+        for (int i = 1; i < m; ++i)
+        {
+            for (int j = 0; j < n; ++j)
             {
-                if (i == 0 || j == 0)
+                if (j < i)//s给出的字串长度j 比t需要的字串长度i还小的话直接dp为0
+                    continue;
+                else if (s[j] == t[i])
                 {
-                    int temp = nums1[i] == nums2[j] ? 1 : 0;
-                    if (i == 0 && j == 0)
-                        dp[i][j] = temp;
-                    else if (i == 0)
-                        dp[i][j] = max(temp, dp[i][j - 1]);
+                    //要确保s的j-1及之前是存在 t的0~i-1的字符串，不然组成不了目标字符串
+                    if (dp[i - 1][j - 1])
+                    {
+                        dp[i][j] = dp[i][j - 1] + dp[i - 1][j - 1];
+                    }
                     else
-                        dp[i][j] = max(temp, dp[i - 1][j]);
-                    ret = max(ret, dp[i][j]);
-                }
-                else if (nums1[i] == nums2[j])
-                {
-                    dp[i][j] = dp[i - 1][j - 1] + 1;
-                    ret = max(ret, dp[i][j]);
+                        dp[i][j] = dp[i][j - 1];
                 }
                 else
-                {
-                    dp[i][j] = max(dp[i - 1][j - 1], max(dp[i - 1][j], dp[i][j - 1]));
-                    ret = max(ret, dp[i][j]);
-                }
+                    dp[i][j] = dp[i][j - 1];
             }
         }
 
-        return ret;
+        return dp[m - 1][n - 1];
     }
 };
 
 int main()
 {
-    Solution s;
-    vector<int> n1 = {1, 4, 2};
-    vector<int> n2 = {1, 2, 4};
-    cout << s.maxUncrossedLines(n1, n2);
+    Solution t;
+    string s1 = "rabbbit";
+    string s2 = "rabbit";
+
+    cout << t.numDistinct(s1, s2);
     return 0;
 }
