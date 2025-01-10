@@ -3740,61 +3740,205 @@
 //}
 
 
+//115. 不同的子序列
+//#include<iostream>
+//#include<vector>
+//#include<string>
+//using namespace std;
+//
+//class Solution {
+//public:
+//    int numDistinct(string s, string t) {
+//        //dp[i][j]为s的0~j范围的子序列出现t的0~i的字串的最大个数
+//        //遍历0~i，如果s[i] == t[j]的话，dp[i][j]等于dp[i][j - 1] 加上 dp[i - 1][j - 1]
+//        //也就是，用t[i]这个字母，插入到之前所有记录的0~i-1的字符串后面，就组成所需要的0~i的字符串了
+//        //否则不等于的话，dp[i][j]和dp[i][j - 1]一样
+//        int n = s.size();
+//        int m = t.size();
+//        vector<vector<long long>> dp(m, vector<long long>(n));
+//        dp[0][0] = s[0] == t[0] ? 1 : 0;
+//        for (int j = 1; j < n; ++j)//初始化，记录t的第一个字符的情况
+//        {
+//            if (s[j] == t[0])
+//                dp[0][j] = dp[0][j - 1] + 1;
+//            else
+//                dp[0][j] = dp[0][j - 1];
+//        }
+//        long long mod = pow(10, 9) + 7;
+//        for (int i = 1; i < m; ++i)
+//        {
+//            for (int j = 0; j < n; ++j)
+//            {
+//                if (j < i)//s给出的字串长度j 比t需要的字串长度i还小的话直接dp为0
+//                    continue;
+//                else if (s[j] == t[i])
+//                {
+//                    //要确保s的j-1及之前是存在 t的0~i-1的字符串，不然组成不了目标字符串
+//                    if (dp[i - 1][j - 1])
+//                        dp[i][j] = (dp[i][j - 1] + dp[i - 1][j - 1]) % mod;
+//                    else
+//                        dp[i][j] = dp[i][j - 1];
+//                }
+//                else
+//                    dp[i][j] = dp[i][j - 1];
+//            }
+//        }
+//
+//        return dp[m - 1][n - 1];
+//    }
+//};
+//
+//int main()
+//{
+//    Solution t;
+//    string s1 = "rabbbit";
+//    string s2 = "rabbit";
+//
+//    cout << t.numDistinct(s1, s2);
+//    return 0;
+//}
+
+
+
 
 #include<iostream>
-#include<vector>
 #include<string>
+#include<vector>
 using namespace std;
-
 class Solution {
 public:
-    int numDistinct(string s, string t) {
-        //dp[i][j]为s的0~j范围的子序列出现t的0~i的字串的最大个数
-        //遍历0~i，如果s[i] == t[j]的话，dp[i][j]等于dp[i][j - 1] 加上 dp[i - 1][j - 1]
-        //也就是，用t[i]这个字母，插入到之前所有记录的0~i-1的字符串后面，就组成所需要的0~i的字符串了
-        //否则不等于的话，dp[i][j]和dp[i][j - 1]一样
+    bool isMatch(string s, string p) {
+        //dp[i][j]表示s的0~i与p的0~j是否匹配
+        //若p[j] == *, 只要dp[0~i][j - 1]有任一匹配，则匹配
+        //若p[j] == ?, dp[i - 1][j - 1]匹配，则匹配
+        //若p[j]为英文字符, 则必须s[i] == p[j],并且dp[i - 1][j - 1]匹配，则匹配
         int n = s.size();
-        int m = t.size();
-        vector<vector<int>> dp(m, vector<int>(n));
-        dp[0][0] = s[0] == t[0] ? 1 : 0;
-        for (int j = 1; j < n; ++j)//初始化，记录t的第一个字符的情况
+        int m = p.size();
+        if (m == 0)
         {
-            if (s[j] == t[0])
-                dp[0][j] = dp[0][j - 1] + 1;
-            else
-                dp[0][j] = dp[0][j - 1];
+            if (n == 0) return true;
+            return false;
         }
-        for (int i = 1; i < m; ++i)
+        if (n == 0)
         {
-            for (int j = 0; j < n; ++j)
+            for (auto e : p)
+                if (e != '*')
+                    return false;
+            return true;
+        }
+        if (m == 1)
+        {
+            if (p[0] == '*') return true;
+            else if (p[0] == '?' && n == 1) return true;
+            else if (n == 1 && p[0] == s[0]) return true;
+            return false;
+        }
+        if (n == 1)
+        {
+            int num = 0;
+            for (auto e : p)
             {
-                if (j < i)//s给出的字串长度j 比t需要的字串长度i还小的话直接dp为0
-                    continue;
-                else if (s[j] == t[i])
+                if (e == s[0] || e == '?')
+                    ++num;
+                if (num >= 2) return false;
+            }
+            return true;
+        }
+        vector<vector<bool>> dp(n, vector<bool>(m, false));
+        for (int i = 0; i < n; ++i)
+        {
+            for (int j = 0; j < m; ++j)
+            {
+                if (p[j] == '?')
                 {
-                    //要确保s的j-1及之前是存在 t的0~i-1的字符串，不然组成不了目标字符串
-                    if (dp[i - 1][j - 1])
+                    if (i == 0)
                     {
-                        dp[i][j] = dp[i][j - 1] + dp[i - 1][j - 1];
+                        if (j == 0)
+                            dp[i][j] = true;
+                        else
+                        {
+                            int flag = 1;
+                            for (int k = 0; k < j; ++k)
+                            {
+                                if (p[k] != '*')
+                                {
+                                    flag = 0;
+                                    break;
+                                }
+                            }
+                            if (flag)
+                                dp[i][j] = true;
+                        }
+
                     }
-                    else
-                        dp[i][j] = dp[i][j - 1];
+                    else if (j == 0)
+                    {
+                        if(i == 0)
+                            dp[i][j] = true;
+                    }
+                    else if (dp[i - 1][j - 1])
+                        dp[i][j] = true;
+                }
+                else if (p[j] != '*')
+                {
+                    if (i == 0)
+                    {
+                        if (j == 0 && s[i] == p[j])
+                            dp[i][j] = true;
+                        else if(s[i] == p[j])
+                        {
+                            int flag = 1;
+                            for (int k = 0; k < j; ++k)
+                            {
+                                if (p[k] != '*')
+                                {
+                                    flag = 0;
+                                    break;
+                                }
+                            }
+                            if (flag)
+                                dp[i][j] = true;
+                        }
+
+                    }
+                    else if (j == 0)
+                    {
+                        if (i == 0 && s[i] == p[j])
+                            dp[i][j] = true;
+                    }
+                    else if (s[i] == p[j] && dp[i - 1][j - 1])
+                        dp[i][j] = true;
                 }
                 else
-                    dp[i][j] = dp[i][j - 1];
+                {
+                    if (j == 0)
+                        dp[i][j] = true;
+                    else 
+                    {
+                        for (int k = 0; k <= i; ++k) {
+                            if (dp[k][j - 1]) {
+                                dp[i][j] = true;
+                                break;
+                            }
+                        }
+                    }
+                }
             }
         }
 
-        return dp[m - 1][n - 1];
+        return dp[n - 1][m - 1];
+
     }
 };
 
 int main()
 {
     Solution t;
-    string s1 = "rabbbit";
-    string s2 = "rabbit";
-
-    cout << t.numDistinct(s1, s2);
+    string s = "abcabczzzde";
+    string p = "*abc???de*";
+    if (t.isMatch(s, p))
+        cout << "Y";
+    else
+        cout << "N";
     return 0;
 }
