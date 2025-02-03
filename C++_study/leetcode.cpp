@@ -3800,145 +3800,167 @@
 
 
 
+//44. 通配符匹配 
+//#include<iostream>
+//#include<string>
+//#include<vector>
+//using namespace std;
+//class Solution {
+//public:
+//    bool isMatch(string s, string p) {
+//        //dp[i][j]表示s的0~i与p的0~j是否匹配
+//        //若p[j] == *, 只要dp[0~i][j - 1]有任一匹配，则匹配
+//        //若p[j] == ?, dp[i - 1][j - 1]匹配，则匹配
+//        //若p[j]为英文字符, 则必须s[i] == p[j],并且dp[i - 1][j - 1]匹配，则匹配
+//        int n = s.size();
+//        int m = p.size();
+//        if (m == 0)
+//        {
+//            if (n == 0) return true;
+//            return false;
+//        }
+//        if (n == 0)
+//        {
+//            for (auto e : p)
+//                if (e != '*')
+//                    return false;
+//            return true;
+//        }
+//        vector<vector<bool>> dp(n, vector<bool>(m, false));
+//        for (int i = 0; i < n; ++i)
+//        {
+//            for (int j = 0; j < m; ++j)
+//            {
+//                if (p[j] == '?')
+//                {
+//                    if (i == 0)
+//                    {
+//                        if (j == 0)
+//                            dp[i][j] = true;
+//                        else
+//                        {
+//                            int flag = 1;
+//                            for (int k = 0; k < j; ++k)
+//                            {
+//                                if (p[k] != '*')
+//                                {
+//                                    flag = 0;
+//                                    break;
+//                                }
+//                            }
+//                            if (flag)
+//                                dp[i][j] = true;
+//                        }
+//
+//                    }
+//                    else if (j == 0)
+//                    {
+//                        if (i == 0)
+//                            dp[i][j] = true;
+//                    }
+//                    else if (dp[i - 1][j - 1])
+//                        dp[i][j] = true;
+//                }
+//                else if (p[j] != '*')
+//                {
+//                    if (i == 0)
+//                    {
+//                        if (j == 0 && s[i] == p[j])
+//                            dp[i][j] = true;
+//                        else if (s[i] == p[j])
+//                        {
+//                            int flag = 1;
+//                            for (int k = 0; k < j; ++k)
+//                            {
+//                                if (p[k] != '*')
+//                                {
+//                                    flag = 0;
+//                                    break;
+//                                }
+//                            }
+//                            if (flag)
+//                                dp[i][j] = true;
+//                        }
+//
+//                    }
+//                    else if (j == 0)
+//                    {
+//                        if (i == 0 && s[i] == p[j])
+//                            dp[i][j] = true;
+//                    }
+//                    else if (s[i] == p[j] && dp[i - 1][j - 1])
+//                        dp[i][j] = true;
+//                }
+//                else
+//                {
+//                    if (j == 0)
+//                        dp[i][j] = true;
+//                    else
+//                    {
+//                        for (int k = 0; k <= i; ++k) {
+//                            if (dp[k][j - 1]) {
+//                                dp[i][j] = true;
+//                                break;
+//                            }
+//                        }
+//                    }
+//                }
+//            }
+//        }
+//
+//        return dp[n - 1][m - 1];
+//
+//    }
+//};
+//
+//int main()
+//{
+//    Solution t;
+//    string s = "abcabczzzde";
+//    string p = "*abc???de*";
+//    if (t.isMatch(s, p))
+//        cout << "Y";
+//    else
+//        cout << "N";
+//    return 0;
+//}
 
-#include<iostream>
-#include<string>
-#include<vector>
-using namespace std;
-class Solution {
-public:
-    bool isMatch(string s, string p) {
-        //dp[i][j]表示s的0~i与p的0~j是否匹配
-        //若p[j] == *, 只要dp[0~i][j - 1]有任一匹配，则匹配
-        //若p[j] == ?, dp[i - 1][j - 1]匹配，则匹配
-        //若p[j]为英文字符, 则必须s[i] == p[j],并且dp[i - 1][j - 1]匹配，则匹配
-        int n = s.size();
-        int m = p.size();
-        if (m == 0)
-        {
-            if (n == 0) return true;
-            return false;
-        }
-        if (n == 0)
-        {
-            for (auto e : p)
-                if (e != '*')
-                    return false;
-            return true;
-        }
-        if (m == 1)
-        {
-            if (p[0] == '*') return true;
-            else if (p[0] == '?' && n == 1) return true;
-            else if (n == 1 && p[0] == s[0]) return true;
-            return false;
-        }
-        if (n == 1)
-        {
-            int num = 0;
-            for (auto e : p)
-            {
-                if (e == s[0] || e == '?')
-                    ++num;
-                if (num >= 2) return false;
-            }
-            return true;
-        }
-        vector<vector<bool>> dp(n, vector<bool>(m, false));
-        for (int i = 0; i < n; ++i)
-        {
-            for (int j = 0; j < m; ++j)
-            {
-                if (p[j] == '?')
-                {
-                    if (i == 0)
-                    {
-                        if (j == 0)
-                            dp[i][j] = true;
-                        else
-                        {
-                            int flag = 1;
-                            for (int k = 0; k < j; ++k)
-                            {
-                                if (p[k] != '*')
-                                {
-                                    flag = 0;
-                                    break;
-                                }
-                            }
-                            if (flag)
-                                dp[i][j] = true;
-                        }
 
-                    }
-                    else if (j == 0)
-                    {
-                        if(i == 0)
-                            dp[i][j] = true;
-                    }
-                    else if (dp[i - 1][j - 1])
-                        dp[i][j] = true;
-                }
-                else if (p[j] != '*')
-                {
-                    if (i == 0)
-                    {
-                        if (j == 0 && s[i] == p[j])
-                            dp[i][j] = true;
-                        else if(s[i] == p[j])
-                        {
-                            int flag = 1;
-                            for (int k = 0; k < j; ++k)
-                            {
-                                if (p[k] != '*')
-                                {
-                                    flag = 0;
-                                    break;
-                                }
-                            }
-                            if (flag)
-                                dp[i][j] = true;
-                        }
 
-                    }
-                    else if (j == 0)
-                    {
-                        if (i == 0 && s[i] == p[j])
-                            dp[i][j] = true;
-                    }
-                    else if (s[i] == p[j] && dp[i - 1][j - 1])
-                        dp[i][j] = true;
-                }
-                else
-                {
-                    if (j == 0)
-                        dp[i][j] = true;
-                    else 
-                    {
-                        for (int k = 0; k <= i; ++k) {
-                            if (dp[k][j - 1]) {
-                                dp[i][j] = true;
-                                break;
-                            }
-                        }
-                    }
-                }
-            }
-        }
-
-        return dp[n - 1][m - 1];
-
-    }
-};
-
-int main()
-{
-    Solution t;
-    string s = "abcabczzzde";
-    string p = "*abc???de*";
-    if (t.isMatch(s, p))
-        cout << "Y";
-    else
-        cout << "N";
-    return 0;
-}
+//322. 零钱兑换
+//class Solution {
+//public:
+//    int coinChange(vector<int>& coins, int amount) {
+//        //dp为组成金钱为x的最少硬币数
+//        //用当前金钱数，减去每一种硬币的面值，就可以得当前金钱之前的某一个金钱数，加上这种的一个硬币，
+//        //而dp[i]就为之前的某一个金钱数的dp[j]加上这个硬币(也就是1)，所有情况中的最小值就为dp[i]
+//        //一个bool数组判断当前金额是否能组成，如果不能，用这个金额组成的新金额也不能组成，所dp[j]以只看能组成的dp，
+//        //如果都不能，则dp[i]也不能
+//        vector<int> dp(amount + 1, -1);
+//        vector<bool> hash(amount + 1, 0);
+//        dp[0] = 0;
+//        hash[0] = true;
+//        sort(coins.begin(), coins.end());
+//        for (int i = 1; i <= amount; ++i)
+//        {
+//            int temp_min = INT_MAX;//记录i之前的最小且有效的dp值
+//            int flag = 0;//记录dp[i]是否有效
+//            for (int m : coins)
+//            {
+//                if (m > i) break;
+//                int j = i - m;
+//                if (hash[j])//判断dp[j]是否有效（能否组成）
+//                {
+//                    temp_min = min(temp_min, dp[j]);
+//                    flag = 1;
+//                }
+//            }
+//            if (flag)
+//            {
+//                dp[i] = temp_min + 1;
+//                hash[i] = 1;
+//            }
+//        }
+//        return dp[amount];
+//    }
+//};
