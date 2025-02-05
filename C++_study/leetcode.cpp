@@ -3964,3 +3964,109 @@
 //        return dp[amount];
 //    }
 //};
+
+
+//75. 颜色分类
+//class Solution {
+//public:
+//    void sortColors(vector<int>& nums) {
+//        int arr[3];
+//        for (auto e : nums)
+//            ++arr[e];
+//        for (int i = 0; i < nums.size(); ++i)
+//        {
+//            if (arr[0])
+//            {
+//                nums[i] = 0;
+//                --arr[0];
+//            }
+//            else if (arr[1])
+//            {
+//                nums[i] = 1;
+//                --arr[1];
+//            }
+//            else
+//                nums[i] = 2;
+//        }
+//    }
+//};
+
+
+
+
+#include<iostream>
+#include<vector>
+#include<string>
+using namespace std;
+
+class Solution {
+public:
+    bool isMatch(string s, string p) {
+        //状态表示为s的前i个与p的前j个是否匹配
+        //若新增的是s，两种情况：新增与前一个字符相同或不同
+        //情况一下：p的末尾为*则匹配，p末尾为.则看dp的s-1和p-1是否匹配，p末尾为确定字符则对比是否一样然后和.一样处理
+        //情况二下：p的末尾为*则不匹配，其他情况和情况一一样
+        //若新增的是p，三种情况：新增一个明确字符/ . / * 
+        //明确字符：末尾比较是否相同，然后看dp的s-1与p-1是否匹配
+        //. ：看dp的s-1与p-1是否匹配
+        //* ：若dp的s与p-1匹配则匹配，不匹配情况下：p-1为*则不匹配，
+        //若为其他(确定字符和.)，确保p-1与s-k匹配且s-1到s-k都是相同字符，则匹配
+        int n = s.size();
+        int m = p.size();
+        vector<vector<bool>> dp(n, vector<bool>(m, false));
+        if (p[0] == '.' || s[0] == p[0])
+            dp[0][0] = true;
+        for (int i = 0; i < n; ++i)
+        {
+            for (int j = 0; j < m; ++j)
+            {
+                if (i == 0 && j == 0) continue;
+                else if (i == 0 && p[j] != '*') continue;
+                else if (j == 0) continue;
+
+                if (p[j] == '.')
+                    dp[i][j] = dp[i - 1][j - 1];
+                else if (p[j] == '*')
+                {
+                    if (dp[i][j - 1] == true)
+                        dp[i][j] = true;
+                    else
+                    {
+                        for (int k = i - 1; k >= 0; --k)
+                        {
+                            if (s[k] != s[k + 1]) break;
+                            else if (p[j - 1] == '.' || p[j - 1] == s[k])
+                            {
+                                if (dp[k][j - 1])
+                                {
+                                    dp[i][j] = true;
+                                    break;
+                                }
+                            }
+                            else break;
+                        }
+                    }
+                }
+                else
+                {
+                    if (s[i] == p[j])
+                        dp[i][j] = dp[i - 1][j - 1];
+                }
+            }
+        }
+
+        return dp[n - 1][m - 1];
+    }
+};
+
+int main()
+{
+    Solution t;
+    string s = "ab";
+    string p = ".*";
+    if (t.isMatch(s, p))
+        cout << "YES";
+    else
+        cout << "NO";
+    return 0;
+}
