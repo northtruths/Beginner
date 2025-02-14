@@ -3993,80 +3993,106 @@
 
 
 
+//正则（什么的，忘了）（未ac）
+//#include<iostream>
+//#include<vector>
+//#include<string>
+//using namespace std;
+//
+//class Solution {
+//public:
+//    bool isMatch(string s, string p) {
+//        //状态表示为s的前i个与p的前j个是否匹配
+//        //若新增的是s，两种情况：新增与前一个字符相同或不同
+//        //情况一下：p的末尾为*则匹配，p末尾为.则看dp的s-1和p-1是否匹配，p末尾为确定字符则对比是否一样然后和.一样处理
+//        //情况二下：p的末尾为*则不匹配，其他情况和情况一一样
+//        //若新增的是p，三种情况：新增一个明确字符/ . / * 
+//        //明确字符：末尾比较是否相同，然后看dp的s-1与p-1是否匹配
+//        //. ：看dp的s-1与p-1是否匹配
+//        //* ：若dp的s与p-1匹配则匹配，不匹配情况下：p-1为*则不匹配，
+//        //若为其他(确定字符和.)，确保p-1与s-k匹配且s-1到s-k都是相同字符，则匹配
+//        int n = s.size();
+//        int m = p.size();
+//        vector<vector<bool>> dp(n, vector<bool>(m, false));
+//        if (p[0] == '.' || s[0] == p[0])
+//            dp[0][0] = true;
+//        for (int i = 0; i < n; ++i)
+//        {
+//            for (int j = 0; j < m; ++j)
+//            {
+//                if (i == 0 && j == 0) continue;
+//                else if (i == 0 && p[j] != '*') continue;
+//                else if (j == 0) continue;
+//
+//                if (p[j] == '.')
+//                    dp[i][j] = dp[i - 1][j - 1];
+//                else if (p[j] == '*')
+//                {
+//                    if (dp[i][j - 1] == true)
+//                        dp[i][j] = true;
+//                    else
+//                    {
+//                        for (int k = i - 1; k >= 0; --k)
+//                        {
+//                            if (s[k] != s[k + 1]) break;
+//                            else if (p[j - 1] == '.' || p[j - 1] == s[k])
+//                            {
+//                                if (dp[k][j - 1])
+//                                {
+//                                    dp[i][j] = true;
+//                                    break;
+//                                }
+//                            }
+//                            else break;
+//                        }
+//                    }
+//                }
+//                else
+//                {
+//                    if (s[i] == p[j])
+//                        dp[i][j] = dp[i - 1][j - 1];
+//                }
+//            }
+//        }
+//
+//        return dp[n - 1][m - 1];
+//    }
+//};
+//
+//int main()
+//{
+//    Solution t;
+//    string s = "ab";
+//    string p = ".*";
+//    if (t.isMatch(s, p))
+//        cout << "YES";
+//    else
+//        cout << "NO";
+//    return 0;
+//}
 
-#include<iostream>
-#include<vector>
-#include<string>
-using namespace std;
 
-class Solution {
-public:
-    bool isMatch(string s, string p) {
-        //状态表示为s的前i个与p的前j个是否匹配
-        //若新增的是s，两种情况：新增与前一个字符相同或不同
-        //情况一下：p的末尾为*则匹配，p末尾为.则看dp的s-1和p-1是否匹配，p末尾为确定字符则对比是否一样然后和.一样处理
-        //情况二下：p的末尾为*则不匹配，其他情况和情况一一样
-        //若新增的是p，三种情况：新增一个明确字符/ . / * 
-        //明确字符：末尾比较是否相同，然后看dp的s-1与p-1是否匹配
-        //. ：看dp的s-1与p-1是否匹配
-        //* ：若dp的s与p-1匹配则匹配，不匹配情况下：p-1为*则不匹配，
-        //若为其他(确定字符和.)，确保p-1与s-k匹配且s-1到s-k都是相同字符，则匹配
-        int n = s.size();
-        int m = p.size();
-        vector<vector<bool>> dp(n, vector<bool>(m, false));
-        if (p[0] == '.' || s[0] == p[0])
-            dp[0][0] = true;
-        for (int i = 0; i < n; ++i)
-        {
-            for (int j = 0; j < m; ++j)
-            {
-                if (i == 0 && j == 0) continue;
-                else if (i == 0 && p[j] != '*') continue;
-                else if (j == 0) continue;
 
-                if (p[j] == '.')
-                    dp[i][j] = dp[i - 1][j - 1];
-                else if (p[j] == '*')
-                {
-                    if (dp[i][j - 1] == true)
-                        dp[i][j] = true;
-                    else
-                    {
-                        for (int k = i - 1; k >= 0; --k)
-                        {
-                            if (s[k] != s[k + 1]) break;
-                            else if (p[j - 1] == '.' || p[j - 1] == s[k])
-                            {
-                                if (dp[k][j - 1])
-                                {
-                                    dp[i][j] = true;
-                                    break;
-                                }
-                            }
-                            else break;
-                        }
-                    }
-                }
-                else
-                {
-                    if (s[i] == p[j])
-                        dp[i][j] = dp[i - 1][j - 1];
-                }
-            }
-        }
-
-        return dp[n - 1][m - 1];
-    }
-};
-
-int main()
-{
-    Solution t;
-    string s = "ab";
-    string p = ".*";
-    if (t.isMatch(s, p))
-        cout << "YES";
-    else
-        cout << "NO";
-    return 0;
-}
+//518. 零钱兑换 II
+//class Solution {
+//public:
+//    int change(int amount, vector<int>& coins) {
+//        //dp[i]为凑成金额为i的组合数
+//        //计算dp[i + 1]时，视为最后一个硬币为x(遍历coins)，然后找到dp[i + 1 - x]，这个dp合法则直接加上
+//        //组合数为零则表示无法凑出
+//        //不过先遍历硬币，再内嵌循环金钱，因为一种硬币组合所对应的金钱是固定的，但反过来内嵌硬币循环的话，
+//        //一个金钱数额所对应的硬币组合却不止一种，而且还可能重复，所以先循环遍历coins
+//        sort(coins.begin(), coins.end());
+//        vector<long long> dp(amount + 1, 0);
+//        dp[0] = 1;
+//        for (int x : coins)
+//        {
+//            for (int i = 1; i <= amount; ++i)
+//            {
+//                if (i < x) continue;
+//                dp[i] += dp[i - x];
+//            }
+//        }
+//        return dp[amount];
+//    }
+//};
