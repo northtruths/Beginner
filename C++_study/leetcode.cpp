@@ -4096,3 +4096,79 @@
 //        return dp[amount];
 //    }
 //};
+
+
+//279. 完全平方数
+//class Solution {
+//public:
+//    int numSquares(int n) {
+//        //dp[i]为和为i的完全平方数的最少数量
+//        //每隔一定时间，i都会变为一个更大的完全平方数，此时dp[i]为1
+//        //dp[i+1]从dp[i]+dp[1]、dp[i-1]+dp[2]、dp[i-2]+dp[3]...这些中最小的
+//        if (sqrt(n) == (int)sqrt(n))
+//            return 1;
+//        vector<int> dp(n + 1, 0);
+//        dp[1] = 1;
+//        for (int i = 2; i <= n; ++i)
+//        {
+//            if (sqrt(i) == (int)sqrt(i))
+//            {
+//                dp[i] = 1;
+//                continue;
+//            }
+//            int left = 1, right = i - 1;
+//            int cur = INT_MAX;//当前最小
+//            while (left <= right)
+//            {
+//                cur = dp[left] + dp[right] < cur ? dp[left] + dp[right] : cur;
+//                ++left;
+//                --right;
+//            }
+//            dp[i] = cur;
+//        }
+//        return dp[n];
+//    }
+//};
+
+//474. 一和零
+#include<iostream>
+#include<string>
+#include<vector>
+using namespace std;
+class Solution {
+public:
+    int findMaxForm(vector<string>& strs, int m, int n) {
+        //dp[i][j][k]为只找strs的前i个子集，且子集中0的个数最多为j、1的个数最多为k的最长长度
+        //dp[i][j][k] = max(dp[i-1][j][k], dp[i-1][j-cur_0][k-cur_1] + 1),cur_0、cur_1当前子集01个数
+        //i这一维可以省略
+        vector<vector<int>> dp(m + 1, vector<int>(n + 1, 0));
+        for (int i = 0; i < strs.size(); ++i)
+        {
+            int cur_0 = 0, cur_1 = 0;
+            for (char e : strs[i])
+            {
+                if (e == '1') ++cur_1;
+                else if (e == '0') ++cur_0;
+            }
+            for (int j = m; j >= 0; --j)
+            {
+                for (int k = n; k >= 0; --k)
+                {
+                    if (j >= cur_0 && k >= cur_1)
+                        dp[j][k] = max(dp[j][k], dp[j - cur_0][k - cur_1] + 1);
+                }
+            }
+        }
+        return dp[m][n];
+
+    }
+};
+
+int main()
+{
+    Solution s;
+    vector<string> strs = { "10", "0001", "111001", "1", "0" };
+    int m = 5, n = 3;
+    cout << s.findMaxForm(strs, m, n);
+    return 0;
+}
