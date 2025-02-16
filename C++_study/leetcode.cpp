@@ -4131,35 +4131,83 @@
 //};
 
 //474. 一和零
+//#include<iostream>
+//#include<string>
+//#include<vector>
+//using namespace std;
+//class Solution {
+//public:
+//    int findMaxForm(vector<string>& strs, int m, int n) {
+//        //dp[i][j][k]为只找strs的前i个子集，且子集中0的个数最多为j、1的个数最多为k的最长长度
+//        //dp[i][j][k] = max(dp[i-1][j][k], dp[i-1][j-cur_0][k-cur_1] + 1),cur_0、cur_1当前子集01个数
+//        //i这一维可以省略
+//        vector<vector<int>> dp(m + 1, vector<int>(n + 1, 0));
+//        for (int i = 0; i < strs.size(); ++i)
+//        {
+//            int cur_0 = 0, cur_1 = 0;
+//            for (char e : strs[i])
+//            {
+//                if (e == '1') ++cur_1;
+//                else if (e == '0') ++cur_0;
+//            }
+//            for (int j = m; j >= 0; --j)
+//            {
+//                for (int k = n; k >= 0; --k)
+//                {
+//                    if (j >= cur_0 && k >= cur_1)
+//                        dp[j][k] = max(dp[j][k], dp[j - cur_0][k - cur_1] + 1);
+//                }
+//            }
+//        }
+//        return dp[m][n];
+//
+//    }
+//};
+//
+//int main()
+//{
+//    Solution s;
+//    vector<string> strs = { "10", "0001", "111001", "1", "0" };
+//    int m = 5, n = 3;
+//    cout << s.findMaxForm(strs, m, n);
+//    return 0;
+//}
+
+
 #include<iostream>
-#include<string>
 #include<vector>
 using namespace std;
 class Solution {
 public:
-    int findMaxForm(vector<string>& strs, int m, int n) {
-        //dp[i][j][k]为只找strs的前i个子集，且子集中0的个数最多为j、1的个数最多为k的最长长度
-        //dp[i][j][k] = max(dp[i-1][j][k], dp[i-1][j-cur_0][k-cur_1] + 1),cur_0、cur_1当前子集01个数
-        //i这一维可以省略
-        vector<vector<int>> dp(m + 1, vector<int>(n + 1, 0));
-        for (int i = 0; i < strs.size(); ++i)
+    int profitableSchemes(int n, int minProfit, vector<int>& group, vector<int>& profit) {
+        //dp[i][j][k]为只看前i种工作并且员工最多为j名、利润至少为k的计划数量
+        //dp[i][j][k] = profit[i] + dp[i-1][j - group[i]][k] >= minProfit ? dp[i-1][j - group[i]][k]+1 : dp[i][j][k];
+        //省略i这一维
+        vector<vector<long long>> dp(n + 1, vector<long long>(minProfit + 2, 0));
+        for (int i = 1; i <= group.size(); ++i)
         {
-            int cur_0 = 0, cur_1 = 0;
-            for (char e : strs[i])
+            for (int j = n; j >= 0; --j)
             {
-                if (e == '1') ++cur_1;
-                else if (e == '0') ++cur_0;
-            }
-            for (int j = m; j >= 0; --j)
-            {
-                for (int k = n; k >= 0; --k)
+                for (int k = minProfit + 1; k >= 0; --k)
                 {
-                    if (j >= cur_0 && k >= cur_1)
-                        dp[j][k] = max(dp[j][k], dp[j - cur_0][k - cur_1] + 1);
+                    if (j - group[i - 1] >= 0)//选取
+                    {
+                        if (profit[i - 1] >= k)//如果当前工作利润直接达标就先++
+                            ++dp[j][k];
+                        dp[j][k] += dp[j - group[i - 1]][k];
+                        if (k + profit[i - 1] >= minProfit + 1)
+                            dp[j][minProfit + 1] += dp[j - group[i - 1]][k];
+                        else
+                            dp[j][k + profit[i - 1]] += dp[j - group[i - 1]][k];
+                    }
                 }
             }
         }
-        return dp[m][n];
+        if (minProfit == 0)
+            for (auto& t1 : dp)
+                for (auto& t2 : t1)
+                    ++t2;
+        return dp[n][minProfit];
 
     }
 };
@@ -4167,8 +4215,8 @@ public:
 int main()
 {
     Solution s;
-    vector<string> strs = { "10", "0001", "111001", "1", "0" };
-    int m = 5, n = 3;
-    cout << s.findMaxForm(strs, m, n);
+    int n = 5, minProfit = 0;
+    vector<int> group = { 10, 2 }, profit = { 2, 3 };
+    cout << s.profitableSchemes(n, minProfit, group, profit);
     return 0;
 }
