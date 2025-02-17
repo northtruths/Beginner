@@ -4173,50 +4173,91 @@
 //    return 0;
 //}
 
+//879. 盈利计划
+//#include<iostream>
+//#include<vector>
+//using namespace std;
+//class Solution {
+//public:
+//    int profitableSchemes(int n, int minProfit, vector<int>& group, vector<int>& profit) {
+//        //dp[i][j][k]为只看前i种工作并且员工最多为j名、利润至少为k的计划数量
+//        //状态转移方程：dp[i][j][k] += dp[i-1][j-g[i]][k-p[i]],这是当前工作能选择的情况下
+//        //如果不能选择，则直接等于上一个，或者当前利润大于等于目标，加上至少为0的利润那个dp，就至少为k了
+//        //省略i这一维
+//        vector<vector<int>> dp(n + 1, vector<int>(minProfit + 1, 0));
+//        for (int i = 0; i <= n; ++i)//初始化利润至少为0时，有什么都不做这一种计划可选择
+//            dp[i][0] = 1;
+//        for (int i = 0; i < group.size(); ++i)
+//        {
+//            for (int j = n; j >= 0; --j)
+//            {
+//                for (int k = minProfit; k >= 0; --k)
+//                {
+//                    if (j >= group[i])//做当前工作人数够
+//                    {
+//                        if (profit[i] >= k)
+//                            dp[j][k] += dp[j - group[i]][0];
+//                        else
+//                            dp[j][k] += dp[j - group[i]][k - profit[i]];
+//                    }
+//                    dp[j][k] %= (int)pow(10, 9) + 7;
+//                }
+//            }
+//        }
+//
+//        return dp[n][minProfit];
+//    }
+//};
+//int main()
+//{
+//    Solution s;
+//    int n = 5, minProfit = 0;
+//    vector<int> group = { 10, 2 }, profit = { 2, 3 };
+//    cout << s.profitableSchemes(n, minProfit, group, profit);
+//    return 0;
+//}
 
-#include<iostream>
+
+#include <iostream>
 #include<vector>
+#include<utility>
 using namespace std;
-class Solution {
-public:
-    int profitableSchemes(int n, int minProfit, vector<int>& group, vector<int>& profit) {
-        //dp[i][j][k]为只看前i种工作并且员工最多为j名、利润至少为k的计划数量
-        //dp[i][j][k] = profit[i] + dp[i-1][j - group[i]][k] >= minProfit ? dp[i-1][j - group[i]][k]+1 : dp[i][j][k];
-        //省略i这一维
-        vector<vector<long long>> dp(n + 1, vector<long long>(minProfit + 2, 0));
-        for (int i = 1; i <= group.size(); ++i)
-        {
-            for (int j = n; j >= 0; --j)
-            {
-                for (int k = minProfit + 1; k >= 0; --k)
-                {
-                    if (j - group[i - 1] >= 0)//选取
-                    {
-                        if (profit[i - 1] >= k)//如果当前工作利润直接达标就先++
-                            ++dp[j][k];
-                        dp[j][k] += dp[j - group[i - 1]][k];
-                        if (k + profit[i - 1] >= minProfit + 1)
-                            dp[j][minProfit + 1] += dp[j - group[i - 1]][k];
-                        else
-                            dp[j][k + profit[i - 1]] += dp[j - group[i - 1]][k];
-                    }
-                }
-            }
-        }
-        if (minProfit == 0)
-            for (auto& t1 : dp)
-                for (auto& t2 : t1)
-                    ++t2;
-        return dp[n][minProfit];
 
+int main() {
+    //dp[i][j]为只看前i个物品，且重量最多为j的背包价值
+    //i这一维可省略
+    int n, V;
+    cin >> n >> V;
+    vector<pair<int, int>> it(n);
+    for (auto& t : it)
+    {
+        int a, b;
+        cin >> a >> b;
+        t = { a, b };
     }
-};
-
-int main()
-{
-    Solution s;
-    int n = 5, minProfit = 0;
-    vector<int> group = { 10, 2 }, profit = { 2, 3 };
-    cout << s.profitableSchemes(n, minProfit, group, profit);
-    return 0;
+    vector<int> dp(V + 1, 0);
+    for (int i = 0; i < n; ++i)
+    {
+        for (int j = V; j >= 0; --j)
+        {
+            if (it[i].first > j) continue;
+            dp[j] = max(dp[j], dp[j - it[i].first] + it[i].second);
+        }
+    }
+    cout << dp[V] << endl;
+    //dp1[i][j]为只看前i个物品，重量刚好为j的最大物品价值
+    //状态转移时，必须确定前面一个背包里重量是真实的，若价值为0则不真实
+    vector<int> dp1(V + 1, 0);
+    for (int i = 0; i < n; ++i)
+    {
+        for (int j = V; j >= 0; --j)
+        {
+            if (it[i].first > j) continue;
+            else if (it[i].first == j)
+                dp1[j] = max(dp1[j], it[i].second);
+            else if (dp[j - it[i].first] > 0)
+                dp1[j] = max(dp1[j], dp1[j - it[i].first] + it[i].second);
+        }
+    }
+    cout << dp1[V] << endl;
 }
