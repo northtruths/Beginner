@@ -4218,46 +4218,153 @@
 //}
 
 
-#include <iostream>
+
+//DP41 【模板】01背包（牛客）
+//#include <iostream>
+//#include<vector>
+//#include<utility>
+//using namespace std;
+//
+//int main() {
+//    //dp[i][j]为只看前i个物品，且重量最多为j的背包价值
+//    //i这一维可省略
+//    int n, V;
+//    cin >> n >> V;
+//    vector<pair<int, int>> it(n);
+//    for (auto& t : it)
+//    {
+//        int a, b;
+//        cin >> a >> b;
+//        t = { a, b };
+//    }
+//    vector<int> dp(V + 1, 0);
+//    for (int i = 0; i < n; ++i)
+//    {
+//        for (int j = V; j >= 0; --j)
+//        {
+//            if (it[i].first > j) continue;
+//            dp[j] = max(dp[j], dp[j - it[i].first] + it[i].second);
+//        }
+//    }
+//    cout << dp[V] << endl;
+//    //dp1[i][j]为只看前i个物品，重量刚好为j的最大物品价值
+//    //状态转移时，必须确定前面一个背包里重量是真实的，若价值为0则不真实
+//    vector<int> dp1(V + 1, 0);
+//    for (int i = 0; i < n; ++i)
+//    {
+//        for (int j = V; j >= 0; --j)
+//        {
+//            if (it[i].first > j) continue;
+//            else if (it[i].first == j)
+//                dp1[j] = max(dp1[j], it[i].second);
+//            else if (dp1[j - it[i].first] > 0)
+//                dp1[j] = max(dp1[j], dp1[j - it[i].first] + it[i].second);
+//        }
+//    }
+//    cout << dp1[V] << endl;
+//}
+
+
+
+//416. 分割等和子集
+//class Solution {
+//public:
+//    bool canPartition(vector<int>& nums) {
+//        long long sum = 0;
+//        for (int e : nums)
+//            sum += e;
+//        if (sum % 2 == 1)    return false;
+//        sum /= 2;//需要的目标值
+//        //dp[i][j]为只看前i项而值是否能为j
+//        //状态转移：dp[i][j] = dp[i - 1][j - nums[i]] == true ? true : false;
+//        //省略i这一维
+//        vector<bool> dp(sum + 1, false);
+//        dp[0] = true;//空集和为0，也就是必定存在为0
+//        for (int i = 0; i < nums.size(); ++i)
+//        {
+//            for (int j = sum; j >= 0; --j)
+//            {
+//                if (j >= nums[i])
+//                    dp[j] = dp[j - nums[i]] == true ? true : false || dp[j];
+//            }
+//        }
+//        return dp[sum];
+//    }
+//};
+
+
+
+//494. 目标和
+//class Solution {
+//public:
+//    int findTargetSumWays(vector<int>& nums, int target) {
+//        //设我们的选择中所有+的加起来为a，-的加起来为b
+//        //可得a + b 等于 sum(nums[i])，a - b 等于 target
+//        //所有 a 等于 (sum + target) / 2
+//        //因此找到所有加起来结果为a的情况就是答案
+//        int sum = 0;
+//        for (auto& e : nums)
+//            sum += e;
+//        int a = (sum + target) / 2;
+//        if (a < 0 || (sum + target) % 2) return 0;
+//        //dp[i][j]为只看前i项和为j的数目, 省略i这一维
+//        vector<int> dp(a + 1, 0);
+//        dp[0] = 1;
+//        for (int i = 0; i < nums.size(); ++i)
+//        {
+//            for (int j = a; j >= 0; --j)
+//            {
+//                if (j >= nums[i])
+//                {
+//                    dp[j] += dp[j - nums[i]];
+//                }
+//            }
+//        }
+//        return dp[a];
+//    }
+//};
+
+
+
+#include<iostream>
 #include<vector>
-#include<utility>
 using namespace std;
 
-int main() {
-    //dp[i][j]为只看前i个物品，且重量最多为j的背包价值
-    //i这一维可省略
-    int n, V;
-    cin >> n >> V;
-    vector<pair<int, int>> it(n);
-    for (auto& t : it)
-    {
-        int a, b;
-        cin >> a >> b;
-        t = { a, b };
-    }
-    vector<int> dp(V + 1, 0);
-    for (int i = 0; i < n; ++i)
-    {
-        for (int j = V; j >= 0; --j)
+class Solution {
+public:
+    int lastStoneWeightII(vector<int>& stones) {
+        //因为两块石头重量相同则为0，不同则取差值，可以看作是石头前面加上+-
+        //要最后最小，就是要所有+的石头和-的石头总共重量最相近，所有问题就转换为：
+        //找到最接近sum/2的石头总和，差值*2即为答案
+        //dp[i][j]为只看前i个，和为j的可能性
+        //省略i这一维
+        float sum = 0;
+        for (auto& e : stones)
+            sum += e;
+        sum /= 2;
+        vector<bool> dp((int)sum + 1, false);
+        dp[0] = true;
+        for (int i = 0; i < stones.size(); ++i)
         {
-            if (it[i].first > j) continue;
-            dp[j] = max(dp[j], dp[j - it[i].first] + it[i].second);
+            for (int j = (int)sum; j >= 0; --j)
+            {
+                if (j - stones[i] >= 0)
+                    dp[j] = dp[j] || dp[j - stones[i]];
+            }
         }
-    }
-    cout << dp[V] << endl;
-    //dp1[i][j]为只看前i个物品，重量刚好为j的最大物品价值
-    //状态转移时，必须确定前面一个背包里重量是真实的，若价值为0则不真实
-    vector<int> dp1(V + 1, 0);
-    for (int i = 0; i < n; ++i)
-    {
-        for (int j = V; j >= 0; --j)
+        for (int j = (int)sum; j >= 0; --j)
         {
-            if (it[i].first > j) continue;
-            else if (it[i].first == j)
-                dp1[j] = max(dp1[j], it[i].second);
-            else if (dp[j - it[i].first] > 0)
-                dp1[j] = max(dp1[j], dp1[j - it[i].first] + it[i].second);
+            if (dp[j])
+                return (sum - j) * 2;
         }
+        return 0;
     }
-    cout << dp1[V] << endl;
+};
+
+int main()
+{
+    Solution s;
+    vector<int> stones = { 21,60,61,20,31 };
+    cout << s.lastStoneWeightII(stones) << endl;
+    return 0;
 }
