@@ -4326,45 +4326,140 @@
 
 
 
-#include<iostream>
-#include<vector>
-using namespace std;
+//1049. 最后一块石头的重量 II
+//#include<iostream>
+//#include<vector>
+//using namespace std;
+//
+//class Solution {
+//public:
+//    int lastStoneWeightII(vector<int>& stones) {
+//        //因为两块石头重量相同则为0，不同则取差值，可以看作是石头前面加上+-
+//        //要最后最小，就是要所有+的石头和-的石头总共重量最相近，所有问题就转换为：
+//        //找到最接近sum/2的石头总和，差值*2即为答案
+//        //dp[i][j]为只看前i个，和为j的可能性
+//        //省略i这一维
+//        float sum = 0;
+//        for (auto& e : stones)
+//            sum += e;
+//        sum /= 2;
+//        vector<bool> dp((int)sum + 1, false);
+//        dp[0] = true;
+//        for (int i = 0; i < stones.size(); ++i)
+//        {
+//            for (int j = (int)sum; j >= 0; --j)
+//            {
+//                if (j - stones[i] >= 0)
+//                    dp[j] = dp[j] || dp[j - stones[i]];
+//            }
+//        }
+//        for (int j = (int)sum; j >= 0; --j)
+//        {
+//            if (dp[j])
+//                return (sum - j) * 2;
+//        }
+//        return 0;
+//    }
+//};
+//
+//int main()
+//{
+//    Solution s;
+//    vector<int> stones = { 21,60,61,20,31 };
+//    cout << s.lastStoneWeightII(stones) << endl;
+//    return 0;
+//}
 
-class Solution {
-public:
-    int lastStoneWeightII(vector<int>& stones) {
-        //因为两块石头重量相同则为0，不同则取差值，可以看作是石头前面加上+-
-        //要最后最小，就是要所有+的石头和-的石头总共重量最相近，所有问题就转换为：
-        //找到最接近sum/2的石头总和，差值*2即为答案
-        //dp[i][j]为只看前i个，和为j的可能性
-        //省略i这一维
-        float sum = 0;
-        for (auto& e : stones)
-            sum += e;
-        sum /= 2;
-        vector<bool> dp((int)sum + 1, false);
-        dp[0] = true;
-        for (int i = 0; i < stones.size(); ++i)
-        {
-            for (int j = (int)sum; j >= 0; --j)
-            {
-                if (j - stones[i] >= 0)
-                    dp[j] = dp[j] || dp[j - stones[i]];
-            }
-        }
-        for (int j = (int)sum; j >= 0; --j)
-        {
-            if (dp[j])
-                return (sum - j) * 2;
-        }
-        return 0;
-    }
-};
 
-int main()
-{
-    Solution s;
-    vector<int> stones = { 21,60,61,20,31 };
-    cout << s.lastStoneWeightII(stones) << endl;
-    return 0;
-}
+
+
+//DP42 【模板】完全背包（牛客）
+//#include <iostream>
+//#include<vector>
+//using namespace std;
+//
+//int main() {
+//    int n = 0, V = 0;
+//    cin >> n >> V;
+//    vector<int> vol(n);
+//    vector<int> val(n);
+//    for (int i = 0; i < n; ++i)
+//        cin >> vol[i] >> val[i];
+//    //dp[i][j]为只看前i个，体积最多为j的最大价值
+//    vector<int> dp(V + 1, 0);
+//    for (int i = 0; i < n; ++i)
+//    {
+//        for (int j = 0; j <= V; ++j)
+//        {
+//            if (vol[i] <= j)
+//                dp[j] = max(dp[j], dp[j - vol[i]] + val[i]);
+//        }
+//    }
+//    cout << dp[V] << endl;
+//    //dp1[i][j]为只看前i个，体积刚好为j的最大价值
+//    //更新状态时，要确保所用的前面的dp1是存在的，也就是体积不为0，但dp1[0][0]是存在的
+//    vector<int> dp1(V + 1, 0);
+//    for (int i = 0; i < n; ++i)
+//    {
+//        for (int j = 0; j <= V; ++j)
+//        {
+//            if (vol[i] <= j && dp1[j - vol[i]])
+//                dp1[j] = max(dp1[j], dp1[j - vol[i]] + val[i]);
+//            if (vol[i] == j)//当前一个物品刚好装下
+//                dp1[j] = max(dp1[j], val[i]);
+//        }
+//    }
+//    cout << dp1[V] << endl;
+//}
+
+
+
+
+//377. 组合总和 Ⅳ
+//class Solution {
+//public:
+//    int combinationSum4(vector<int>& nums, int target) {
+//        sort(nums.begin(), nums.end());
+//        //dp[i]为组合为i的排列个数
+//        //hash
+//        vector<int> dp(target + 1, 0);
+//        dp[0] = 1;
+//        for (int i = 0; i <= target; ++i)
+//        {
+//            for (auto& e : nums) {
+//                if (i >= e)
+//                    dp[i] += dp[i - e];
+//            }
+//        }
+//        return dp[target];
+//    }
+//};
+
+
+
+//96. 不同的二叉搜索树
+//class Solution {
+//public:
+//    int numTrees(int n) {
+//        //以i为根的左子树有由 i-1 到 0 个节点的树的和数量
+//        //以i为根的右子树有由 i_max-i 到 0 个节点的树的和数量
+//        //节点有i个节点的树，一共就有 以i为根的 左子树*右子树的数量
+//        //root[i]为以i为根的二叉搜索树的种数(i为最大节点数)
+//        //dp[i]为由i个节点组成的二叉搜索树的种数
+//        if (n == 1) return 1;
+//        if (n == 2) return 2;
+//        vector<int> root(n + 1, 0);
+//        vector<int> dp(n + 1, 0);
+//        root[0] = root[1] = 1;
+//        dp[0] = dp[1] = 1;
+//        for (int i = 2; i <= n; ++i) {
+//            for (int j = 0; j < i; ++j)
+//            {
+//                dp[i] += root[j] * root[i - j - 1];
+//            }
+//            root[i] = dp[i];
+//        }
+//
+//        return dp[n];
+//    }
+//};
