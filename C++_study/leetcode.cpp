@@ -4463,3 +4463,43 @@
 //        return dp[n];
 //    }
 //};
+
+
+#include<iostream>
+#include<vector>
+using namespace std;
+
+class Solution {
+public:
+    vector<vector<int>> floodFill(vector<vector<int>>& image, int sr, int sc, int color) {
+        int init = image[sr][sc];
+        int dir[4][2] = { {-1, 0}, {0, 1}, {1, 0}, {0, -1} };
+        dfs(image, sr, sc, color, init, dir);
+        return image;
+
+    }
+    void dfs(vector<vector<int>>& image, int sr, int sc, int color, int init, int (&dir)[4][2])
+    {
+        if (sr < 0 || sc < 0 || sr >= image.size() || sc >= image[0].size() || image[sr][sc] != init)
+            return;
+        else
+        {
+            image[sr][sc] = color;
+            for (int i = 0; i < 4; ++i)
+            {
+                dfs(image, sr + dir[i][0], sc + dir[i][1], color, init, dir);
+            }
+        } 
+    }
+};
+
+int main()
+{
+    Solution s;
+    vector < vector<int>> image = { {1,1,1} ,{1,1,0},{1,0,1} };
+    int sr = 1, sc = 1;
+    int color = 2;
+    s.floodFill(image, sr, sc, color);
+    int a = 1;
+    return 0;
+}
