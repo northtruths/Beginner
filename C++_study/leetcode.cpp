@@ -4465,41 +4465,249 @@
 //};
 
 
+//733. 图像渲染
+//#include<iostream>
+//#include<vector>
+//using namespace std;
+//
+//class Solution {
+//public:
+//    vector<vector<int>> floodFill(vector<vector<int>>& image, int sr, int sc, int color) {
+//        int init = image[sr][sc];
+//        int dir[4][2] = { {-1, 0}, {0, 1}, {1, 0}, {0, -1} };
+//        vector<vector<int>> hash(image.size(), vector<int>(image[0].size(), 0));
+//        dfs(image, hash, sr, sc, color, init, dir);
+//        if (init == color)
+//        {
+//            for (int i = 0; i < image.size(); ++i)
+//            {
+//                for (int j = 0; j < image[0].size(); ++j)
+//                {
+//                    if (hash[i][j])
+//                        image[i][j] = color;
+//                }
+//            }
+//        }
+//        return image;
+//
+//    }
+//    void dfs(vector<vector<int>>& image, vector<vector<int>>& hash, int sr, int sc, int color, int init, int(&dir)[4][2])
+//    {
+//        if (sr < 0 || sc < 0 || sr >= image.size() || sc >= image[0].size() || image[sr][sc] != init)
+//            return;
+//        else
+//        {
+//            if (init == color)
+//                image[sr][sc] = color + 1;//避免需要改的颜色和改成颜色相同而死循环
+//            else
+//                image[sr][sc] = color;
+//            hash[sr][sc] = 1;
+//            for (int i = 0; i < 4; ++i)
+//            {
+//                dfs(image, hash, sr + dir[i][0], sc + dir[i][1], color, init, dir);
+//            }
+//        }
+//    }
+//};
+//
+//
+//int main()
+//{
+//    Solution s;
+//    vector < vector<int>> image = { {1,1,1} ,{1,1,0},{1,0,1} };
+//    int sr = 1, sc = 1;
+//    int color = 2;
+//    s.floodFill(image, sr, sc, color);
+//    int a = 1;
+//    return 0;
+//}
+
+
+
+
+//200. 岛屿数量
+//class Solution {
+//public:
+//    int numIslands(vector<vector<char>>& grid) {
+//        //遍历扫描网格，每遇见一个陆地就搜索相邻所有陆地，并将其改为水，当一个块搜索完就数量加一
+//        int dir[4][2] = { {1, 0}, {-1, 0}, {0, 1}, {0, -1} };
+//        int ret = 0;
+//        for (int i = 0; i < grid.size(); ++i)
+//        {
+//            for (int j = 0; j < grid[0].size(); ++j)
+//            {
+//                if (grid[i][j] == '1')
+//                {
+//                    ++ret;
+//                    dfs(grid, i, j, dir);
+//                }
+//            }
+//        }
+//        return ret;
+//    }
+//
+//    void dfs(vector<vector<char>>& grid, int row, int col, int(&dir)[4][2])
+//    {
+//        if (row < 0 || col < 0 || row >= grid.size() || col >= grid[0].size() || grid[row][col] == '0')
+//            return;
+//        else
+//        {
+//            grid[row][col] = '0';
+//            for (auto& d : dir)
+//            {
+//                dfs(grid, row + d[0], col + d[1], dir);
+//            }
+//        }
+//    }
+//
+//};
+
+
+
+//695. 岛屿的最大面积
+//class Solution {
+//public:
+//    int maxAreaOfIsland(vector<vector<int>>& grid) {
+//        //floodfill法，记录最大
+//        int dir[4][2] = { {1, 0}, {-1, 0}, {0, 1}, {0, -1} };
+//        int ret = 0;
+//        for (int i = 0; i < grid.size(); ++i)
+//        {
+//            for (int j = 0; j < grid[0].size(); ++j)
+//            {
+//                int cur = 0;
+//                dfs(grid, i, j, dir, cur);
+//                ret = max(ret, cur);
+//            }
+//        }
+//        return ret;
+//    }
+//
+//    int dfs(vector<vector<int>>& grid, int row, int col, int(&dir)[4][2], int& cur)
+//    {
+//        if (row < 0 || col < 0 || row >= grid.size() || col >= grid[0].size() || grid[row][col] == 0)
+//            return 0;
+//        else
+//        {
+//            grid[row][col] = 0;
+//            ++cur;
+//            for (auto& e : dir)
+//            {
+//                dfs(grid, row + e[0], col + e[1], dir, cur);
+//            }
+//            return cur;
+//        }
+//    }
+//};
+
+
+
+
+
+//130. 被围绕的区域
+//class Solution {
+//public:
+//    void solve(vector<vector<char>>& board) {
+//        //因为未被捕获的区域，与其相连的所有格子中一定会至少有一个在矩阵边缘，
+//        //所以我只找边缘的0，并将与其相连的区域标记，这块区域将不会被捕获，而其他所有0都会被捕获
+//        vector<vector<bool>> hash(board.size(), vector<bool>(board[0].size(), true));//记录当前格子是否会被捕获，false则不会
+//        int dir[4][2] = { {1, 0}, {-1, 0}, {0, 1}, {0, -1} };
+//        int row = board.size(), col = board[0].size();
+//        for (int i = 0; i < col; ++i)//第一行和最后一行
+//        {
+//            dfs(board, 0, i, dir, hash);
+//            dfs(board, row - 1, i, dir, hash);
+//        }
+//        for (int i = 0; i < row; ++i)//第一列和最后一列
+//        {
+//            dfs(board, i, 0, dir, hash);
+//            dfs(board, i, col - 1, dir, hash);
+//        }
+//        for (int i = 0; i < row; ++i)
+//        {
+//            for (int j = 0; j < col; ++j)
+//            {
+//                if (board[i][j] == 'O' && hash[i][j] == true)
+//                    board[i][j] = 'X';
+//            }
+//        }
+//    }
+//
+//    void dfs(vector<vector<char>>& board, int row, int col, int(&dir)[4][2], vector<vector<bool>>& hash)
+//    {
+//        if (row < 0 || col < 0 || row >= board.size() || col >= board[0].size()
+//            || board[row][col] == 'X' || hash[row][col] == false)//若当前位置不合法，或已经捕获，或已确定不能捕获则跳过
+//            return;
+//        else
+//        {
+//            hash[row][col] = false;//因为初始格子是从边缘来，所以不能捕获
+//            for (auto& e : dir)
+//            {
+//                dfs(board, row + e[0], col + e[1], dir, hash);
+//            }
+//        }
+//    }
+//};
+
+
+
 #include<iostream>
 #include<vector>
 using namespace std;
 
 class Solution {
 public:
-    vector<vector<int>> floodFill(vector<vector<int>>& image, int sr, int sc, int color) {
-        int init = image[sr][sc];
-        int dir[4][2] = { {-1, 0}, {0, 1}, {1, 0}, {0, -1} };
-        dfs(image, sr, sc, color, init, dir);
-        return image;
-
+    vector<vector<int>> pacificAtlantic(vector<vector<int>>& heights) {
+        //从上下左右这四边，分别开始遍历搜索，搜索条件为大于等于当前位置
+        //左上和右下分别计算，若能流入大海记录，获得两个记录的格子及为答案
+        int row = heights.size(), col = heights[0].size();
+        vector<vector<bool>> lh(row, vector<bool>(col, false));//左上太平洋
+        vector<vector<bool>> rd(row, vector<bool>(col, false));//右下大西洋
+        int dir[4][2] = { {1, 0}, {-1, 0}, {0, 1}, {0, -1} };
+        for (int i = 0; i < col; ++i)
+        {
+            dfs(heights, 0, i, dir, lh, 0);
+            dfs(heights, row - 1, i, dir, rd, 0);
+        }
+        for (int i = 0; i < row; ++i)
+        {
+            dfs(heights, i, 0, dir, lh, 0);
+            dfs(heights, i, col - 1, dir, rd, 0);
+        }
+        vector<vector<int>> ret;
+        for (int i = 0; i < row; ++i)
+        {
+            for (int j = 0; j < col; ++j)
+            {
+                if (lh[i][j] && rd[i][j])
+                {
+                    ret.push_back({ i, j });
+                }
+            }
+        }
+        return ret;
     }
-    void dfs(vector<vector<int>>& image, int sr, int sc, int color, int init, int (&dir)[4][2])
+
+    void dfs(vector<vector<int>>& heights, int row, int col, int (&dir)[4][2], vector<vector<bool>>& hash, int pre)
     {
-        if (sr < 0 || sc < 0 || sr >= image.size() || sc >= image[0].size() || image[sr][sc] != init)
+        if (row < 0 || col < 0 || row >= heights.size() || col >= heights[0].size() || heights[row][col] < pre)
             return;
         else
         {
-            image[sr][sc] = color;
-            for (int i = 0; i < 4; ++i)
+            hash[row][col] = true;
+            int cur = heights[row][col];
+            for (auto& e : dir)
             {
-                dfs(image, sr + dir[i][0], sc + dir[i][1], color, init, dir);
+                dfs(heights, row + e[0], col + e[1], dir, hash, cur);
             }
-        } 
+        }
     }
 };
 
 int main()
 {
     Solution s;
-    vector < vector<int>> image = { {1,1,1} ,{1,1,0},{1,0,1} };
-    int sr = 1, sc = 1;
-    int color = 2;
-    s.floodFill(image, sr, sc, color);
-    int a = 1;
+    vector<vector<int>> heights = {{1, 2, 2, 3, 5}, {3, 2, 3, 4, 4}, {2, 4, 5, 3, 1}, {6, 7, 1, 4, 5}, {5, 1, 1, 2, 4}};
+    s.pacificAtlantic(heights);
     return 0;
 }
