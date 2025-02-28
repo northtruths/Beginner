@@ -4650,64 +4650,318 @@
 //};
 
 
+//417. 太平洋大西洋水流问题
+//#include<iostream>
+//#include<vector>
+//using namespace std;
+//
+//class Solution {
+//public:
+//    vector<vector<int>> pacificAtlantic(vector<vector<int>>& heights) {
+//        //从上下左右这四边，分别开始遍历搜索，搜索条件为大于等于当前位置
+//        //左上和右下分别计算，若能流入大海记录，获得两个记录的格子及为答案
+//        int row = heights.size(), col = heights[0].size();
+//        vector<vector<bool>> lh(row, vector<bool>(col, false));//左上太平洋
+//        vector<vector<bool>> rd(row, vector<bool>(col, false));//右下大西洋
+//        int dir[4][2] = { {1, 0}, {-1, 0}, {0, 1}, {0, -1} };
+//        for (int i = 0; i < col; ++i)
+//        {
+//            dfs(heights, 0, i, dir, lh, 0);
+//            dfs(heights, row - 1, i, dir, rd, 0);
+//        }
+//        for (int i = 0; i < row; ++i)
+//        {
+//            dfs(heights, i, 0, dir, lh, 0);
+//            dfs(heights, i, col - 1, dir, rd, 0);
+//        }
+//        vector<vector<int>> ret;
+//        for (int i = 0; i < row; ++i)
+//        {
+//            for (int j = 0; j < col; ++j)
+//            {
+//                if (lh[i][j] && rd[i][j])
+//                {
+//                    ret.push_back({ i, j });
+//                }
+//            }
+//        }
+//        return ret;
+//    }
+//
+//    void dfs(vector<vector<int>>& heights, int row, int col, int (&dir)[4][2], vector<vector<bool>>& hash, int pre)
+//    {
+//        if (row < 0 || col < 0 || row >= heights.size() || col >= heights[0].size() || heights[row][col] < pre)
+//            return;
+//        else
+//        {
+//            hash[row][col] = true;
+//            int cur = heights[row][col];
+//            for (auto& e : dir)
+//            {
+//                dfs(heights, row + e[0], col + e[1], dir, hash, cur);
+//            }
+//        }
+//    }
+//};
+//
+//int main()
+//{
+//    Solution s;
+//    vector<vector<int>> heights = {{1, 2, 2, 3, 5}, {3, 2, 3, 4, 4}, {2, 4, 5, 3, 1}, {6, 7, 1, 4, 5}, {5, 1, 1, 2, 4}};
+//    s.pacificAtlantic(heights);
+//    return 0;
+//}
 
-#include<iostream>
-#include<vector>
-using namespace std;
 
-class Solution {
-public:
-    vector<vector<int>> pacificAtlantic(vector<vector<int>>& heights) {
-        //从上下左右这四边，分别开始遍历搜索，搜索条件为大于等于当前位置
-        //左上和右下分别计算，若能流入大海记录，获得两个记录的格子及为答案
-        int row = heights.size(), col = heights[0].size();
-        vector<vector<bool>> lh(row, vector<bool>(col, false));//左上太平洋
-        vector<vector<bool>> rd(row, vector<bool>(col, false));//右下大西洋
-        int dir[4][2] = { {1, 0}, {-1, 0}, {0, 1}, {0, -1} };
-        for (int i = 0; i < col; ++i)
-        {
-            dfs(heights, 0, i, dir, lh, 0);
-            dfs(heights, row - 1, i, dir, rd, 0);
-        }
-        for (int i = 0; i < row; ++i)
-        {
-            dfs(heights, i, 0, dir, lh, 0);
-            dfs(heights, i, col - 1, dir, rd, 0);
-        }
-        vector<vector<int>> ret;
-        for (int i = 0; i < row; ++i)
-        {
-            for (int j = 0; j < col; ++j)
-            {
-                if (lh[i][j] && rd[i][j])
-                {
-                    ret.push_back({ i, j });
-                }
-            }
-        }
-        return ret;
-    }
 
-    void dfs(vector<vector<int>>& heights, int row, int col, int (&dir)[4][2], vector<vector<bool>>& hash, int pre)
-    {
-        if (row < 0 || col < 0 || row >= heights.size() || col >= heights[0].size() || heights[row][col] < pre)
-            return;
-        else
-        {
-            hash[row][col] = true;
-            int cur = heights[row][col];
-            for (auto& e : dir)
-            {
-                dfs(heights, row + e[0], col + e[1], dir, hash, cur);
-            }
-        }
-    }
-};
 
-int main()
-{
-    Solution s;
-    vector<vector<int>> heights = {{1, 2, 2, 3, 5}, {3, 2, 3, 4, 4}, {2, 4, 5, 3, 1}, {6, 7, 1, 4, 5}, {5, 1, 1, 2, 4}};
-    s.pacificAtlantic(heights);
-    return 0;
-}
+//529. 扫雷游戏
+//class Solution {
+//public:
+//    vector<vector<char>> updateBoard(vector<vector<char>>& board, vector<int>& click) {
+//        int dir[8][2] = { {1, 1}, {1, -1}, {1, 0}, {0, 1}, {0, -1}, {-1, 1}, {-1, 0}, {-1, -1} };
+//        bool game_state = true;
+//        dfs(board, click[0], click[1], dir, game_state);
+//        return board;
+//    }
+//
+//    void dfs(vector<vector<char>>& board, int r, int c, int(&dir)[8][2], bool& game)
+//    {
+//        if (r < 0 || c < 0 || r >= board.size() || c >= board[0].size() || game == false)
+//            return;
+//        if (board[r][c] == 'M')
+//        {
+//            board[r][c] = 'X';
+//            game = false;
+//            return;
+//        }
+//        if (board[r][c] == 'E')
+//        {
+//            int count = Count(board, r, c, dir);
+//            if (count == 0)
+//            {
+//                board[r][c] = 'B';
+//                for (auto& e : dir)
+//                    dfs(board, r + e[0], c + e[1], dir, game);
+//            }
+//            else
+//                board[r][c] = 48 + count;
+//        }
+//
+//    }
+//
+//    //计算当前位置周围的地雷数量
+//    int Count(vector<vector<char>>& board, int r, int c, int(&dir)[8][2])
+//    {
+//        int ret = 0;
+//        for (auto& e : dir)
+//        {
+//            int nr = r + e[0];
+//            int nc = c + e[1];
+//            if (!(nr < 0 || nc < 0 || nr >= board.size() || nc >= board[0].size()))
+//            {
+//                if (board[nr][nc] == 'M')
+//                    ++ret;
+//            }
+//        }
+//        return ret;
+//    }
+//};
+
+
+
+//LCR 130. 衣橱整理
+//#include<iostream>
+//#include<vector>
+//using namespace std;
+
+//class Solution {
+//public:
+//    int wardrobeFinishing(int m, int n, int cnt) {
+//        int count = 0;
+//        int dir[4][2] = { {1, 0}, {-1, 0}, {0, 1}, {0, -1} };
+//        vector<vector<int>> grid(m, vector<int>(n, 0));
+//        for (int i = 0; i < m; ++i)
+//            for (int j = 0; j < n; ++j)
+//                grid[i][j] = digit(i) + digit(j);
+//
+//        dfs(grid, dir, 0, 0, count, cnt);
+//        return count;
+//    }
+//
+//private:
+//
+//    void dfs(vector<vector<int>>& grid, int(&dir)[4][2], int row, int col, int& count, int cnt)
+//    {
+//        if (row < 0 || col < 0 || row >= grid.size() || col >= grid[0].size()
+//            || grid[row][col] > cnt)
+//            return;
+//        ++count;
+//        grid[row][col] = cnt + 1;
+//        for (auto& e : dir)
+//        {
+//            dfs(grid, dir, row + e[0], col + e[1], count, cnt);
+//        }
+//    }
+//    int digit(int x)
+//    {
+//        int ret = 0;
+//        while (x)
+//        {
+//            ret += x % 10;
+//            x /= 10;
+//        }
+//        return ret;
+//    }
+//
+//};
+//
+//int main()
+//{
+//    Solution s;
+//    cout << s.wardrobeFinishing(16, 16, 4);
+//    return 0;
+//}
+
+
+
+//509. 斐波那契数(记忆化搜索)
+//#include<vector>
+//using namespace std;
+//class Solution {
+//public:
+//    Solution()
+//    {
+//        arr.resize(31, -1);
+//    }
+//    int fib(int n) {
+//        if (arr[n] != -1)
+//            return arr[n];
+//        if (n == 1 || n == 0)
+//        {
+//            arr[n] = n;
+//            return n;
+//        }
+//        arr[n] = fib(n - 1) + fib(n - 2);
+//        return arr[n];
+//    }
+//private:
+//    vector<int> arr;
+//
+//};
+
+
+
+//62. 不同路径(记忆化搜索)
+//#include<iostream>
+//#include<vector>
+//using namespace std;
+//class Solution {
+//public:
+//    int uniquePaths(int m, int n) {
+//        //记忆化搜索
+//        //递归，start到终点的路径等于右边到和下边到加起来，问题分解为右边和下边加起来的和，递归下去
+//        //dfs就为 (x, y)到终点的路径
+//        vector<vector<int>> grid(m, vector<int>(n, 0));
+//        grid[m - 1][n - 1] = 1;//终点到终点的路径只有一条，就是不动
+//        return dfs(grid, 0, 0);
+//    }
+//
+//    int dfs(vector<vector<int>>& grid, int r, int c)
+//    {
+//        if (r < 0 || c < 0 || r >= grid.size() || c >= grid[0].size())
+//            return 0;
+//        if (grid[r][c] != 0)//已经来过
+//            return grid[r][c];
+//        grid[r][c] = dfs(grid, r + 1, c) + dfs(grid, r, c + 1);
+//        return grid[r][c];
+//    }
+//};
+//
+//int main()
+//{
+//    Solution s;
+//    cout << s.uniquePaths(3, 7);
+//    return 0;
+//}
+
+
+//300. 最长递增子序列(记忆化搜索)
+//#include<iostream>
+//#include<vector>
+//using namespace std;
+//
+//class Solution {
+//public:
+//    int lengthOfLIS(vector<int>& nums) {
+//        //记忆化搜索，遍历数组，从每个元素开始，再遍历这个元素后面的所有元素，
+//        //若这个元素大于上个元素，则长度等于1 + 从个元素开始的最长长度
+//        //dfs为从下标为i的元素开始，这个序列的最长子序列长度
+//        vector<int> memory(nums.size());
+//        memory[memory.size() - 1] = 1;
+//        int ret = 1;
+//        for (int i = nums.size() - 1; i >= 0; --i)
+//        {
+//            ret = max(ret, dfs(nums, i, memory));
+//        }
+//        return ret;
+//    }
+//
+//    int dfs(vector<int>& nums, int i, vector<int>& memory)
+//    {
+//        if (memory[i])
+//            return memory[i];
+//        for (int j = i + 1; j < nums.size(); ++j)
+//        {
+//            if (nums[j] > nums[i]) {
+//                memory[i] = max(memory[i], dfs(nums, j, memory) + 1);
+//            }
+//        }
+//        return max(1, memory[i]);
+//    }
+//};
+//
+//int main()
+//{
+//    Solution s;
+//    vector<int> nums = { 1,3,6,7,9,4,10,5,6 };
+//    cout << s.lengthOfLIS(nums);
+//    return 0;
+//}
+
+
+//375. 猜数字大小 II
+//#include<vector>
+//#include<iostream>
+//using namespace std;
+//
+//class Solution {
+//public:
+//    int getMoneyAmount(int n) {
+//        //遍历1~n，初始数字选择，然后二分，计算每个不同的初始位置的最终结果，最后找最小值
+//        //dfs就为区间[left, right]最坏情况最小金额， 答案为两边较大的加上选择的初始节点
+//        int memory[205][205] = { 0 };
+//        return dfs(memory, 1, n);
+//    }
+//
+//    int dfs(int(&memory)[205][205], int left, int right)
+//    {
+//        if (left >= right)
+//            return 0;
+//        if (memory[left][right])
+//            return memory[left][right];
+//        int ret = INT_MAX;
+//        for (int i = left; i <= right; ++i)
+//        {
+//            ret = min(ret, max(dfs(memory, left, i - 1), dfs(memory, i + 1, right)) + i);
+//        }
+//        memory[left][right] = ret;
+//        return ret;
+//    }
+//};
+//
+//int main()
+//{
+//    Solution s;
+//    return 0;
+//}
