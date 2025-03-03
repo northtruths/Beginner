@@ -4965,3 +4965,96 @@
 //    Solution s;
 //    return 0;
 //}
+
+//#include<iostream>
+//using namespace std;
+//void f()
+//{
+//	int t = 2;
+//	static int a = 1;
+//	cout << a << endl;
+//}
+//int main()
+//{
+//	int t = 2;
+//	f();
+//	return 0;
+//}
+
+
+
+
+
+//#include<iostream>
+//#include<string>
+//#include<unordered_map> 
+//
+//using namespace std;
+//
+//int main() {
+//	string S = "ANQNANBNQNANQNQNBNINQNQNANQNINANQNANBNQNANQNQNBNBNQNQNANQNINANQNANBNQNANQNQNBNINQNQNANQNINBNQNANBNQN";
+//	//从第i个位置起,获取以它为头的1~10长度的字串，然后遍历计数 
+//	//设置一个hash判断这个字串是否找过
+//	unordered_map <string> hash
+//		return 0;
+//}
+
+
+//#include<iostream>
+//#include<string>
+//#include<unordered_map>
+//using namespace std;
+//class Solution {
+//public:
+//    int longestPalindromicSubsequence(string s, int k) {
+//        //寻找以i为中心和以 i、i+1为中心的回文
+//        //中心两边的字符差就是需要的操作次数，只要操作次数还够，就可以变为回文
+//        int n = s.size();
+//        unordered_map<int, int> hash;//两字符差值的最小距离
+//        for (int i = 0; i < 26; ++i) {
+//            if (i <= 13)
+//                hash[i] = i;
+//            else
+//                hash[i] = hash[i - 1] - 1;
+//        }
+//        int ret = 1;
+//        //中心为单个
+//        for (int i = 0; i < n; ++i) {
+//            int cur_k = k;
+//            int cur_ret = 1;
+//            int left = i - 1, right = i + 1;
+//            while (left >= 0 && right < n && cur_k >= 0) {
+//                cur_k -= hash[abs(s[left] - s[right])];
+//                if (cur_k >= 0) {
+//                    cur_ret += 2;
+//                }
+//                --left; ++right;
+//            }
+//            ret = max(ret, cur_ret);
+//        }
+//        //中心为两个
+//        for (int i = 0; i < n - 1; ++i) {
+//            int cur_k = k - hash[abs(s[i] - s[i + 1])];
+//            if (cur_k < 0) continue;
+//            int cur_ret = 2;
+//            int left = i - 1, right = i + 2;
+//            while (left >= 0 && right < n && cur_k >= 0) {
+//                cur_k -= hash[abs(s[left] - s[right])];
+//                if (cur_k >= 0) {
+//                    cur_ret += 2;
+//                }
+//                --left; ++right;
+//            }
+//            ret = max(ret, cur_ret);
+//        }
+//        return ret;
+//    }
+//};
+//
+//int main()
+//{
+//    Solution s;
+//    cout << s.longestPalindromicSubsequence("wehzr", 3);
+//    return 0;
+//}
+
