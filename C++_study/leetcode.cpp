@@ -5058,3 +5058,45 @@
 //    return 0;
 //}
 
+
+//class Solution {
+//public:
+//    int minCost(vector<int>& nums) {
+//        //dfs为前两个元素下标为i、j的最小值
+//        int n = nums.size();
+//        vector<vector<int>> dp(n, vector<int>(n));
+//        return dfs(nums, dp, 0, 1);
+//
+//    }
+//    int dfs(vector<int>& nums, vector<vector<int>>& dp, int i, int j)
+//    {
+//        if (j >= nums.size() - 1)
+//        {
+//            if (j == nums.size() - 1) return max(nums[i], nums[j]);
+//            else return nums[i];
+//        }
+//        if (dp[i][j]) return dp[i][j];
+//        int a = max(nums[j], nums[j + 1]) + dfs(nums, dp, i, j + 2);
+//        int b = max(nums[i], nums[j]) + dfs(nums, dp, j + 1, j + 2);
+//        int c = max(nums[i], nums[j + 1]) + dfs(nums, dp, j, j + 2);
+//        dp[i][j] = min(min(a, b), c);
+//        return dp[i][j];
+//
+//    }
+//};
+
+
+//#include<iostream>
+//using namespace std;
+//// decltype的一些使用使用场景
+//template<class T1, class T2>
+//void F(T1 t1, T2 t2)
+//{
+//	decltype(t1 * t2) ret;
+//	cout << typeid(ret).name() << endl;
+//}
+//int main()
+//{
+//
+//	return 0;
+}
