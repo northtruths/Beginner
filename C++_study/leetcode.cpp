@@ -5100,3 +5100,41 @@
 //
 //	return 0;
 }
+
+
+
+//329. 矩阵中的最长递增路径
+//class Solution {
+//public:
+//    int longestIncreasingPath(vector<vector<int>>& matrix) {
+//        //dfs为从ij位置开始的最长路径，并且用个哈希将这个位置的最长路径记录
+//        //当遇到有存储路径长度的地方，当前方向的最长路径直接为 当前已有长度加上hash[当前位置]
+//        //因为移动条件是值递增，所以衔接以前记录的路径时，之前走过的路径不会再走，因为之前走过的都是比当前小的，后面要走的都是比当前大的
+//        int m = matrix.size(), n = matrix[0].size();
+//        vector<vector<int>> hash(m, vector<int>(n));
+//        int dir[4][2] = { {1, 0}, {-1, 0}, {0, 1}, {0, -1} };
+//        int ret = 0;
+//        for (int i = 0; i < m; ++i)
+//        {
+//            for (int j = 0; j < n; ++j)
+//            {
+//                ret = max(ret, dfs(matrix, i, j, dir, hash, -1));
+//            }
+//        }
+//        return ret;
+//    }
+//    int dfs(vector<vector<int>>& matrix, int i, int j, int(&dir)[4][2], vector<vector<int>>& hash, int pre)
+//    {
+//        if (i < 0 || j < 0 || i >= matrix.size() || j >= matrix[0].size()
+//            || matrix[i][j] <= pre)
+//            return 0;
+//        if (hash[i][j])  return hash[i][j];
+//        int ret = 0;
+//        for (auto& e : dir)
+//        {
+//            ret = max(ret, 1 + dfs(matrix, i + e[0], j + e[1], dir, hash, matrix[i][j]));
+//        }
+//        hash[i][j] = ret;
+//        return ret;
+//    }
+//};
