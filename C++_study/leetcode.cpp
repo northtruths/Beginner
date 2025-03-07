@@ -5099,7 +5099,7 @@
 //{
 //
 //	return 0;
-}
+//}
 
 
 
@@ -5138,3 +5138,231 @@
 //        return ret;
 //    }
 //};
+
+
+
+//2208. 将数组和减半的最少操作次数
+//#include<iostream>
+//#include<vector>
+//#include<algorithm>
+//using namespace std;
+//
+//class Solution {
+//public:
+//    int halveArray(vector<int>& nums) {
+//        priority_queue<double> pq;
+//        double sum = 0;
+//        for (auto& e : nums)
+//        {
+//            sum += e;
+//            pq.push(e);
+//        }
+//        double need = sum / 2;
+//        int ret = 0;
+//        while (need > 0)
+//        {
+//            ++ret;
+//            double half = pq.top() / 2;
+//            need -= half;
+//            pq.pop();
+//            pq.push(half);
+//        }
+//        return ret;
+//    }
+//};
+//int main()
+//{
+//    Solution s;
+//    vector<int> v = { 6,58,10,84,35,8,22,64,1,78,86,71,77 };
+//    cout << s.halveArray(v);
+//    return 0;
+//}
+
+
+//179. 最大数
+//#include<iostream>
+//#include<string>
+//#include<vector>
+//#include<algorithm>
+//using namespace std;
+//
+//class Solution {
+//public:
+//    string largestNumber(vector<int>& nums) {
+//        int zero = 0;
+//        int n = nums.size();
+//        vector<string> vs(n);
+//        for (int i = 0; i < n; ++i)
+//        {
+//            vs[i] = to_string(nums[i]);
+//            if (nums[i] == 0) ++zero;
+//        }
+//        if (zero == n)
+//            return "0";
+//        sort(vs.begin(), vs.end(), [](string& s1, string& s2)->bool {return s1 + s2 > s2 + s1; });
+//        string ret;
+//        for (auto& e : vs)
+//            ret += e;
+//        return ret;
+//
+//    }
+//};
+//
+//int main()
+//{
+//    Solution s;
+//    vector<int> nums = { 34323,3432 };
+//    cout << s.largestNumber(nums) << endl;
+//    return 0;
+//}
+
+
+
+//376. 摆动序列（贪心策略）
+//class Solution {
+//public:
+//    int wiggleMaxLength(vector<int>& nums) {
+//        //贪心策略：当前减去前面是正则尽可能大，是负则尽可能小，如：9 5 10 优先度高于 9 8 10
+//        //遍历数组，找到转折点，转折点的位置为前面所有的最大/最小,相等则忽略
+//        if (nums.size() == 1) return 1;
+//        int ret = 1;//初始长度为1，为数组第一个元素
+//        int pre = nums[0];
+//        bool flag = 0;//正负，1正 0负
+//        int i = 1;//当前位置（下标）
+//        for (i; i < nums.size(); ++i)//寻找第一个转折点确定初始正负
+//        {
+//            if (nums[i] == nums[i - 1]) continue;
+//            else if (nums[i] > nums[i - 1])
+//            {
+//                flag = 1;
+//                pre = nums[i];
+//                ++ret;
+//                ++i;
+//                break;
+//            }
+//            else
+//            {
+//                flag = 0;
+//                pre = nums[i];
+//                ++ret;
+//                ++i;
+//                break;
+//            }
+//        }
+//        for (i; i < nums.size(); ++i)
+//        {
+//            if (nums[i] == pre) continue;
+//            if (flag)//如果前面为正
+//            {
+//                if (nums[i] < pre)
+//                {
+//                    flag = 0;
+//                    ++ret;
+//                }
+//            }
+//            else//如果前面为负
+//            {
+//                if (nums[i] > pre)
+//                {
+//                    flag = 1;
+//                    ++ret;
+//                }
+//            }
+//            pre = nums[i];
+//        }
+//        return ret;
+//    }
+//};
+
+//#include<iostream>
+//#include<vector>
+//#include<cstdlib>
+//#include<time.h>
+//using namespace std;
+//
+//int main()
+//{
+//	cout << rand();
+//	srand((unsigned int)time(0));
+//	int a = 1;
+//	while (a)
+//	{
+//		cout << rand() << endl;
+//		cin >> a;
+//	}
+//	//int a = 0;
+//	//cin >> a;
+//	//switch (a)
+//	//{
+//	//case 1:
+//	//	printf("111");
+//	//	cout << "test" << endl;
+//	//	break;
+//	//case 2:
+//	//	cout << "222" << endl;
+//	//case 3:
+//	//	cout << "333" << endl;
+//	//}
+//	return 0;
+//}
+
+//int get_rand(int a)
+//{
+//	char arr;
+//	long long p = (long long)&arr;
+//	if (p < 0) p *= -1;
+//	p /= a;
+//	p %= 8;
+//	return p % 8;
+//}
+//
+//#include<iostream>
+//using namespace std;
+//
+//int main()
+//{
+//	int a = 1;
+//	while (a++)
+//		cout << get_rand(a) + 1 << endl;
+//	return 0;
+//}
+
+
+int P1 = 0;
+int led1 = P1 ^ 0; int led2 = P1 ^ 0; int led3 = P1 ^ 0; int led4 = P1 ^ 0; int led5 = P1 ^ 0; int led6 = P1 ^ 0; int led7 = P1 ^ 0; int led8 = P1 ^ 0;
+
+int get_rand(int i)
+{
+	char c;
+	long p = (long)&c;
+	p /= i;
+	return p %= 8;
+}
+void main() {
+	int i = 1;
+	while (1)
+	{
+		P1 = 0;
+		switch (get_rand(i++) + 1)
+		{
+		case 1:
+			led1 = 0B00000001; break;
+		case 2:
+			led2 = 0B00000010; break;
+		case 3:
+			led3 = 0B00000100; break;
+		case 4:
+			led4 = 0B00001000; break;
+		case 5:
+			led5 = 0B00010000; break;
+		case 6:
+			led6 = 0B00100000; break;
+		case 7:
+			led7 = 0B01000000; break;
+		case 8:
+			led8 = 0B10000000; break;
+		}
+		i %= 1000 + 1;
+		if (i == 1000) break;
+	}
+}
