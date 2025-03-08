@@ -5328,41 +5328,40 @@
 //}
 
 
-int P1 = 0;
-int led1 = P1 ^ 0; int led2 = P1 ^ 0; int led3 = P1 ^ 0; int led4 = P1 ^ 0; int led5 = P1 ^ 0; int led6 = P1 ^ 0; int led7 = P1 ^ 0; int led8 = P1 ^ 0;
+#include<iostream>
+#include<vector>
+using namespace std;
 
-int get_rand(int i)
+class Solution {
+public:
+    int lengthOfLIS(vector<int>& nums) {
+        //贪心策略：在动态规划时，发现我们只考虑最后一个元素是否能接在后面，然后如果想后面能接更多元素，当前最后一个元素要尽可能小
+        //这样我们就记录长度为i的子序列，末尾元素的最小值为d[i]
+        //遍历数组，再遍历记录数组，当前元素小于等于某个长度并小于那个长度的之前最小值时，就替换，若都大于则新增一个最长长度
+        int n = nums.size();
+        vector<int> v(1);
+        v[0] = nums[0];
+        for (int i = 1; i < n; ++i)
+        {
+            if (nums[i] > v[v.size() - 1])
+            {
+                v.push_back(nums[i]);
+                continue;
+            }
+            for (auto& e : v)
+            {
+                if (nums[i] <= e)
+                    e = nums[i];
+            }
+        }
+        return v.size();
+    }
+};
+
+int main()
 {
-	char c;
-	long p = (long)&c;
-	p /= i;
-	return p %= 8;
-}
-void main() {
-	int i = 1;
-	while (1)
-	{
-		P1 = 0;
-		switch (get_rand(i++) + 1)
-		{
-		case 1:
-			led1 = 0B00000001; break;
-		case 2:
-			led2 = 0B00000010; break;
-		case 3:
-			led3 = 0B00000100; break;
-		case 4:
-			led4 = 0B00001000; break;
-		case 5:
-			led5 = 0B00010000; break;
-		case 6:
-			led6 = 0B00100000; break;
-		case 7:
-			led7 = 0B01000000; break;
-		case 8:
-			led8 = 0B10000000; break;
-		}
-		i %= 1000 + 1;
-		if (i == 1000) break;
-	}
+    Solution s;
+    vector<int> nums = { 4,10,4,3,8,9 };
+    cout << s.lengthOfLIS(nums);
+    return 0;
 }
