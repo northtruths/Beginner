@@ -5369,3 +5369,123 @@
 //    cout << s.lengthOfLIS(nums);
 //    return 0;
 //}
+
+
+
+//334. 递增的三元子序列
+//class Solution {
+//public:
+//    bool increasingTriplet(vector<int>& nums) {
+//        //贪心策略：记录长度为i的子序列的最小末尾，
+//        //遍历数组，依次比较，若大于前一个长度的末尾小于当前长度的末尾，则当前长度末尾更新为这个更小的
+//        //若都大于，则总长度加一
+//        vector<int> v(1);
+//        v[0] = nums[0];
+//        int n = nums.size();
+//        for (int i = 1; i < n; ++i)
+//        {
+//            if (nums[i] > v[v.size() - 1])
+//            {
+//                v.push_back(nums[i]);
+//                if (v.size() >= 3) return true;
+//                continue;
+//            }
+//            for (int j = 0; j < v.size(); ++j)
+//            {
+//                if (nums[i] <= v[j])
+//                {
+//                    v[j] = nums[i];
+//                    break;
+//                }
+//            }
+//        }
+//        return false;
+//    }
+//};
+
+
+//674. 最长连续递增序列
+//class Solution {
+//public:
+//    int findLengthOfLCIS(vector<int>& nums) {
+//        int ret = 1;
+//        int cur = 1;
+//        int pre = nums[0];
+//        for (int i = 1; i < nums.size(); ++i)
+//        {
+//            if (pre < nums[i])
+//            {
+//                ++cur;
+//            }
+//            else
+//            {
+//                ret = max(ret, cur);
+//                cur = 1;
+//            }
+//            pre = nums[i];
+//        }
+//        ret = max(ret, cur);
+//        return ret;
+//    }
+//};
+
+
+
+//121. 买卖股票的最佳时机
+//class Solution {
+//public:
+//    int maxProfit(vector<int>& prices) {
+//        //贪心策略：低买高卖
+//        //对于每个位置，只需知道它前面最小的值，即可知道当前能赚的最多，每个位置的最大即为答案
+//        int n = prices.size();
+//        if (n == 1) return 0;
+//        int ret = 0;
+//        vector<int> lowest(n);
+//        lowest[0] = prices[0];
+//        for (int i = 1; i < n; ++i)
+//        {
+//            lowest[i] = min(prices[i], lowest[i - 1]);
+//            ret = max(ret, prices[i] - lowest[i]);
+//        }
+//        return ret;
+//    }
+//};
+
+
+//122. 买卖股票的最佳时机 II
+//class Solution {
+//public:
+//    int maxProfit(vector<int>& prices) {
+//        //贪心策略：低买高卖
+//        int n = prices.size();
+//        if (n == 1) return 0;
+//        int ret = 0, max, min, pre = prices[0];
+//        if (prices[1] > prices[0])
+//        {
+//            min = prices[0];
+//            max = prices[1];
+//        }
+//        else
+//        {
+//            min = prices[1];
+//            max = INT_MIN;
+//        }
+//        for (int i = 1; i < prices.size(); ++i)
+//        {
+//            if (prices[i] < pre && pre == max)//pre即为峰值，此时卖出
+//            {
+//                ret += max - min;
+//                min = prices[i];
+//                max = INT_MIN;
+//            }
+//            if (prices[i] < min)
+//                min = prices[i];
+//            else if (prices[i] > max)
+//                max = prices[i];
+//            pre = prices[i];
+//        }
+//        if (prices[n - 2] <= prices[n - 1] && prices[n - 1] == max)
+//            ret += max - min;
+//        return ret;
+//    }
+//};
