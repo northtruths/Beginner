@@ -5328,40 +5328,44 @@
 //}
 
 
-#include<iostream>
-#include<vector>
-using namespace std;
-
-class Solution {
-public:
-    int lengthOfLIS(vector<int>& nums) {
-        //贪心策略：在动态规划时，发现我们只考虑最后一个元素是否能接在后面，然后如果想后面能接更多元素，当前最后一个元素要尽可能小
-        //这样我们就记录长度为i的子序列，末尾元素的最小值为d[i]
-        //遍历数组，再遍历记录数组，当前元素小于等于某个长度并小于那个长度的之前最小值时，就替换，若都大于则新增一个最长长度
-        int n = nums.size();
-        vector<int> v(1);
-        v[0] = nums[0];
-        for (int i = 1; i < n; ++i)
-        {
-            if (nums[i] > v[v.size() - 1])
-            {
-                v.push_back(nums[i]);
-                continue;
-            }
-            for (auto& e : v)
-            {
-                if (nums[i] <= e)
-                    e = nums[i];
-            }
-        }
-        return v.size();
-    }
-};
-
-int main()
-{
-    Solution s;
-    vector<int> nums = { 4,10,4,3,8,9 };
-    cout << s.lengthOfLIS(nums);
-    return 0;
-}
+//300. 最长递增子序列（贪心）
+//#include<iostream>
+//#include<vector>
+//using namespace std;
+//
+//class Solution {
+//public:
+//    int lengthOfLIS(vector<int>& nums) {
+//        //贪心策略：在动态规划时，发现我们只考虑最后一个元素是否能接在后面，然后如果想后面能接更多元素，当前最后一个元素要尽可能小
+//        //这样我们就记录长度为i的子序列，末尾元素的最小值为d[i]
+//        //遍历数组，再遍历记录数组，当前元素小于等于某个长度并小于那个长度的之前最小值时，就替换，若都大于则新增一个最长长度
+//        int n = nums.size();
+//        vector<int> v(1);
+//        v[0] = nums[0];
+//        for (int i = 1; i < n; ++i)
+//        {
+//            if (nums[i] > v[v.size() - 1])
+//            {
+//                v.push_back(nums[i]);
+//                continue;
+//            }
+//            for (auto& e : v)
+//            {
+//                if (nums[i] <= e)
+//                {
+//                    e = nums[i];
+//                    break;
+//                }
+//            }
+//        }
+//        return v.size();
+//    }
+//};
+//
+//int main()
+//{
+//    Solution s;
+//    vector<int> nums = { 4,10,4,3,8,9 };
+//    cout << s.lengthOfLIS(nums);
+//    return 0;
+//}
