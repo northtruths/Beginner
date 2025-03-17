@@ -5489,3 +5489,72 @@
 //        return ret;
 //    }
 //};
+
+
+//1005. K 次取反后最大化的数组和
+//class Solution {
+//public:
+//    int largestSumAfterKNegations(vector<int>& nums, int k) {
+//        //升序排序，从小开始翻转，若为负翻转，然后下一个，记录不论是否翻转的最小正值(含0)，若数组所有元素都不为负，则一直翻转最小正值那个
+//        sort(nums.begin(), nums.end());
+//        int min_i = 0;
+//        for (int i = 0; i < nums.size(); ++i)
+//        {
+//            if (nums[i] >= 0)
+//            {
+//                min_i = i;
+//                break;
+//            }
+//        }
+//        int i = 0;
+//        while (k > 0 && i < nums.size())
+//        {
+//            if (nums[i] <= 0)
+//            {
+//                nums[i] *= -1;
+//                --k;
+//                min_i = nums[i] < nums[min_i] ? i : min_i;
+//                ++i;
+//            }
+//            else
+//            {
+//                nums[min_i] *= -1;
+//                --k;
+//            }
+//        }
+//        while (k > 0)
+//        {
+//            nums[min_i] *= -1;
+//            --k;
+//        }
+//        long long ret = 0;
+//        for (auto& e : nums)
+//            ret += e;
+//        return ret;
+//    }
+//};
+
+
+
+//2418. 按身高排序
+//class Solution {
+//public:
+//    vector<string> sortPeople(vector<string>& names, vector<int>& heights) {
+//        int n = names.size();
+//        vector<pair<int, int>> vp(n);
+//        for (int i = 0; i < n; ++i)
+//        {
+//            vp[i].first = heights[i];
+//            vp[i].second = i;
+//        }
+//        sort(vp.begin(), vp.end(),
+//            [](pair<int, int>& x, pair<int, int>& y)->bool {return x.first > y.first; });
+//        vector<string> ret(n);
+//        for (int i = 0; i < n; ++i)
+//        {
+//            ret[i] = names[vp[i].second];
+//        }
+//        return ret;
+//    }
+//};
+

@@ -4422,3 +4422,38 @@
 //    cout << max_weight_after_merge(n, weights, edges) << endl;
 //    return 0;
 //} 
+
+
+
+//#include<iostream>
+//#include<vector>
+//#include<algorithm>
+//using namespace std;
+//
+//int main()
+//{
+//	vector<int> v = { 5,5,5,1,2,3,5,5,4,4,6,7 };
+//	//sort(v.begin(), v.end());
+//	std::vector<int>::iterator it_end = unique(v.begin(), v.end());
+//	for (auto i = v.begin(); i != it_end; ++i)
+//		cout << *i << ' ';
+//	cout << endl;
+//	return 0;
+//}
+
+
+//#include<iostream>
+//#include<vector>
+//#include<algorithm>
+//using namespace std;
+//
+//int main()
+//{
+//	vector<int> arr1 = { 3, 1, 2, 5, 4 };//1 2 0 4 3
+//	vector<int> arr2 = { 0, 1, 2, 3, 4 };
+//	sort(arr2.begin(), arr2.end(), [arr1](int i, int j)->bool {return arr1[i] < arr1[j];});
+//	for (auto& e : arr2)
+//		cout << e << ' ';
+//	cout << endl;
+//	return 0;
+//}
