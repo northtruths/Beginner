@@ -5558,3 +5558,35 @@
 //    }
 //};
 
+
+
+//870. 优势洗牌
+//class Solution {
+//public:
+//    vector<int> advantageCount(vector<int>& nums1, vector<int>& nums2) {
+//        int n = nums1.size();
+//        vector<int> hash1(n);//nums1的元素对应下标，用于排序
+//        vector<int> hash2(n);//nums2的
+//        for (int i = 0; i < n; ++i)
+//            hash1[i] = hash2[i] = i;
+//        sort(hash1.begin(), hash1.end(), [&nums1](int i, int j)->bool {return nums1[i] < nums1[j]; });
+//        sort(hash2.begin(), hash2.end(), [&nums2](int i, int j)->bool {return nums2[i] < nums2[j]; });
+//
+//        vector<int> ret(n);
+//        int begin2 = 0;
+//        int end2 = n - 1;
+//        for (int i = 0; i < n; ++i)
+//        {
+//            if (nums1[hash1[i]] <= nums2[hash2[begin2]]) {
+//                ret[hash2[end2]] = nums1[hash1[i]];
+//                --end2;
+//            }
+//            else {
+//                ret[hash2[begin2]] = nums1[hash1[i]];
+//                ++begin2;
+//            }
+//        }
+//
+//        return ret;
+//    }
+//};
