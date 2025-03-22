@@ -5590,3 +5590,29 @@
 //        return ret;
 //    }
 //};
+
+
+
+//409. 最长回文串
+//class Solution {
+//public:
+//    int longestPalindrome(string s) {
+//        int hash[52] = { 0 };//26个字母的大小写数量
+//        for (auto& e : s) {
+//            if (e >= 'a') {
+//                ++hash[e - 'a'];
+//            }
+//            else {
+//                ++hash[e - 'A' + 26];
+//            }
+//        }
+//        int len = 0;
+//        for (auto& e : hash) {
+//            len += 2 * (e / 2);
+//        }
+//        if (len < s.size()) {
+//            len += 1;
+//        }
+//        return len;
+//    }
+//};
