@@ -5616,3 +5616,90 @@
 //        return len;
 //    }
 //};
+
+
+
+//942. 增减字符串匹配
+//class Solution {
+//public:
+//    vector<int> diStringMatch(string s) {
+//        //一个最小i，一个最大j, 若当前为I且下个为I,则当前为未用的最小
+//        //若当前为D则为未用最大
+//        int i = 0;
+//        int j = s.size();
+//        vector<int> ret;
+//        for (auto& e : s) {
+//            if (e == 'I') {
+//                ret.push_back(i++);
+//            }
+//            else {
+//                ret.push_back(j--);
+//            }
+//        }
+//        ret.push_back(i);
+//        return ret;
+//    }
+//};
+
+
+//455. 分发饼干
+//class Solution {
+//public:
+//    int findContentChildren(vector<int>& g, vector<int>& s) {
+//        int ret = 0;
+//        sort(g.begin(), g.end());
+//        sort(s.begin(), s.end());
+//        //贪心策略，若饼干能满足多个孩子，则给最大胃口的那个
+//        int gi = 0;//当前孩子的下标
+//        for (int i = 0; i < s.size(); ++i)
+//        {
+//            if (gi >= g.size())
+//                break;
+//            if (s[i] >= g[gi]) {
+//                ++ret;
+//                ++gi;
+//            }
+//        }
+//        return ret;
+//    }
+//};
+
+
+
+//553. 最优除法
+//class Solution {
+//public:
+//    string optimalDivision(vector<int>& nums) {
+//        //因为要尽可能大，所以被除数尽可能大，除数尽可能小
+//        //因为所有元素都大于等于2，所以首元素单独为被除数为最大情况，
+//        //而后面按顺序连着除，就一直会使分母变小，如果改变顺序，可能会出现除以小数的情况，
+//        //使最终除数变大，所以按顺序除就行
+//        if (nums.size() == 1)
+//            return to_string(nums[0]);
+//        if (nums.size() == 2)
+//        {
+//            string ret;
+//            ret += to_string(nums[0]);
+//            ret += '/';
+//            ret += to_string(nums[1]);
+//            return ret;
+//        }
+//        string ret;
+//        ret += to_string(nums[0]);
+//        ret += '/';
+//        ret += '(';
+//        for (int i = 1; i < nums.size(); ++i)
+//        {
+//            if (i == nums.size() - 1)
+//            {
+//                ret += to_string(nums[i]);
+//                ret += ')';
+//            }
+//            else {
+//                ret += to_string(nums[i]);
+//                ret += '/';
+//            }
+//        }
+//        return ret;
+//    }
+//};
