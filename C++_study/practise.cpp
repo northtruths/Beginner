@@ -4459,11 +4459,16 @@
 //}
 
 
-
-
-int main()
-{
-	int a = 0;
-	int a = 1;
-	return 0;
-}
+//#include<vector>
+//#include<algorithm>
+//#include<iostream>
+//using namespace std;
+//
+//int main() {
+//	vector<int> v = { 1,1,1,1,1,2,2,2,2,2,3,3,3 };
+//	unique(v.begin(), v.end());
+//	cout << v.size() << endl;
+//	for (auto& e : v)
+//		cout << e << endl;
+//	return 0;
+//}

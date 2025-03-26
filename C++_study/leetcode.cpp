@@ -5703,3 +5703,235 @@
 //        return ret;
 //    }
 //};
+
+
+//45. 跳跃游戏 II（dp解法）
+//class Solution {
+//public:
+//    int jump(vector<int>& nums) {
+//        //dp[i]为到当前位置的最小次数，遍历dp[i 到 i + nums[i] ]，取最小
+//        int n = nums.size();
+//        vector<int> dp(n, INT_MAX);
+//        dp[0] = 0;
+//        for (int i = 0; i < n; ++i) {
+//            for (int j = i + 1; j <= min(i + nums[i], n - 1); ++j)
+//            {
+//                dp[j] = min(dp[j], dp[i] + 1);
+//            }
+//        }
+//        return dp[n - 1];
+//    }
+//};
+
+
+
+//移动零
+//class Solution {
+//public:
+//    void moveZeroes(vector<int>& nums) {
+//        //双指针，一个指向待换位置(元素为0)，一个寻找非零，找到就交换
+//        int cur, next;
+//        cur = next = 0;
+//        while (cur < nums.size())
+//        {
+//            if (nums[cur])
+//                ++cur;
+//            else
+//            {
+//                break;
+//            }
+//        }
+//        next = cur + 1;
+//        while (cur < nums.size() && next < nums.size())
+//        {
+//            while (next < nums.size() && nums[next] == 0)
+//                ++next;
+//            if (cur < nums.size() && next < nums.size())
+//                swap(nums[cur], nums[next]);
+//            ++cur;
+//            ++next;
+//        }
+//    }
+//};
+
+
+
+//1089. 复写零
+//class Solution {
+//public:
+//    void duplicateZeros(vector<int>& arr) {
+//        vector<int> ret;
+//        for (int i = 0; i < arr.size(); ++i)
+//        {
+//            if (ret.size() == arr.size())
+//                break;
+//            if (arr[i])
+//                ret.push_back(arr[i]);
+//            else
+//            {
+//                ret.push_back(0);
+//                if (ret.size() == arr.size())
+//                    break;
+//                ret.push_back(0);
+//            }
+//        }
+//        swap(arr, ret);
+//    }
+//};
+
+
+//1089. 复写零（ 空间复杂度为O(1) ）
+//#include<iostream>
+//#include<vector>
+//using namespace std;
+//
+//class Solution {
+//public:
+//    void duplicateZeros(vector<int>& arr) {
+//        int pre = 0;
+//        int cur = 0;
+//        for (pre = 0; pre < arr.size(); ++pre)
+//        {
+//            if (arr[pre] == 0)
+//                ++cur;
+//            if (cur >= arr.size() - 1)
+//                break;
+//            ++cur;
+//        }
+//        if (cur == arr.size())
+//        {
+//            arr[arr.size() - 1] = 0;
+//            cur -= 2;
+//            --pre;
+//        }
+//        while (pre < cur)
+//        {
+//            if (arr[pre]) {
+//                arr[cur] = arr[pre];
+//                --pre;
+//                --cur;
+//            }
+//            else {
+//                arr[cur] = arr[cur - 1] = arr[pre];
+//                --pre;
+//                cur -= 2;
+//            }
+//        }
+//    }
+//};
+//
+//int main() {
+//    Solution s;
+//    vector<int> arr = { 1,0,2,3,0,4,5,0 };
+//    s.duplicateZeros(arr);
+//    return 0;
+//}
+
+
+
+//202. 快乐数
+//class Solution {
+//public:
+//    bool isHappy(int n) {
+//        unordered_set<int> hash;
+//        int cur = 0;
+//        while (n != 1)
+//        {
+//            int temp = 0;
+//            while (n)
+//            {
+//                temp += pow(n % 10, 2);
+//                n /= 10;
+//            }
+//            n = temp;
+//            if (hash.count(n))
+//                return false;
+//            else
+//                hash.insert(n);
+//        }
+//        return true;
+//    }
+//};
+
+
+
+//盛最多水的容器
+//#include<iostream>
+//#include<vector>
+//using namespace std;
+//
+//class Solution {
+//public:
+//    int maxArea(vector<int>& height) {
+//        //双指针，一首一尾，较小那个先动，找到大于等于另一边的位置
+//        int right = height.size() - 1;
+//        int left = 0;
+//        int ret = 0;
+//        ret = max(ret, abs(right - left) * min(height[right], height[left]));
+//        while (left < right)
+//        {
+//            if (height[left] < height[right])
+//            {
+//                while (left < right && height[left] < height[right])
+//                {
+//                    ret = max(ret, abs(right - left) * min(height[right], height[left]));
+//                    ++left;
+//                }
+//            }
+//            else if (height[left] > height[right])
+//            {
+//                while (left < right && height[left] > height[right])
+//                {
+//                    ret = max(ret, abs(right - left) * min(height[right], height[left]));
+//                    --right;
+//                }
+//            }
+//            else
+//                ++left;
+//            ret = max(ret, abs(right - left) * min(height[right], height[left]));
+//        }
+//        return ret;
+//    }
+//};
+//
+//int main()
+//{
+//    Solution s;
+//    vector<int> v = { 1,8,6,2,5,4,8,3,7 };
+//    cout << s.maxArea(v) << endl;
+//    return 0;
+//}
+
+
+
+#include<iostream>
+#include<vector>
+#include<algorithm>
+using namespace std;
+
+class Solution {
+public:
+    int triangleNumber(vector<int>& nums) {
+        sort(nums.begin(), nums.end());
+        int ret = 0;
+        int n = nums.size();
+        for (int i = 0; i <= n - 3; ++i)
+        {
+            for (int j = i + 1; j <= n - 2; ++j)
+            {
+                int k = j + 1;
+                while (k <= n - 1 && nums[i] + nums[j] > nums[k])
+                    ++k;
+                ret += k - j - 1;
+            }
+        }
+        return ret;
+    }
+};
+
+int main() {
+    Solution s;
+    vector<int> v = { 48,66,61,46,94,75 };
+    cout << s.triangleNumber(v) << endl;
+    return 0;
+}
