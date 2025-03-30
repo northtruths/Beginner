@@ -5904,34 +5904,167 @@
 
 
 
+//611. 有效三角形的个数
+//#include<iostream>
+//#include<vector>
+//#include<algorithm>
+//using namespace std;
+//
+//class Solution {
+//public:
+//    int triangleNumber(vector<int>& nums) {
+//        sort(nums.begin(), nums.end());
+//        int ret = 0;
+//        int n = nums.size();
+//        for (int i = 0; i <= n - 3; ++i)
+//        {
+//            int k = i;
+//            for (int j = i + 1; j <= n - 2; ++j)
+//            {
+//                //int k = j + 1;//若k在这赋值则时间复杂度为( O(n^3) )
+//                while (k <= n - 1 && nums[i] + nums[j] > nums[k])
+//                    ++k;
+//                ret += max(k - j - 1, 0);
+//            }
+//        }
+//        return ret;
+//    }
+//};
+//
+//int main() {
+//    Solution s;
+//    vector<int> v = { 48,66,61,46,94,75 };
+//    cout << s.triangleNumber(v) << endl;
+//    return 0;
+//}
+
+
+//LCR 179. 查找总价格为目标值的两个商品(哈希做法)
+//class Solution {
+//public:
+//    vector<int> twoSum(vector<int>& price, int target) {
+//        unordered_set<int> hash;
+//        for (auto& e : price)
+//            hash.insert(e);
+//        for (auto& e : price)
+//        {
+//            if (hash.count(target - e))
+//                return { e, target - e };
+//        }
+//        return vector<int>();
+//    }
+//};
+
+
+//LCR 179. 查找总价格为目标值的两个商品（双指针）
+//class Solution {
+//public:
+//    vector<int> twoSum(vector<int>& price, int target) {
+//        int left = 0;
+//        int right = price.size() - 1;
+//        while (left <= right)
+//        {
+//            if (price[left] + price[right] == target)
+//                return { price[left], price[right] };
+//            else if (price[left] + price[right] > target)
+//                --right;
+//            else
+//                ++left;
+//        }
+//        return {};
+//    }
+//};
+
+
+
+//class Solution {
+//public:
+//    vector<vector<int>> threeSum(vector<int>& nums) {
+//        //因为要和为零，所以排序，从正负和0中选择
+//        int n = nums.size();
+//        vector<vector<int>> ret;
+//        //遍历数组每个元素a，从a后面找到 和为 -a
+//        sort(nums.begin(), nums.end());
+//        for (int i = 0; i < n; ++i)
+//        {
+//            if ((i != 0 && nums[i] == nums[i - 1]))
+//                continue;
+//            if (nums[i] > 0)
+//                break;
+//            int left = i + 1;
+//            int right = n - 1;
+//            int target = -nums[i];
+//            while (left < right)
+//            {
+//                if (nums[left] + nums[right] == target) {
+//                    ret.push_back({ nums[i], nums[left], nums[right] });
+//                    ++left;
+//                }
+//                else if (nums[left] + nums[right] > target)
+//                    --right;
+//                else
+//                    ++left;
+//                while (i < left - 1 && left < right && nums[left] == nums[left - 1])
+//                    ++left;
+//                while (left < right && right + 1 < n && nums[right] == nums[right + 1])
+//                    --right;
+//            }
+//
+//        }
+//
+//        return ret;
+//    }
+//};
+
+
+
+
 #include<iostream>
 #include<vector>
 #include<algorithm>
 using namespace std;
 
+
 class Solution {
 public:
-    int triangleNumber(vector<int>& nums) {
+    vector<vector<int>> fourSum(vector<int>& nums, int target) {
+        //思路和三数求和相同，不过这次先固定一个数，然后求三数和为 target - 这个数
         sort(nums.begin(), nums.end());
-        int ret = 0;
+        vector<vector<int>> ret;
         int n = nums.size();
-        for (int i = 0; i <= n - 3; ++i)
-        {
-            for (int j = i + 1; j <= n - 2; ++j)
-            {
-                int k = j + 1;
-                while (k <= n - 1 && nums[i] + nums[j] > nums[k])
-                    ++k;
-                ret += k - j - 1;
+        for (int i = 0; i < n; ++i) {
+            if (i - 1 >= 0 && nums[i] == nums[i - 1])    continue;
+            for (int j = i + 1; j < n; ++j) {
+                if (j - 1 >= i + 1 && nums[j] == nums[j - 1])   continue;
+                int sum = target - nums[i] - nums[j];
+                if (nums[j] >= 0 && sum < 0) break;
+                int left = j + 1, right = n - 1;
+                while (left < right) {
+                    if (nums[left] + nums[right] == sum)
+                    {
+                        ret.push_back({ nums[i], nums[j], nums[left], nums[right] });
+                        ++left;
+                    }
+                    else if (nums[left] + nums[right] < sum)
+                        ++left;
+                    else
+                        --right;
+                    while (left < right && left - 1 > j && nums[left] == nums[left - 1])
+                        ++left;
+                    while (left < right && right + 1 < n && nums[right] == nums[right + 1])
+                        --right;
+                }
             }
         }
+
         return ret;
     }
 };
 
+
 int main() {
     Solution s;
-    vector<int> v = { 48,66,61,46,94,75 };
-    cout << s.triangleNumber(v) << endl;
+    vector<int> nums = { 1,0,-1,0,-2,2 };
+    s.fourSum(nums, 0);
     return 0;
 }

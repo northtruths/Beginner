@@ -4472,3 +4472,32 @@
 //		cout << e << endl;
 //	return 0;
 //}
+
+
+//#include<iostream>
+//#include<unordered_map>
+//using namespace std;
+//
+//int main() {
+//	unordered_map<int, int> hash;
+//	if (hash[0] == 1)
+//		;
+//	else
+//		hash[0] = 1;
+//	return 0;
+//}
+
+
+//#include<unordered_set>
+//#include<iostream>
+//using namespace std;
+//
+//int main()
+//{
+//	unordered_set<int> hash;
+//	hash.insert(2);
+//	cout << hash.size() << endl;
+//	hash.insert(2);
+//	cout << hash.size() << endl;
+//	return 0;
+//}
