@@ -5918,7 +5918,7 @@
 //        int n = nums.size();
 //        for (int i = 0; i <= n - 3; ++i)
 //        {
-//            int k = i;
+//            int k = i;//k在这赋值则复杂度为 n^2 ，很精妙
 //            for (int j = i + 1; j <= n - 2; ++j)
 //            {
 //                //int k = j + 1;//若k在这赋值则时间复杂度为( O(n^3) )
@@ -5976,7 +5976,7 @@
 //};
 
 
-
+//三数之和
 //class Solution {
 //public:
 //    vector<vector<int>> threeSum(vector<int>& nums) {
@@ -6018,53 +6018,184 @@
 
 
 
+//18. 四数之和
+//#include<iostream>
+//#include<vector>
+//#include<algorithm>
+//using namespace std;
+//
+//class Solution {
+//public:
+//    vector<vector<int>> fourSum(vector<int>& nums, int target) {
+//        //思路和三数求和相同，不过这次先固定一个数，然后求三数和为 target - 这个数
+//        sort(nums.begin(), nums.end());
+//        vector<vector<int>> ret;
+//        int n = nums.size();
+//        for (int i = 0; i < n; ++i) {
+//            if (i - 1 >= 0 && nums[i] == nums[i - 1])    continue;
+//            for (int j = i + 1; j < n; ++j) {
+//                if (j - 1 >= i + 1 && nums[j] == nums[j - 1])   continue;
+//                long long sum = (long long)target - (long long)nums[i] - (long long)nums[j];
+//                if (nums[j] >= 0 && sum < 0) break;
+//                int left = j + 1, right = n - 1;
+//                while (left < right) {
+//                    if (nums[left] + nums[right] == sum)
+//                    {
+//                        ret.push_back({ nums[i], nums[j], nums[left], nums[right] });
+//                        ++left;
+//                    }
+//                    else if (nums[left] + nums[right] < sum)
+//                        ++left;
+//                    else
+//                        --right;
+//                    while (left < right && left - 1 > j && nums[left] == nums[left - 1])
+//                        ++left;
+//                    while (left < right && right + 1 < n && nums[right] == nums[right + 1])
+//                        --right;
+//                }
+//            }
+//        }
+//
+//        return ret;
+//    }
+//};
+//
+//int main() {
+//    Solution s;
+//    vector<int> nums = { 1,0,-1,0,-2,2 };
+//    s.fourSum(nums, 0);
+//    return 0;
+//}
 
-#include<iostream>
-#include<vector>
-#include<algorithm>
-using namespace std;
 
 
-class Solution {
-public:
-    vector<vector<int>> fourSum(vector<int>& nums, int target) {
-        //思路和三数求和相同，不过这次先固定一个数，然后求三数和为 target - 这个数
-        sort(nums.begin(), nums.end());
-        vector<vector<int>> ret;
-        int n = nums.size();
-        for (int i = 0; i < n; ++i) {
-            if (i - 1 >= 0 && nums[i] == nums[i - 1])    continue;
-            for (int j = i + 1; j < n; ++j) {
-                if (j - 1 >= i + 1 && nums[j] == nums[j - 1])   continue;
-                int sum = target - nums[i] - nums[j];
-                if (nums[j] >= 0 && sum < 0) break;
-                int left = j + 1, right = n - 1;
-                while (left < right) {
-                    if (nums[left] + nums[right] == sum)
-                    {
-                        ret.push_back({ nums[i], nums[j], nums[left], nums[right] });
-                        ++left;
-                    }
-                    else if (nums[left] + nums[right] < sum)
-                        ++left;
-                    else
-                        --right;
-                    while (left < right && left - 1 > j && nums[left] == nums[left - 1])
-                        ++left;
-                    while (left < right && right + 1 < n && nums[right] == nums[right + 1])
-                        --right;
-                }
-            }
-        }
+//209. 长度最小的子数组
+//class Solution {
+//public:
+//    int minSubArrayLen(int target, vector<int>& nums) {
+//        //滑动窗口，先从开头找到满足条件的数组，然后每次添加一个元素，并在满足条件的情况下从最前面一直减去元素
+//        int len = 0;
+//        int cur = 0;//当前长度
+//        int sum = 0;//当前滑动窗口的数组和
+//        int i = 0;
+//        int front = 0;//滑动窗口的开头
+//        while (sum < target && i < nums.size()) {
+//            sum += nums[i];
+//            ++cur;
+//            ++i;
+//        }
+//        len = sum >= target ? cur : 0;
+//        for (i; i < nums.size(); ++i) {
+//            sum += nums[i];
+//            ++cur;
+//            while (sum - nums[front] >= target) {
+//                sum -= nums[front];
+//                --cur;
+//                ++front;
+//            }
+//            len = min(len, cur);
+//        }
+//        while (sum - nums[front] >= target) {
+//            sum -= nums[front];
+//            --cur;
+//            ++front;
+//        }
+//        len = min(len, cur);
+//        return len;
+//    }
+//};
 
-        return ret;
-    }
-};
 
 
-int main() {
-    Solution s;
-    vector<int> nums = { 1,0,-1,0,-2,2 };
-    s.fourSum(nums, 0);
-    return 0;
-}
+//无重复字符的最长字串
+//class Solution {
+//public:
+//    int lengthOfLongestSubstring(string s) {
+//        //哈希+滑动窗口，看当前字符是否有了，没有则直接添加，有了则从窗口开头删除，直到删除和当前一样的字符
+//        int ret = 0;
+//        int front = 0;//窗口的头下标
+//        int cur = 0;//当前长度
+//        unordered_set<char> hash;
+//        for (int i = 0; i < s.size(); ++i) {
+//            if (hash.count(s[i]))
+//            {
+//                while (hash.count(s[i]))
+//                {
+//                    hash.erase(s[front++]);
+//                    --cur;
+//                }
+//                hash.insert(s[i]);
+//                ++cur;
+//            }
+//            else {
+//                hash.insert(s[i]);
+//                ++cur;
+//                ret = max(ret, cur);
+//            }
+//        }
+//
+//        return ret;
+//    }
+//};
+
+
+
+//最大连续1的个数Ⅲ
+//#include<iostream>
+//#include<vector>
+//using namespace std;
+//
+//class Solution {
+//public:
+//    int longestOnes(vector<int>& nums, int k) {
+//        //滑动窗口，遇到零还有次数的话就变1，遇到1直接加上
+//        //记录原本的零和一，当次数不够时，一直删除窗口开头直到删到变化后的一就有次数了
+//
+//        int ret = 0;
+//        int cur = 0;//当前长度
+//        int front = 0;//窗口开头
+//        vector<int> hash(nums);
+//        for (int i = 0; i < nums.size(); ++i) {
+//            if (nums[i] == 1) {//为1直接++
+//                ++cur;
+//                ret = max(ret, cur);
+//            }
+//            else {
+//                if (k) {//次数还有则变0为1
+//                    nums[i] = 1;
+//                    ++cur;
+//                    --k;
+//                    ret = max(ret, cur);
+//                }
+//                else {
+//                    //找到为最初为0的位置，还回变化次数
+//                    while (front < i && hash[front])
+//                    {
+//                        ++front;
+//                        --cur;
+//                    }
+//                    //这里两种情况，一种是这里已经变化，还回变化次数即可，
+//                    //另一种是这里变化前后都是0，因为到这里已经没有变化次数（实际这种情况只会存在于k最初就为0）
+//                    //情况二直接跳过不操作即可
+//                    if (nums[front] == 1)//情况一
+//                    {
+//                        nums[front] = 0;
+//                        ++front;
+//                        nums[i] = 1;
+//                    }
+//                    else
+//                        ++front;
+//                }
+//            }
+//        }
+//
+//        return ret;
+//    }
+//};
+//
+//int main() {
+//    Solution s;
+//    vector<int> nums = { 1,1,1,0,0,0,1,1,1,1,0 };
+//    cout << s.longestOnes(nums, 2) << endl;
+//    return 0;
+//}
