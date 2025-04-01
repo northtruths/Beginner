@@ -6199,3 +6199,91 @@
 //    cout << s.longestOnes(nums, 2) << endl;
 //    return 0;
 //}
+
+
+//1658. 将 x 减到 0 的最小操作数
+//#include<iostream>
+//#include<vector>
+//using namespace std;
+//
+//class Solution {
+//public:
+//    int minOperations(vector<int>& nums, int x) {
+//        //滑动窗口，求和为sum(nums) - x的最长长度的子数组，最小操作数就为nums的长度减去这个最长长度
+//        long long sum = 0;
+//        for (auto& e : nums)
+//            sum += e;
+//        long long target = sum - x;
+//        if (target == 0) return nums.size();//target为0说明整个数组加起来刚好为x
+//        int len = 0;//最长长度
+//        int cur = 0;//当前长度
+//        sum = 0;//当前窗口数组和
+//        int front = 0;//窗口开始
+//        for (int i = 0; i < nums.size(); ++i) {
+//            sum += nums[i];
+//            ++cur;
+//            if (sum == target) {
+//                len = max(len, cur);
+//            }
+//            else if (sum > target) {
+//                while (front <= i && sum > target) {
+//                    sum -= nums[front];
+//                    --cur;
+//                    ++front;
+//                }
+//                if (sum == target)
+//                    len = max(len, cur);
+//            }
+//        }
+//        if (len)
+//            return nums.size() - len;
+//        else
+//            return -1;
+//    }
+//};
+//int main() {
+//    Solution s;
+//    vector<int> nums = { 8828,9581,49,9818,9974,9869,9991,10000,10000,10000,9999,9993,9904,8819,1231,6309 };
+//    int x = 134365;
+//    cout << s.minOperations(nums, x) << endl;
+//
+//    return 0;
+//}
+
+
+
+
+//904. 水果成篮
+//class Solution {
+//public:
+//    int totalFruit(vector<int>& fruits) {
+//        //1 1 2 2 2 1 2 3 3 3
+//        //两个滑动窗口，第一个只存储一种果子，如上面的1，第二个窗口紧随其后，但存储两种果子1和2
+//        //遇到第三种果子后，结算最大数量，然后第一个窗口变为之前的后面一种果子2，然后重复上面的步骤
+//        //滑动窗口左闭右开 [l, r)
+//        int ret = 0;
+//        int left1 = 0, right1 = 0;
+//        int left2 = 0, right2 = 0;
+//        int kind1 = fruits[0];
+//        int kind2 = -1;
+//        while (right1 < fruits.size() && right2 < fruits.size()) {
+//            if (fruits[right1] == kind1)
+//                ++right1;
+//            else {
+//                left2 = right2 = right1;
+//                kind2 = fruits[left2];
+//                while (right2 < fruits.size() && (fruits[right2] == kind1 || fruits[right2] == kind2))
+//                    ++right2;
+//                //两种情况，right2到末尾了，此时循环也该结束了
+//                //情况二是遇到第三种水果，此时记录数量，然后将第一个篮子(窗口)从right1从新开始
+//                ret = max(ret, right2 - left1);
+//                if (right2 < fruits.size()) {
+//                    left1 = right1;
+//                    kind1 = fruits[right1];
+//                }
+//            }
+//        }
+//        ret = max(ret, right1 - left1);
+//        return ret;
+//    }
+//};
