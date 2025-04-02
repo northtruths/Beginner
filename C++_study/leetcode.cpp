@@ -6287,3 +6287,84 @@
 //        return ret;
 //    }
 //};
+
+
+//30. 串联所有单词的子串
+//#include<iostream>
+//#include<vector>
+//#include<string>
+//#include<unordered_map>
+//using namespace std;
+//
+//class Solution {
+//public:
+//    vector<int> findSubstring(string s, vector<string>& words) {
+//        // 因为words组成的序列长度是固定的，所以可以维护一共固定长度的滑动窗口，判断是否满足条件
+//        // 因为wrods中所有字符串长度相等，所以可以直接用哈希记录个数的方式，判断窗口中字符串是否成立
+//        int m = words[0].size();  // words中每个字符串的长度
+//        int n = words.size() * m; // 窗口长度
+//        if (n > s.size())
+//            return vector<int>();
+//
+//        vector<int> ret;
+//        unordered_map<string, int> hash;
+//        for (auto& e : words)
+//            ++hash[e];
+//
+//        for (int i = 0; i < n; ++i) // 每个窗口初始位置都要试一下
+//        {
+//            Func(s, words, hash, ret, i);
+//        }
+//        return ret;
+//    }
+//
+//    void Func(string& s, vector<string>& words,
+//        unordered_map<string, int>& hash, vector<int>& ret,
+//        int begin_front = 0) {
+//        int m = words[0].size();  // words中每个字符串的长度
+//        int n = words.size() * m; // 窗口长度
+//        if (n + begin_front > s.size())
+//            return;
+//        unordered_map<string, int> cur; // 当前窗口的字符串存储情况
+//        int front = begin_front;
+//        for (int i = begin_front; i < n + begin_front; i += m) {
+//            ++cur[s.substr(i, m)];
+//        }
+//        int flag = 1; // 判断当前窗口是否成立
+//        for (auto& e : cur) {
+//            if (e.second != hash[e.first]) {
+//                flag = 0;
+//                break;
+//            }
+//        }
+//        cur.clear();
+//        if (flag)
+//            ret.push_back(front);
+//        for (int i = n + begin_front; i < s.size(); i += n) {
+//            if (i + n > s.size())
+//                break;
+//            for (int j = i; j < i + n; j += m) {
+//                ++cur[s.substr(j, m)];
+//            }
+//            front += n;
+//            int flag = 1; // 判断当前窗口是否成立
+//            for (auto& e : cur) {
+//                if (e.second != hash[e.first]) {
+//                    flag = 0;
+//                    break;
+//                }
+//            }
+//            cur.clear();
+//            if (flag)
+//                ret.push_back(front);
+//        }
+//    }
+//};
+//
+//int main() {
+//    Solution t;
+//    string s = "aaaaaaaaaaaaaa";
+//    vector<string> words = { "aa","aa" };
+//    t.findSubstring(s, words);
+//    return 0;
+//}
