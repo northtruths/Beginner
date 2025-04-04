@@ -6368,3 +6368,91 @@
 //    t.findSubstring(s, words);
 //    return 0;
 //}
+
+
+//76. 最小覆盖子串
+//#include<string>
+//#include<unordered_map>
+//#include<iostream>
+//using namespace std;
+//
+//class Solution {
+//public:
+//    string minWindow(string s, string t) {
+//        // 记录t的各个字母数量
+//        // 从左到右滑动窗口，每次右端进入，若满足条件则可以一直pop左端
+//        if (t.size() > s.size())
+//            return string();
+//        unordered_map<char, int> hash;
+//        for (auto& e : t)
+//            ++hash[e];
+//        unordered_map<char, int> cur; // 当前窗口情况
+//        int front = 0;                // 窗口头下标
+//        int cur_len = 0;              // 当前窗口(字串)长度
+//        int ret_len = INT_MAX;        // 返回字串长度
+//        int ret_head = 0;             // 返回字串头下标
+//        int i = 0;
+//        for (i; i < s.size(); ++i) {
+//            ++cur[s[i]];
+//            int flag = 1; // 判断当前是否已经满足条件
+//            for (auto& e : hash) {
+//                if (cur[e.first] < e.second) // 当前窗口还不满足条件，一直进入
+//                {
+//                    flag = 0;
+//                    break;
+//                }
+//            }
+//            if (flag) {
+//                cur_len = ++i;
+//                ret_len = min(ret_len, cur_len);
+//                break;
+//            }
+//        }
+//        while (cur[s[front]] - 1 >= hash[s[front]]) {
+//            --cur[s[front]];
+//            ++front;
+//            --cur_len;
+//        }
+//        if (cur_len < ret_len) {
+//            ret_head = front;
+//            ret_len = cur_len;
+//        }
+//        for (i; i < s.size(); ++i) {
+//            ++cur[s[i]];
+//            ++cur_len;
+//            // 因为前面已经满足条件，只需判断pop掉的头是否满足对应字符的数量即可
+//            while (cur[s[front]] - 1 >= hash[s[front]]) {
+//                --cur[s[front]];
+//                ++front;
+//                --cur_len;
+//            }
+//            if (cur_len < ret_len) {
+//                ret_head = front;
+//                ret_len = cur_len;
+//            }
+//        }
+//        while (cur[s[front]] - 1 >= hash[s[front]]) {
+//            --cur[s[front]];
+//            ++front;
+//            --cur_len;
+//        }
+//        if (cur_len < ret_len) {
+//            ret_head = front;
+//            ret_len = cur_len;
+//        }
+//
+//        if (ret_len > s.size())
+//            return string();
+//        else
+//            return s.substr(ret_head, ret_len);
+//    }
+//};
+//
+//int main() {
+//    Solution st;
+//    string s = "abc";
+//    string t = "b";
+//    cout << st.minWindow(s, t) << endl;
+//
+//    return 0;
+//}
