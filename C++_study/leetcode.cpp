@@ -6456,3 +6456,140 @@
 //
 //    return 0;
 //}
+
+
+
+//704. 二分查找
+//class Solution {
+//public:
+//    int search(vector<int>& nums, int target) {
+//        int first = 0;
+//        int last = nums.size() - 1;
+//        int mid = (first + last) / 2;
+//        while (first <= last) {
+//            if (nums[mid] == target)
+//                return mid;
+//            if (nums[mid] > target)
+//                last = mid - 1;
+//            else
+//                first = mid + 1;
+//            mid = (first + last) / 2;
+//        }
+//        return -1;
+//    }
+//};
+
+
+
+//34. 在排序数组中查找元素的第一个和最后一个位置
+//class Solution {
+//public:
+//    vector<int> searchRange(vector<int>& nums, int target) {
+//        int left = 0;
+//        int right = nums.size() - 1;
+//        int mid = (left + right) / 2;
+//        while (left <= right) {
+//            if (nums[mid] == target)
+//                break;
+//            if (nums[mid] > target)
+//                right = mid - 1;
+//            else
+//                left = mid + 1;
+//            mid = (left + right) / 2;
+//        }
+//        if (left <= right)
+//        {
+//            int first = mid;
+//            int last = mid;
+//            while (first - 1 >= 0 && nums[first - 1] == target)
+//                --first;
+//            while (last + 1 < nums.size() && nums[last + 1] == target)
+//                ++last;
+//            return { first, last };
+//        }
+//        else
+//            return { -1, -1 };
+//    }
+//};
+
+
+
+//35. 搜索插入位置
+//class Solution {
+//public:
+//    int searchInsert(vector<int>& nums, int target) {
+//        int left = 0;
+//        int right = nums.size() - 1;
+//        int mid = (left + right) / 2;
+//        while (left <= right) {
+//            if (nums[mid] == target)
+//                return mid;
+//            if (left == right)
+//            {
+//                if (target > nums[left])
+//                    return left + 1;
+//                else
+//                    return left;
+//            }
+//            if (nums[mid] > target)
+//                right = mid - 1;
+//            else
+//                left = mid + 1;
+//            mid = (left + right) / 2;
+//        }
+//
+//        return left;
+//    }
+//};
+
+
+
+//852. 山脉数组的峰顶索引
+//class Solution {
+//public:
+//    int peakIndexInMountainArray(vector<int>& arr) {
+//        //二分，找到数组中间，若是山峰，则应该大于左边和右边,若不是，哪边有更大的就去计算那边
+//        int left = 0;
+//        int right = arr.size() - 1;
+//        int mid = (left + right) / 2;
+//        while (left <= right) {
+//            if (mid - 1 >= 0 && mid + 1 < arr.size()
+//                && arr[mid] > arr[mid - 1] && arr[mid] > arr[mid + 1])
+//                return mid;
+//            if (arr[mid - 1] > arr[mid])
+//                right = mid - 1;
+//            else
+//                left = mid + 1;
+//            if (left + 1 == right)
+//                return arr[left] > arr[right] ? left : right;
+//            mid = (left + right) / 2;
+//        }
+//        return -1;
+//    }
+//};
+
+
+
+//162. 寻找峰值
+//class Solution {
+//public:
+//    int findPeakElement(vector<int>& nums) {
+//        if (nums.size() == 1) return 0;
+//        if (nums[0] >= nums[1]) return 0;
+//        if (nums[nums.size() - 1] >= nums[nums.size() - 2]) return nums.size() - 1;
+//        int left = 0;
+//        int right = nums.size() - 1;
+//        int mid = (left + right) / 2;
+//        while (left < right)
+//        {
+//            if (nums[mid] >= nums[mid - 1] && nums[mid] >= nums[mid + 1])
+//                return mid;
+//            if (nums[mid] < nums[mid - 1])
+//                right = mid;
+//            else
+//                left = mid;
+//            mid = (left + right) / 2;
+//        }
+//        return left;
+//    }
+//};
