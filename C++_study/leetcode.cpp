@@ -6593,3 +6593,47 @@
 //        return left;
 //    }
 //};
+
+
+//153. 寻找旋转排序数组中的最小值
+//#include<vector>
+//#include<algorithm>
+//#include<iostream>
+//using namespace std;
+//
+//class Solution {
+//public:
+//    int findMin(vector<int>& nums) {
+//        //由题可知：数组被分为两个升序数组，左一个右一个，并且其中一个数组所有元素都大于另一个的所有元素
+//        //当包含两个数组时，左右边界为一个数组的最大和一个数组的最小
+//        //但不论最大最小，大的数组总是大于小的数组，所以新的查询界限就向小的那边收缩
+//        //mid用于判断当前查询范围是否包含两个数组，
+//        //若包含两个数组，则mid大于两界限较大那边，或小于两界限较小那边，
+//        //否则就只包含一个数组，这样左边边界就是最小
+//
+//        int left = 0;
+//        int right = nums.size() - 1;
+//        int mid = (left + right) / 2;
+//        if (left + 1 == right)
+//            return min(nums[left], nums[right]);
+//        while (nums[mid] > max(nums[left], nums[right])
+//            || nums[mid] < min(nums[left], nums[right]))
+//        {
+//            if (nums[mid] > max(nums[left], nums[right]))
+//                left = mid;
+//            else
+//                right = mid;
+//            mid = (left + right) / 2;
+//            if (left + 1 == right)
+//                return min(nums[left], nums[right]);
+//        }
+//        return nums[left];
+//    }
+//};
+//
+//int main() {
+//    Solution s;
+//    vector<int> n = { 3,4,5,1,2 };
+//    cout << s.findMin(n) << endl;
+//    return 0;
+//}
