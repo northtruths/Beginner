@@ -6637,3 +6637,113 @@
 //    cout << s.findMin(n) << endl;
 //    return 0;
 //}
+
+
+//LCR 173. 点名
+//#include<iostream>
+//#include<vector>
+//using namespace std;
+//
+//class Solution {
+//public:
+//    int takeAttendance(vector<int>& records) {
+//        //二分，因为不缺失的话下标和学号一一对应，
+//        //所以，缺失的学号左边会对应，右边不对应
+//        //找到中间点，中间点对应且右边不对应，或中间点不对应且左边对应
+//        if (records[0] != 0) return 0;
+//        if (records[records.size() - 1] == records.size() - 1) return records.size();
+//        int left = 1;
+//        int right = records.size() - 1;
+//        int mid = (left + right) / 2;
+//        while (left <= right) {
+//            if (records[mid] == mid && records[mid + 1] != mid + 1)
+//                return mid + 1;
+//            if (records[mid] != mid && records[mid - 1] == mid - 1)
+//                return mid;
+//            if (records[mid] == mid)
+//                left = mid;
+//            else
+//                right = mid - 1;
+//            mid = (left + right) / 2;
+//            if (left == right)
+//            {
+//                if (records[left] == left)
+//                    return left + 1;
+//                else
+//                    return left;
+//            }
+//        }
+//        return records.size();
+//    }
+//};
+//int main() {
+//    Solution s;
+//    vector<int> v = { 0,2,3 };
+//    cout << s.takeAttendance(v) << endl;
+//    return 0;
+//}
+
+
+
+//724. 寻找数组的中心下标
+//#include<iostream>
+//#include<vector>
+//using namespace std;
+//
+//class Solution {
+//public:
+//    int pivotIndex(vector<int>& nums) {
+//        int n = nums.size();
+//        vector<int> dp(n);//下标0~i的元素和
+//        int sum = 0;//总的元素和
+//        dp[0] = nums[0];
+//        sum += dp[0];
+//        for (int i = 1; i < n; ++i) {
+//            dp[i] = dp[i - 1] + nums[i];
+//            sum += nums[i];
+//        }
+//        if (0 == dp[n - 1] - nums[0]) return 0;
+//        for (int i = 1; i < n; ++i)
+//        {
+//            if (dp[i - 1] == sum - dp[i])
+//                return i;
+//        }
+//        return -1;
+//    }
+//};
+//
+//int main()
+//{
+//    Solution s;
+//    vector<int> nums = { 0,-1,-1,-1,-1,-1 };
+//    cout << s.pivotIndex(nums) << endl;
+//    return 0;
+//}
+
+
+
+//238. 除自身以外数组的乘积
+//class Solution {
+//public:
+//    vector<int> productExceptSelf(vector<int>& nums) {
+//        int n = nums.size();
+//        vector<int> dp_left(n, 1);//下标0~i的乘积
+//        dp_left[0] = nums[0];
+//        vector<int> dp_right(n, 1);//下标i~n-1的乘积
+//        dp_right[n - 1] = nums[n - 1];
+//        for (int i = 1; i < n; ++i) {
+//            dp_left[i] = dp_left[i - 1] * nums[i];
+//        }
+//        for (int i = n - 2; i >= 0; --i) {
+//            dp_right[i] = dp_right[i + 1] * nums[i];
+//        }
+//
+//        vector<int> answer(n);
+//        answer[0] = dp_right[1];
+//        answer[n - 1] = dp_left[n - 2];
+//        for (int i = 1; i < n - 1; ++i) {
+//            answer[i] = dp_left[i - 1] * dp_right[i + 1];
+//        }
+//        return answer;
+//    }
+//};
