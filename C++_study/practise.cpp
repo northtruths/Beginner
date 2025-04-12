@@ -4501,3 +4501,32 @@
 //	cout << hash.size() << endl;
 //	return 0;
 //}
+
+
+
+//#include<iostream>
+//using namespace std;
+//
+//int main() {
+//	cout << -6 % 2 << endl;
+//	int 
+//	for (int i = 0; i < 5; ++i)
+//		cout << i << endl;
+//	return 0;
+//}
+
+#include<iostream>
+using namespace std;
+
+int main() {
+	for (int i = 1; i < 5; ++i)
+		for (int j = i; j < 5; ++j)
+			cout << (i ^ j) << ' ';
+	cout << endl;
+	for (int i = 1; i < 5; ++i)
+		for (int j = i; j < 5; ++j)
+			for (int k = j; k < 5; ++k)
+				cout << (i ^ j ^ k) << ' ';
+	cout << endl;
+	return 0;
+}

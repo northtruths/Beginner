@@ -6747,3 +6747,67 @@
 //        return answer;
 //    }
 //};
+
+
+//560. 和为 K 的子数组
+//#include<iostream>
+//#include<vector>
+//#include<unordered_map>
+//using namespace std;
+//
+//class Solution {
+//public:
+//    int subarraySum(vector<int>& nums, int k) {
+//        //dp[i]为前缀和
+//        //dp[i][j] = dp[0][j] - dp[0][i]
+//        int n = nums.size();
+//        int ret = 0;
+//        vector<int> dp(n);
+//        unordered_map<int, int> hash;
+//        hash[0] = 1;
+//        dp[0] = nums[0];
+//        ++hash[dp[0]];
+//        if (dp[0] == k)  ++ret;
+//        for (int i = 1; i < n; ++i)
+//        {
+//            dp[i] = dp[i - 1] + nums[i]; 
+//            ret += hash[dp[i] - k];
+//            ++hash[dp[i]];
+//        }
+//
+//        return ret;
+//    }
+//};
+//
+//int main() {
+//    Solution s;
+//    vector<int> nums = { -1, -1, 1 };
+//    cout << s.subarraySum(nums, 0) << endl;
+//    return 0;
+//}
+
+
+
+//974. 和可被 K 整除的子数组
+//class Solution {
+//public:
+//    int subarraysDivByK(vector<int>& nums, int k) {
+//        //前缀和dp
+//        //根据同余原理：(a - b) % n == 0可得a % n == b % n
+//        int n = nums.size();
+//        long long sum = 0;
+//        sum = nums[0];
+//        unordered_map<int, int> hash;
+//        ++hash[(sum % k + k) % k];
+//        int ret = sum % k == 0 ? 1 : 0;
+//        for (int i = 1; i < n; ++i) {
+//            sum += nums[i];
+//            ret += hash[(sum % k + k) % k];
+//            if (sum % k == 0)
+//                ++ret;
+//            ++hash[(sum % k + k) % k];
+//        }
+//
+//        return ret;
+//    }
+//};
