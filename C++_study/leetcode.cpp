@@ -1,4 +1,5 @@
 #define _CRT_SECURE_NO_WARNINGS
+#include"leetcode.h"
 
 //力扣汉诺塔
 //class Solution {
@@ -6811,3 +6812,76 @@
 //        return ret;
 //    }
 //};
+
+
+//525. 连续数组
+//class Solution {
+//public:
+//    int findMaxLength(vector<int>& nums) {
+//        //前缀和+哈希，哈希记录0比1多的数量和此前缀和的长度
+//        //一边进行前缀和的记录，一边用前面的哈希
+//        //当前前缀和的01数量相同的话当前就是最大值，否则减去对应哈希记录的前缀和
+//        //若有相同01数量的前缀和，哈希只记录较小那个，因为哈希记录的是将会被减去的，越小越好
+//        int n = nums.size();
+//        vector<int> dp0(n), dp1(n);//前缀和
+//        unordered_map<int, int> hash;//first为0的数量-1的数量，second为此前缀和的长度
+//        nums[0] == 0 ? (dp0[0] = 1, dp1[0] = 0) : (dp0[0] = 0, dp1[0] = 1);
+//        hash[dp0[0] - dp1[0]] = 1;
+//        int ret = 0;
+//        for (int i = 1; i < n; ++i) {
+//            nums[i] == 0 ? (dp0[i] = dp0[i - 1] + 1, dp1[i] = dp1[i - 1])
+//                : (dp0[i] = dp0[i - 1], dp1[i] = dp1[i - 1] + 1);
+//            if (dp0[i] == dp1[i])
+//                ret = max(ret, i + 1);
+//            else {
+//                if (hash.count(dp0[i] - dp1[i])) {
+//                    ret = max(ret, i + 1 - hash[dp0[i] - dp1[i]]);
+//                }
+//            }
+//            if (hash.count(dp0[i] - dp1[i]) == 0)//若已经存在，因为前面的前缀和肯定比现在的短，所以省略
+//                hash[dp0[i] - dp1[i]] = i + 1;
+//        }
+//
+//        return ret;
+//    }
+//};
+//
+//int main() {
+//    Solution s;
+//    vector<int> nums = { 0,1,1,1,1,1,0,0,0 };
+//    cout << s.findMaxLength(nums) << endl;
+//    return 0;
+//}
+
+
+
+//1314. 矩阵区域和
+//class Solution {
+//public:
+//    vector<vector<int>> matrixBlockSum(vector<vector<int>>& mat, int k) {
+//        //dp[i][j]为(0, 0)到(i, j)的矩阵和
+//        int m = mat.size(), n = mat[0].size();
+//        vector<vector<int>> answer(m, vector<int>(n));
+//        vector<vector<int>> dp(m + 1, vector<int>(n + 1, 0));
+//        for (int i = 1; i <= m; ++i) {
+//            for (int j = 1; j <= n; ++j) {
+//                dp[i][j] = dp[i - 1][j] + dp[i][j - 1] - dp[i - 1][j - 1] + mat[i - 1][j - 1];
+//            }
+//        }
+//        for (int i = 0; i < m; ++i) {
+//            for (int j = 0; j < n; ++j) {
+//                int r_1 = max(0, i - k) + 1, r_2 = min(m - 1, i + k) + 1;
+//                int c_1 = max(0, j - k) + 1, c_2 = min(n - 1, j + k) + 1;
+//                answer[i][j] = dp[r_2][c_2] - dp[r_1 - 1][c_2] - dp[r_2][c_1 - 1] + dp[r_1 - 1][c_1 - 1];
+//            }
+//        }
+//        return answer;
+//    }
+//};
+//
+//int main() {
+//    Solution s;
+//    vector<vector<int>> mat = { {1,2,3}, {4,5,6}, {7,8,9} };
+//    s.matrixBlockSum(mat, 1);
+//    return 0;
+//}
