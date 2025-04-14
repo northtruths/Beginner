@@ -6885,3 +6885,22 @@
 //    s.matrixBlockSum(mat, 1);
 //    return 0;
 //}
+
+
+//面试题 01.01. 判定字符是否唯一
+//class Solution {
+//public:
+//    bool isUnique(string astr) {
+//        //根据鸽巢原理，大于26必定重复
+//        if (astr.size() > 26)
+//            return false;
+//        //位图
+//        int bitmap = 0;
+//        for (auto& e : astr) {
+//            if ((bitmap & (1 << (e - 'a'))) != 0)
+//                return false;
+//            bitmap |= 1 << (e - 'a');
+//        }
+//        return true;
+//    }
+//};
