@@ -6904,3 +6904,111 @@
 //        return true;
 //    }
 //};
+
+
+
+//371. 两整数之和
+//class Solution {
+//public:
+//    int getSum(int a, int b) {
+//        //^本质是无进位加法
+//        //&可以获得进位
+//        //先^得到无进位加法的结果，然后算出进位，两者再无进位地加(^)直到无进位
+//        while (b) {
+//            int x = a ^ b;
+//            unsigned int c = (unsigned)(a & b) << 1;
+//            a = x;
+//            b = c;
+//        }
+//        return a;
+//    }
+//};
+
+
+//137. 只出现一次的数字 II
+//class Solution {
+//public:
+//    int singleNumber(vector<int>& nums) {
+//        int ret = 0;
+//        for (int i = 0; i < 32; ++i) {
+//            int sum = 0;//每一位的和
+//            for (auto& e : nums) {
+//                sum += (e >> i) & 1;
+//            }
+//            ret += sum % 3 << i;
+//        }
+//        return ret;
+//
+//    }
+//};
+
+
+//260. 只出现一次的数字 III
+//class Solution {
+//public:
+//    vector<int> singleNumber(vector<int>& nums) {
+//        //所有数异或后得到的是缺少的那两个数的异或
+//        //当这个数的某一位为1时，说明两个答案中这一位有一个为1，一个为0
+//        //将nums中的数分为两种，一种是这一位为1，另一种是这一位为0
+//        //若一个数出现两次，则这两次都会在同一区分的组中，而只出现一次的两个数将在不同组
+//        int sum = 0;
+//        for (auto& e : nums)
+//            sum ^= e;
+//        int l = 0;//哪一比特位出现了1
+//        for (l; l < 32; ++l) {
+//            if (sum & (1 << l))
+//                break;
+//        }
+//        int x = 0;
+//        int y = 0;
+//        for (auto& e : nums) {
+//            if (e & (1 << l))
+//                x ^= e;
+//            else
+//                y ^= e;
+//        }
+//        return { x, y };
+//    }
+//};
+
+
+
+//面试题 17.19. 消失的两个数字
+//class Solution {
+//public:
+//    vector<int> missingTwo(vector<int>& nums) {
+//        //1~N的异或再异或nums，得到两个缺少值的异或
+//        //再以“260. 只出现一次的数字 III”的思想把这两个值拆分开来得到即可
+//        int sum = 0;
+//        for (int i = 1; i <= nums.size() + 2; ++i)
+//            sum ^= i;
+//        for (auto& e : nums)
+//            sum ^= e;
+//        int l = 0;//哪一比特位出现了1
+//        for (l; l < 32; ++l) {
+//            if (sum & (1 << l))
+//                break;
+//        }
+//        int x = 0;
+//        int y = 0;
+//        for (auto& e : nums) {
+//            if (e & (1 << l))
+//                x ^= e;
+//            else
+//                y ^= e;
+//        }
+//        for (int i = 1; i <= nums.size() + 2; ++i) {
+//            if (i & (1 << l))
+//                x ^= i;
+//            else
+//                y ^= i;
+//        }
+//        return { x, y };
+//    }
+//};
+//
+//int main() {
+//    Solution s;
+//    s.missingTwo({2, 3});
+//    return 0;
+//}
