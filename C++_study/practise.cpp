@@ -4530,3 +4530,28 @@
 //	cout << endl;
 //	return 0;
 //}
+
+
+
+//#include <iostream>
+//#include <vector>
+//using namespace std;
+//typedef pair<int, int> PII;
+//const int N = 1e5 + 10;
+//int n, m;
+//vector<PII> edges[N];
+//int main()
+//{
+//	cin >> n >> m; // 读⼊结点个数以及边的个数
+//
+//		for (int i = 1; i <= m; i++)
+//		{
+//			int a, b, c; cin >> a >> b >> c;
+//			// a 和b之间有⼀条边，权值为c
+//			edges[a].push_back({ b, c });
+//			// 如果是⽆向边，需要反过来再存⼀下
+//			edges[b].push_back({ a, c });
+//		}
+//
+//	return 0;
+//}

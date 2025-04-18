@@ -1171,10 +1171,10 @@
 
 
 //P8703 [蓝桥杯 2019 国 B] 最优包含
-#include<iostream>
-#include<algorithm>
-#include<string>
-using namespace std;
+//#include<iostream>
+//#include<algorithm>
+//#include<string>
+//using namespace std;
 //
 //void Func(string& s1, string& s2, int begin1, int begin2, int cur, int& ret, int& num)
 //{
@@ -1221,3 +1221,126 @@ using namespace std;
 //XAABZ
 
 //P8745 [蓝桥杯 2021 省 AB] 括号序列(未ac，是真不会，题解看了都不会)
+
+
+
+
+//P3366 【模板】最小生成树
+//#include<iostream>
+//#include<vector>
+//#include<cstring>
+//using namespace std;
+//
+//const int N = 5005, INF = 0x3f3f3f3f;
+//int dest[N];//距离树最小的权值
+//bool st[N];//这个节点是否在树中
+//bool st[N];
+//int prim(int n, int m) {
+//	memset(dest, 0x3f, sizeof(dest));
+//	dest[1] = 0;
+//	int ret = 0;
+//	for (int i = 1; i <= n; ++i) {//因为是一个一个节点放进树，所以遍历n次
+//		int cur = 0;//当前离树最短且不在树中的节点下标
+//		for (int j = 1; j <= n; ++j) {
+//			if (!st[j] && dest[j] < dest[cur])
+//				cur = j;
+//		}
+//
+//		//判断是否为连通图，若当前节点到树的距离最短为INF则不是
+//		if (dest[cur] == INF)
+//			return INF;
+//		ret += dest[cur];
+//		st[cur] = true;
+//
+//		//更新距离
+//		for (int j = 1; j <= n; ++j) {
+//			//应该要判断是否能连通或者节点是否已在树中
+//			//但这两种情况下，dest的值已经为最大/最小，不会影响结果
+//			dest[j] = min(dest[j], weight[cur][j]);
+//		}
+//	}
+//	return ret;
+//}
+//
+//int main() {
+//	//邻接矩阵
+//	int n, m;
+//	cin >> n >> m;
+//	memset(weight, 0x3f, sizeof(weight));
+//	for (int i = 0; i < m; ++i) {
+//		int x, y, z;
+//		cin >> x >> y >> z;
+//		weight[x][y] = weight[y][x] = min(weight[x][y], z);
+//	}
+//	int ret = prim(n, m);
+//	if (ret == INF)
+//		cout << "orz" << endl;
+//	else
+//		cout << ret << endl;
+//	return 0;
+//}
+
+
+
+//P3366 【模板】最小生成树
+//#include<iostream>
+//#include<vector>
+//#include<cstring>
+//#include<utility>
+//using namespace std;
+//
+//typedef pair<int, int> PII;
+//
+//const int N = 5005, INF = 0x3f3f3f3f; 
+//vector<PII> weight[N];
+//int dest[N];//距离树最小的权值
+//bool st[N];//这个节点是否在树中
+//int prim(int n, int m) {
+//	memset(dest, 0x3f, sizeof(dest));
+//	dest[1] = 0;
+//	int ret = 0;
+//	for (int i = 1; i <= n; ++i) {//因为是一个一个节点放进树，所以遍历n次
+//		int cur = 0;//当前离树最短且不在树中的节点下标
+//		for (int j = 1; j <= n; ++j) {
+//			if (!st[j] && dest[j] < dest[cur])
+//				cur = j;
+//		}
+//
+//		//判断是否为连通图，若当前节点到树的距离最短为INF则不是
+//		if (dest[cur] == INF)
+//			return INF;
+//		ret += dest[cur];
+//		st[cur] = true;
+//
+//		//更新距离
+//		for (auto& e : weight[cur]) {
+//			dest[e.first] = min(dest[e.first], e.second);
+//		}
+//	}
+//	return ret;
+//}
+//
+//int main() {
+//	//邻接表
+//	int n, m;
+//	cin >> n >> m;
+//	for (int i = 0; i < m; ++i) {
+//		int x, y, z;
+//		cin >> x >> y >> z;
+//		weight[x].push_back({ y, z });
+//		weight[y].push_back({ x, z });
+//	}
+//	int ret = prim(n, m);
+//	if (ret == INF)
+//		cout << "orz" << endl;
+//	else
+//		cout << ret << endl;
+//	return 0;
+//}
+
+//4 5
+//1 2 2
+//1 3 2
+//1 4 3
+//2 3 4
+//3 4 3
