@@ -7012,3 +7012,154 @@
 //    s.missingTwo({2, 3});
 //    return 0;
 //}
+
+
+
+//1576. 替换所有的问号
+//class Solution {
+//public:
+//    string modifyString(string s) {
+//        s = '0' + s + '0';
+//        for (int i = 0; i < s.size(); ++i) {
+//            if (s[i] == '?') {
+//                for (int j = 0; j < 26; ++j) {
+//                    if (j + 'a' != s[i - 1] && j + 'a' != s[i + 1]) {
+//                        s[i] = j + 'a';
+//                        break;
+//                    }
+//                }
+//            }
+//        }
+//        return s.substr(1, s.size() - 2);
+//    }
+//};
+
+
+
+//495. 提莫攻击
+//class Solution {
+//public:
+//    int findPoisonedDuration(vector<int>& timeSeries, int duration) {
+//        int ret = 0;
+//        for (int i = 0; i < timeSeries.size() - 1; ++i) {
+//            int next = timeSeries[i + 1];//下一次攻击在什么时候
+//            int cur = timeSeries[i];//这次攻击在什么时候
+//            int time = duration;//持续时间
+//            while (cur < next && time > 0) {
+//                ++ret;
+//                ++cur;
+//                --time;
+//            }
+//        }
+//
+//        ret += duration;
+//        return ret;
+//    }
+//};
+
+
+
+//6. Z 字形变换
+//class Solution {
+//public:
+//    string convert(string s, int numRows) {
+//        string ret;
+//        int n = s.size();
+//        for (int i = 0; i < numRows; ++i) {
+//            for (int j = 0; j < n; j += max(2 * numRows - 2, 1)) {
+//                if (i == 0)
+//                    ret += s[j];
+//                else {
+//                    if (j + i < n)
+//                        ret += s[j + i];
+//                    if (j + i != j + i + 2 * numRows - 2 - 2 * i && j + i + 2 * numRows - 2 - 2 * i < n)
+//                        ret += s[j + i + 2 * numRows - 2 - 2 * i];
+//                }
+//            }
+//        }
+//        return ret;
+//    }
+//};
+//int main() {
+//    Solution s;
+//    cout << s.convert("A", 1) << endl;
+//    return 0;
+//}
+
+
+
+//38. 外观数列
+//class Solution {
+//public:
+//    string countAndSay(int n) {
+//        if (n == 1)
+//            return "1";
+//        return Func(countAndSay(n - 1));
+//    }
+//
+//    string Func(string&& s) {
+//        string ret;
+//        int num = 1;
+//        char ch = s[0];
+//        for (int i = 1; i < s.size(); ++i) {
+//            if (s[i] == ch)
+//                ++num;
+//            else {
+//                ret += to_string(num);
+//                ret += ch;
+//                ch = s[i];
+//                num = 1;
+//            }
+//        }
+//        ret += to_string(num);
+//        ret += ch;
+//        return ret;
+//    }
+//};
+
+
+
+class Solution {
+public:
+    int minNumberOfFrogs(string croakOfFrogs) {
+        //用数组模拟青蛙，每一个元素就是一只青蛙，并且存储当前这只青蛙的叫声，若青蛙处于空闲则为'0'
+        unordered_multiset<char> gg;
+        unordered_map<char, char> hash;//当前叫声对应的前一个叫声
+        hash.insert({ 'c', '0' });
+        hash.insert({ 'r', 'c' });
+        hash.insert({ 'o', 'r' });
+        hash.insert({ 'a', 'o' });
+        hash.insert({ 'k', 'a' });
+        hash.insert({ 'r', 'c' });
+        for (auto& e : croakOfFrogs) {
+            //某只青蛙开始叫，若有之前发现的空闲青蛙，则让它叫，没有的话就加一只青蛙
+            char pre = hash[e];//前面的叫声
+            if (pre == '0') {
+                if (gg.count('0'))
+                    gg.erase('0');
+                gg.insert(e);
+            }
+            else {
+                if (gg.count(pre)) {
+                    gg.erase(pre);
+                    if (e == 'k')
+                        gg.insert('0');
+                    else
+                        gg.insert(e);
+                }
+                else
+                    return -1;
+            }
+        }
+        for (auto& g : gg)
+            if (g != '0')
+                return -1;
+        return gg.size();
+    }
+};
+int main() {
+    Solution s;
+    string str = "ccrrooaakk";
+    cout << s.minNumberOfFrogs(str) << endl;
+    return 0;
+}
