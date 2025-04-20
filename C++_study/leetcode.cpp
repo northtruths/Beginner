@@ -7119,47 +7119,171 @@
 
 
 
-class Solution {
-public:
-    int minNumberOfFrogs(string croakOfFrogs) {
-        //用数组模拟青蛙，每一个元素就是一只青蛙，并且存储当前这只青蛙的叫声，若青蛙处于空闲则为'0'
-        unordered_multiset<char> gg;
-        unordered_map<char, char> hash;//当前叫声对应的前一个叫声
-        hash.insert({ 'c', '0' });
-        hash.insert({ 'r', 'c' });
-        hash.insert({ 'o', 'r' });
-        hash.insert({ 'a', 'o' });
-        hash.insert({ 'k', 'a' });
-        hash.insert({ 'r', 'c' });
-        for (auto& e : croakOfFrogs) {
-            //某只青蛙开始叫，若有之前发现的空闲青蛙，则让它叫，没有的话就加一只青蛙
-            char pre = hash[e];//前面的叫声
-            if (pre == '0') {
-                if (gg.count('0'))
-                    gg.erase('0');
-                gg.insert(e);
-            }
-            else {
-                if (gg.count(pre)) {
-                    gg.erase(pre);
-                    if (e == 'k')
-                        gg.insert('0');
-                    else
-                        gg.insert(e);
-                }
-                else
-                    return -1;
-            }
-        }
-        for (auto& g : gg)
-            if (g != '0')
-                return -1;
-        return gg.size();
-    }
-};
-int main() {
-    Solution s;
-    string str = "ccrrooaakk";
-    cout << s.minNumberOfFrogs(str) << endl;
-    return 0;
-}
+//1419. 数青蛙（O(n)复杂度超时）
+//class Solution {
+//public:
+//    int minNumberOfFrogs(string croakOfFrogs) {
+//        //用数组模拟青蛙，每一个元素就是一只青蛙，并且存储当前这只青蛙的叫声，若青蛙处于空闲则为'0'
+//        vector<char> gg;
+//        char arr[6] = "croak";
+//        for (auto& e : croakOfFrogs) {
+//            if (e == 'c') {//某只青蛙开始叫，若有之前发现的空闲青蛙，则让它叫，没有的话就加一只青蛙
+//                int flag1 = 0;//判断是否是之前的青蛙叫
+//                for (auto& g : gg) {
+//                    if (g == '0') {
+//                        g = 'c';
+//                        flag1 = 1;
+//                        break;
+//                    }
+//                }
+//                if (flag1 == 0)
+//                    gg.push_back('c');
+//            }
+//            else {
+//                char pre;//当前叫声的前一声
+//                for (int i = 1; i < 5; ++i) {
+//                    if (arr[i] == e) {
+//                        pre = arr[i - 1];
+//                        break;
+//                    }
+//                }
+//                int flag2 = 0;//判断声音是否合法
+//                for (auto& g : gg) {
+//                    if (g == pre) {
+//                        g = e;
+//                        flag2 = 1;
+//                        if (g == 'k')//这只青蛙叫完了
+//                            g = '0';
+//                        break;
+//                    }
+//                }
+//                if (flag2 == 0)
+//                    return -1;
+//            }
+//        }
+//        for (auto& g : gg)
+//            if (g != '0')
+//                return -1;
+//        return gg.size();
+//    }
+//};
+//int main() {
+//    Solution s;
+//    string str = "ccckkk";
+//
+//    return 0;
+//}
+//
+//
+//1419. 数青蛙（O(n)复杂度超时）
+//1419. 数青蛙
+//class Solution {
+//public:
+//    int minNumberOfFrogs(string croakOfFrogs) {
+//        //用数组模拟青蛙，每一个元素就是一只青蛙，并且存储当前这只青蛙的叫声，若青蛙处于空闲则为'k'（最后的叫声）
+//        unordered_multiset<char> gg;
+//        unordered_map<char, char> hash;//当前叫声对应的前一个叫声
+//        hash.insert({ 'c', 'k' });
+//        hash.insert({ 'r', 'c' });
+//        hash.insert({ 'o', 'r' });
+//        hash.insert({ 'a', 'o' });
+//        hash.insert({ 'k', 'a' });
+//        hash.insert({ 'r', 'c' });
+//        for (auto& e : croakOfFrogs) {
+//            //某只青蛙开始叫，若有之前发现的空闲青蛙，则让它叫，没有的话就加一只青蛙
+//            char pre = hash[e];//前面的叫声
+//            if (pre == 'k') {
+//                if (gg.count(pre)) {
+//                    auto it = gg.find(pre);
+//                    gg.erase(it);
+//                }
+//                gg.insert(e);
+//            }
+//            else {
+//                if (gg.count(pre)) {
+//                    auto it = gg.find(pre);
+//                    gg.erase(it);
+//                    gg.insert(e);
+//                }
+//                else
+//                    return -1;
+//            }
+//        }
+//        for (auto& g : gg)
+//            if (g != '0')
+//                return -1;
+//        return gg.size();
+//    }
+//};
+//
+//
+//
+//1419. 数青蛙
+//class Solution {
+//public:
+//    int minNumberOfFrogs(string croakOfFrogs) {
+//        string s = "croak";
+//        vector<int> gg(5);//croak的叫声
+//        unordered_map<char, int> hash;//叫声对应gg的下标
+//        for (int i = 0; i < 5; ++i)
+//            hash[s[i]] = i;
+//        int ret = 0;
+//        for (auto& e : croakOfFrogs) {
+//            ++gg[hash[e]];
+//            if (e != 'c') {
+//                if (gg[hash[e]] > gg[hash[e] - 1])
+//                    return -1;
+//            }
+//            if (gg[4] == 1) {//k为1，有一只青蛙叫完了
+//                for (int i = 0; i < 5; ++i)
+//                    --gg[i];
+//            }
+//            ret = max(ret, gg[0]);
+//        }
+//        for (int i = 0; i < 5; ++i)
+//            if (gg[i])
+//                return -1;
+//        return ret;
+//    }
+//};
+
+
+
+//912. 排序数组（未ac，这题就是自己写个快排，但搞了半天，还是超时，
+// 看了笔记、问了ai，还是半懂不懂，真不清楚之前是怎么在赛场上手搓快排的，是已经没以前思想灵活了吗，暂时放弃）
+//class Solution {
+//public:
+//    vector<int> sortArray(vector<int>& nums) {
+//        mysort(nums, 0, nums.size() - 1);
+//        return nums;
+//    }
+//
+//    void mysort(vector<int>& nums, int begin, int end) {
+//        if (begin > end)
+//            return;
+//        if (end - begin < 2) {
+//            if (nums[begin] > nums[end])
+//                swap(nums[begin], nums[end]);
+//            return;
+//        }
+//        int key = nums[begin];
+//        int left = begin, right = begin + 1;
+//        while (right <= end) {
+//            if (nums[right] < key) {
+//                ++left;
+//                swap(nums[left], nums[right]);
+//            }
+//            ++right;
+//        }
+//        swap(nums[left], nums[begin]);
+//        mysort(nums, begin, left - 1);
+//        mysort(nums, left + 1, end);
+//    }
+//};
+//
+//int main() {
+//    Solution s;
+//    vector<int> nums = { 5,2,3,1 };
+//    s.sortArray(nums);
+//    return 0;
+//}
