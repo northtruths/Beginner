@@ -7287,3 +7287,25 @@
 //    s.sortArray(nums);
 //    return 0;
 //}
+
+
+//215. 数组中的第K个最大元素
+//class Solution {
+//public:
+//    int findKthLargest(vector<int>& nums, int k) {
+//        vector<int> arr(2 * 10e4 + 5);
+//        for (auto& e : nums) {
+//            ++arr[e + 10e4];
+//        }
+//        --k;
+//        int cur = arr.size() - 1;
+//        while (k--) {
+//            while (arr[cur] == 0)
+//                --cur;
+//            --arr[cur];
+//        }
+//        while (arr[cur] == 0)
+//            --cur;
+//        return cur - 10e4;
+//    }
+//};
