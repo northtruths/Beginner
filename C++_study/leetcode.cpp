@@ -7309,3 +7309,51 @@
 //        return cur - 10e4;
 //    }
 //};
+
+
+
+class Solution {
+public:
+    vector<int> smallestK(vector<int>& arr, int k) {
+        //快排，统计key前面的数，当key前面的元素个数大于k时，找它左边，小于等于时这些数就是答案
+        //若小于，则会提前入一些元素，剩下比较k时都应减去这些元素来比较
+        if (arr.size() == 0)
+            return vector<int>();
+        vector<int> ret(k);
+        my_half_sort(arr, 0, arr.size() - 1, k, ret);
+        return ret;
+    }
+
+    void my_half_sort(vector<int>& arr, int begin, int end, int k, vector<int>& ret) {
+        if (end < begin || begin < 0 || end >= arr.size())
+            return;
+        int key = arr[begin];
+        int left = begin, right = left + 1;
+        while (right <= end) {
+            if (arr[right] < key) {
+                ++left;
+                swap(arr[left], arr[right]);
+            }
+            ++right;
+        }
+        swap(arr[left], arr[begin]);
+
+        if (left == k) {
+            for (int i = 0; i < k; ++i)
+                ret[i] = arr[i];
+            return;
+        }
+        else if (left < k)
+            my_half_sort(arr, left + 1, end, k, ret);
+        else
+            my_half_sort(arr, begin, left - 1, k, ret);
+
+    }
+};
+
+int main() {
+    Solution sl;
+    vector<int> arr = { 1,3,5,7,2,4,6,8 };
+    sl.smallestK(arr, 4);
+    return 0;
+}
