@@ -7394,3 +7394,200 @@
 //    sl.sortArray(nums);
 //    return 0;
 //}
+
+
+//912. 排序数组（归并排序）
+//class Solution {
+//public:
+//    vector<int> sortArray(vector<int>& nums) {
+//        vector<int> temp(nums.size());
+//        my_sort(nums, 0, nums.size() - 1, temp);
+//        return nums;
+//    }
+//
+//private:
+//    void my_sort(vector<int>& nums, int left, int right, vector<int>& temp) {
+//        if (left >= right)//自然有序
+//            return;
+//        my_sort(nums, left, (left + right) / 2, temp);//排左边
+//        my_sort(nums, (left + right) / 2 + 1, right, temp);//排右边
+//        int l = left;
+//        int r = (left + right) / 2 + 1;
+//        //合并
+//
+//        int cur = left;
+//        while (l <= (left + right) / 2 && r <= right) {
+//            if (nums[l] <= nums[r])
+//                temp[cur++] = nums[l++];
+//            else
+//                temp[cur++] = nums[r++];
+//        }
+//        while (l <= (left + right) / 2)
+//            temp[cur++] = nums[l++];
+//        while (r <= right)
+//            temp[cur++] = nums[r++];
+//        for (int i = left; i <= right; ++i)
+//            nums[i] = temp[i];
+//    }
+//};
+
+
+
+
+//LCR 170. 交易逆序对的总数（完美利用归并排序，真要多多试下分解问题和做出假设之类的东西，说不定哪天我自己就能想出这种有难度极其考验思维的题呢）
+//class Solution {
+//public:
+//    int temp[50005];
+//    long long ret;
+//    int reversePairs(vector<int>& record) {
+//        //利用归并排序和分治思想，将数组分为左右部分，分别找出全为左边部分的逆序和右边部分的逆序还有左边对于右边的逆序
+//        //对于左边于右边，因为已经左右两边已经有序，所以可以通过比较某一个数，快速统计出后面所有逆序数，并且这一步也和归并排序完美契合
+//
+//        my_sort(record, 0, record.size() - 1);
+//        return ret;
+//
+//    }
+//private:
+//    void my_sort(vector<int>& record, int left, int right) {
+//        if (left >= right)
+//            return;
+//        int mid = (left + right) >> 1;
+//        my_sort(record, left, mid);
+//        my_sort(record, mid + 1, right);
+//        int cur1 = left, cur2 = mid + 1;
+//        int i = left;
+//        while (cur1 <= mid && cur2 <= right) {
+//            if (record[cur1] > record[cur2]) {
+//                ret += mid - cur1 + 1;
+//                temp[i++] = record[cur2++];
+//            }
+//            else
+//                temp[i++] = record[cur1++];
+//        }
+//        while (cur1 <= mid)
+//            temp[i++] = record[cur1++];
+//        while (cur2 <= right)
+//            temp[i++] = record[cur2++];
+//        for (left; left <= right; ++left) {
+//            record[left] = temp[left];
+//        }
+//    }
+//};
+
+
+
+//315. 计算右侧小于当前元素的个数
+//class Solution {
+//public:
+//    int temp[100005];
+//    int temp_hash[100005];
+//    vector<int> countSmaller(vector<int>& nums) {
+//        //归并排序降序，当左右两边有序时，可以用左边比较右边快速进行统计，这也是求全左全右中的右侧小于数
+//        //因为和归并排序契合，只是在排序中加些统计，复杂度和归并排序一样
+//        //一个哈希记录排序后的下标，因为返回的是最开始数的右侧最小数
+//        vector<int> ret(nums.size());
+//        vector<int> hash(nums.size());
+//        for (int i = 0; i < hash.size(); ++i)
+//            hash[i] = i;
+//        my_sort(nums, 0, nums.size() - 1, ret, hash);
+//        return ret;
+//    }
+//
+//private:
+//    void my_sort(vector<int>& nums, int left, int right, vector<int>& ret, vector<int>& hash) {
+//        if (left >= right)
+//            return;
+//        int mid = (left + right) >> 1;
+//        my_sort(nums, left, mid, ret, hash);
+//        my_sort(nums, mid + 1, right, ret, hash);
+//        int cur1 = left, cur2 = mid + 1, i = left;
+//        while (cur1 <= mid && cur2 <= right) {
+//            if (nums[cur1] > nums[cur2]) {
+//                temp[i] = nums[cur1];
+//                temp_hash[i] = hash[cur1];//因为是排序下标，当前下标已排好的顺序是存在hash里的，所以要通过hash映射才能获得正确结果
+//                ret[hash[cur1]] += right - cur2 + 1;//记录真正位置
+//
+//                ++i; ++cur1;
+//            }
+//            else {
+//                temp[i] = nums[cur2];
+//                temp_hash[i] = hash[cur2];
+//                ++i; ++cur2;
+//            }
+//        }
+//        while (cur1 <= mid) {
+//            temp[i] = nums[cur1];
+//            temp_hash[i] = hash[cur1];
+//            ++i; ++cur1;
+//        }
+//        while (cur2 <= right) {
+//            temp[i] = nums[cur2];
+//            temp_hash[i] = hash[cur2];
+//            ++i; ++cur2;
+//        }
+//        for (left; left <= right; ++left) {
+//            nums[left] = temp[left];
+//            hash[left] = temp_hash[left];
+//        }
+//    }
+//};
+//int main() {
+//    Solution sl;
+//    vector<int> nums = { 1,9,7,8,5 };
+//    sl.countSmaller(nums);
+//    return 0;
+//}
+
+
+
+//493. 翻转对（大道至简，别老想着全用什么高级算法，像这道题想要计算正确的数量，
+//    因为条件原因，只能在排序前硬算，而不能边排序边算，而你就陷入困境觉得必须找办法使得能一起算，最后不了了之只能又去看题解）
+//class Solution {
+//public:
+//    int temp[50005];
+//    int ret = 0;
+//    int reversePairs(vector<int>& nums) {
+//        //和归并排序契合，归并排序分组时左边下标小于右边下标，满足i<j,只要再满足nums[i] > 2*nums[j]则成立
+//        //单左边和单右边逻辑和上面一样，将左边和右边看作一个单独数组即可
+//        my_sort(nums, 0, nums.size() - 1);
+//        return ret;
+//    }
+//
+//private:
+//    void my_sort(vector<int>& nums, int left, int right) {
+//        if (left >= right)
+//            return;
+//        int mid = (left + right) >> 1;
+//        my_sort(nums, left, mid);
+//        my_sort(nums, mid + 1, right);
+//        int cur1 = left, cur2 = mid + 1, i = left;
+//        //因为即便nums[cur1]大于nums[cur2]，但此时却不满足翻转对，而提前将cur2放进数组可能会导致少计算的情况，所以直接先计算翻转对数量，这步骤复杂度为O(2n)，和合并数组是同一量级，不影响最终复杂度
+//        while (cur1 <= mid && cur2 <= right) {
+//            while (cur1 <= mid && nums[cur1] / 2.0 <= nums[cur2])
+//                ++cur1;
+//            if (cur1 <= mid) {
+//                ret += mid - cur1 + 1;
+//                ++cur2;
+//            }
+//        }
+//        cur1 = left, cur2 = mid + 1;
+//        while (cur1 <= mid && cur2 <= right) {
+//            if (nums[cur1] > nums[cur2])
+//                temp[i++] = nums[cur2++];
+//            else
+//                temp[i++] = nums[cur1++];
+//        }
+//        while (cur1 <= mid)
+//            temp[i++] = nums[cur1++];
+//        while (cur2 <= right)
+//            temp[i++] = nums[cur2++];
+//        for (left; left <= right; ++left)
+//            nums[left] = temp[left];
+//    }
+//};
+//int main() {
+//    Solution sl;
+//    vector<int> nums = { 1,3,2,3,1 };
+//    sl.reversePairs(nums);
+//    return 0;
+//}
