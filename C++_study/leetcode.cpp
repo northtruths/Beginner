@@ -7591,3 +7591,237 @@
 //    sl.reversePairs(nums);
 //    return 0;
 //}
+
+
+
+//2. 两数相加
+// struct ListNode {
+//      int val;
+//      ListNode *next;
+//      ListNode() : val(0), next(nullptr) {}
+//      ListNode(int x) : val(x), next(nullptr) {}
+//     ListNode(int x, ListNode *next) : val(x), next(next) {}
+//};
+//
+// /**
+//  * Definition for singly-linked list.
+//  * struct ListNode {
+//  *     int val;
+//  *     ListNode *next;
+//  *     ListNode() : val(0), next(nullptr) {}
+//  *     ListNode(int x) : val(x), next(nullptr) {}
+//  *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+//  * };
+//  */
+// class Solution {
+// public:
+//     ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
+//         ListNode* cur1 = l1;//当前位置
+//         ListNode* cur2 = l2;
+//         ListNode* ret_head = new ListNode();
+//         ListNode* ret = ret_head;
+//         int add = 0;//进位
+//         while (cur1 && cur2) {
+//             int sum = cur1->val + cur2->val + add;
+//             add = sum / 10;
+//             ret->val = sum % 10;
+//             cur1 = cur1->next;
+//             cur2 = cur2->next;
+//             if (cur1 || cur2 || add)
+//                 ret->next = new ListNode();
+//             ret = ret->next;
+//         }
+//         while (cur1) {
+//             int sum = cur1->val + add;
+//             add = sum / 10;
+//             ret->val = sum % 10;
+//             cur1 = cur1->next;
+//             if (cur1 || add)
+//                 ret->next = new ListNode();
+//             ret = ret->next;
+//         }
+//         while (cur2) {
+//             int sum = cur2->val + add;
+//             add = sum / 10;
+//             ret->val = sum % 10;
+//             cur2 = cur2->next;
+//             if (cur2 || add)
+//                 ret->next = new ListNode();
+//             ret = ret->next;
+//         }
+//         if (add) {
+//             ret->val = add;
+//             ret = ret->next;
+//         }
+//         ret = nullptr;
+//         return ret_head;
+//     }
+// };
+//
+//int main() {
+//    ListNode* l1 = new ListNode(2);
+//    l1->next = new ListNode(4);
+//    l1->next->next = new ListNode(3);
+//    ListNode* l2= new ListNode(5);
+//    l2->next = new ListNode(6);
+//    l2->next->next = new ListNode(4);
+//    Solution sl;
+//    sl.addTwoNumbers(l1, l2);
+//    return 0;
+//}
+
+
+//876. 链表的中间结点
+///**
+// * Definition for singly-linked list.
+// * struct ListNode {
+// *     int val;
+// *     ListNode *next;
+// *     ListNode() : val(0), next(nullptr) {}
+// *     ListNode(int x) : val(x), next(nullptr) {}
+// *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+// * };
+// */
+//class Solution {
+//public:
+//    ListNode* middleNode(ListNode* head) {
+//        int count = 0;
+//        ListNode* cur = head;
+//        while (cur) {
+//            ++count;
+//            cur = cur->next;
+//        }
+//        int mid = count / 2;
+//        ListNode* ret = head;
+//        while (mid--)
+//            ret = ret->next;
+//        return ret;
+//    }
+//};
+
+
+
+//206. 反转链表
+///**
+// * Definition for singly-linked list.
+// * struct ListNode {
+// *     int val;
+// *     ListNode *next;
+// *     ListNode() : val(0), next(nullptr) {}
+// *     ListNode(int x) : val(x), next(nullptr) {}
+// *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+// * };
+// */
+//class Solution {
+//public:
+//    ListNode* reverseList(ListNode* head) {
+//        //若左右两边已经翻转，则将左边的头接上右边的尾即可完成翻转
+//        //左右两边也如此递归解决
+//        ListNode* ret = head;
+//        while (ret && ret->next)
+//            ret = ret->next;
+//        my_reverse(head);
+//        return ret;
+//    }
+//
+//    void my_reverse(ListNode* head) {
+//        if (head == nullptr || head->next == nullptr)//一个节点或空节点
+//            return;
+//        ListNode* mid = head;//链表中间点，并且翻转后为右边尾节点
+//        ListNode* pre = nullptr;//mid的前面一个节点，并且翻转后为左边头节点
+//        ListNode* cur = head;
+//        while (cur && cur->next) {
+//            pre = mid;
+//            mid = mid->next;
+//            cur = cur->next->next;
+//        }
+//        pre->next = nullptr;//将链表分割
+//        my_reverse(head);//翻转左边
+//        my_reverse(mid);//翻转右边
+//        mid->next = pre;//连接
+//    }
+//};
+
+
+
+//143. 重排链表
+//  struct ListNode {
+//      int val;
+//      ListNode *next;
+//      ListNode() : val(0), next(nullptr) {}
+//      ListNode(int x) : val(x), next(nullptr) {}
+//      ListNode(int x, ListNode *next) : val(x), next(next) {}
+//  };
+//
+//class Solution {
+//public:
+//    void reorderList(ListNode* head) {
+//        // 找到中间点，将链表分割两部分，后面部分反转，然后两链表从头开始一个一个连起来即可
+//        ListNode* cur = head;
+//        ListNode* mid = head;    // 中间节点
+//        ListNode* pre = nullptr; // 中间节点前面一个
+//        while (cur && cur->next) {
+//            pre = mid;
+//            mid = mid->next;
+//            cur = cur->next->next;
+//        }
+//        if (pre == nullptr) // 只有一个节点，直接返回
+//            return;
+//        pre->next = nullptr;            // 断开连接，避免形成环路
+//        ListNode* L2 = my_reverse(mid); // 链表2开头
+//        ListNode* L1 = head;
+//        ListNode* N_L1 = L1->next; // 链表的下一个节点，避免前面连接后找不到下一个节点了
+//        ListNode* N_L2 = L2->next;
+//
+//        do {
+//            // 因为中间节点mid的选取原因，L2长度要么等于L1要么多一个，所以当N_L1为空时，L1为尾节点
+//            //此时L1连接剩下的L2即可
+//            if (N_L1 == nullptr) {
+//                L1->next = L2;
+//                break;
+//            }
+//            L1->next = L2;
+//            L2->next = N_L1;
+//            L1 = N_L1;
+//            L2 = N_L2;
+//            N_L1 = N_L1->next;
+//            N_L2 = N_L2->next;
+//        } while (L1 && L2);
+//    }
+//
+//    ListNode* my_reverse(ListNode* head) {            // 反转链表
+//        if (head == nullptr || head->next == nullptr) // 一个节点或空节点
+//            return head;
+//        ListNode* mid = head; // 链表中间点，并且翻转后为右边尾节点
+//        ListNode* pre = nullptr; // mid的前面一个节点，并且翻转后为左边头节点
+//        ListNode* cur = head;
+//        ListNode* ret = cur; // 链表尾节点，反转后就是头节点
+//        while (cur && cur->next) {
+//            pre = mid;
+//            mid = mid->next;
+//            cur = cur->next->next;
+//            if (cur == nullptr)
+//                ret =
+//                ret->next; // 因为cur是两个两个走，若此时cur为kong则说明ret走一个就为尾节点
+//            else
+//                ret = cur;
+//        }
+//        pre->next = nullptr; // 将链表分割
+//        my_reverse(head);    // 翻转左边
+//        my_reverse(mid);     // 翻转右边
+//        mid->next = pre;     // 连接
+//        return ret;
+//    }
+//};
+//
+//int main() {
+//    ListNode* l1 = new ListNode(1);
+//    l1->next = new ListNode(2);
+//    l1->next->next = new ListNode(3);
+//    l1->next->next->next = new ListNode(4);
+//    l1->next->next->next->next = new ListNode(5);
+//
+//    Solution sl;
+//    sl.reorderList(l1);
+//    return 0;
+//}
