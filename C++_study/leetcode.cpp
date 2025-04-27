@@ -7825,3 +7825,101 @@
 //    sl.reorderList(l1);
 //    return 0;
 //}
+
+
+
+//23. 合并 K 个升序链表（遍历做法，时间复杂度为 logN * N 空间复杂度为 N）
+///**
+// * Definition for singly-linked list.
+// * struct ListNode {
+// *     int val;
+// *     ListNode *next;
+// *     ListNode() : val(0), next(nullptr) {}
+// *     ListNode(int x) : val(x), next(nullptr) {}
+// *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+// * };
+// */
+//class Solution {
+//public:
+//    vector<int> arr;
+//    ListNode* mergeKLists(vector<ListNode*>& lists) {
+//        for (int i = 0; i < lists.size(); ++i) {
+//            ListNode* cur = lists[i];
+//            while (cur) {
+//                arr.push_back(cur->val);
+//                cur = cur->next;
+//            }
+//        }
+//        if (arr.size() == 0)
+//            return nullptr;
+//        sort(arr.begin(), arr.end());
+//
+//        ListNode* head = new ListNode();
+//        ListNode* cur = head;
+//        for (int i = 0; i < arr.size(); ++i) {
+//            cur->val = arr[i];
+//            if (i != arr.size() - 1) {
+//                cur->next = new ListNode();
+//                cur = cur->next;
+//            }
+//        }
+//
+//        return head;
+//    }
+//};
+
+
+
+//23. 合并 K 个升序链表（空间复杂度O(1)做法，时间复杂度nlogn）
+///**
+// * Definition for singly-linked list.
+// * struct ListNode {
+// *     int val;
+// *     ListNode *next;
+// *     ListNode() : val(0), next(nullptr) {}
+// *     ListNode(int x) : val(x), next(nullptr) {}
+// *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+// * };
+// */
+//class Solution {
+//public:
+//    ListNode* mergeKLists(vector<ListNode*>& lists) {
+//        //遍历数组，每个链表都和上个链表相加的结果相加
+//        if (lists.size() == 0)
+//            return nullptr;
+//        ListNode* ret = nullptr;
+//        for (int i = 0; i < lists.size(); ++i) {
+//            ret = ListAdd(ret, lists[i]);
+//        }
+//        return ret;
+//    }
+//
+//    ListNode* ListAdd(ListNode* L1, ListNode* L2) {
+//        if (L1 == nullptr)
+//            return L2;
+//        if (L2 == nullptr)
+//            return L1;
+//        ListNode* head = new ListNode();//哨兵节点
+//        ListNode* cur = head;
+//        while (L1 && L2) {
+//            if (L1->val < L2->val) {
+//                cur->next = L1;
+//                cur = cur->next;
+//                L1 = L1->next;
+//            }
+//            else {
+//                cur->next = L2;
+//                cur = cur->next;
+//                L2 = L2->next;
+//            }
+//        }
+//
+//        if (L1)
+//            cur->next = L1;
+//        if (L2)
+//            cur->next = L2;
+//        ListNode* ret = head->next;
+//        delete head;
+//        return ret;
+//    }
+//};
