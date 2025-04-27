@@ -7923,3 +7923,267 @@
 //        return ret;
 //    }
 //};
+
+
+//LCR 159. 库存管理 III
+//class Solution {
+//public:
+//    vector<int> inventoryManagement(vector<int>& stock, int cnt) {
+//        my_sort(stock, 0, stock.size() - 1, cnt);
+//        vector<int> ret(cnt);
+//        for (int i = 0; i < cnt; ++i)
+//            ret[i] = stock[i];
+//        return ret;
+//    }
+//
+//    void my_sort(vector<int>& stock, int begin, int end, int cnt) {
+//        if (begin >= end)
+//            return;
+//        int key = stock[begin];
+//        int left = begin, right = end;
+//        while (left < right) {
+//            while (left < right && stock[right] > key)
+//                --right;
+//            while (left < right && stock[left] <= key)
+//                ++left;
+//            swap(stock[left], stock[right]);
+//        }
+//        swap(stock[left], stock[begin]);
+//        if (left - begin + 1 == cnt)
+//            return;
+//        else if (left - begin + 1 > cnt)
+//            my_sort(stock, begin, left - 1, cnt);
+//        else
+//            my_sort(stock, left + 1, end, cnt - (left - begin + 1));
+//    }
+//};
+
+
+//25. K 个一组翻转链表
+// struct ListNode {
+//      int val;
+//      ListNode *next;
+//      ListNode() : val(0), next(nullptr) {}
+//      ListNode(int x) : val(x), next(nullptr) {}
+//      ListNode(int x, ListNode *next) : val(x), next(next) {}
+//  };
+//
+//class Solution {
+//public:
+//    ListNode* reverseKGroup(ListNode* head, int k) {
+//        //将链表按k的长度截断，每段分别反转，然后连接
+//        ListNode* cur = head;
+//        ListNode* preTail = nullptr;//上一段链表反转后的尾节点，用于连接
+//        ListNode* next = cur;//下一截链表的开头
+//        ListNode* prev = nullptr;//next的前面一个节点，用于截断链表
+//        ListNode* ret = head;
+//        int n = k - 1;
+//        while (n && ret) {
+//            ret = ret->next;
+//            --n;
+//        }
+//        if (n)
+//            ret = head;
+//        while (next) {
+//            n = k;
+//            while (n && next) {
+//                prev = next;
+//                next = next->next;
+//                --n;
+//            }
+//            if (n)//如果n不为0则说明到最后一段了，且长度不够k
+//            {
+//                preTail->next = cur;
+//                break;
+//            }
+//            prev->next = nullptr;//截断
+//            if (preTail)
+//                preTail->next = ListReverse(cur);
+//            else
+//                ListReverse(cur);
+//            preTail = cur;
+//            cur = next;
+//        }
+//
+//        return ret;
+//    }
+//
+//    ListNode* ListReverse(ListNode* head) {
+//        ListNode* retHead = new ListNode();//哨兵节点
+//        ListNode* cur = head;
+//        ListNode* next = head->next;
+//        while (cur) {
+//            cur->next = retHead->next;
+//            retHead->next = cur;
+//            cur = next;
+//            if(next)
+//                next = next->next;
+//        }
+//        ListNode* ret = retHead->next;
+//        delete retHead;
+//        return ret;
+//    }
+//};
+//
+//int main() {
+//    ListNode* l1 = new ListNode(1);
+//    l1->next = new ListNode(2);
+//    l1->next->next = new ListNode(3);
+//    l1->next->next->next = new ListNode(4);
+//    l1->next->next->next->next = new ListNode(5);
+//
+//    Solution sl;
+//    sl.reverseKGroup(l1, 2);
+//    return 0;
+//}
+
+
+
+//1. 两数之和
+//class Solution {
+//public:
+//    vector<int> twoSum(vector<int>& nums, int target) {
+//        //根据题意，答案只有一个，所以若出现重复元素，要么这两个元素就是答案，要么这两个或以上元素都不是答案
+//        //第一种情况，hash里还没有存第二个，之间正常逻辑，第二种情况，其元素是无效值，直接替换即可
+//        unordered_map<int, int> hash;//first为已出现数字，second为其下标
+//        for (int i = 0; i < nums.size(); ++i) {
+//            int cur = nums[i];
+//            if (hash.count(target - cur)) {
+//                return { hash[target - cur], i };
+//            }
+//            hash[cur] = i;
+//        }
+//        return vector<int>();
+//    }
+//};
+
+
+
+//面试题 01.02.判定是否互为字符重排
+//class Solution {
+//public:
+//    int arr1[26];
+//    int arr2[26];
+//    bool CheckPermutation(string s1, string s2) {
+//        //因为是重排，所以字符顺序无所谓，两个哈希记录出现的字符个数
+//        if (s1.size() != s2.size())
+//            return false;
+//        for (int i = 0; i < s1.size(); ++i) {
+//            ++arr1[s1[i] - 'a'];
+//            ++arr2[s2[i] - 'a'];
+//        }
+//        for (int i = 0; i < 26; ++i)
+//            if (arr1[i] != arr2[i])
+//                return false;
+//        return true;
+//    }
+//};
+
+
+//217. 存在重复元素
+//class Solution {
+//public:
+//    bool containsDuplicate(vector<int>& nums) {
+//        unordered_set<int> hash;
+//        for (auto& e : nums) {
+//            if (hash.count(e))
+//                return true;
+//            hash.insert(e);
+//        }
+//        return false;
+//    }
+//};
+
+
+//219. 存在重复元素 II
+//class Solution {
+//public:
+//    bool containsNearbyDuplicate(vector<int>& nums, int k) {
+//        //哈希表，因为条件需要两相等元素下标的尽可能小，所以出现重复元素并判断后，
+//        //这次出现的元素下标覆盖上次的即可，因为下一次再遇见重复元素，k - j 肯定比 k - i小， i < j
+//        unordered_map<int, int> hash;//first为元素，second为其下标
+//        for (int i = 0; i < nums.size(); ++i) {
+//            if (hash.count(nums[i]) && i - hash[nums[i]] <= k)
+//                return true;
+//            hash[nums[i]] = i;
+//        }
+//        return false;
+//    }
+//};
+
+
+
+//49. 字母异位词分组
+//class Solution {
+//public:
+//    vector<vector<string>> groupAnagrams(vector<string>& strs) {
+//        //创建一个哈希数组，每次统计当前字符串字符个数，然后对比哈希数组，
+//        //若存在，就属于对应下标那一组吗，若不存在，就创建一个新组
+//        vector<vector<string>> ret;
+//        vector<array<int, 26>> hash;
+//        for (auto& s : strs) {
+//            array<int, 26> tempArray = { 0 };
+//            for (auto& ch : s)
+//                ++tempArray[ch - 'a'];
+//            int flag = -1;//判断是否有和tempArray完全相同的，有就flag赋值对应下标
+//            for (int i = 0; i < hash.size(); ++i) {
+//                int tempFlag = 1;//判断当前的哈希是否相等，0不等，1等
+//                for (int j = 0; j < 26; ++j) {
+//                    if (tempArray[j] != hash[i][j]) {
+//                        tempFlag = 0;
+//                        break;
+//                    }
+//                }
+//                if (tempFlag) {
+//                    flag = i;
+//                    break;
+//                }
+//            }
+//            if (flag == -1) {//新的字母异位词
+//                hash.push_back(tempArray);
+//                ret.push_back(vector<string>(1, s));
+//            }
+//            else {
+//                ret[flag].push_back(s);
+//            }
+//        }
+//
+//        return ret;
+//    }
+//};
+//
+//int main() {
+//    Solution sl;
+//    vector<string> strs = { "eat", "tea", "tan", "ate", "nat", "bat" };
+//    sl.groupAnagrams(strs);
+//    return 0;
+//}
+
+
+
+//14. 最长公共前缀
+//class Solution {
+//public:
+//    string longestCommonPrefix(vector<string>& strs) {
+//        //每次遍历数组第n个字符，若全都相等，则公共前缀加长
+//        string ret;
+//        int n = 0;
+//        int nmax = 0x3f3f;
+//        for (auto& s : strs)
+//            nmax = min((int)s.size(), nmax);
+//        while (n < nmax) {
+//            int flag = 1;//判断当前字符是否全都相等
+//            for (int i = 1; i < strs.size(); ++i)
+//            {
+//                if (strs[i][n] != strs[i - 1][n]) {
+//                    flag = 0;
+//                    break;
+//                }
+//            }
+//            if (flag == 0)
+//                break;
+//            ++n;
+//        }
+//        return strs[0].substr(0, n);
+//    }
+//};
