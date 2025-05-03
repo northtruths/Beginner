@@ -8189,48 +8189,48 @@
 //};
 
 
-
-class Solution {
-public:
-    string longestPalindrome(string s) {
-        int retIndex = 0;//最长回文子串的中间下标
-        int numMax = 0;//最长回文子串的长度，奇数说明retIndex只有一个，偶数就有retIndex和它后面的一个
-        for (int i = 0; i < s.size() - 1; ++i) {
-            int left = i - 1, right = i + 1;//回文子串长度为奇数的情况
-            int curNum = 1;//当前回文子串最长长度
-            while (left >= 0 && right < s.size() && s[left] == s[right]) {
-                --left; ++right;
-                curNum += 2;
-            }
-            if (curNum > numMax) {
-                numMax = curNum;
-                retIndex = i;
-            }
-            if (i + 1 < s.size() && s[i] == s[i + 1]) {//回文子串长度为偶数的情况
-                left = i - 1, right = i + 2;
-                curNum = 2;
-                while (left >= 0 && right < s.size() && s[left] == s[right]) {
-                    --left; ++right;
-                    curNum += 2;
-                }
-                if (curNum > numMax) {
-                    numMax = curNum;
-                    retIndex = i;
-                }
-            }
-        }
-        //通过回文子串中间点确定回文子串头节点，具体自己举例看看，回文子串长度奇偶不同计算稍有不同，
-        //为偶数时retIndex要后移一位
-        if (numMax & 1 == 0)
-            retIndex++;
-        string retStr = s.substr(retIndex - numMax / 2, numMax);
-        return retStr;
-    }
-};
-
-int main() {
-    Solution sl;
-    string s = "cbbd";
-    sl.longestPalindrome(s);
-    return 0;
-}
+//5. 最长回文子串
+//class Solution {
+//public:
+//    string longestPalindrome(string s) {
+//        int retIndex = 0;//最长回文子串的中间下标
+//        int numMax = 0;//最长回文子串的长度，奇数说明retIndex只有一个，偶数就有retIndex和它后面的一个
+//        for (int i = 0; i < s.size(); ++i) {
+//            int left = i - 1, right = i + 1;//回文子串长度为奇数的情况
+//            int curNum = 1;//当前回文子串最长长度
+//            while (left >= 0 && right < s.size() && s[left] == s[right]) {
+//                --left; ++right;
+//                curNum += 2;
+//            }
+//            if (curNum > numMax) {
+//                numMax = curNum;
+//                retIndex = i;
+//            }
+//            if (i + 1 < s.size() && s[i] == s[i + 1]) {//回文子串长度为偶数的情况
+//                left = i - 1, right = i + 2;
+//                curNum = 2;
+//                while (left >= 0 && right < s.size() && s[left] == s[right]) {
+//                    --left; ++right;
+//                    curNum += 2;
+//                }
+//                if (curNum > numMax) {
+//                    numMax = curNum;
+//                    retIndex = i;
+//                }
+//            }
+//        }
+//        //通过回文子串中间点确定回文子串头节点，具体自己举例看看，回文子串长度奇偶不同计算稍有不同，
+//        //为偶数时retIndex要后移一位
+//        if ((numMax & 1) == 0)
+//            retIndex++;
+//        string retStr = s.substr(retIndex - numMax / 2, numMax);
+//        return retStr;
+//    }
+//};
+//
+//int main() {
+//    Solution sl;
+//    string s = "cbbd";
+//    sl.longestPalindrome(s);
+//    return 0;
+//}
