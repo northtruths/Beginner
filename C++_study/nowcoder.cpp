@@ -126,43 +126,92 @@
 
 
 
-合唱团
-#include <iostream>
-#include<vector>
-using namespace std;
+//合唱团
+//#include <iostream>
+//#include<vector>
+//using namespace std;
+//
+//int main() {
+//    //动态规划，dp[i][j]选取了j个学生且最后一个选取i位置的学生的最大能力乘积
+//    //dp[i][j]就从前d组的dp[i][j]里找
+//    //因为有负数的情况，创建一个最小能力乘积的dp，当前为负值时，乘以最小即为最大
+//    int n;
+//    cin >> n;
+//    vector<int> stu(n);
+//    for (int i = 0; i < n; ++i)
+//        cin >> stu[i];
+//    int k, d;
+//    cin >> k >> d;
+//    vector<vector<long long>> dp_max(n, vector<long long>(k + 1, -0x3f3f3f3f));
+//    vector<vector<long long>> dp_min(n, vector<long long>(k + 1, 0x3f3f3f3f));
+//    dp_max[0][1] = dp_min[0][1] = stu[0];
+//    long long ret = stu[0];
+//    for (int i = 1; i < n; ++i) {
+//        //这里每次初始化只选当前位置的学生的dp，不这样操作的话就需要单独将所有dp[i][0]设置为1，否则选择当前学生时乘积会为0
+//        dp_max[i][1] = dp_min[i][1] = stu[i];
+//        for (int j = 1; j <= k; ++j) {
+//            for (int z = i - 1; z >= max(0, i - d); --z) {
+//                if (stu[i] < 0) {
+//                    dp_max[i][j] = max(dp_max[i][j], dp_min[z][j - 1] * stu[i]);
+//                    dp_min[i][j] = min(dp_min[i][j], dp_max[z][j - 1] * stu[i]);
+//                }
+//                else {
+//                    dp_max[i][j] = max(dp_max[i][j], dp_max[z][j - 1] * stu[i]);
+//                    dp_min[i][j] = min(dp_min[i][j], dp_min[z][j - 1] * stu[i]);
+//                }
+//            }
+//        }
+//        ret = max(ret, dp_max[i][k]);
+//    }
+//    cout << ret << endl;
+//    return 0;
+//}
 
-int main() {
-    //动态规划，dp[i][j]选取了j个学生且最后一个选取i位置的学生的最大能力乘积
-    //dp[i][j]就从前d组的dp[i][j]里找
-    //因为有负数的情况，创建一个最小能力乘积的dp，当前为负值时，乘以最小即为最大
-    int n;
-    cin >> n;
-    vector<int> stu(n);
-    for (int i = 0; i < n; ++i)
-        cin >> stu[i];
-    int k, d;
-    cin >> k >> d;
-    vector<vector<long long>> dp_max(n, vector<long long>(k + 1, -0x3f3f3f3f));
-    vector<vector<long long>> dp_min(n, vector<long long>(k + 1, 0x3f3f3f3f));
-    dp_max[0][1] = dp_min[0][1] = stu[0];
-    long long ret = stu[0];
-    for (int i = 1; i < n; ++i) {
-        //这里每次初始化只选当前位置的学生的dp，不这样操作的话就需要单独将所有dp[i][0]设置为1，否则选择当前学生时乘积会为0
-        dp_max[i][1] = dp_min[i][1] = stu[i];
-        for (int j = 1; j <= k; ++j) {
-            for (int z = i - 1; z >= max(0, i - d); --z) {
-                if (stu[i] < 0) {
-                    dp_max[i][j] = max(dp_max[i][j], dp_min[z][j - 1] * stu[i]);
-                    dp_min[i][j] = min(dp_min[i][j], dp_max[z][j - 1] * stu[i]);
-                }
-                else {
-                    dp_max[i][j] = max(dp_max[i][j], dp_max[z][j - 1] * stu[i]);
-                    dp_min[i][j] = min(dp_min[i][j], dp_min[z][j - 1] * stu[i]);
-                }
-            }
-        }
-        ret = max(ret, dp_max[i][k]);
-    }
-    cout << ret << endl;
-    return 0;
-}
+
+
+//活动安排
+//#include <iostream>
+//#include<vector>
+//#include<algorithm>
+//using namespace std;
+//
+//int main() {
+//    //贪心+动态规划+二分
+//    //对于选择的最优情况的n个活动，因为是最优，所以后面遇见能接在后面的活动，此刻也是最优
+//    //因为排序后开始时间为升序，所以若后面的活动结束时间大于前面的活动的结束时间，则选择当前活动优于选择前面的活动
+//    //用一个数组记录选择n个活动的结束时间为k（因为根据可知排序后我们只需要关注结束时间即可），
+//    //若当前活动能接在最后面，则接在最后，否则看看是否能优化之前记录的活动（开始时间都能接在同一个活动后，但结束时间优于所记录的那一个）
+//    int n;
+//    cin >> n;
+//    vector<vector<int>> nums(n, vector<int>(2));
+//    for (int i = 0; i < n; ++i) {
+//        int a, b;
+//        cin >> a >> b;
+//        nums[i] = { a, b };
+//    }
+//    sort(nums.begin(), nums.end(), [&nums](vector<int>& x, vector<int>& y)->bool {return x[0] < y[0]; });
+//    vector<int> ret;//记录选择的活动，ret的size即为最多活动数
+//    ret.push_back({ nums[0][1] });
+//    for (int i = 1; i < n; ++i) {
+//        int a = nums[i][0], b = nums[i][1];
+//        if (a >= ret[ret.size() - 1])
+//            ret.push_back(b);
+//        else {
+//            //寻找时用二分，因为存储的数据肯定有序
+//            int left = 0, right = ret.size() - 1;
+//            while (left <= right) {
+//                int mid = (left + right) >> 1;
+//                if (ret[mid] == a) {
+//                    //刚好可以接在mid位置后面
+//                    left = mid + 1;//left最后的位置是大于目标a的第一个，所以left的位置就是我们要替换的位置
+//                    break;
+//                }
+//                else if (ret[mid] > a) right = mid - 1;
+//                else left = mid + 1;
+//            }
+//            ret[left] = min(ret[left], b);
+//        }
+//    }
+//    cout << ret.size() << endl;
+//    return 0;
+//}
