@@ -215,3 +215,68 @@
 //    cout << ret.size() << endl;
 //    return 0;
 //}
+
+
+
+//kotori和迷宫
+//#include<iostream>
+//#include<vector>
+//#include<queue>
+//#include<utility>
+//using namespace std;
+//
+//int n, m;
+//int dir[4][2] = { {0, 1}, {0, -1}, {1, 0}, {-1, 0} };
+//
+//void BFS(vector<vector<char>>& grid, vector<vector<int>>& ret, queue<pair<int, int>>& q) {
+//    while (!q.empty()) {
+//        auto& [x, y] = q.front();
+//        for (auto& e : dir) {
+//            int a = x + e[0];
+//            int b = y + e[1];
+//            //若位置a,b为-1且不为*，则说明可以走
+//            if (0 <= a && a < n && 0 <= b && b < m && grid[a][b] != '*' && ret[a][b] == -1) {
+//                ret[a][b] = ret[x][y] + 1;
+//                if (grid[a][b] == '.')//若为'.'还能继续走
+//                    q.push({ a, b });
+//            }
+//        }
+//        q.pop();
+//    }
+//}
+//
+//int main() {
+//    //层序遍历，用一个二维数组记录走到此处需要的最少步数，不能走到则为-1
+//    //遍历结果统计数量和最小
+//    cin >> n >> m;
+//    int ki, kj;//起始位置
+//    vector<vector<char>> grid(n, vector<char>(m));
+//    for (int i = 0; i < n; ++i) {
+//        for (int j = 0; j < m; ++j) {
+//            cin >> grid[i][j];
+//            if (grid[i][j] == 'k') {
+//                ki = i, kj = j;
+//            }
+//        }
+//    }
+//    vector<vector<int>> ret(n, vector<int>(m, -1));
+//    ret[ki][kj] = 0;
+//    queue<pair<int, int>> q;
+//    q.push({ ki, kj });
+//    BFS(grid, ret, q);
+//    int ret_count = 0;
+//    int ret_min = 0x3f3f3f3f;
+//    for (int i = 0; i < n; ++i) {
+//        for (int j = 0; j < m; ++j) {
+//            if (grid[i][j] == 'e' && ret[i][j] != -1) {
+//                ++ret_count;
+//                ret_min = min(ret_min, ret[i][j]);
+//            }
+//        }
+//    }
+//    if (ret_count == 0)
+//        cout << -1 << endl;
+//    else
+//        cout << ret_count << " " << ret_min << endl;
+//    return 0;
+//}
