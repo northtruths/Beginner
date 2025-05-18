@@ -8234,3 +8234,142 @@
 //    sl.longestPalindrome(s);
 //    return 0;
 //}
+
+
+//67. 二进制求和
+//class Solution {
+//public:
+//    string addBinary(string a, string b) {
+//        string ret;
+//        reverse(a.begin(), a.end());
+//        reverse(b.begin(), b.end());
+//        int i = 0;
+//        int add = 0;
+//        for (i; i < min(a.size(), b.size()); ++i) {
+//            int cur = a[i] + b[i] - 96 + add;
+//            add = cur / 2;
+//            ret.push_back(cur % 2 + 48);
+//        }
+//        while (i < a.size()) {
+//            int cur = a[i] - 48 + add;
+//            add = cur / 2;
+//            ret.push_back(cur % 2 + 48);
+//            ++i;
+//        }
+//        while (i < b.size()) {
+//            int cur = b[i] - 48 + add;
+//            add = cur / 2;
+//            ret.push_back(cur % 2 + 48);
+//            ++i;
+//        }
+//        if (add)
+//            ret.push_back(add + 48);
+//        reverse(ret.begin(), ret.end());
+//        return ret;
+//    }
+//};
+//
+//int main() {
+//    Solution sl;
+//    string a = "11";
+//    string b = "1";
+//    cout << sl.addBinary(a, b);
+//    return 0;
+//}
+
+//1047. 删除字符串中的所有相邻重复项
+//class Solution {
+//public:
+//    string removeDuplicates(string s) {
+//        stack<char> st;
+//        for (int i = 0; i < s.size(); ++i) {
+//            char cur = s[i];
+//            bool flag = 0;//判断当前字符是否被删除，没有就push
+//            while (!st.empty() && st.top() == cur) {
+//                flag = true;
+//                st.pop();
+//            }
+//            if (flag == false)
+//                st.push(cur);
+//        }
+//        string ret;
+//        while (!st.empty()) {
+//            ret.push_back(st.top());
+//            st.pop();
+//        }
+//        reverse(ret.begin(), ret.end());
+//        return ret;
+//    }
+//};
+
+
+
+//844. 比较含退格的字符串
+//class Solution {
+//public:
+//    bool backspaceCompare(string s, string t) {
+//        vector<char> a(200);
+//        vector<char> b(200);
+//        int ai = 0, bi = 0;
+//        for (auto& e : s) {
+//            if (e == '#')
+//                ai = max(ai - 1, 0);
+//            else
+//                a[ai++] = e;
+//        }
+//        for (auto& e : t) {
+//            if (e == '#')
+//                bi = max(bi - 1, 0);
+//            else
+//                b[bi++] = e;
+//        }
+//        if (ai != bi)
+//            return false;
+//        for (int i = 0; i < ai; ++i)
+//            if (a[i] != b[i])
+//                return false;
+//        return true;
+//    }
+//};
+
+
+class Solution {
+public:
+    int calculate(string s) {
+        vector<int> nums(3*1e5);
+        int nums_i = 0;//nums的尾下标，用于出入栈使用
+        int i = 0;
+        while (i < s.size() && ('0' <= s[i] && s[i] <= '9'))
+            ++i;
+        string temp = s.substr(0, i);
+        nums[nums_i++] = stoi(temp);
+        for (i; i < s.size(); ++i) {
+            int j = i + 1;
+            while (j < s.size() && ('0' <= s[j] && s[j] <= '9'))
+                ++j;
+            int len = j - i - 1;//当前运算符后面的数字的长度，用于后面遍历
+            temp = s.substr(i + 1, len);
+            int cur = stoi(temp);
+            if (nums[i] == '*')
+                nums[nums_i - 1] *= cur;
+            else if (nums[i] == '/')
+                nums[nums_i - 1] /= cur;
+            else if (nums[i] == '-')
+                nums[nums_i++] = -1 * cur;
+            else
+                nums[nums_i++] = cur;
+        }
+        long long ret = 0;
+        for (i = 0; i < nums_i; ++i)
+            ret += nums[i];
+        return ret;
+
+    }
+};
+
+int main() {
+    Solution sl;
+    string s = "3+2*2";
+    cout << sl.calculate(s);
+    return 0;
+}
