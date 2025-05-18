@@ -8333,43 +8333,166 @@
 //};
 
 
+
+//227. 基本计算器 II（处理了很久细节问题过了，但逻辑还是写得很乱，都是看哪错就改哪补哪，该改）
+//class Solution {
+//public:
+//    int calculate(string s) {
+//        vector<int> nums(3e5);
+//        int nums_i = 0;//nums的尾下标，用于出入栈使用
+//        int i = 0;
+//        while (s[i] == ' ')
+//            ++i;
+//        while (i < s.size() && ('0' <= s[i] && s[i] <= '9'))
+//            ++i;
+//        string temp = s.substr(0, i);
+//        nums[nums_i++] = my_stoi(temp);//将第一个数字放入数组，后面每次碰见运算符则操作
+//        while (i < s.size()) {
+//            if (s[i] == ' ') {
+//                ++i;
+//                continue;
+//            }
+//            int j = i + 1;
+//            while (j < s.size() && (s[j] != '+' && s[j] != '-' && s[j] != '*' && s[j] != '/'))
+//                ++j;
+//            int len = j - i - 1;//当前运算符后面的数字的长度，用于后面遍历
+//            temp = s.substr(i + 1, len);
+//            int cur = my_stoi(temp);
+//            if (s[i] == '*')
+//                nums[nums_i - 1] *= cur;
+//            else if (s[i] == '/')
+//                nums[nums_i - 1] /= cur;
+//            else if (s[i] == '-')
+//                nums[nums_i++] = -1 * cur;
+//            else
+//                nums[nums_i++] = cur;
+//            i = j;
+//        }
+//        long long ret = 0;
+//        for (i = 0; i < nums_i; ++i)
+//            ret += nums[i];
+//        return ret;
+//
+//    }
+//
+//    int my_stoi(string& s) {
+//        int sum = 0;
+//        int index = 0;
+//        int n = s.size();
+//        for (int i = n - 1; i >= 0; --i) {
+//            if (s[i] == ' ')
+//                continue;
+//            sum += (s[i] - 48) * pow(10, index++);
+//        }
+//        return sum;
+//    }
+//};
+//
+//int main() {
+//    Solution sl;
+//    string s = " 3+5 / 2 ";
+//    cout << sl.calculate(s);
+//    return 0;
+//}
+
+
+//227. 基本计算器 II（搞清晰每一步需要什么后，如何得到后，优化成功）
+//class Solution {
+//public:
+//    int calculate(string s) {
+//        //栈模拟，每次从当前（运算符）开始，遇到下一个运算符或者结尾，中间的即为本次需要处理的数字
+//        vector<int> nums;
+//        int i = 0;
+//        while (i < s.size() && (s[i] != '+' && s[i] != '-' && s[i] != '*' && s[i] != '/'))
+//            ++i;
+//        string temp = s.substr(0, i);
+//        nums.push_back(my_stoi(temp));//将第一个数字放入数组，后面每次碰见运算符则操作
+//        while (i < s.size()) {
+//            int j = i + 1;
+//            while (j < s.size() && (s[j] != '+' && s[j] != '-' && s[j] != '*' && s[j] != '/'))
+//                ++j;
+//            int len = j - i - 1;//两运算符间的距离，即待处理数字
+//            temp = s.substr(i + 1, len);
+//            int cur = my_stoi(temp);
+//            if (s[i] == '*')
+//                nums[nums.size() - 1] *= cur;
+//            else if (s[i] == '/')
+//                nums[nums.size() - 1] /= cur;
+//            else if (s[i] == '-')
+//                nums.push_back(-1 * cur);
+//            else
+//                nums.push_back(cur);
+//            i = j;
+//        }
+//        long long ret = 0;
+//        for (auto& e : nums)
+//            ret += e;
+//        return ret;
+//
+//    }
+//
+//    int my_stoi(string& s) {
+//        int sum = 0;
+//        int index = 0;
+//        int n = s.size();
+//        for (int i = n - 1; i >= 0; --i) {
+//            if (s[i] == ' ')
+//                continue;
+//            sum += (s[i] - 48) * pow(10, index++);
+//        }
+//        return sum;
+//    }
+//};
+
+
+
+
+
 class Solution {
 public:
-    int calculate(string s) {
-        vector<int> nums(3*1e5);
-        int nums_i = 0;//nums的尾下标，用于出入栈使用
-        int i = 0;
-        while (i < s.size() && ('0' <= s[i] && s[i] <= '9'))
-            ++i;
-        string temp = s.substr(0, i);
-        nums[nums_i++] = stoi(temp);
-        for (i; i < s.size(); ++i) {
-            int j = i + 1;
-            while (j < s.size() && ('0' <= s[j] && s[j] <= '9'))
-                ++j;
-            int len = j - i - 1;//当前运算符后面的数字的长度，用于后面遍历
-            temp = s.substr(i + 1, len);
-            int cur = stoi(temp);
-            if (nums[i] == '*')
-                nums[nums_i - 1] *= cur;
-            else if (nums[i] == '/')
-                nums[nums_i - 1] /= cur;
-            else if (nums[i] == '-')
-                nums[nums_i++] = -1 * cur;
-            else
-                nums[nums_i++] = cur;
-        }
-        long long ret = 0;
-        for (i = 0; i < nums_i; ++i)
-            ret += nums[i];
-        return ret;
+    string ret;
 
+    string decodeString(string s) {
+        //若遇到数字，则一直遍历到']'以操作当前的k[encoded_string]
+        int i = 0;
+        while (i < s.size()) {
+            int j = i;
+            if ('0' <= s[i] && s[i] <= '9') {
+                int count = 0;//记录遇到的'['个数，若遇到过的话，']'也应相应地跳过几次
+                while (s[j] != ']' || count != 1) {
+                    if (s[j] == '[')
+                        ++count;
+                    if (s[j] == ']')
+                        --count;
+                    ++j;
+                }
+                //循环结束j将会指在对应最后一个']'的位置
+                //取得[]里的编码，递归解决括号里的问题
+                Func(s.substr(i, j - i + 1));
+            }
+            else
+                ret += s[i];
+            i = j + 1;//不论那种情况，现在i位于带处理的位置
+        }
+        return ret;
+    }
+
+    //处理k[encoded_string ]
+    void Func(const string& s) {
+        int num = 0;//数字的长度
+        while (s[num] != '[')
+            ++num;
+        int k = stoi(s.substr(0, num));
+        //num此时的值也标志着'['的位置
+        string add = s.substr(num + 1, s.size() - num - 2);//减去数字的长度和[]的长度就为需要添加的字符串的长度
+        while (k--)
+            decodeString(add);
     }
 };
 
 int main() {
     Solution sl;
-    string s = "3+2*2";
-    cout << sl.calculate(s);
+    string s = "3[a]2[bc]";
+    cout << sl.decodeString(s);
     return 0;
 }
