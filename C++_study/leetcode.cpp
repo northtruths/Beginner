@@ -8447,52 +8447,285 @@
 
 
 
+//394. 字符串解码
+//class Solution {
+//public:
+//    string ret;
+//
+//    string decodeString(string s) {
+//        //若遇到数字，则一直遍历到']'以操作当前的k[encoded_string]
+//        int i = 0;
+//        while (i < s.size()) {
+//            int j = i;
+//            if ('0' <= s[i] && s[i] <= '9') {
+//                int count = 0;//记录遇到的'['个数，若遇到过的话，']'也应相应地跳过几次
+//                while (s[j] != ']' || count != 1) {
+//                    if (s[j] == '[')
+//                        ++count;
+//                    if (s[j] == ']')
+//                        --count;
+//                    ++j;
+//                }
+//                //循环结束j将会指在对应最后一个']'的位置
+//                //取得[]里的编码，递归解决括号里的问题
+//                Func(s.substr(i, j - i + 1));
+//            }
+//            else
+//                ret += s[i];
+//            i = j + 1;//不论那种情况，现在i位于带处理的位置
+//        }
+//        return ret;
+//    }
+//
+//    //处理k[encoded_string ]
+//    void Func(const string& s) {
+//        int num = 0;//数字的长度
+//        while (s[num] != '[')
+//            ++num;
+//        int k = stoi(s.substr(0, num));
+//        //num此时的值也标志着'['的位置
+//        string add = s.substr(num + 1, s.size() - num - 2);//减去数字的长度和[]的长度就为需要添加的字符串的长度
+//        while (k--)
+//            decodeString(add);
+//    }
+//};
+//
+//int main() {
+//    Solution sl;
+//    string s = "3[a]2[bc]";
+//    cout << sl.decodeString(s);
+//    return 0;
+//}
 
+
+
+
+//946. 验证栈序列
+//class Solution {
+//public:
+//    bool validateStackSequences(vector<int>& pushed, vector<int>& popped) {
+//        //模拟,当前栈顶不是popped对应的数据，就push，是的话就pop
+//        //若pushed走完，poped却没能走完，或走完栈不为空，则false
+//        if (pushed.size() != popped.size())  return false;
+//        stack<int> st;
+//        int pop_i = 0;//popped的下标
+//        for (int i = 0; i < pushed.size(); ++i) {
+//            if (st.empty() || st.top() != popped[pop_i])
+//                st.push(pushed[i]);
+//            while (!st.empty() && st.top() == popped[pop_i]) {
+//                st.pop();
+//                ++pop_i;
+//            }
+//        }
+//        if (st.empty())
+//            return true;
+//        else
+//            return false;
+//    }
+//};
+
+
+
+
+//429. N 叉树的层序遍历（还是要加强对边界和特殊情况的处理能力）
+///*
+//// Definition for a Node.
+//class Node {
+//public:
+//    int val;
+//    vector<Node*> children;
+//
+//    Node() {}
+//
+//    Node(int _val) {
+//        val = _val;
+//    }
+//
+//    Node(int _val, vector<Node*> _children) {
+//        val = _val;
+//        children = _children;
+//    }
+//};
+//*/
+//
+//class Solution {
+//public:
+//    vector<vector<int>> levelOrder(Node* root) {
+//        queue<pair<Node*, int>> q; // first为节点，second为层数
+//        q.push({ root, 0 });
+//        vector<vector<int>> ret;
+//        while (!q.empty()) {
+//            Node* cur = q.front().first;
+//            int floor = q.front().second;
+//            if (cur) {
+//                for (auto& e : cur->children) {
+//                    if (e) {
+//                        q.push({ e, floor + 1 });
+//                    }
+//                }
+//            }
+//            if (cur && floor >= ret.size()) {
+//                ret.push_back({ cur->val });
+//            }
+//            else if (cur) {
+//                ret[floor].push_back(cur->val);
+//            }
+//            q.pop();
+//        }
+//        return ret;
+//    }
+//};
+
+
+
+//103. 二叉树的锯齿形层序遍历
+///**
+// * Definition for a binary tree node.
+// * struct TreeNode {
+// *     int val;
+// *     TreeNode *left;
+// *     TreeNode *right;
+// *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+// *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+// *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+// * };
+// */
+//class Solution {
+//public:
+//    vector<vector<int>> zigzagLevelOrder(TreeNode* root) {
+//        //层序遍历，偶数层逆序
+//        vector<vector<int>> ret;
+//        queue<TreeNode*> q;
+//        q.push(root);
+//        while (!q.empty()) {
+//            int n = q.size();//这一层节点个数
+//            vector<int> temp;
+//            for (int i = 0; i < n; ++i) {
+//                TreeNode* cur = q.front();
+//                q.pop();
+//                if (cur) {
+//                    temp.push_back(cur->val);
+//                    q.push(cur->left);
+//                    q.push(cur->right);
+//                }
+//            }
+//            if (ret.size() % 2 == 1)//若ret的size为奇数，说明当前插入的为偶数层，逆序
+//                reverse(temp.begin(), temp.end());
+//            if (!temp.empty())
+//                ret.push_back(temp);
+//        }
+//        return ret;
+//    }
+//};
+
+
+
+//662. 二叉树最大宽度（直接层序，简单优化后还是超时， 再次优化后有超空间）
+///**
+// * Definition for a binary tree node.
+// * struct TreeNode {
+// *     int val;
+// *     TreeNode *left;
+// *     TreeNode *right;
+// *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+// *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+// *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+// * };
+// */
+//class Solution {
+//public:
+//    int widthOfBinaryTree(TreeNode* root) {
+//        //层序遍历
+//        //每一层从遇到非空才开始push，双指针去寻找下一个非空，push两指针之间的节点，空节点需要push的话还是push空
+//        int ret = 0;
+//        deque<TreeNode*> dq;
+//        dq.push_back(root);
+//        while (!dq.empty()) {
+//            int n = dq.size();//当前层的节点个数
+//
+//            int dis = 0;//当前层的有效节点个数
+//            while (n && dq[0] == nullptr)//找第一个非空
+//            {
+//                dq.pop_front();
+//                --n;
+//            }
+//            if (n) {
+//                //此时n不为0说明必定有一个非空节点
+//                ++dis;
+//                dq.push_back(dq[0]->left);
+//                dq.push_back(dq[0]->right);
+//                dq.pop_front();
+//                --n;
+//            }
+//            while (n) {
+//                int temp = 0;//记录当前非空节点到下一个非空节点的距离，能找到则给dis加上
+//                deque<TreeNode*> add;//入队列的元素，必须得是有效元素区间才入队
+//                while (n && dq[0] == nullptr) {
+//                    ++temp;
+//                    add.push_back(nullptr);
+//                    add.push_back(nullptr);
+//                    dq.pop_front();
+//                    --n;
+//                }
+//                if (n) {
+//                    dis += temp + 1;
+//                    dq.insert(dq.end(), add.begin(), add.end());
+//                    dq.push_back(dq[0]->left);
+//                    dq.push_back(dq[0]->right);
+//                    dq.pop_front();
+//                    --n;
+//                }
+//            }
+//            ret = max(ret, dis);
+//        }
+//        return ret;
+//    }
+//};
+
+
+
+//二叉树最大宽度(未活用之前已学知识，还有就是这个测试用例卡得真死，用了long long还是数据溢出，想着是不是有其他方法减少数据大小，而不是unsigned，结果题解还真是)
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+ * };
+ */
 class Solution {
 public:
-    string ret;
-
-    string decodeString(string s) {
-        //若遇到数字，则一直遍历到']'以操作当前的k[encoded_string]
-        int i = 0;
-        while (i < s.size()) {
-            int j = i;
-            if ('0' <= s[i] && s[i] <= '9') {
-                int count = 0;//记录遇到的'['个数，若遇到过的话，']'也应相应地跳过几次
-                while (s[j] != ']' || count != 1) {
-                    if (s[j] == '[')
-                        ++count;
-                    if (s[j] == ']')
-                        --count;
-                    ++j;
+    int widthOfBinaryTree(TreeNode* root) {
+        //层序遍历+二叉树知识(二叉树数组)
+        //在数组二叉树中，每个子节点的下标都按照父节点的下标存储在数组中，对于同一层的节点，它们的下标之差就是它们的宽度距离
+        //所以给每个节点加上一个下标编号，根节点为0，左子节点为2*n+1,右子节点为2*n+2
+        if (root == nullptr) return 0;
+        unsigned long long ret = 0;
+        queue<TreeNode*> q;
+        deque<unsigned long long> index;//对应下标
+        q.push(root);
+        index.push_back(0);
+        while (!q.empty()) {
+            int n = q.size();
+            ret = max(ret, index[n - 1] - index[0] + 1);//因为是从左往右push的，所以最右边减去最左边为最大差值
+            while (n--) {
+                if (q.front()) {
+                    if (q.front()->left) {
+                        q.push(q.front()->left);
+                        index.push_back(index.front() * 2 + 1);
+                    }
+                    if (q.front()->right) {
+                        q.push(q.front()->right);
+                        index.push_back(index.front() * 2 + 2);
+                    }
                 }
-                //循环结束j将会指在对应最后一个']'的位置
-                //取得[]里的编码，递归解决括号里的问题
-                Func(s.substr(i, j - i + 1));
+                q.pop();
+                index.pop_front();
             }
-            else
-                ret += s[i];
-            i = j + 1;//不论那种情况，现在i位于带处理的位置
         }
-        return ret;
-    }
-
-    //处理k[encoded_string ]
-    void Func(const string& s) {
-        int num = 0;//数字的长度
-        while (s[num] != '[')
-            ++num;
-        int k = stoi(s.substr(0, num));
-        //num此时的值也标志着'['的位置
-        string add = s.substr(num + 1, s.size() - num - 2);//减去数字的长度和[]的长度就为需要添加的字符串的长度
-        while (k--)
-            decodeString(add);
+        return (int)ret;
     }
 };
-
-int main() {
-    Solution sl;
-    string s = "3[a]2[bc]";
-    cout << sl.decodeString(s);
-    return 0;
-}

@@ -280,3 +280,38 @@
 //        cout << ret_count << " " << ret_min << endl;
 //    return 0;
 //}
+
+
+
+//包含不超过两种字符的最长子串（复习）
+//#include <iostream>
+//#include<string>
+//using namespace std;
+//
+//int main() {
+//    //双指针，一个数组记录当前所有字母的个数，当某个字母由0变1或1变0，说明当前[left, right]窗口中总共包含的字符种类有变
+//    //字符种类变为3时，right刚好在第三种字符的位置上，记录长度right-left，然后left走
+//    //当字符种类<=2时，right走
+//    string s;
+//    cin >> s;
+//    int hash[26] = { 0 };
+//    int count = 0;//当前窗口中字符种类
+//    int left = 0, right = 0;
+//    int ret = 0;
+//    while (right < s.size()) {
+//        if (++hash[s[right] - 'a'] == 1)//窗口新增字符种类
+//            ++count;
+//        if (count == 3) {
+//            ret = max(ret, right - left);
+//            while (count == 3) {
+//                if (--hash[s[left] - 'a'] == 0)
+//                    --count;
+//                ++left;
+//            }
+//        }
+//        ++right;
+//    }
+//    ret = max(ret, right - left);
+//    cout << ret << endl;
+//    return 0;
+//}
