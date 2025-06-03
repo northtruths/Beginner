@@ -8684,48 +8684,112 @@
 
 
 
-//二叉树最大宽度(未活用之前已学知识，还有就是这个测试用例卡得真死，用了long long还是数据溢出，想着是不是有其他方法减少数据大小，而不是unsigned，结果题解还真是)
-/**
- * Definition for a binary tree node.
- * struct TreeNode {
- *     int val;
- *     TreeNode *left;
- *     TreeNode *right;
- *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
- *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
- *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
- * };
- */
-class Solution {
-public:
-    int widthOfBinaryTree(TreeNode* root) {
-        //层序遍历+二叉树知识(二叉树数组)
-        //在数组二叉树中，每个子节点的下标都按照父节点的下标存储在数组中，对于同一层的节点，它们的下标之差就是它们的宽度距离
-        //所以给每个节点加上一个下标编号，根节点为0，左子节点为2*n+1,右子节点为2*n+2
-        if (root == nullptr) return 0;
-        unsigned long long ret = 0;
-        queue<TreeNode*> q;
-        deque<unsigned long long> index;//对应下标
-        q.push(root);
-        index.push_back(0);
-        while (!q.empty()) {
-            int n = q.size();
-            ret = max(ret, index[n - 1] - index[0] + 1);//因为是从左往右push的，所以最右边减去最左边为最大差值
-            while (n--) {
-                if (q.front()) {
-                    if (q.front()->left) {
-                        q.push(q.front()->left);
-                        index.push_back(index.front() * 2 + 1);
-                    }
-                    if (q.front()->right) {
-                        q.push(q.front()->right);
-                        index.push_back(index.front() * 2 + 2);
-                    }
-                }
-                q.pop();
-                index.pop_front();
-            }
-        }
-        return (int)ret;
-    }
-};
+////二叉树最大宽度(未活用之前已学知识，还有就是这个测试用例卡得真死，用了long long还是数据溢出，想着是不是有其他方法减少数据大小，而不是unsigned，结果题解还真是)
+///**
+// * Definition for a binary tree node.
+// * struct TreeNode {
+// *     int val;
+// *     TreeNode *left;
+// *     TreeNode *right;
+// *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+// *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+// *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+// * };
+// */
+//class Solution {
+//public:
+//    int widthOfBinaryTree(TreeNode* root) {
+//        //层序遍历+二叉树知识(二叉树数组)
+//        //在数组二叉树中，每个子节点的下标都按照父节点的下标存储在数组中，对于同一层的节点，它们的下标之差就是它们的宽度距离
+//        //所以给每个节点加上一个下标编号，根节点为0，左子节点为2*n+1,右子节点为2*n+2
+//        if (root == nullptr) return 0;
+//        unsigned long long ret = 0;
+//        queue<TreeNode*> q;
+//        deque<unsigned long long> index;//对应下标
+//        q.push(root);
+//        index.push_back(0);
+//        while (!q.empty()) {
+//            int n = q.size();
+//            ret = max(ret, index[n - 1] - index[0] + 1);//因为是从左往右push的，所以最右边减去最左边为最大差值
+//            while (n--) {
+//                if (q.front()) {
+//                    if (q.front()->left) {
+//                        q.push(q.front()->left);
+//                        index.push_back(index.front() * 2 + 1);
+//                    }
+//                    if (q.front()->right) {
+//                        q.push(q.front()->right);
+//                        index.push_back(index.front() * 2 + 2);
+//                    }
+//                }
+//                q.pop();
+//                index.pop_front();
+//            }
+//        }
+//        return (int)ret;
+//    }
+//};
+
+
+
+//227. 基本计算器 II（复习）
+//class Solution {
+//public:
+//    int calculate(string s) {
+//        stack<int> sum; // 提取所有数字
+//        string cur;     // 当前数字
+//        int pre = 0;    // 当前数字前面的一个符号是什么，0为+，1为-，2为*，3为/
+//        for (auto& e : s) {
+//            if (('0' <= e && e <= '9') || e == ' ') {
+//                cur += e;
+//            }
+//            else {
+//                if (pre == 1)
+//                    sum.push(-1 * stoi(cur));
+//                else
+//                    sum.push(stoi(cur));
+//                if (pre == 2) {
+//                    int a = sum.top();
+//                    sum.pop();
+//                    int b = sum.top();
+//                    sum.pop();
+//                    sum.push(a * b);
+//                }
+//                else if (pre == 3) {
+//                    int a = sum.top();
+//                    sum.pop();
+//                    int b = sum.top();
+//                    sum.pop();
+//                    sum.push(b / a);
+//                }
+//                pre = e == '+' ? 0 : e == '-' ? 1 : e == '*' ? 2 : 3;
+//                cur.clear();
+//            }
+//        }
+//        if (pre == 1)
+//            sum.push(-1 * stoi(cur));
+//        else
+//            sum.push(stoi(cur));
+//        if (pre == 2) {
+//            int a = sum.top();
+//            sum.pop();
+//            int b = sum.top();
+//            sum.pop();
+//            sum.push(a * b);
+//        }
+//        else if (pre == 3) {
+//            int a = sum.top();
+//            sum.pop();
+//            int b = sum.top();
+//            sum.pop();
+//            sum.push(b / a);
+//        }
+//
+//        int ret = 0;
+//        while (sum.size()) {
+//            ret += sum.top();
+//            sum.pop();
+//        }
+//        return ret;
+//    }
+//};
