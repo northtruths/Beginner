@@ -8,5 +8,6 @@
 #include<cmath>
 #include<utility>
 #include<array>
+#include<stack>
 using namespace std;
 

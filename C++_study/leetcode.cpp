@@ -8793,3 +8793,55 @@
 //        return ret;
 //    }
 //};
+
+
+
+
+class Solution {
+public:
+    string decodeString(string s) {
+        //栈，当遇到']'时，就一直出栈处理直到遇到'['，再计算前面的数字
+        deque<char> st;//用双端队列模拟栈，便于最后输出
+
+        for (auto& ch : s) {
+            if (ch == ']') {
+                string temp;
+                while (st.back() != '[') {//处理括号里的，因为用的栈结构，所以这个括号里不会有重复的括号
+                    temp += st.back();
+                    st.pop_back();
+                }
+                st.pop_back();//出栈'['
+                string number;//数字k
+                while (st.size() && '0' <= st.back() && st.back() <= '9') {
+                    number += st.back();
+                    st.pop_back();
+                }
+                reverse(number.begin(), number.end());
+                int k = 1;
+                k = number.empty() ? 1 : stoi(number);
+                if (k != 1)
+                    reverse(temp.begin(), temp.end());
+                while (k--) {
+                    for (auto& e : temp)
+                        st.push_back(e);
+                }
+            }
+            else {
+                st.push_back(ch);
+            }
+        }
+
+        string ret;
+        for (auto& e : st) {
+            ret += e;
+        }
+        return ret;
+    }
+};
+
+int main() {
+    Solution sl;
+    string s = "1[4[2[a]ff]]";
+    cout << sl.decodeString(s) << endl;
+    return 0;
+}
