@@ -8796,52 +8796,312 @@
 
 
 
+//394. 字符串解码（复习，细节处理还是不够，但复习目的用栈写是达成）
+//class Solution {
+//public:
+//    string decodeString(string s) {
+//        //栈，当遇到']'时，就一直出栈处理直到遇到'['，再计算前面的数字
+//        deque<char> st;//用双端队列模拟栈，便于最后输出
+//
+//        for (auto& ch : s) {
+//            if (ch == ']') {
+//                string temp;
+//                while (st.back() != '[') {//处理括号里的，因为用的栈结构，所以这个括号里不会有重复的括号
+//                    temp += st.back();
+//                    st.pop_back();
+//                }
+//                st.pop_back();//出栈'['
+//                reverse(temp.begin(), temp.end());
+//                string number;//数字k
+//                while (st.size() && '0' <= st.back() && st.back() <= '9') {
+//                    number += st.back();
+//                    st.pop_back();
+//                }
+//                reverse(number.begin(), number.end());
+//                int k = 1;
+//                k = number.empty() ? 1 : stoi(number);
+//                while (k--) {
+//                    for (auto& e : temp)
+//                        st.push_back(e);
+//                }
+//            }
+//            else {
+//                st.push_back(ch);
+//            }
+//        }
+//
+//        string ret;
+//        for (auto& e : st) {
+//            ret += e;
+//        }
+//        return ret;
+//    }
+//};
+//
+//int main() {
+//    Solution sl;
+//    string s = "1[4[2[a]ff]]";
+//    cout << sl.decodeString(s) << endl;
+//    return 0;
+//}
 
-class Solution {
-public:
-    string decodeString(string s) {
-        //栈，当遇到']'时，就一直出栈处理直到遇到'['，再计算前面的数字
-        deque<char> st;//用双端队列模拟栈，便于最后输出
 
-        for (auto& ch : s) {
-            if (ch == ']') {
-                string temp;
-                while (st.back() != '[') {//处理括号里的，因为用的栈结构，所以这个括号里不会有重复的括号
-                    temp += st.back();
-                    st.pop_back();
-                }
-                st.pop_back();//出栈'['
-                string number;//数字k
-                while (st.size() && '0' <= st.back() && st.back() <= '9') {
-                    number += st.back();
-                    st.pop_back();
-                }
-                reverse(number.begin(), number.end());
-                int k = 1;
-                k = number.empty() ? 1 : stoi(number);
-                if (k != 1)
-                    reverse(temp.begin(), temp.end());
-                while (k--) {
-                    for (auto& e : temp)
-                        st.push_back(e);
-                }
-            }
-            else {
-                st.push_back(ch);
-            }
-        }
 
-        string ret;
-        for (auto& e : st) {
-            ret += e;
-        }
-        return ret;
-    }
-};
 
-int main() {
-    Solution sl;
-    string s = "1[4[2[a]ff]]";
-    cout << sl.decodeString(s) << endl;
-    return 0;
-}
+//662. 二叉树最大宽度
+///**
+// * Definition for a binary tree node.
+// * struct TreeNode {
+// *     int val;
+// *     TreeNode *left;
+// *     TreeNode *right;
+// *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+// *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+// *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+// * };
+// */
+//class Solution {
+//public:
+//    int widthOfBinaryTree(TreeNode* root) {
+//        //层序遍历+数组二叉树
+//        //因为用数组存储数组时，两节点间的个数就为下标之差，只用数组存储有效个数，知道第一个有效个数和最后一个有效个数即可算出最大差值
+//        //减少了模拟需要模拟空节点的步骤
+//        unsigned long long ret = 0;
+//        deque<TreeNode*> dq;
+//        dq.push_back(root);
+//        deque<unsigned long long> index;
+//        index.push_back(0);
+//        while (dq.size()) {
+//            int num = dq.size();
+//            ret = max(ret, index[num - 1] - index[0] + 1);
+//            while (num--) {
+//                if (dq.front()) {
+//                    if (dq.front()->left) {
+//                        dq.push_back(dq.front()->left);
+//                        index.push_back(index.front() * 2 + 1);
+//                    }
+//                    if (dq.front()->right) {
+//                        dq.push_back(dq.front()->right);
+//                        index.push_back(index.front() * 2 + 2);
+//                    }
+//                }
+//                dq.pop_front();
+//                index.pop_front();
+//            }
+//        }
+//
+//        return ret;
+//    }
+//};
+
+
+
+//小红取数（难题，还是没完全理解最优做法，多做）
+//#include <iostream>
+//#include<vector>
+//using namespace std;
+//
+//int main() {
+//    //01背包+同余定理
+//    //dp[i][j]为从前i个挑选，总和%k为j时的最大和
+//    //取所有j=0的情况最大值就为结果
+//    long long n, k;
+//    cin >> n >> k;
+//    vector<long long> nums(n);
+//    for (long long i = 0; i < n; ++i)
+//        cin >> nums[i];
+//    vector<vector<long long>> dp(n, vector<long long>(k, -1));
+//    dp[0][nums[0] % k] = nums[0];
+//    for (long long i = 1; i < n; ++i) {
+//        dp[i][nums[i] % k] = max(dp[i][nums[i] % k], nums[i]);
+//        for (long long j = k - 1; j >= 0; --j) {
+//            dp[i][j] = max(dp[i - 1][j], dp[i][j]);
+//            if (dp[i - 1][j] != -1) {//必须要前面的和存在
+//                long long a = nums[i] % k;
+//                long long b = (a + j) % k;
+//                dp[i][b] = max(dp[i - 1][b], dp[i - 1][j] + nums[i]);
+//            }
+//
+//        }
+//    }
+//    long long ret = -1;
+//    for (auto& e : dp) {
+//        ret = max(ret, e[0]);
+//    }
+//    if (ret == 0)
+//        ret = -1;
+//    cout << ret << endl;
+//    return 0;
+//}
+
+
+
+//字符编码(哈夫曼编码，复习)
+//#include <iostream>
+//#include<queue>
+//#include<unordered_map>
+//#include<string>
+//using namespace std;
+//
+//int main() {
+//
+//    string s;
+//    while (cin >> s) {
+//        priority_queue<int, vector<int>, greater<>> heap;
+//        unordered_map<char, int> hash;
+//        for (auto& ch : s)
+//            ++hash[ch];
+//        for (auto& [ch, n] : hash) {
+//            heap.push(n);
+//        }
+//        int ret = 0;
+//        while (heap.size() > 1) {
+//            int a = heap.top();
+//            heap.pop();
+//            int b = heap.top();
+//            heap.pop();
+//            ret += a + b;
+//            heap.push(a + b);
+//        }
+//        cout << ret << endl;
+//    }
+//    return 0;
+//}
+
+
+
+
+
+//515. 在每个树行中找最大值
+///**
+// * Definition for a binary tree node.
+// * struct TreeNode {
+// *     int val;
+// *     TreeNode *left;
+// *     TreeNode *right;
+// *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+// *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+// *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+// * };
+// */
+//class Solution {
+//public:
+//    vector<int> largestValues(TreeNode* root) {
+//        //层序遍历
+//        if (!root)
+//            return vector<int>();
+//        queue<TreeNode*> q;
+//        q.push(root);
+//        int n = 0;//每层个数
+//        vector<int> ret;
+//        while (n = q.size()) {
+//            int cur_max = INT_MIN;//当前层最大
+//            for (int i = 0; i < n; ++i) {
+//                cur_max = max(cur_max, q.front()->val);
+//                if (q.front()->left)
+//                    q.push(q.front()->left);
+//                if (q.front()->right)
+//                    q.push(q.front()->right);
+//                q.pop();
+//            }
+//            ret.push_back(cur_max);
+//        }
+//        return ret;
+//    }
+//};
+
+
+
+//1046. 最后一块石头的重量
+//class Solution {
+//public:
+//    int lastStoneWeight(vector<int>& stones) {
+//        //堆结构
+//        priority_queue<int> heap;
+//        for (auto& e : stones) {
+//            heap.push(e);
+//        }
+//        while (heap.size() > 1 && heap.top() > 0) {
+//            int x = heap.top();
+//            heap.pop();
+//            int y = heap.top();
+//            heap.pop();
+//            if (x > y)
+//                swap(x, y);
+//            heap.push(y - x);
+//        }
+//        return heap.top();
+//    }
+//};
+
+
+
+
+//703. 数据流中的第 K 大元素
+//class KthLargest {
+//public:
+//    KthLargest(int k, vector<int>& nums) {
+//        _k = k;
+//        for (auto& e : nums)
+//            _nums.push(e);
+//        while (_nums.size() > _k)
+//            _nums.pop();
+//    }
+//
+//    int add(int val) {
+//        _nums.push(val);
+//        while (_nums.size() > _k)
+//            _nums.pop();
+//        return _nums.top();
+//    }
+//
+//private:
+//    int _k;
+//    //底层用堆，因为是要求第k大，并且k固定，则用小堆，维护_nums里只有k个元素（最大的k个），堆顶则为第k大
+//    priority_queue<int, vector<int>, greater<>> _nums;
+//};
+//
+///**
+// * Your KthLargest object will be instantiated and called as such:
+// * KthLargest* obj = new KthLargest(k, nums);
+// * int param_1 = obj->add(val);
+// */
+
+
+
+
+
+//692. 前K个高频单词（比较函数还是写少了，但总之ac了）
+//class Solution {
+//public:
+//    vector<string> topKFrequent(vector<string>& words, int k) {
+//	      //一个自定义比较函数的堆结构
+//        unordered_map<string, int> hash;
+//        for (auto& s : words)
+//            ++hash[s];
+//        priority_queue<pair<string, int>, vector<pair<string, int>>, Compare> heap;
+//        for (auto& p : hash)
+//            heap.push(p);
+//        vector<string> ret(k);
+//        for (int i = 0; i < k; ++i) {
+//            ret[i] = heap.top().first;
+//            heap.pop();
+//        }
+//        return ret;
+//    }
+//
+//private:
+//    struct Compare {
+//        bool operator()(pair<string, int>& a, pair<string, int>& b) {
+//            //需要大堆(less)
+//            if (a.second < b.second)
+//                return true;
+//            else if (a.second == b.second) {
+//                //注意，需要字典序小的在大的上面，但大堆判断时更小的那个在下面，所以字典序大的在判断条件中更小
+//                return !(a.first < b.first);
+//            }
+//            else
+//                return false;
+//        }
+//    };
+//};
