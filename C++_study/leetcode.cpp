@@ -9105,3 +9105,357 @@
 //        }
 //    };
 //};
+
+
+
+//295. 数据流的中位数（用的deque+二分插入，非最优解）
+//
+////本质上只需找到有序数据中最中间的那一两个数据即可，类似topk
+//class MedianFinder {
+//public:
+//    MedianFinder() {
+//
+//    }
+//
+//    void addNum(int num) {
+//        //二分插入
+//        int left = 0, right = _dv.size() - 1;
+//        while (left <= right) {
+//            int mid = (left + right) >> 1;
+//            if (_dv[mid] == num) {
+//                _dv.insert(_dv.begin() + mid, num);
+//                return;
+//            }
+//            else if (_dv[mid] > num)
+//                right = mid - 1;
+//            else
+//                left = mid + 1;
+//        }
+//        _dv.insert(_dv.begin() + left, num);
+//    }
+//
+//    double findMedian() {
+//        if (_dv.size() % 2 == 1) {
+//            return _dv[_dv.size() / 2];
+//        }
+//        else {
+//            int a = _dv[_dv.size() / 2 - 1];
+//            int b = _dv[_dv.size() / 2];
+//            return (a + b) / 2.0;
+//        }
+//    }
+//
+//private:
+//    deque<int> _dv;
+//};
+//
+///**
+// * Your MedianFinder object will be instantiated and called as such:
+// * MedianFinder* obj = new MedianFinder();
+// * obj->addNum(num);
+// * double param_2 = obj->findMedian();
+// */
+
+
+
+
+//733. 图像渲染
+//class Solution {
+//public:
+//    vector<vector<int>> floodFill(vector<vector<int>>& image, int sr, int sc, int color) {
+//        int begin = image[sr][sc];
+//        if (begin == color)//如果要上色的颜色和原来一样直接返回
+//            return image;
+//        int dir[4][2] = { {1, 0}, {-1, 0}, {0, 1}, {0, -1} };
+//        queue<pair<int, int>> qp;//层序遍历涂色
+//        qp.push({ sr, sc });
+//        while (qp.size()) {
+//            int n = qp.size();
+//            while (n--) {
+//                int x = qp.front().first;
+//                int y = qp.front().second;
+//                image[x][y] = color;
+//                for (auto& e : dir) {
+//                    int a = x + e[0];
+//                    int b = y + e[1];
+//                    if (0 <= a && a < image.size() && 0 <= b && b < image[0].size()
+//                        && image[a][b] == begin)
+//                    {
+//                        qp.push({ a, b });
+//                    }
+//                }
+//                qp.pop();
+//            }
+//        }
+//        return image;
+//    }
+//};
+//int main() {
+//    Solution sl;
+//    vector<vector<int>> image = { {1, 1, 1}, {1, 1, 0}, {1, 0, 1} };
+//    sl.floodFill(image, 1, 1, 2);
+//    return 0;
+//}
+
+
+
+
+//200. 岛屿数量
+//class Solution {
+//public:
+//    int numIslands(vector<vector<char>>& grid) {
+//        int ret = 0;
+//        for (int i = 0; i < grid.size(); ++i) {
+//            for (int j = 0; j < grid[0].size(); ++j) {
+//                if (grid[i][j] == '1') {
+//                    ++ret;
+//                    DFS(grid, i, j);
+//                }
+//            }
+//        }
+//        return ret;
+//    }
+//
+//private:
+//    //每次寻找一片岛屿，并将其记录后置为0
+//    void DFS(vector<vector<char>>& grid, int i, int j) {
+//        if (grid[i][j] == '0') return;
+//        grid[i][j] = '0';
+//        for (auto& e : dir) {
+//            int x = i + e[0];
+//            int y = j + e[1];
+//            if (0 <= x && x < grid.size() && 0 <= y && y < grid[0].size() && grid[x][y] == '1')
+//                DFS(grid, x, y);
+//        }
+//    }
+//
+//    int dir[4][2] = { {0, 1}, {0, -1}, {1, 0}, {-1, 0} };
+//};
+
+
+//695. 岛屿的最大面积
+//class Solution {
+//public:
+//    int maxAreaOfIsland(vector<vector<int>>& grid) {
+//        int ret = 0;
+//        for (int i = 0; i < grid.size(); ++i) {
+//            for (int j = 0; j < grid[0].size(); ++j) {
+//                if (grid[i][j] == 1)
+//                {
+//                    int cur = 0;
+//                    ret = max(ret, Dfs(grid, i, j, cur));
+//                }
+//            }
+//        }
+//        return ret;
+//    }
+//private:
+//    //每次寻找一片岛屿，记录后置为0
+//    int Dfs(vector<vector<int>>& grid, int i, int j, int& cur) {
+//        if (grid[i][j] == 0) return 0;
+//        ++cur;
+//        grid[i][j] = 0;
+//        for (auto& e : dir) {
+//            int x = i + e[0];
+//            int y = j + e[1];
+//            if (0 <= x && x < grid.size() && 0 <= y && y < grid[0].size() && grid[x][y] == 1)
+//                Dfs(grid, x, y, cur);
+//        }
+//        return cur;
+//    }
+//
+//    int dir[4][2] = { {0, 1}, {0, -1}, {1, 0}, {-1, 0} };
+//
+//};
+
+
+
+//130. 被围绕的区域
+//class Solution {
+//public:
+//    void solve(vector<vector<char>>& board) {
+//        //只要连接了边缘的区域o就不会被捕获，其他的均会被捕获
+//        //遍历board边缘，记录所有与边缘o连接的区域，再遍历一遍board，将除了记录的区域全改为X
+//        int n = board.size(), m = board[0].size();
+//        vector<vector<bool>> hash(n, vector<bool>(m, true));
+//        for (int i = 0; i < n; ++i) {
+//            if (board[i][0] == 'O')
+//                Dfs(board, hash, i, 0);
+//            if (board[i][m - 1] == 'O')
+//                Dfs(board, hash, i, m - 1);
+//        }
+//        for (int j = 0; j < m; ++j) {
+//            if (board[0][j] == 'O')
+//                Dfs(board, hash, 0, j);
+//            if (board[n - 1][j] == 'O')
+//                Dfs(board, hash, n - 1, j);
+//        }
+//
+//        for (int i = 0; i < n; ++i) {
+//            for (int j = 0; j < m; ++j) {
+//                if (hash[i][j])
+//                    board[i][j] = 'X';
+//            }
+//        }
+//    }
+//private:
+//    void Dfs(vector<vector<char>>& board, vector<vector<bool>>& hash, int i, int j) {
+//        if (board[i][j] == 'X' || hash[i][j] == false) return;
+//        hash[i][j] = false;
+//        for (auto& e : dir) {
+//            int x = i + e[0];
+//            int y = j + e[1];
+//            if (0 <= x && x < board.size() && 0 <= y && y < board[0].size())
+//                Dfs(board, hash, x, y);
+//        }
+//    }
+//    int dir[4][2] = { {0, 1}, {0, -1}, {1, 0}, {-1, 0} };
+//};
+
+
+
+
+
+//1926. 迷宫中离入口最近的出口
+//class Solution {
+//public:
+//    int nearestExit(vector<vector<char>>& maze, vector<int>& entrance) {
+//        //层序遍历
+//        queue<pair<int, int>> q;
+//        q.push({ entrance[0], entrance[1] });
+//        maze[entrance[0]][entrance[1]] = '+';
+//        if (Check(maze))//查看边界是否有出路，节省时间
+//            return -1;
+//        int ret = 0;
+//        while (q.size()) {
+//            int n = q.size();
+//            while (n--) {
+//                auto& [x, y] = q.front();
+//                if (ret && (x == 0 || x == maze.size() - 1 || y == 0 || y == maze[0].size() - 1))
+//                    return ret;
+//                for (auto& e : dir) {
+//                    int a = x + e[0];
+//                    int b = y + e[1];
+//                    if (0 <= a && a < maze.size() && 0 <= b && b < maze[0].size()
+//                        && maze[a][b] == '.')
+//                    {
+//                        q.push({ a, b });
+//                        maze[a][b] = '+';//push进去就标志着走到那了，置为墙避免重复
+//                    }
+//                }
+//                q.pop();
+//            }
+//            ++ret;
+//        }
+//
+//        return -1;
+//    }
+//private:
+//    int dir[4][2] = { {0, 1}, {0, -1}, {1, 0}, {-1, 0} };
+//
+//    bool Check(vector<vector<char>>& maze) {
+//        int n = maze.size(), m = maze[0].size();
+//        for (int i = 0; i < n; ++i) {
+//            if (maze[i][0] == '.' || maze[i][m - 1] == '.')
+//                return false;
+//        }
+//        for (int j = 0; j < m; ++j) {
+//            if (maze[0][j] == '.' || maze[n - 1][j] == '.')
+//                return false;
+//        }
+//
+//        return true;
+//    }
+//};
+
+
+
+
+//433. 最小基因变化
+//class Solution {
+//public:
+//    int minMutation(string startGene, string endGene, vector<string>& bank) {
+//        //根据题意应该是每次只能进行一次基因变化，就是说每次只能有一个字符改变
+//        //BFS，队列里存变化的基因，两基因字符相差只有一个，才能push进去
+//        //一个哈希数组记录是否已经变化，已变化过的直接跳过
+//        int flag = 0;
+//        for (auto& s : bank)
+//            if (s == endGene)
+//                flag = 1;
+//        if (flag == 0)
+//            return -1;
+//        vector<bool> hash(bank.size(), false);
+//        queue<string> q;
+//        q.push(startGene);
+//        int ret = 0;
+//        while (q.size()) {
+//            int n = q.size();
+//            while (n--) {
+//                if (q.front() == endGene)
+//                    return ret;
+//                for (int i = 0; i < bank.size(); ++i) {
+//                    if (hash[i] == false) {
+//                        int dif = 0;//两字符串相差
+//                        for (int j = 0; j < 8; ++j) {
+//                            if (q.front()[j] != bank[i][j])
+//                                ++dif;
+//                        }
+//                        if (dif == 1) {
+//                            q.push(bank[i]);
+//                            hash[i] = true;
+//                        }
+//                    }
+//                }
+//                q.pop();
+//            }
+//            ++ret;
+//        }
+//
+//        return -1;
+//    }
+//};
+
+
+
+
+//127. 单词接龙
+//class Solution {
+//public:
+//    int ladderLength(string beginWord, string endWord, vector<string>& wordList) {
+//        //和433. 最小基因变化一模一样
+//        int flag = 0;
+//        for (auto& s : wordList)
+//            if (s == endWord)
+//                flag = 1;
+//        if (flag == 0)
+//            return 0;
+//        vector<bool> hash(wordList.size(), false);
+//        queue<string> q;
+//        q.push(beginWord);
+//        int ret = 1;
+//        while (q.size()) {
+//            int n = q.size();
+//            while (n--) {
+//                if (q.front() == endWord)
+//                    return ret;
+//                for (int i = 0; i < wordList.size(); ++i) {
+//                    if (hash[i] == false) {
+//                        int dif = 0; // 两字符串相差
+//                        for (int j = 0; j < beginWord.size(); ++j) {
+//                            if (q.front()[j] != wordList[i][j])
+//                                ++dif;
+//                        }
+//                        if (dif == 1) {
+//                            q.push(wordList[i]);
+//                            hash[i] = true;
+//                        }
+//                    }
+//                }
+//                q.pop();
+//            }
+//            ++ret;
+//        }
+//
+//        return 0;
+//    }
+//};
