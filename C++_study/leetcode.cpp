@@ -9459,3 +9459,79 @@
 //        return 0;
 //    }
 //};
+
+
+
+//675. 为高尔夫比赛砍树（困难果然是困难，细节很多）
+//class Solution {
+//public:
+//    int cutOffTree(vector<vector<int>>& forest) {
+//        //记忆化搜索+BFS
+//        //先统计出砍树的顺序，然后从高到低计算每个树到砍完的最少步数
+//        //每次从新的未计算的位置开始，计算到它下一个高度的树的最小步数
+//        //因为每个计算都是求最短路径，所以用BFS，注意遍历除了0不能走其他的都能走，因为可以选择不砍树
+//        vector<pair<int, pair<int, int>>> nums;//first为树的高度，second为树的下标
+//        for (int i = 0; i < forest.size(); ++i) {
+//            for (int j = 0; j < forest[0].size(); ++j) {
+//                if (forest[i][j] > 1) {
+//                    nums.push_back({ forest[i][j], {i, j} });
+//                }
+//            }
+//        }
+//        sort(nums.begin(), nums.end(), [](auto& x, auto& y)->bool {return x.first > y.first; });
+//        vector<int> step(nums.size());//每一棵树到它下一高度的树的距离，答案为数组和
+//        for (int i = 0; i < nums.size(); ++i) {
+//            int cur = 0;
+//            if (i != 0)
+//                cur = Bfs(forest, nums[i - 1].first, nums[i].second.first, nums[i].second.second);
+//            else
+//                cur = Bfs(forest, nums[nums.size() - 1].first, 0, 0);//从(0,0)位置走到最矮的那棵树那
+//            if (cur == -1)
+//                return -1;
+//            step[i] = cur;
+//        }
+//        int sum = 0;
+//        for (auto& e : step)
+//            sum += e;
+//        return sum;
+//    }
+//
+//    int Bfs(vector<vector<int>>& forest, int next, int begin, int end) {
+//        //next为需要找的目标，begin/end为开始位置
+//        vector<vector<bool>> hash(forest.size(), vector<bool>(forest[0].size(), false));//本次搜索的哈希，避免重复
+//        queue<pair<int, int>> q;
+//        q.push({ begin, end });
+//        hash[begin][end] = true;
+//        int ret = 0;
+//        while (q.size()) {
+//            int n = q.size();
+//            while (n--) {
+//                auto& [a, b] = q.front();
+//                if (forest[a][b] == next)//找到就返回
+//                    return ret;
+//                for (auto& e : dir) {
+//                    int x = a + e[0];
+//                    int y = b + e[1];
+//                    if (0 <= x && x < forest.size() && 0 <= y && y < forest[0].size()
+//                        && forest[x][y] != 0 && hash[x][y] == false)
+//                    {
+//                        q.push({ x, y });
+//                        hash[x][y] = true;
+//                    }
+//                }
+//                q.pop();
+//            }
+//            ++ret;
+//        }
+//        return -1;//没找到
+//    }
+//
+//    int dir[4][2] = { {0, 1}, {0, -1}, {1, 0}, {-1, 0} };
+//};
+//
+//int main() {
+//    Solution sl;
+//    vector<vector<int>> forest = {{54581641,64080174,24346381,69107959},{86374198,61363882,68783324,79706116},{668150,92178815,89819108,94701471},{83920491,22724204,46281641,47531096},{89078499,18904913,25462145,60813308}};
+//    cout << sl.cutOffTree(forest) << endl;
+//    return 0;
+//}
