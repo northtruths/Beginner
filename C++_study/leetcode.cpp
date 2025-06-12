@@ -9535,3 +9535,31 @@
 //    cout << sl.cutOffTree(forest) << endl;
 //    return 0;
 //}
+
+
+
+//1979. 找出数组的最大公约数
+//
+//class Solution {
+//public:
+//    int findGCD(vector<int>& nums) {
+//        //遍历找最大最小，直接求
+//        int _max = INT_MIN;
+//        int _min = INT_MAX;
+//        for (auto& n : nums) {
+//            _max = max(_max, n);
+//            _min = min(_min, n);
+//        }
+//        return GCD(_max, _min);
+//    }
+//
+//    int GCD(int a, int b) {
+//        int c = a % b;
+//        while (c) {
+//            a = b;
+//            b = c;
+//            c = a % b;
+//        }
+//        return b;
+//    }
+//};
