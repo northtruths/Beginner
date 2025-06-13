@@ -9563,3 +9563,52 @@
 //        return b;
 //    }
 //};
+
+
+
+
+//1819. 序列中不同最大公约数的数目
+//class Solution {
+//public:
+//    int countDifferentSubsequenceGCDs(vector<int>& nums) {
+//        //枚举+数论
+//        //枚举所有可能的最大公约数，证明此数x为某个子序列的最大公约数需要满足两个条件：
+//        //1.这个序列的所有数都为x的倍数
+//        //2.这个序列的所有数除以x的所有商互质（最大公约数为1）
+//        int ret = 0;
+//        int num_max = 0;
+//        for (auto& e : nums)
+//            num_max = max(e, num_max);
+//        vector<bool> hash(num_max + 1);
+//        for (auto& e : nums)
+//            hash[e] = true;
+//        for (int i = 1; i <= num_max; ++i) {
+//            int temp = 0;//序列计算是否互质
+//            for (int j = i; j <= num_max; j += i) {
+//                if (hash[j]) {
+//                    if (temp == 0)
+//                        temp = j / i;
+//                    else
+//                        temp = GCD(temp, j / i);
+//                    if (temp == 1) {
+//                        //temp=1说明序列的最大公约数为1了
+//                        ++ret;
+//                        break;
+//                    }
+//                }
+//            }
+//        }
+//        return ret;
+//    }
+//
+//private:
+//    int GCD(int a, int b) {
+//        int c = a % b;
+//        while (c) {
+//            a = b;
+//            b = c;
+//            c = a % b;
+//        }
+//        return b;
+//    }
+//};
