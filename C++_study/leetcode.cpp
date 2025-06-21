@@ -9612,3 +9612,52 @@
 //        return b;
 //    }
 //};
+
+
+
+
+class Solution {
+public:
+    vector<vector<int>> updateMatrix(vector<vector<int>>& mat) {
+        //BFS，若当前为0则为0，否则加上四周最小的距离
+        int n = mat.size(), m = mat[0].size();
+        vector<vector<int>> ret(n, vector<int>(m, -1));
+        vector<vector<bool>>hash(n, vector<bool>(m, false));
+        for (int i = 0; i < n; ++i) {
+            for (int j = 0; j < m; ++j) {
+                Bfs(mat, ret, hash, i, j);
+            }
+        }
+
+        return ret;
+    }
+
+private:
+    long long Bfs(vector<vector<int>>& mat, vector<vector<int>>& ret, vector<vector<bool>>& hash, int i, int j) {
+        hash[i][j] = true;
+        if (mat[i][j] == 0)
+            ret[i][j] = 0;
+        if (ret[i][j] != -1)
+            return ret[i][j];
+        long long _min = INT_MAX;
+        for (auto& e : dir) {
+            int x = i + e[0];
+            int y = j + e[1];
+            if (0 <= x && x < mat.size() && 0 <= y && y < mat[0].size() && hash[x][y] == false)
+                _min = min(_min, 1 + Bfs(mat, ret, hash, x, y));
+        }
+        ret[i][j] = _min;
+        hash[i][j] = false;
+        return ret[i][j];
+    }
+
+    int dir[4][2] = { {0, 1}, {0, -1}, {1, 0}, {-1, 0} };
+};
+
+
+int main() {
+    Solution sl;
+    vector<vector<int>> mat = { {0, 0, 0}, {0, 1, 0}, {1, 1, 1} };
+    sl.updateMatrix(mat);
+    return 0;
+}

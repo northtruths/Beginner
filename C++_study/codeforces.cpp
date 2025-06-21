@@ -86,65 +86,60 @@
 
 
 
-
-
-
-
-
-//F.Array Stabilization(GCD version)（超时）
-#include<iostream>
-#include<vector>
-using namespace std;
-
-int GCD(int a, int b) {
-    if (a < b)
-        swap(a, b);
-    int c = a % b;
-    while (c) {
-        a = b;
-        b = c;
-        c = a % b;
-    }
-    return b;
-}
-
-int main() {
-    //整个序列的最大公约数就是最后它们相等的值
-    int t = 0;
-    cin >> t;
-    while (t--) {
-        int n = 0;
-        cin >> n;
-        vector<int> nums(n);
-        cin >> nums[0];
-        int g = nums[0];
-        for (int i = 1; i < n; ++i) {
-            cin >> nums[i];
-            g = GCD(g, nums[i]);
-        }
-        int step = 0;
-        int count = n;
-        vector<bool> hash(n, false);
-        int flag = 1;//判断是否一开始所有数就等于g
-        while (count) {//count为还剩多少个元素不为g，只要不为零就得继续
-            int front = nums[0];//记录nums[0]，因为计算GCD时是用的当前未改变的那个元素，正常情况因为是后后面一个元素计算，对当前不影响，但最后一个元素是和第一个元素计算，此时第一个元素已经变化
-            for (int i = 0; i < n; ++i) {
-                if (nums[i] == g && hash[i] == false) {
-                    --count;
-                    hash[i] = true;
-                }
-                else if (hash[i] == false && (nums[i] = GCD(nums[i], i == n - 1 ? front : nums[i + 1])) == g) {
-                    --count;
-                    hash[i] = true;
-                    flag = 0;
-                }
-            }
-            ++step;
-        }
-        if (flag)
-            cout << 0 << endl;
-        else
-            cout << step << endl;
-    }
-    return 0;
-}
+////F.Array Stabilization(GCD version)（超时）
+//#include<iostream>
+//#include<vector>
+//using namespace std;
+//
+//int GCD(int a, int b) {
+//    if (a < b)
+//        swap(a, b);
+//    int c = a % b;
+//    while (c) {
+//        a = b;
+//        b = c;
+//        c = a % b;
+//    }
+//    return b;
+//}
+//
+//int main() {
+//    //整个序列的最大公约数就是最后它们相等的值
+//    int t = 0;
+//    cin >> t;
+//    while (t--) {
+//        int n = 0;
+//        cin >> n;
+//        vector<int> nums(n);
+//        cin >> nums[0];
+//        int g = nums[0];
+//        for (int i = 1; i < n; ++i) {
+//            cin >> nums[i];
+//            g = GCD(g, nums[i]);
+//        }
+//        int step = 0;
+//        int count = n;
+//        vector<bool> hash(n, false);
+//        int flag = 1;//判断是否一开始所有数就等于g
+//        while (count) {//count为还剩多少个元素不为g，只要不为零就得继续
+//            int front = nums[0];//记录nums[0]，因为计算GCD时是用的当前未改变的那个元素，正常情况因为是后后面一个元素计算，对当前不影响，但最后一个元素是和第一个元素计算，此时第一个元素已经变化
+//            for (int i = 0; i < n; ++i) {
+//                if (nums[i] == g && hash[i] == false) {
+//                    --count;
+//                    hash[i] = true;
+//                }
+//                else if (hash[i] == false && (nums[i] = GCD(nums[i], i == n - 1 ? front : nums[i + 1])) == g) {
+//                    --count;
+//                    hash[i] = true;
+//                    flag = 0;
+//                }
+//            }
+//            ++step;
+//        }
+//        if (flag)
+//            cout << 0 << endl;
+//        else
+//            cout << step << endl;
+//    }
+//    return 0;
+//}
