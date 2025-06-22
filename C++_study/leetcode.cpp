@@ -9615,49 +9615,246 @@
 
 
 
+//542. 01 矩阵
+//class Solution {
+//public:
+//    vector<vector<int>> updateMatrix(vector<vector<int>>& mat) {
+//        //BFS
+//        int n = mat.size(), m = mat[0].size();
+//        queue<pair<int, int>> q;
+//        vector<vector<bool>> hash(n, vector<bool>(m, false));//hash记录已push的位置
+//        vector<vector<int>> ret(n, vector<int>(m));
+//        for (int i = 0; i < n; ++i) {
+//            for (int j = 0; j < m; ++j) {
+//                if (mat[i][j] == 0) {
+//                    q.push({ i, j });
+//                    hash[i][j] = true;
+//                }
+//            }
+//        }
+//
+//        int cur = 0;//当前第几步
+//        while (q.size()) {
+//            int num = q.size();//当前层的数量
+//            while (num--) {
+//                auto& [x, y] = q.front();
+//                ret[x][y] = cur;
+//                for (auto& e : dir) {
+//                    int i = x + e[0];
+//                    int j = y + e[1];
+//                    if (0 <= i && i < n && 0 <= j && j < m && hash[i][j] == false) {
+//                        q.push({ i, j });
+//                        hash[i][j] = true;
+//                    }
+//                }
+//                q.pop();
+//            }
+//            ++cur;
+//        }
+//
+//        return ret;
+//    }
+//
+//    int dir[4][2] = { {0, 1}, {0, -1}, {1, 0}, {-1, 0} };
+//};
+//
+//int main() {
+//    Solution sl;
+//    vector<vector<int>> mat = { {0, 0, 0}, {0, 1, 0}, {1, 1, 1} };
+//    sl.updateMatrix(mat);
+//    return 0;
+//}
 
-class Solution {
+
+
+//1020. 飞地的数量
+//class Solution {
+//public:
+//    int numEnclaves(vector<vector<int>>& grid) {
+//        //bfs/dfs
+//        int n = grid.size(), m = grid[0].size();
+//        queue<pair<int, int>> qp;
+//        vector<vector<bool>> hash(n, vector<bool>(m, false));
+//        for (int i = 0; i < n; ++i) {
+//            if (grid[i][0] == 1) {
+//                qp.push({ i, 0 });
+//                hash[i][0] = true;
+//            }
+//            if (grid[i][m - 1] == 1) {
+//                qp.push({ i, m - 1 });
+//                hash[i][m - 1] = true;
+//            }
+//        }
+//        for (int j = 0; j < m; ++j) {
+//            if (grid[0][j] == 1 && hash[0][j] == false) {
+//                qp.push({ 0, j });
+//                hash[0][j] = true;
+//            }
+//            if (grid[n - 1][j] == 1 && hash[n - 1][j] == false) {
+//                qp.push({ n - 1, j });
+//                hash[n - 1][j] = true;
+//            }
+//        }
+//
+//        while (qp.size()) {
+//            int num = qp.size();
+//            while (num--) {
+//                auto& [x, y] = qp.front();
+//                for (auto& e : dir) {
+//                    int i = x + e[0];
+//                    int j = y + e[1];
+//                    if (0 <= i && i < n && 0 <= j && j < m && grid[i][j] == 1 && hash[i][j] == false) {
+//                        qp.push({ i, j });
+//                        hash[i][j] = true;
+//                    }
+//                }
+//                qp.pop();
+//            }
+//        }
+//
+//        int ret = 0;
+//        for (int i = 0; i < n; ++i) {
+//            for (int j = 0; j < m; ++j) {
+//                if (grid[i][j] == 1 && hash[i][j] == false)
+//                    ++ret;
+//            }
+//        }
+//
+//        return ret;
+//    }
+//
+//    int dir[4][2] = { {0, 1}, {0, -1}, {1, 0}, {-1, 0} };
+//};
+
+
+
+
+//692. 前K个高频单词(复习)
+//class Solution {
+//public:
+//    vector<string> topKFrequent(vector<string>& words, int k) {
+//        priority_queue<pair<string, int>, vector<pair<string, int>>, Compare> heap;
+//        unordered_map<string, int> hash;
+//        for (auto& s : words)
+//            ++hash[s];
+//        for (auto& p : hash) {
+//            heap.push(p);
+//            while (heap.size() > k)
+//                heap.pop();
+//        }
+//        vector<string> ret(k);
+//        for (int i = k - 1; i >= 0; --i) {
+//            ret[i] = heap.top().first;
+//            heap.pop();
+//        }
+//        return ret;
+//    }
+//
+//private:
+//    struct Compare {
+//        bool operator()(pair<string, int>& x, pair<string, int>& y) {
+//            auto& [s1, n1] = x;
+//            auto& [s2, n2] = y;
+//            if (n1 > n2)
+//                return true;
+//            else if (n1 == n2) {
+//                return s1 < s2;
+//            }
+//            else
+//                return false;
+//        }
+//    };
+//};
+//
+//int main() {
+//    Solution sl;
+//    return 0;
+//}
+
+
+
+
+//void addNum(int num) {
+//    if (_size == 0) {
+//        heap_l.push(num);
+//        heap_s.push(num);
+//    }
+//    else {
+//        if (num < heap_l.top())
+//            heap_l.push(num);
+//        if (num > heap_s.top())
+//            heap_s.push(num);
+//        ++_size;
+//        while (heap_l.size() > (_size + 1) / 2) {
+//            heap_l.pop();
+//        }
+//        while (heap_s.size() > (_size + 1) / 2) {
+//            heap_s.pop();
+//        }
+//    }
+//}
+
+
+
+
+
+// 本质上只需找到有序数据中最中间的那一两个数据即可，类似topk
+// 一个大堆一个小堆(topk)，当元素数量为奇数时，两堆堆顶相等为中位数，偶数时取两堆顶的平均值
+class MedianFinder {
 public:
-    vector<vector<int>> updateMatrix(vector<vector<int>>& mat) {
-        //BFS，若当前为0则为0，否则加上四周最小的距离
-        int n = mat.size(), m = mat[0].size();
-        vector<vector<int>> ret(n, vector<int>(m, -1));
-        vector<vector<bool>>hash(n, vector<bool>(m, false));
-        for (int i = 0; i < n; ++i) {
-            for (int j = 0; j < m; ++j) {
-                Bfs(mat, ret, hash, i, j);
+    MedianFinder() { _size = 0; }
+
+    void addNum(int num) {
+        if (_size == 0) {
+            heap_l.push(num);
+        }
+        else {
+            if (heap_l.size() != heap_s.size()) {
+                if (num >= heap_l.top())
+                    heap_s.push(num);
+                else {
+                    heap_s.push(heap_l.top());
+                    heap_l.pop();
+                    heap_l.push(num);
+                }
+            }
+            else {
+                if (num <= heap_l.top())
+                    heap_l.push(num);
+                else {
+                    heap_l.push(heap_s.top());
+                    heap_s.pop();
+                    heap_s.push(num);
+                }
             }
         }
+        ++_size;
+    }
 
-        return ret;
+    double findMedian() {
+        if (_size % 2 == 0)
+            return (heap_l.top() + heap_s.top()) / 2.0;
+        else
+            return heap_l.top();
     }
 
 private:
-    long long Bfs(vector<vector<int>>& mat, vector<vector<int>>& ret, vector<vector<bool>>& hash, int i, int j) {
-        hash[i][j] = true;
-        if (mat[i][j] == 0)
-            ret[i][j] = 0;
-        if (ret[i][j] != -1)
-            return ret[i][j];
-        long long _min = INT_MAX;
-        for (auto& e : dir) {
-            int x = i + e[0];
-            int y = j + e[1];
-            if (0 <= x && x < mat.size() && 0 <= y && y < mat[0].size() && hash[x][y] == false)
-                _min = min(_min, 1 + Bfs(mat, ret, hash, x, y));
-        }
-        ret[i][j] = _min;
-        hash[i][j] = false;
-        return ret[i][j];
-    }
-
-    int dir[4][2] = { {0, 1}, {0, -1}, {1, 0}, {-1, 0} };
+    int _size; // 总元素个数
+    priority_queue<int> heap_l;                         // 大堆，用于存前k小
+    priority_queue<int, vector<int>, greater<>> heap_s; // 小堆，用于存前k大
 };
 
 
+
 int main() {
-    Solution sl;
-    vector<vector<int>> mat = { {0, 0, 0}, {0, 1, 0}, {1, 1, 1} };
-    sl.updateMatrix(mat);
+    MedianFinder t;
+    while (1) {
+        int n = 0;
+        cin >> n;
+        t.addNum(n);
+        cout << t.findMedian() << endl;
+    }
     return 0;
 }
+
+//6 10 2 6 5 0
