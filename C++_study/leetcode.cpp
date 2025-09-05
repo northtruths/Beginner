@@ -9797,64 +9797,85 @@
 
 
 
-
-// 本质上只需找到有序数据中最中间的那一两个数据即可，类似topk
-// 一个大堆一个小堆(topk)，当元素数量为奇数时，两堆堆顶相等为中位数，偶数时取两堆顶的平均值
-class MedianFinder {
-public:
-    MedianFinder() { _size = 0; }
-
-    void addNum(int num) {
-        if (_size == 0) {
-            heap_l.push(num);
-        }
-        else {
-            if (heap_l.size() != heap_s.size()) {
-                if (num >= heap_l.top())
-                    heap_s.push(num);
-                else {
-                    heap_s.push(heap_l.top());
-                    heap_l.pop();
-                    heap_l.push(num);
-                }
-            }
-            else {
-                if (num <= heap_l.top())
-                    heap_l.push(num);
-                else {
-                    heap_l.push(heap_s.top());
-                    heap_s.pop();
-                    heap_s.push(num);
-                }
-            }
-        }
-        ++_size;
-    }
-
-    double findMedian() {
-        if (_size % 2 == 0)
-            return (heap_l.top() + heap_s.top()) / 2.0;
-        else
-            return heap_l.top();
-    }
-
-private:
-    int _size; // 总元素个数
-    priority_queue<int> heap_l;                         // 大堆，用于存前k小
-    priority_queue<int, vector<int>, greater<>> heap_s; // 小堆，用于存前k大
-};
-
-
-
-int main() {
-    MedianFinder t;
-    while (1) {
-        int n = 0;
-        cin >> n;
-        t.addNum(n);
-        cout << t.findMedian() << endl;
-    }
-    return 0;
-}
+//295. 数据流的中位数
+//// 本质上只需找到有序数据中最中间的那一两个数据即可，类似topk
+//// 一个大堆一个小堆(topk)，当元素数量为奇数时，两堆堆顶相等为中位数，偶数时取两堆顶的平均值
+//class MedianFinder {
+//public:
+//    MedianFinder() { _size = 0; }
+//
+//    void addNum(int num) {
+//        if (_size == 0) {
+//            heap_l.push(num);
+//        }
+//        else {
+//            if (heap_l.size() != heap_s.size()) {
+//                if (num >= heap_l.top())
+//                    heap_s.push(num);
+//                else {
+//                    heap_l.push(num);
+//                    heap_s.push(heap_l.top());
+//                    heap_l.pop();
+//                }
+//            }
+//            else {
+//                if (num <= heap_l.top())
+//                    heap_l.push(num);
+//                else {
+//                    heap_s.push(num);
+//                    heap_l.push(heap_s.top());
+//                    heap_s.pop();
+//                }
+//            }
+//        }
+//        ++_size;
+//    }
+//
+//    double findMedian() {
+//        if (_size % 2 == 0)
+//            return (heap_l.top() + heap_s.top()) / 2.0;
+//        else
+//            return heap_l.top();
+//    }
+//
+//private:
+//    int _size; // 总元素个数
+//    priority_queue<int> heap_l;                         // 大堆，用于存前k小
+//    priority_queue<int, vector<int>, greater<>> heap_s; // 小堆，用于存前k大
+//};
+//
+//
+//
+//int main() {
+//    MedianFinder t;
+//    while (1) {
+//        int n = 0;
+//        cin >> n;
+//        t.addNum(n);
+//        cout << t.findMedian() << endl;
+//    }
+//    return 0;
+//}
 
 //6 10 2 6 5 0
+
+
+
+//128. 最长连续序列
+//class Solution {
+//public:
+//    int longestConsecutive(vector<int>& nums) {
+//        unordered_set<int> hash(nums.begin(), nums.end());
+//        int ret = 0;
+//        for (auto& e : hash) {
+//            int cur = 1;
+//            if (hash.count(e - 1) == false) {
+//                int n = e;
+//                while (hash.count(++n))
+//                    ++cur;
+//            }
+//            ret = max(ret, cur);
+//        }
+//        return ret;
+//    }
+//};
