@@ -9879,3 +9879,270 @@
 //        return ret;
 //    }
 //};
+
+
+
+
+
+//1. 两数之和
+//class Solution {
+//public:
+//    vector<int> twoSum(vector<int>& nums, int target) {
+//        unordered_map<int, int> hash;
+//        for (int i = 0; i < nums.size(); ++i) {
+//            int n = target - nums[i];
+//            if (hash.count(n))
+//                return { i, hash[n] };
+//            else
+//                hash.insert({ nums[i], i });
+//        }
+//
+//        return {};
+//    }
+//};
+
+
+
+//20. 有效的括号
+//class Solution {
+//public:
+//    bool isValid(string s) {
+//        stack<char> st;
+//        unordered_map<char, char> hash;
+//        hash[')'] = '(';
+//        hash['}'] = '{';
+//        hash[']'] = '[';
+//        for (auto& ch : s) {
+//            if (st.empty())
+//                st.push(ch);
+//            else {
+//                if (ch == '(' || ch == '{' || ch == '[')
+//                    st.push(ch);
+//                else if (hash[ch] == st.top())
+//                    st.pop();
+//                else
+//                    return false;
+//            }
+//        }
+//        if (st.empty())
+//            return true;
+//        else
+//            return false;
+//    }
+//};
+
+
+//206. 反转链表
+//class Solution {
+//public:
+//    ListNode* reverseList(ListNode* head) {
+//        ListNode* cur = head;
+//        ListNode* next;
+//        ListNode* prev = nullptr;
+//        while (cur) {
+//            next = cur->next;
+//            cur->next = prev;
+//            prev = cur;
+//            cur = next;
+//        }
+//        return prev;
+//    }
+//};
+
+
+
+//121. 买卖股票的最佳时机
+//class Solution {
+//public:
+//    int maxProfit(vector<int>& prices) {
+//        int ret = 0;
+//        int dp = 1e4 + 5;//当前位置前的最小股票
+//        for (auto& e : prices) {
+//            dp = min(dp, e);
+//            ret = max(ret, e - dp);
+//        }
+//        return ret;
+//    }
+//};
+
+
+
+//49. 字母异位词分组
+//class Solution {
+//public:
+//    vector<vector<string>> groupAnagrams(vector<string>& strs) {
+//        //用multimap将所有字符串排序后分组，排序后的字符串为键，原下标为值，以此快速分组
+//        multimap<string, int> hash;
+//        for (int i = 0; i < strs.size(); ++i) {
+//            string str = strs[i];
+//            sort(str.begin(), str.end());
+//            hash.insert({ str, i });
+//        }
+//        vector<vector<string>> ret;
+//        string key = "AAA";
+//        int cur = -1;//当前第几组，ret某位下标
+//        for (auto& [str, index] : hash) {
+//            if (key != str) {
+//                key = str;
+//                ++cur;
+//                ret.push_back({ strs[index] });
+//            }
+//            else {
+//                ret[cur].push_back(strs[index]);
+//            }
+//        }
+//
+//        return ret;
+//    }
+//};
+//
+//int main() {
+//    Solution sl;
+//    vector<string> strs = {"eat", "tea", "tan", "ate", "nat", "bat"};
+//    sl.groupAnagrams(strs);
+//    return 0;
+//}
+
+
+
+//5. 最长回文子串
+//class Solution {
+//public:
+//    string longestPalindrome(string s) {
+//        //遍历以每个/两个字符为中心的回文子串
+//        string ret;
+//        ret += s[0];
+//        int n = s.size();
+//        for (int i = 0; i < n; ++i) {
+//            //以一个字符为中心
+//            int left = i - 1, right = i + 1;
+//            int cur_len = 1;//当前长度
+//            while (left >= 0 && right < n) {
+//                if (s[left] == s[right])
+//                    cur_len += 2;
+//                else
+//                    break;
+//                --left, ++right;
+//            }
+//            if (cur_len > ret.size())
+//                ret = string(s, left + 1, cur_len);//left不论是走完字符串还是途中不等，指向位置都是正确位置的前一个
+//
+//            //以两个字符为中心
+//            if (i + 1 < n && s[i] == s[i + 1]) {
+//                cur_len = 2;
+//                left = i - 1, right = i + 2;
+//                while (left >= 0 && right < n) {
+//                    if (s[left] == s[right])
+//                        cur_len += 2;
+//                    else
+//                        break;
+//                    --left, ++right;
+//                }
+//                if (cur_len > ret.size())
+//                    ret = string(s, left + 1, cur_len);
+//            }
+//        }
+//
+//        return ret;
+//    }
+//};
+
+
+
+
+//239. 滑动窗口最大值
+//class Solution {
+//public:
+//    vector<int> maxSlidingWindow(vector<int>& nums, int k) {
+//        priority_queue<int> heap;
+//        unordered_map<int, int> hash;
+//        for (int i = 0; i < k; ++i) {
+//            heap.push(nums[i]);
+//            hash[nums[i]]++;
+//        }
+//        int left = 0, right = k - 1;
+//        vector<int> ret(nums.size() - k + 1, INT_MIN);
+//        while (right < nums.size()) {
+//            while (hash[heap.top()] == 0)
+//                heap.pop();
+//            ret[left] = heap.top();
+//            hash[nums[left]]--;
+//            ++left, ++right;
+//            if (right < nums.size()) {
+//                hash[nums[right]]++;
+//                heap.push(nums[right]);
+//            }
+//        }
+//
+//        return ret;
+//    }
+//};
+
+
+
+
+//155. 最小栈
+////栈的一个性质是怎么存进去怎么取出来，后进的元素不论进出都不影响前面的元素，可以用一个辅助栈来存储最小元素
+//class MinStack {
+//public:
+//    MinStack() {
+//
+//    }
+//
+//    void push(int val) {
+//        _stk.push_back(val);
+//        _mstk.push_back(min(val, _mstk.empty() ? val : _mstk.back()));
+//    }
+//
+//    void pop() {
+//        _stk.pop_back();
+//        _mstk.pop_back();
+//    }
+//
+//    int top() {
+//        return _stk.back();
+//    }
+//
+//    int getMin() {
+//        return _mstk.back();
+//    }
+//
+//private:
+//    vector<int> _stk;
+//    vector<int> _mstk;
+//};
+
+
+
+
+
+//394. 字符串解码
+////递归嵌套拆解
+//class Solution {
+//public:
+//    string decodeString(string s) {
+//        string ret;//拆解后的返回字符串
+//        for (int i = 0; i < s.size(); ++i) {
+//            if ('0' <= s[i] && s[i] <= '9') {
+//                string numb;//数字字符串
+//                while (s[i] != '[')//提取数字部分
+//                    numb += s[i++];
+//                string mid;//括号中间部分字符串
+//                int count = 1;//括号数量，左括号+1，右括号-1，为0时说明遍历完了当前括号中的字符串
+//                for (i = i + 1; i < s.size(); ++i) {
+//                    if (s[i] == '[') ++count;
+//                    if (s[i] == ']') --count;
+//                    if (count == 0) break;
+//                    mid += s[i];
+//                }
+//                string cur = decodeString(mid);//括号所拆解的结果
+//                int n = stoi(numb);//重复次数
+//                while (n--)
+//                    ret += cur;
+//            }
+//            else
+//                ret += s[i];
+//        }
+//        return ret;
+//    }
+//};
