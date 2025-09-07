@@ -1344,3 +1344,282 @@
 //1 4 3
 //2 3 4
 //3 4 3
+
+
+
+
+//P3367 【模板】并查集
+//#include<iostream>
+//#include<vector>
+//using namespace std;
+//
+//template<class T>
+//class UF {
+//public:
+//    UF(int x)
+//        :v(vector<T>(x + 1))
+//    {
+//        for (int i = 1; i <= x; ++i)
+//            v[i] = i;
+//    }
+//
+//    int Find(int p) {
+//        if (v[p] == p) return p;
+//        int root = Find(v[p]);
+//        v[p] = root;
+//        return root;
+//    }
+//    void uni(int x, int y) {
+//        int root_x = Find(x);
+//        int root_y = Find(y);
+//        v[root_x] = root_y;
+//    }
+//    bool is_same(int x, int y) {
+//        int root_x = Find(x);
+//        int root_y = Find(y);
+//        if (root_x == root_y)
+//            return true;
+//        else
+//            return false;
+//    }
+//
+//private:
+//    vector<T> v;
+//};
+//
+//int main() {
+//    int n, m;
+//    cin >> n >> m;
+//    UF<int> uf(n);
+//    while (m--) {
+//        int z, x, y;
+//        cin >> z >> x >> y;
+//        if (z == 1) {
+//            uf.uni(x, y);
+//        }
+//        else {
+//            if (uf.is_same(x, y))
+//                cout << "Y" << endl;
+//            else
+//                cout << "N" << endl;
+//        }
+//    }
+//    return 0;
+//}
+
+
+
+
+
+//P1551 亲戚
+//#include<iostream>
+//#include<vector>
+//using namespace std;
+//
+//class UF {
+//public:
+//    UF(int n)
+//        :v(vector<int>(n + 1))
+//    {
+//        for (int i = 1; i <= n; ++i)
+//            v[i] = i;
+//    }
+//
+//    int Find(int p) {
+//        if (v[p] == p)
+//            return p;
+//        return v[p] = Find(v[p]);
+//    }
+//
+//    void uni(int x, int y) {
+//        int r_x = Find(x);
+//        int r_y = Find(y);
+//        v[r_x] = r_y;
+//    }
+//
+//    bool is_same(int x, int y) {
+//        return Find(x) == Find(y);
+//    }
+//private:
+//    vector<int> v;
+//};
+//
+//int main() {
+//    int n, m, p;
+//    cin >> n >> m >> p;
+//    UF uf(n);
+//    while (m--) {
+//        int x, y;
+//        cin >> x >> y;
+//        uf.uni(x, y);
+//    }
+//    while (p--) {
+//        int x, y;
+//        cin >> x >> y;
+//        if (uf.is_same(x, y))
+//            cout << "Yes" << endl;
+//        else
+//            cout << "No" << endl;
+//    }
+//    return 0;
+//}
+
+
+
+
+
+//P1596 [USACO10OCT] Lake Counting S(存储的二维的并查集，有细节错误)
+//#include<iostream>
+//#include<vector>
+//#include<string>
+//#include<unordered_set>
+//using namespace std;
+//
+//class UF {
+//public:
+//    UF(int n, int m, int count)
+//        :v(vector<vector<pair<int, int>>>(n + 1, vector<pair<int, int>>(m + 1)))
+//        ,_count(count)
+//    {
+//        for (int i = 1; i <= n; ++i) {
+//            for (int j = 1; j <= m; ++j) {
+//                v[i][j] = { i, j };
+//            }
+//        }
+//    }
+//
+//    pair<int, int> Find(pair<int, int> p) {
+//        if (p == v[p.first][p.second])
+//            return p;
+//        return v[p.first][p.second] = Find(v[p.first][p.second]); ;
+//    }
+//
+//    void uni(pair<int, int> x, pair<int, int> y) {
+//        auto rx = Find(x);
+//        auto ry = Find(y);
+//        if (rx != ry)    
+//        {
+//            v[rx.first][rx.second] = ry;
+//            --_count;
+//        }
+//    }
+//
+//    bool is_same(pair<int, int> x, pair<int, int> y) {
+//        return Find(x) == Find(y);
+//    }
+//
+//    int Ret() {
+//        return _count;
+//    }
+//private:
+//    vector<vector<pair<int, int>>> v;
+//    int _count;
+//};
+//
+//int dir[8][2] = { {1, 0}, {-1, 0}, {1, 1}, {-1, 1}, {0, 1}, {0, -1}, {-1, -1}, {1, -1} };
+//
+//int main() {
+//    //并查集，遇到没有检查过的地方，若为水，则八方向检查，有水就归为一组
+//    int n, m;
+//    cin >> n >> m;
+//    vector<string> vs(n);
+//    for (int i = 0; i < n; ++i) {
+//        cin >> vs[i];
+//    }
+//    int count = 0;
+//    for (auto& e : vs) {
+//        for (auto& ch : e) {
+//            if (ch == 'W')
+//                ++count;
+//        }
+//    }
+//    UF uf(n, m, count);
+//    vector<vector<bool>> hash(n + 1, vector<bool>(m + 1, false));
+//    for (int i = 0; i < n; ++i) {
+//        for (int j = 0; j < m; ++j) {
+//            if (hash[i][j]) continue;
+//            hash[i][j] = true;
+//            for (auto& d : dir) {
+//                int x = i + d[0];
+//                int y = j + d[1];
+//                if (0 <= x && x < n && 0 <= y &&  y < m) {
+//                    if (hash[x][y] == false && vs[x][y] == 'W')
+//                        uf.uni({ i + 1, j + 1 }, { x + 1, y + 1});
+//                }
+//            }
+//        }
+//    }
+//    cout << uf.Ret() << endl;
+//    return 0;
+//}
+
+
+
+
+#include<iostream>
+#include<vector>
+#include<string>
+using namespace std;
+
+class UF {
+public:
+    UF(int n, int m)
+        :v(vector<int>(n * m))
+    {
+        for (int i = 0; i < n * m; ++i)
+            v[i] = i;
+    }
+
+    int Find(int p) {
+        if (v[p] == p)
+            return p;
+        return v[p] = Find(v[p]);
+    }
+
+    void uni(int x, int y) {
+        int r_x = Find(x);
+        int r_y = Find(y);
+        v[r_x] = r_y;
+    }
+
+    bool is_same(int x, int y) {
+        return Find(x) == Find(y);
+    }
+
+    int count(string& s) {
+        int ret = 0;
+        for (int i = 0; i < v.size(); ++i)
+            if (i == v[i] && s[i] == 'W')
+                ++ret;
+        return ret;
+    }
+private:
+    vector<int> v;
+};
+int dir[4][2] = { {1, 0}, {1, 1}, {0, 1}, {1, -1} };
+int main() {
+    int n, m;
+    cin >> n >> m;
+    vector<string> grid(n);
+    string s;
+    for (int i = 0; i < n; ++i) {
+        cin >> grid[i];
+        s += grid[i];
+    }
+    UF uf(n, m);
+    for (int i = 0; i < n; ++i) {
+        for (int j = 0; j < m; ++j) {
+            if (grid[i][j] == 'W') {
+                for (auto& d : dir) {
+                    int x = i + d[0];
+                    int y = j + d[1];
+                    if (0 <= x && x < n && 0 <= y && y < m && grid[x][y] == 'W')
+                        uf.uni(i * m + j, x * m + y);
+                }
+            }
+        }
+    }
+    cout << uf.count(s) << endl;
+    return 0;
+}
+
