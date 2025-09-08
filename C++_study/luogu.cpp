@@ -1556,17 +1556,89 @@
 
 
 
+//P1596[USACO10OCT] Lake Counting S
+//#include<iostream>
+//#include<vector>
+//#include<string>
+//using namespace std;
+//
+//class UF {
+//public:
+//    UF(int n, int m)
+//        :v(vector<int>(n * m))
+//    {
+//        for (int i = 0; i < n * m; ++i)
+//            v[i] = i;
+//    }
+//
+//    int Find(int p) {
+//        if (v[p] == p)
+//            return p;
+//        return v[p] = Find(v[p]);
+//    }
+//
+//    void uni(int x, int y) {
+//        int r_x = Find(x);
+//        int r_y = Find(y);
+//        v[r_x] = r_y;
+//    }
+//
+//    bool is_same(int x, int y) {
+//        return Find(x) == Find(y);
+//    }
+//
+//    int count(string& s) {
+//        int ret = 0;
+//        for (int i = 0; i < v.size(); ++i)
+//            if (i == v[i] && s[i] == 'W')
+//                ++ret;
+//        return ret;
+//    }
+//private:
+//    vector<int> v;
+//};
+//int dir[4][2] = { {1, 0}, {1, 1}, {0, 1}, {1, -1} };
+//int main() {
+//    int n, m;
+//    cin >> n >> m;
+//    vector<string> grid(n);
+//    string s;
+//    for (int i = 0; i < n; ++i) {
+//        cin >> grid[i];
+//        s += grid[i];
+//    }
+//    UF uf(n, m);
+//    for (int i = 0; i < n; ++i) {
+//        for (int j = 0; j < m; ++j) {
+//            if (grid[i][j] == 'W') {
+//                for (auto& d : dir) {
+//                    int x = i + d[0];
+//                    int y = j + d[1];
+//                    if (0 <= x && x < n && 0 <= y && y < m && grid[x][y] == 'W')
+//                        uf.uni(i * m + j, x * m + y);
+//                }
+//            }
+//        }
+//    }
+//    cout << uf.count(s) << endl;
+//    return 0;
+//}
+
+
+
+
+
 #include<iostream>
 #include<vector>
-#include<string>
+#include<stack>
 using namespace std;
 
 class UF {
 public:
-    UF(int n, int m)
-        :v(vector<int>(n * m))
+    UF(int n)
+        :v(vector<int>(n + 1))
     {
-        for (int i = 0; i < n * m; ++i)
+        for (int i = 1; i <= n; ++i)
             v[i] = i;
     }
 
@@ -1577,49 +1649,48 @@ public:
     }
 
     void uni(int x, int y) {
-        int r_x = Find(x);
-        int r_y = Find(y);
-        v[r_x] = r_y;
+        int rx = Find(x);
+        int ry = Find(y);
+        v[rx] = ry;
     }
 
     bool is_same(int x, int y) {
         return Find(x) == Find(y);
     }
-
-    int count(string& s) {
-        int ret = 0;
-        for (int i = 0; i < v.size(); ++i)
-            if (i == v[i] && s[i] == 'W')
-                ++ret;
-        return ret;
-    }
 private:
     vector<int> v;
 };
-int dir[4][2] = { {1, 0}, {1, 1}, {0, 1}, {1, -1} };
+
 int main() {
-    int n, m;
-    cin >> n >> m;
-    vector<string> grid(n);
-    string s;
-    for (int i = 0; i < n; ++i) {
-        cin >> grid[i];
-        s += grid[i];
-    }
-    UF uf(n, m);
-    for (int i = 0; i < n; ++i) {
-        for (int j = 0; j < m; ++j) {
-            if (grid[i][j] == 'W') {
-                for (auto& d : dir) {
-                    int x = i + d[0];
-                    int y = j + d[1];
-                    if (0 <= x && x < n && 0 <= y && y < m && grid[x][y] == 'W')
-                        uf.uni(i * m + j, x * m + y);
-                }
+    int t;
+    cin >> t;
+    while (t--) {
+        int n;
+        cin >> n;
+        UF uf(n);
+        stack<int> stk;//若约束为相等，则用并查集分组，约束不等则存入栈，最后检查，若此时已经相等则否
+        while (n--) {
+            int i, j, e;
+            cin >> i >> j >> e;
+            if (e)
+                uf.uni(i, j);
+            else
+                stk.push(i), stk.push(j);
+        }
+        int flag = 1;
+        while (stk.size()) {
+            int i = stk.top();
+            stk.pop();
+            int j = stk.top();
+                stk.pop();
+            if (uf.is_same(i, j))
+            {
+                flag = 0;
+                break;
             }
         }
+        if (flag) cout << "YES" << endl;
+        else cout << "NO" << endl;
     }
-    cout << uf.count(s) << endl;
     return 0;
 }
-
