@@ -1627,70 +1627,122 @@
 
 
 
+//P1955[NOI2015] 程序自动分析 - 洛谷（未ac）
+//#include<iostream>
+//#include<vector>
+//#include<stack>
+//using namespace std;
+//
+//class UF {
+//public:
+//    UF(int n)
+//        :v(vector<int>(n + 1))
+//    {
+//        for (int i = 1; i <= n; ++i)
+//            v[i] = i;
+//    }
+//
+//    int Find(int p) {
+//        if (v[p] == p)
+//            return p;
+//        return v[p] = Find(v[p]);
+//    }
+//
+//    void uni(int x, int y) {
+//        int rx = Find(x);
+//        int ry = Find(y);
+//        v[rx] = ry;
+//    }
+//
+//    bool is_same(int x, int y) {
+//        return Find(x) == Find(y);
+//    }
+//private:
+//    vector<int> v;
+//};
+//
+//int main() {
+//    int t;
+//    cin >> t;
+//    while (t--) {
+//        int n;
+//        cin >> n;
+//        UF uf(n);
+//        stack<int> stk;//若约束为相等，则用并查集分组，约束不等则存入栈，最后检查，若此时已经相等则否
+//        while (n--) {
+//            int i, j, e;
+//            cin >> i >> j >> e;
+//            if (e)
+//                uf.uni(i, j);
+//            else
+//                stk.push(i), stk.push(j);
+//        }
+//        int flag = 1;
+//        while (stk.size()) {
+//            int i = stk.top();
+//            stk.pop();
+//            int j = stk.top();
+//                stk.pop();
+//            if (uf.is_same(i, j))
+//            {
+//                flag = 0;
+//                break;
+//            }
+//        }
+//        if (flag) cout << "YES" << endl;
+//        else cout << "NO" << endl;
+//    }
+//    return 0;
+//}
+
+
 
 #include<iostream>
 #include<vector>
-#include<stack>
 using namespace std;
 
-class UF {
-public:
-    UF(int n)
-        :v(vector<int>(n + 1))
-    {
-        for (int i = 1; i <= n; ++i)
-            v[i] = i;
-    }
+int uf[5005];//扩展域并查集
 
-    int Find(int p) {
-        if (v[p] == p)
-            return p;
-        return v[p] = Find(v[p]);
-    }
+int Find(int x) {
+    if (uf[x] == x)
+        return x;
+    return uf[x] = Find(uf[x]);
+}
 
-    void uni(int x, int y) {
-        int rx = Find(x);
-        int ry = Find(y);
-        v[rx] = ry;
+void uni(int x, int y) {
+    //保证 x < y，合并时以前面非扩展的位置为根,方便统计
+    if (y < x) {
+        int temp = x;
+        x = y;
+        y = temp;
     }
-
-    bool is_same(int x, int y) {
-        return Find(x) == Find(y);
-    }
-private:
-    vector<int> v;
-};
+    int rx = Find(x);
+    int ry = Find(y);
+    uf[ry] = rx;
+}
 
 int main() {
-    int t;
-    cin >> t;
-    while (t--) {
-        int n;
-        cin >> n;
-        UF uf(n);
-        stack<int> stk;//若约束为相等，则用并查集分组，约束不等则存入栈，最后检查，若此时已经相等则否
-        while (n--) {
-            int i, j, e;
-            cin >> i >> j >> e;
-            if (e)
-                uf.uni(i, j);
-            else
-                stk.push(i), stk.push(j);
+    int n, m;
+    cin >> n >> m;
+    for (int i = 1; i <= 2 * n; ++i)
+        uf[i] = i;
+    while (m--) {
+        char opt;
+        int p, q;
+        cin >> opt >> p >> q;
+        if (opt == 'F') {
+            //朋友合并,朋友的敌人关系不明不做处理
+            uni(p, q);
         }
-        int flag = 1;
-        while (stk.size()) {
-            int i = stk.top();
-            stk.pop();
-            int j = stk.top();
-                stk.pop();
-            if (uf.is_same(i, j))
-            {
-                flag = 0;
-                break;
-            }
+        else {
+            //敌人的敌人是朋友,合并
+            uni(p, q + n);
+            uni(p + n, q);
         }
-        if (flag) cout << "YES" << endl;
-        else cout << "NO" << endl;
     }
+    int count = 0;
+    for (int i = 1; i <= n; ++i)
+        count += uf[i] == i ? 1 : 0;
+    cout << count << endl;
     return 0;
 }
