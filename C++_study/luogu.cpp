@@ -1,4 +1,5 @@
 #define _CRT_SECURE_NO_WARNINGS
+#include"leetcode.h"
 
 //#include<iostream>
 //using namespace std;
@@ -1697,52 +1698,110 @@
 
 
 
-#include<iostream>
-#include<vector>
-using namespace std;
 
-int uf[5005];//扩展域并查集
+//[BalticOI 2003] 团伙
+//#include<iostream>
+//#include<vector>
+//using namespace std;
+//
+//int uf[5005];//扩展域并查集
+//
+//int Find(int x) {
+//    if (uf[x] == x)
+//        return x;
+//    return uf[x] = Find(uf[x]);
+//}
+//
+//void uni(int x, int y) {
+//    //保证 x < y，合并时以前面非扩展的位置为根,方便统计
+//    if (y < x) {
+//        int temp = x;
+//        x = y;
+//        y = temp;
+//    }
+//    int rx = Find(x);
+//    int ry = Find(y);
+//    uf[ry] = rx;
+//}
+//
+//int main() {
+//    int n, m;
+//    cin >> n >> m;
+//    for (int i = 1; i <= 2 * n; ++i)
+//        uf[i] = i;
+//    while (m--) {
+//        char opt;
+//        int p, q;
+//        cin >> opt >> p >> q;
+//        if (opt == 'F') {
+//            //朋友合并,朋友的敌人关系不明不做处理
+//            uni(p, q);
+//        }
+//        else {
+//            //敌人的敌人是朋友,合并
+//            uni(p, q + n);
+//            uni(p + n, q);
+//        }
+//    }
+//    int count = 0;
+//    for (int i = 1; i <= n; ++i)
+//        count += uf[i] == i ? 1 : 0;
+//    cout << count << endl;
+//    return 0;
+//}
 
-int Find(int x) {
-    if (uf[x] == x)
-        return x;
-    return uf[x] = Find(uf[x]);
-}
 
-void uni(int x, int y) {
-    //保证 x < y，合并时以前面非扩展的位置为根,方便统计
-    if (y < x) {
-        int temp = x;
-        x = y;
-        y = temp;
-    }
-    int rx = Find(x);
-    int ry = Find(y);
-    uf[ry] = rx;
-}
 
-int main() {
-    int n, m;
-    cin >> n >> m;
-    for (int i = 1; i <= 2 * n; ++i)
-        uf[i] = i;
-    while (m--) {
-        char opt;
-        int p, q;
-        cin >> opt >> p >> q;
-        if (opt == 'F') {
-            //朋友合并,朋友的敌人关系不明不做处理
-            uni(p, q);
-        }
-        else {
-            //敌人的敌人是朋友,合并
-            uni(p, q + n);
-            uni(p + n, q);
-        }
-    }
-    int count = 0;
-    for (int i = 1; i <= n; ++i)
-        count += uf[i] == i ? 1 : 0;
-    cout << count << endl;
-    return 0;
-}
+//P3366 【模板】最小生成树
+//#include<iostream>
+//#include<vector>
+//#include<climits>
+//#include<algorithm>
+//using namespace std;
+//
+//int main() {
+//    int n, m;
+//    cin >> n >> m;
+//    vector<vector<int>> v(n + 1, vector<int>(n + 1, INT_MAX));
+//    while (m--) {
+//        int x, y, z;
+//        cin >> x >> y >> z;
+//        v[x][y] = v[y][x] = min(v[x][y], z);
+//    }
+//    for (int i = 1; i <= n; ++i)
+//        v[i][i] = 0;
+//    vector<int> dest(n + 1, INT_MAX);
+//    vector<bool> st(n + 1, false);
+//    dest[1] = 0;
+//    int time = n;
+//    while (time) {
+//        int _min = INT_MAX;//剩下的最短距离
+//        int min_i = 1;//剩下的最短距离的下标
+//        //找当前未在生成树中的最短距离节点
+//        for (int i = 1; i <= n; ++i) {
+//            if (st[i] == false && dest[i] < _min) {
+//                _min = dest[i];
+//                min_i = i;
+//            }
+//        }
+//        st[min_i] = true;
+//        //更新生成树所能到达节点y的最短距离
+//        for (int y = 1; y <= n; ++y) {
+//            if (st[y] == false) {
+//                dest[y] = min(dest[y], v[min_i][y]);
+//            }
+//        }
+//        --time;
+//    }
+//    int ret = 0;
+//    for (int i = 1; i <= n; ++i)
+//    {
+//        if (dest[i] == INT_MAX) {
+//            cout << "orz" << endl;
+//            return 0;
+//        }
+//        ret += dest[i];
+//    }
+//    cout << ret << endl;
+//    return 0;
+//}
