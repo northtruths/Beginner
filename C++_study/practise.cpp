@@ -4557,3 +4557,26 @@
 //
 //	return 0;
 //}
+
+//int operator+(vector<int>& a, int& b) {
+//
+//}
+//
+//class test {
+//public:
+//	test(int a = 0)
+//		:_a(a)
+//	{}
+//	int operator+(int b) {
+//		return this->_a * b;
+//	}
+//private:
+//	int _a;
+//};
+//
+//int main() {
+//	test t1(3);
+//	cout << t1.operator+(3) << endl;
+//	cout << t1 + 3 << endl;
+//	return 0;
+//}
