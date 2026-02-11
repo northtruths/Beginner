@@ -10146,3 +10146,32 @@
 //        return ret;
 //    }
 //};
+
+
+//300. 最长递增子序列
+//class Solution {
+//public:
+//    int lengthOfLIS(vector<int>& nums) {
+//        //贪心、dp
+//        //遍历数组并记录当前所有合规序列的末尾、和对应序列长度
+//        //遍历所记录的末尾，若当前元素更小则贪心替换对应长度序列的末尾，若大于所有记录的末尾则新添最长序列
+//        vector<int> record(1, nums[0]);
+//        int ans = 1;//最长长度，也是record里有效序列数
+//        for (auto& cur : nums) {
+//            if (cur > record[ans - 1]) {
+//                cout << "cur" << cur << ";" << "ans" << ans << endl;
+//                record.push_back(cur);
+//                ++ans;
+//            }
+//            for (auto& end : record) {
+//                if (cur <= end) {
+//                    end = cur;
+//                    break;
+//                }
+//            }
+//        }
+//        // for(auto& e :record)
+//        //     cout << e << endl;
+//        return ans;
+//    }
+//};

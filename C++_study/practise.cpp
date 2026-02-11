@@ -4580,3 +4580,123 @@
 //	cout << t1 + 3 << endl;
 //	return 0;
 //}
+
+
+
+//class Complex_Number {
+//public:
+//	Complex_Number(int a = 0, int b = 0)
+//		:_a(a)
+//		,_b(b)
+//	{}
+//	Complex_Number(const Complex_Number& num) {
+//		this->_a = num._a;
+//		this->_b = num._b;
+//	}
+//
+//	~Complex_Number() {
+//		
+//	}
+//
+//	Complex_Number operator+(const Complex_Number& num) {
+//		Complex_Number sum;
+//		sum._a = this->_a + num._a;
+//		sum._b = this->_b + num._b;
+//		return sum;
+//	}
+//	Complex_Number operator-(const Complex_Number& num) {
+//		Complex_Number sum;
+//		sum._a = this->_a - num._a;
+//		sum._b = this->_b - num._b;
+//		return sum;
+//	}
+//	Complex_Number operator*(const Complex_Number& num) {
+//		Complex_Number sum;
+//		sum._a = this->_a * num._a - this->_b * num._b;
+//		sum._b = this->_a * num._b + this->_b * num._a;
+//		return sum;
+//	}
+//	Complex_Number operator/(const Complex_Number& num) {
+//		Complex_Number sum;
+//		sum._a = (this->_a * num._a + this->_b * num._b) / (num._a * num._a + num._b * num._b);
+//		sum._b = (this->_b * num._a - this->_a * num._b) / (num._a * num._a + num._b * num._b);
+//		return sum;
+//	}
+//
+//
+//	void Print() {//打印复数
+//		if (_a)
+//			cout << _a;
+//		if (_b > 0) {
+//			if (_a)
+//				cout << '+';
+//			cout << _b << 'i';
+//		}
+//		else if (_b < 0)
+//			cout << _b << 'i';
+//		if (_a == 0 && _b == 0)
+//			cout << 0;
+//	}
+//private:
+//	double _a;//实部
+//	double _b;//虚部
+//};
+//
+//int main() {
+//	Complex_Number n1(10, 5);
+//	Complex_Number n2(5, 5);
+//	Complex_Number sum = n1 - n2;
+//	sum.Print();//输出5
+//	return 0;
+//}
+
+
+#include<iostream>
+
+using namespace std;
+
+class base {
+    //周长
+    double perimeter() {
+
+    }
+
+    //面积
+    double area() {
+
+    }
+};
+
+class chang_fang_xing : public base {
+public: chang_fang_xing(int a, int b) : _width(a),
+    _height(b) {}
+      double perimeter() {
+          return 2 * _width + 2 * _height;
+      }
+      double area() {
+          return _width * _height;
+      }
+private: int _width; //长
+       int _height; //宽
+};
+
+class yuan : public base {
+public: yuan(int r) : _r(r) {}
+      double perimeter() {
+          return 2 * 3.14 * _r;
+      }
+      double area() {
+          return 3.14 * _r * _r;
+      }
+private: int _r; //半径
+};
+
+int main() {
+    chang_fang_xing t1(3, 4);
+    cout << t1.perimeter() << endl; //输出14
+    cout << t1.area() << endl; //输出12
+    yuan t2(1);
+    cout << t2.perimeter() << endl; //输出6.28
+    cout << t2.area() << endl; //输出3.14
+    return 0;
+}
