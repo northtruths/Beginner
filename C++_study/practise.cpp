@@ -4651,52 +4651,52 @@
 //}
 
 
-#include<iostream>
-
-using namespace std;
-
-class base {
-    //周长
-    double perimeter() {
-
-    }
-
-    //面积
-    double area() {
-
-    }
-};
-
-class chang_fang_xing : public base {
-public: chang_fang_xing(int a, int b) : _width(a),
-    _height(b) {}
-      double perimeter() {
-          return 2 * _width + 2 * _height;
-      }
-      double area() {
-          return _width * _height;
-      }
-private: int _width; //长
-       int _height; //宽
-};
-
-class yuan : public base {
-public: yuan(int r) : _r(r) {}
-      double perimeter() {
-          return 2 * 3.14 * _r;
-      }
-      double area() {
-          return 3.14 * _r * _r;
-      }
-private: int _r; //半径
-};
-
-int main() {
-    chang_fang_xing t1(3, 4);
-    cout << t1.perimeter() << endl; //输出14
-    cout << t1.area() << endl; //输出12
-    yuan t2(1);
-    cout << t2.perimeter() << endl; //输出6.28
-    cout << t2.area() << endl; //输出3.14
-    return 0;
-}
+//#include<iostream>
+//
+//using namespace std;
+//
+//class base {
+//    //周长
+//    double perimeter() {
+//
+//    }
+//
+//    //面积
+//    double area() {
+//
+//    }
+//};
+//
+//class chang_fang_xing : public base {
+//public: chang_fang_xing(int a, int b) : _width(a),
+//    _height(b) {}
+//      double perimeter() {
+//          return 2 * _width + 2 * _height;
+//      }
+//      double area() {
+//          return _width * _height;
+//      }
+//private: int _width; //长
+//       int _height; //宽
+//};
+//
+//class yuan : public base {
+//public: yuan(int r) : _r(r) {}
+//      double perimeter() {
+//          return 2 * 3.14 * _r;
+//      }
+//      double area() {
+//          return 3.14 * _r * _r;
+//      }
+//private: int _r; //半径
+//};
+//
+//int main() {
+//    chang_fang_xing t1(3, 4);
+//    cout << t1.perimeter() << endl; //输出14
+//    cout << t1.area() << endl; //输出12
+//    yuan t2(1);
+//    cout << t2.perimeter() << endl; //输出6.28
+//    cout << t2.area() << endl; //输出3.14
+//    return 0;
+//}
